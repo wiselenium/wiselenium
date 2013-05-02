@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <parent>
+  	<groupId>org.wiselenium</groupId>
+  	<artifactId>wiselenium-bom</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  	<relativePath>../</relativePath>
+  </parent>
+  
+  <artifactId>wiselenium-parent</artifactId>
+  <packaging>pom</packaging>
+  
+  <modules>
+  	<module>../wiselenium-core</module>
+  	<module>../wiselenium-testng</module>
+  </modules>
+  
+  <build>
+  	<plugins>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+          	<artifactId>maven-compiler-plugin</artifactId>
+          	<version>3.1</version>
+          	<configuration>
+          		<source>1.6</source>
+          		<target>1.6</target>
+          	</configuration>
+  		</plugin>
+  		
+  		<plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-jar-plugin</artifactId>
+	        <version>2.4</version>
+	        <configuration>
+	        	<forceCreation>true</forceCreation>
+	        </configuration>
+      	</plugin>
+      	
+      	<plugin>
+      		<groupId>org.apache.maven.plugins</groupId>
+      		<artifactId>maven-javadoc-plugin</artifactId>
+        	<version>2.9</version>
+        	<executions>
+        		<execution>
+        			<id>attach-javadoc</id>
+        			<phase>verify</phase>
+        			<goals>
+        				<goal>jar</goal>
+        			</goals>
+        			<configuration>
+        				<force>true</force>
+        			</configuration>
+        		</execution>
+        	</executions>
+      	</plugin>
+      	
+      	<plugin>
+      		<groupId>org.apache.maven.plugins</groupId>
+      		<artifactId>maven-source-plugin</artifactId>
+      		<version>2.2.1</version>
+      		<executions>
+      			<execution>
+      				<id>attach-source</id>
+      				<phase>verify</phase>
+      				<goals>
+      					<goal>jar-no-fork</goal>
+      				</goals>
+      				<configuration>
+      					<forceCreation>true</forceCreation>
+      				</configuration>
+      			</execution>
+      		</executions>
+      	</plugin>
+  	</plugins>
+  </build>
+  
+</project>

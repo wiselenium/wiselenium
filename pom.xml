@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.wiselenium</groupId>
+  <artifactId>wiselenium-bom</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  
+  <properties>
+	<wiselenium-core.version>0.0.1-SNAPSHOT</wiselenium-core.version>
+	<wiselenium-testng.version>0.0.1-SNAPSHOT</wiselenium-testng.version>
+  </properties>
+  
+  <modules>
+	<module>wiselenium-parent</module>
+  </modules>
+  
+  <dependencyManagement>
+	<dependencies>
+		<dependency>
+			<groupId>org.wiselenium</groupId>
+			<artifactId>wiselenium-core</artifactId>
+			<version>${wiselenium-core.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.wiselenium</groupId>
+			<artifactId>wiselenium-testng</artifactId>
+			<version>${wiselenium-testng.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>2.32.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.8</version>
+		</dependency>
+	</dependencies>
+  </dependencyManagement>
+  
+</project>
