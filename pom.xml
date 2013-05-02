@@ -5,6 +5,17 @@
   <artifactId>wiselenium-bom</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
+
+  <name>wiselenium</name>
+  <url>https://github.com/andreschaffer/wiselenium</url>
+  
+  <developers>
+	<developer>
+		<name>Andre Ricardo Schaffer</name>
+		<email>andre.schaffer@gmail.com</email>
+		<url>http://www.linkedin.com/in/andrericardoschaffer</url>
+	</developer>
+  </developers>
   
   <properties>
 	<wiselenium-core.version>0.0.1-SNAPSHOT</wiselenium-core.version>
