@@ -14,7 +14,7 @@ import org.openqa.selenium.internal.WrapsElement;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-public class WiseElementProxy implements MethodInterceptor {
+class WiseElementProxy implements MethodInterceptor {
 	
 	private static final String GET_WRAPPED_ELEMENT_METHOD_NAME = "getWrappedElement";
 	private final WebElement element;

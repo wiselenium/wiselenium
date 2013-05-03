@@ -14,7 +14,7 @@ import org.openqa.selenium.internal.WrapsDriver;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-public class WisePageProxy implements MethodInterceptor {
+class WisePageProxy implements MethodInterceptor {
 	
 	private static final String GET_WRAPPED_DRIVER_METHOD_NAME = "getWrappedDriver";
 	private final WebDriver driver;

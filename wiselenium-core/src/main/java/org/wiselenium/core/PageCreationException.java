@@ -6,7 +6,7 @@ package org.wiselenium.core;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-public class PageCreationException extends WiseException {
+class PageCreationException extends WiseException {
 	
 	private static final long serialVersionUID = 1L;
 	

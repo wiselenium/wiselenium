@@ -19,7 +19,7 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-public class WiseDecorator extends DefaultFieldDecorator {
+class WiseDecorator extends DefaultFieldDecorator {
 	
 	WiseDecorator(ElementLocatorFactory factory) {
 		super(factory);

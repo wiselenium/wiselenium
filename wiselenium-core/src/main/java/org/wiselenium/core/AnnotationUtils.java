@@ -8,7 +8,7 @@ import java.lang.annotation.Annotation;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-public final class AnnotationUtils {
+final class AnnotationUtils {
 	
 	private AnnotationUtils() {}
 	

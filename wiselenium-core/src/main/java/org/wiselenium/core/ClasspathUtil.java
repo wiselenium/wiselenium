@@ -8,7 +8,7 @@ import java.lang.reflect.Modifier;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-public final class ClasspathUtil {
+final class ClasspathUtil {
 	
 	private ClasspathUtil() {}
 	
