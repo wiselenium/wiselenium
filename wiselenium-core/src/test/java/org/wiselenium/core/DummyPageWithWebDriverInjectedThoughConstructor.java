@@ -12,7 +12,7 @@ public class DummyPageWithWebDriverInjectedThoughConstructor {
 	
 	private final WebDriver driver;
 	
-	@FindBy(id = "button-id")
+	@FindBy(id = "buttonId")
 	private DummyFieldWithWebElementInjectThroughConstructor dummy;
 	
 	

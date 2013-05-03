@@ -13,7 +13,7 @@ public class ButtonPageWithWebDriverConstructor {
 	
 	private final WebDriver webDriver;
 	
-	@FindBy(id = "button-id")
+	@FindBy(id = "buttonId")
 	private Button button;
 	
 	private WebElement message;

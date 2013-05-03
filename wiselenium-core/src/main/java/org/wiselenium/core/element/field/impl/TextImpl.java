@@ -2,32 +2,35 @@ package org.wiselenium.core.element.field.impl;
 
 import static org.wiselenium.core.WiseUnwrapper.unwrapWebElement;
 
-import org.wiselenium.core.element.field.Button;
+import org.wiselenium.core.element.field.Text;
 
 /**
- * Implemention of a HTML Button.
+ * Implementation of a HTML input text;
  * 
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-public class ButtonImpl implements Button {
+public class TextImpl implements Text {
 	
 	@Override
-	public Button and() {
+	public Text and() {
 		return this;
 	}
 	
 	@Override
-	public Button click() {
+	public Text clear() {
+		unwrapWebElement(this).clear();
+		return this;
+	}
+	
+	@Override
+	public Text click() {
 		unwrapWebElement(this).click();
-		return this;
+		return null;
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
-	public Button doubleClick() {
+	public Text doubleClick() {
 		// TODO will need a webdriver reference
 		return null;
 	}
@@ -43,8 +46,19 @@ public class ButtonImpl implements Button {
 	}
 	
 	@Override
+	public String getValue() {
+		return unwrapWebElement(this).getAttribute("value");
+	}
+	
+	@Override
 	public boolean isDisplayed() {
 		return unwrapWebElement(this).isDisplayed();
+	}
+	
+	@Override
+	public Text sendKeys(CharSequence... keysToSend) {
+		unwrapWebElement(this).sendKeys(keysToSend);
+		return this;
 	}
 	
 }

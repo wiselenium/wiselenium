@@ -15,20 +15,23 @@ public class ButtonTest extends TestBase {
 	@Test
 	public void shouldClickButton() {
 		this.driver.get(getAbsoluteFilePath(URL));
-		ButtonPage buttonPage = initElements(this.driver, ButtonPage.class);
-		assertEquals(buttonPage.getTitle(), TITLE);
-		buttonPage.clickButton();
-		assertEquals(buttonPage.getMessage(), SUCCESS_MESSAGE);
+		ButtonPage page = initElements(this.driver, ButtonPage.class);
+		assertEquals(page.getTitle(), TITLE);
+		page.clickButton();
+		assertEquals(page.getMessage(), SUCCESS_MESSAGE);
 	}
 	
+	// TODO erase test? there's already a test for injections...
 	@Test
 	public void shouldClickButtonInPageWithWebDriverConstructor() {
 		this.driver.get(getAbsoluteFilePath(ButtonPageWithWebDriverConstructor.URL));
-		ButtonPageWithWebDriverConstructor buttonPage = initElements(this.driver,
+		ButtonPageWithWebDriverConstructor page = initElements(this.driver,
 			ButtonPageWithWebDriverConstructor.class);
-		assertEquals(buttonPage.getTitle(), ButtonPageWithWebDriverConstructor.TITLE);
-		buttonPage.clickButton();
-		assertEquals(buttonPage.getMessage(), ButtonPageWithWebDriverConstructor.SUCCESS_MESSAGE);
+		assertEquals(page.getTitle(), ButtonPageWithWebDriverConstructor.TITLE);
+		page.clickButton();
+		assertEquals(page.getMessage(), ButtonPageWithWebDriverConstructor.SUCCESS_MESSAGE);
 	}
+	
+	// TODO tests for its other methods
 	
 }

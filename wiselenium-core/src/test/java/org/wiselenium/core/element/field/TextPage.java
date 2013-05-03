@@ -3,33 +3,43 @@ package org.wiselenium.core.element.field;
 import static org.wiselenium.core.WiseUnwrapper.unwrapWebDriver;
 
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 @SuppressWarnings("javadoc")
-public class ButtonPage {
+public class TextPage {
 	
 	public static final String SUCCESS_MESSAGE = "success";
-	public static final String URL = "button.html";
-	public static final String TITLE = "page for button tests";
+	public static final String URL = "text.html";
+	public static final String TITLE = "page for text tests";
 	
 	// TODO add the hidden button attribute
 	
-	@FindBy(id = "buttonId")
-	private Button button;
-	
+	private Text text;
 	private WebElement message;
 	
 	
-	public void clickButton() {
-		this.button.click();
+	public TextPage and() {
+		return this;
+	}
+	
+	public void clickText() {
+		this.text.click();
 	}
 	
 	public String getMessage() {
 		return this.message.getText();
 	}
 	
+	public String getTextValue() {
+		return this.text.getValue();
+	}
+	
 	public String getTitle() {
 		return unwrapWebDriver(this).getTitle();
+	}
+	
+	public Text typeOnText(CharSequence... keysToSend) {
+		this.text.sendKeys(keysToSend);
+		return this.text;
 	}
 	
 }
