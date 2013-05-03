@@ -10,9 +10,10 @@ public class ButtonPage {
 	
 	public static final String SUCCESS_MESSAGE = "success";
 	public static final String URL = "button.html";
+	public static final String TITLE = "page for button tests";
 	
 	@FindBy(id = "button-id")
-	private WebElement button;
+	private Button button;
 	
 	private WebElement message;
 	

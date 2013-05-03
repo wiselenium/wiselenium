@@ -1,16 +1,14 @@
 package org.wiselenium.core;
 
-import java.lang.reflect.Method;
+import java.lang.reflect.Field;
 
 import net.sf.cglib.proxy.Enhancer;
-import net.sf.cglib.proxy.MethodInterceptor;
-import net.sf.cglib.proxy.MethodProxy;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
 /**
  * Utility class to create Pages.
@@ -34,50 +32,63 @@ public final class WisePageFactory {
 	 * @see CacheLookup
 	 */
 	public static <T> T initElements(WebDriver driver, Class<T> clazz) {
+		T instance;
 		try {
-			return createInstanceWithWebDriverConstructor(driver, clazz);
+			instance = createInstanceWithWebDriverConstructor(driver, clazz);
 		} catch (ClassWithNoConstructorWithWebDriverException e) {
-			return createInstanceWithEmptyConstructor(driver, clazz);
+			instance = createInstanceWithEmptyConstructor(driver, clazz);
 		}
 		
-		// TODO initialize its elements with the WiseDecorator
+		return initElements(new WiseDecorator(driver), instance);
 	}
 	
-	private static <T> Enhancer createEnhancerOfInstance(Class<T> clazz) {
+	private static <T> Enhancer createEnhancerOfInstance(WebDriver driver, Class<T> clazz) {
 		Enhancer e = new Enhancer();
 		e.setSuperclass(clazz);
 		e.setInterfaces(new Class[] { WrapsDriver.class });
-		e.setCallback(new MethodInterceptor() {
-			
-			@Override
-			public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
-				throws Throwable {
-				return proxy.invokeSuper(obj, args);
-			}
-			
-		});
+		e.setCallback(WisePageProxy.getInstance(driver));
 		
 		return e;
 	}
 	
 	@SuppressWarnings("unchecked")
 	private static <T> T createInstanceWithEmptyConstructor(WebDriver driver, Class<T> clazz) {
-		Enhancer e = createEnhancerOfInstance(clazz);
-		Object instance = e.create();
-		
-		PageFactory.initElements(driver, instance);
-		return (T) instance;
+		Enhancer e = createEnhancerOfInstance(driver, clazz);
+		return (T) e.create();
 	}
 	
 	@SuppressWarnings("unchecked")
 	private static <T> T createInstanceWithWebDriverConstructor(WebDriver driver, Class<T> clazz) {
 		validateClassHasConstructorWithWebDriver(clazz);
 		
-		Enhancer e = createEnhancerOfInstance(clazz);
-		Object instance = e.create(new Class[] { WebDriver.class }, new Object[] { driver });
+		Enhancer e = createEnhancerOfInstance(driver, clazz);
+		return (T) e.create(new Class[] { WebDriver.class }, new Object[] { driver });
+	}
+	
+	private static <T> T initElements(FieldDecorator decorator, T instance) {
+		Class<?> currentInstanceHierarchyClass = instance.getClass();
+		while (currentInstanceHierarchyClass != Object.class) {
+			proxyElements(decorator, instance, currentInstanceHierarchyClass);
+			currentInstanceHierarchyClass = currentInstanceHierarchyClass.getSuperclass();
+		}
 		
-		PageFactory.initElements(driver, instance);
-		return (T) instance;
+		return instance;
+	}
+	
+	private static void proxyElements(FieldDecorator decorator, Object instance,
+		Class<?> instanceHierarchyClass) {
+		
+		Field[] fields = instanceHierarchyClass.getDeclaredFields();
+		for (Field field : fields) {
+			Object value = decorator.decorate(instance.getClass().getClassLoader(), field);
+			if (value != null) try {
+				field.setAccessible(true);
+				field.set(instance, value);
+			} catch (IllegalAccessException e) {
+				// TODO change exception
+				throw new RuntimeException(e);
+			}
+		}
 	}
 	
 	private static <T> void validateClassHasConstructorWithWebDriver(Class<T> clazz) {
