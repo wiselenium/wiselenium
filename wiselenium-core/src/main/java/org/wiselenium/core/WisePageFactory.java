@@ -89,8 +89,7 @@ public final class WisePageFactory {
 				field.setAccessible(true);
 				field.set(instance, value);
 			} catch (IllegalAccessException e) {
-				// TODO change exception
-				throw new RuntimeException(e);
+				throw new PageCreationException(instance.getClass(), e);
 			}
 		}
 	}

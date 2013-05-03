@@ -18,4 +18,19 @@ public class WiseException extends RuntimeException {
 		super(msg);
 	}
 	
+	/**
+	 * @param msg The message of the exception.
+	 * @param t The cause of the exception.
+	 */
+	public WiseException(String msg, Throwable t) {
+		super(msg, t);
+	}
+	
+	/**
+	 * @param t The cause of the exception.
+	 */
+	public WiseException(Throwable t) {
+		super(t);
+	}
+	
 }
