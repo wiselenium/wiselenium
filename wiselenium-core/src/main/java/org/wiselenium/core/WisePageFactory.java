@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
+import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
 /**
@@ -39,7 +41,9 @@ public final class WisePageFactory {
 			instance = createInstanceWithEmptyConstructor(driver, clazz);
 		}
 		
-		return initElements(new WiseDecorator(driver), instance);
+		ElementLocatorFactory locatorFactory = new DefaultElementLocatorFactory(driver);
+		WiseDecorator decorator = new WiseDecorator(locatorFactory);
+		return initElements(decorator, instance);
 	}
 	
 	private static <T> Enhancer createEnhancerOfInstance(WebDriver driver, Class<T> clazz) {

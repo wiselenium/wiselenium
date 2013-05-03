@@ -10,7 +10,6 @@ import net.sf.cglib.proxy.Enhancer;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
-import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
@@ -23,19 +22,7 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
  */
 public class WiseDecorator extends DefaultFieldDecorator {
 	
-	// TODO remove the driver from here and instantiate the locatorfactory at the wisepagefactory
-	private WebDriver driver;
-	
-	
-	/**
-	 * @param driver The driver used to locate the elements.
-	 */
-	public WiseDecorator(WebDriver driver) {
-		this(new DefaultElementLocatorFactory(driver));
-		this.driver = driver;
-	}
-	
-	private WiseDecorator(ElementLocatorFactory factory) {
+	WiseDecorator(ElementLocatorFactory factory) {
 		super(factory);
 	}
 	
