@@ -35,7 +35,7 @@ public interface Text extends Field {
 	Text doubleClick();
 	
 	/**
-	 * Get the value of this text.
+	 * Retrieves the value of this text.
 	 * 
 	 * @return The innerText of this element.
 	 * @since 0.0.1
@@ -50,7 +50,5 @@ public interface Text extends Field {
 	 * @since 0.0.1
 	 */
 	Text sendKeys(CharSequence... keysToSend);
-	
-	// TODO add getText method? it's different from getValue cause it retrieves the innerHTML...
 	
 }

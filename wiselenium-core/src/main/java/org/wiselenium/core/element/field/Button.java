@@ -26,4 +26,12 @@ public interface Button extends Field {
 	@Override
 	Button doubleClick();
 	
+	/**
+	 * Retrieves the value of this button.
+	 * 
+	 * @return The innerText of this button.
+	 * @since 0.0.1
+	 */
+	String getValue();
+	
 }

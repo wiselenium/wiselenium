@@ -1,6 +1,5 @@
 package org.wiselenium.core.element;
 
-
 /**
  * Represents a HTML Element.
  * 
@@ -10,7 +9,7 @@ package org.wiselenium.core.element;
 public interface Element {
 	
 	/**
-	 * Returns this element object in order to chain calls in a more fluent way.
+	 * Returns this element object in order to allow chain calls in a more fluent way.
 	 * 
 	 * @return This element object.
 	 * @since 0.0.1
@@ -30,7 +29,8 @@ public interface Element {
 	 * Gets the value of a given CSS property.
 	 * 
 	 * @param propertyName The name of the property.
-	 * @return The current, computed value of the property.
+	 * @return The current, computed value of the property. If it doesn't have the property, an
+	 * empty string is returned.
 	 * @since 0.0.1
 	 */
 	String getCssValue(String propertyName);

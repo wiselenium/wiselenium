@@ -1,12 +1,14 @@
 package org.wiselenium.core;
 
+import static org.wiselenium.core.WiseUnwrapper.unwrapWebDriver;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.wiselenium.core.element.field.DummyFieldWithWebElementInjectThroughConstructor;
 
 @SuppressWarnings("javadoc")
-public class DummyPageWithWebDriverInjectedThoughConstructor extends Page {
+public class DummyPageWithoutInheritanceAndWithEmptyConstructor {
 	
 	public static final String URL = "button.html";
 	
@@ -14,12 +16,12 @@ public class DummyPageWithWebDriverInjectedThoughConstructor extends Page {
 	private DummyFieldWithWebElementInjectThroughConstructor dummy;
 	
 	
-	public DummyPageWithWebDriverInjectedThoughConstructor(WebDriver driver) {
-		super(driver);
-	}
-	
 	public WebElement getDummyElementWebElement() {
 		return this.dummy.getWebElement();
+	}
+	
+	public WebDriver getWebDriver() {
+		return unwrapWebDriver(this);
 	}
 	
 }

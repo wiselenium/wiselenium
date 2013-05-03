@@ -1,35 +1,32 @@
 package org.wiselenium.core.element.field;
 
-import static org.wiselenium.core.WiseUnwrapper.unwrapWebDriver;
-
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import org.wiselenium.core.Page;
 
 @SuppressWarnings("javadoc")
-public class ButtonPage {
+public class ButtonPage extends Page {
 	
-	public static final String SUCCESS_MESSAGE = "success";
+	public static final String BUTTON_CLICKED_MESSAGE = "button clicked";
+	public static final String BUTTON_VALUE = "button";
+	public static final String HIDDEN_BUTTON_VALUE = "hiddenButton";
 	public static final String URL = "button.html";
 	public static final String TITLE = "page for button tests";
 	
-	// TODO add the hidden button attribute
-	
-	@FindBy(id = "buttonId")
 	private Button button;
-	
+	private Button hiddenButton;
 	private WebElement message;
 	
 	
-	public void clickButton() {
-		this.button.click();
+	public Button getButton() {
+		return this.button;
+	}
+	
+	public Button getHiddenButton() {
+		return this.hiddenButton;
 	}
 	
 	public String getMessage() {
 		return this.message.getText();
-	}
-	
-	public String getTitle() {
-		return unwrapWebDriver(this).getTitle();
 	}
 	
 }

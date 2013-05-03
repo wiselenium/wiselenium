@@ -1,44 +1,31 @@
 package org.wiselenium.core.element.field;
 
-import static org.wiselenium.core.WiseUnwrapper.unwrapWebDriver;
-
 import org.openqa.selenium.WebElement;
+import org.wiselenium.core.Page;
 
 @SuppressWarnings("javadoc")
-public class TextPage {
+public class TextPage extends Page {
 	
-	public static final String SUCCESS_MESSAGE = "success";
+	public static final String TEXT_CLICKED_MESSAGE = "text clicked";
+	public static final String TEXT_VALUE = "text";
+	public static final String HIDDEN_TEXT_VALUE = "hiddenText";
 	public static final String URL = "text.html";
 	public static final String TITLE = "page for text tests";
 	
-	// TODO add the hidden button attribute
-	
 	private Text text;
+	private Text hiddenText;
 	private WebElement message;
 	
 	
-	public TextPage and() {
-		return this;
-	}
-	
-	public void clickText() {
-		this.text.click();
+	public Text getHiddenText() {
+		return this.hiddenText;
 	}
 	
 	public String getMessage() {
 		return this.message.getText();
 	}
 	
-	public String getTextValue() {
-		return this.text.getValue();
-	}
-	
-	public String getTitle() {
-		return unwrapWebDriver(this).getTitle();
-	}
-	
-	public Text typeOnText(CharSequence... keysToSend) {
-		this.text.sendKeys(keysToSend);
+	public Text getText() {
 		return this.text;
 	}
 	

@@ -16,7 +16,7 @@ import org.openqa.selenium.internal.WrapsDriver;
  */
 final class WisePageProxy implements MethodInterceptor {
 	
-	private static final String GET_WRAPPED_DRIVER_METHOD_NAME = "getWrappedDriver";
+	private static final String GET_WRAPPED_DRIVER = "getWrappedDriver";
 	private final WebDriver driver;
 	
 	
@@ -35,7 +35,7 @@ final class WisePageProxy implements MethodInterceptor {
 	public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
 		throws Throwable { // NOSONAR because it's an overriden method
 	
-		if (GET_WRAPPED_DRIVER_METHOD_NAME.equals(method.getName())) {
+		if (GET_WRAPPED_DRIVER.equals(method.getName())) {
 			if (!(obj instanceof WrapsDriver)) throw new WebDriverNotWrappedException(obj);
 			return this.driver;
 		}

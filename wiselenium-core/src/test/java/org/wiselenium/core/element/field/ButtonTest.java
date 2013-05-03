@@ -1,37 +1,67 @@
 package org.wiselenium.core.element.field;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.WisePageFactory.initElements;
-import static org.wiselenium.core.element.field.ButtonPage.SUCCESS_MESSAGE;
+import static org.wiselenium.core.element.field.ButtonPage.BUTTON_CLICKED_MESSAGE;
+import static org.wiselenium.core.element.field.ButtonPage.BUTTON_VALUE;
+import static org.wiselenium.core.element.field.ButtonPage.HIDDEN_BUTTON_VALUE;
 import static org.wiselenium.core.element.field.ButtonPage.TITLE;
 import static org.wiselenium.core.element.field.ButtonPage.URL;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.wiselenium.core.TestBase;
 
 @SuppressWarnings("javadoc")
 public class ButtonTest extends TestBase {
 	
-	@Test
-	public void shouldClickButton() {
+	ButtonPage page;
+	
+	
+	@BeforeMethod
+	public void initPage() {
 		this.driver.get(getAbsoluteFilePath(URL));
-		ButtonPage page = initElements(this.driver, ButtonPage.class);
-		assertEquals(page.getTitle(), TITLE);
-		page.clickButton();
-		assertEquals(page.getMessage(), SUCCESS_MESSAGE);
+		this.page = initElements(this.driver, ButtonPage.class);
+		assertEquals(this.page.getTitle(), TITLE);
 	}
 	
-	// TODO erase test? there's already a test for injections...
 	@Test
-	public void shouldClickButtonInPageWithWebDriverConstructor() {
-		this.driver.get(getAbsoluteFilePath(ButtonPageWithWebDriverConstructor.URL));
-		ButtonPageWithWebDriverConstructor page = initElements(this.driver,
-			ButtonPageWithWebDriverConstructor.class);
-		assertEquals(page.getTitle(), ButtonPageWithWebDriverConstructor.TITLE);
-		page.clickButton();
-		assertEquals(page.getMessage(), ButtonPageWithWebDriverConstructor.SUCCESS_MESSAGE);
+	public void shouldAllowChainCallsWithAnd() {
+		Button button = this.page.getButton();
+		assertEquals(button, button.and());
 	}
 	
-	// TODO tests for its other methods
+	@Test
+	public void shouldClick() {
+		this.page.getButton().click();
+		assertEquals(this.page.getMessage(), BUTTON_CLICKED_MESSAGE);
+	}
+	
+	@Test
+	public void shouldGetAttribute() {
+		assertNotNull(this.page.getButton().getAttribute("id"));
+		assertNotNull(this.page.getHiddenButton().getAttribute("id"));
+	}
+	
+	@Test
+	public void shouldGetCssValue() {
+		assertTrue(this.page.getButton().getCssValue("inexistent").isEmpty());
+		assertNotNull(this.page.getHiddenButton().getCssValue("visibility"));
+	}
+	
+	@Test
+	public void shouldGetDisplayCondition() {
+		assertTrue(this.page.getButton().isDisplayed());
+		assertFalse(this.page.getHiddenButton().isDisplayed());
+	}
+	
+	@Test
+	public void shouldGetValue() {
+		assertEquals(this.page.getButton().getValue(), BUTTON_VALUE);
+		assertEquals(this.page.getHiddenButton().getValue(), HIDDEN_BUTTON_VALUE);
+	}
 	
 }

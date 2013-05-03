@@ -43,6 +43,11 @@ public class ButtonImpl implements Button {
 	}
 	
 	@Override
+	public String getValue() {
+		return unwrapWebElement(this).getAttribute("value");
+	}
+	
+	@Override
 	public boolean isDisplayed() {
 		return unwrapWebElement(this).isDisplayed();
 	}
