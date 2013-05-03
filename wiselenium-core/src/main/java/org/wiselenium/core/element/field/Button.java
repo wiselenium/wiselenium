@@ -6,25 +6,7 @@ package org.wiselenium.core.element.field;
  * @author Andre Ricardo Schaffer
  * @since
  */
-public interface Button extends Field {
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	Button and();
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	Button click();
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	Button doubleClick();
+public interface Button extends Field<Button> {
 	
 	/**
 	 * Retrieves the value of this button.

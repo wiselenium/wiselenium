@@ -4,9 +4,10 @@ package org.wiselenium.core.element;
  * Represents a HTML Element.
  * 
  * @author Andre Ricardo Schaffer
- * @since
+ * @param <T> The element type.
+ * @since 0.0.1
  */
-public interface Element {
+public interface Element<T> {
 	
 	/**
 	 * Returns this element object in order to allow chain calls in a more fluent way.
@@ -14,7 +15,7 @@ public interface Element {
 	 * @return This element object.
 	 * @since 0.0.1
 	 */
-	Element and();
+	T and();
 	
 	/**
 	 * Gets the value of a given attribute of the element.

@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
- * Represents a common Page. <br/>
+ * Basic implementation of a common Page. <br/>
  * Should be extended to reflect your own page services.
  * 
  * @author Andre Ricardo Schaffer

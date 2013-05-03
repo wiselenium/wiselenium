@@ -6,10 +6,11 @@ import org.wiselenium.core.element.Element;
  * Represents an abstraction of a HTML Field.
  * 
  * @author Andre Ricardo Schaffer
+ * @param <T> The field type.
  * @since 0.0.1
  */
 @org.wiselenium.core.Field
-public interface Field extends Element {
+public interface Field<T extends Field<T>> extends Element<T> {
 	
 	/**
 	 * Clicks on this field.
@@ -17,7 +18,7 @@ public interface Field extends Element {
 	 * @return This field object in order to allow chain calls.
 	 * @since 0.0.1
 	 */
-	Field click();
+	T click();
 	
 	/**
 	 * Double clicks on this field.
@@ -25,6 +26,6 @@ public interface Field extends Element {
 	 * @return This field object in order to allow chain calls.
 	 * @since 0.0.1
 	 */
-	Field doubleClick();
+	T doubleClick();
 	
 }

@@ -9,6 +9,6 @@ import org.wiselenium.core.element.Element;
  * @since 0.0.1
  */
 @org.wiselenium.core.Container
-public interface Container extends Element {
+public interface Container extends Element<Container> {
 	
 }

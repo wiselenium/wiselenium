@@ -6,13 +6,7 @@ package org.wiselenium.core.element.field;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-public interface Text extends Field {
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	Text and();
+public interface Text extends Field<Text> {
 	
 	/**
 	 * Clears this text content.
@@ -21,18 +15,6 @@ public interface Text extends Field {
 	 * @since 0.0.1
 	 */
 	Text clear();
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	Text click();
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	Text doubleClick();
 	
 	/**
 	 * Retrieves the value of this text.
