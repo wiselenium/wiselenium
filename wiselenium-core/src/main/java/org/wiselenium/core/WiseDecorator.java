@@ -59,7 +59,7 @@ class WiseDecorator extends DefaultFieldDecorator {
 		try {
 			clazz.getConstructor(WebElement.class);
 		} catch (Exception e) {
-			throw new ClassWithNoConstructorWithWebElementException(clazz);
+			throw new ClassWithNoConstructorWithWebElementException(e);
 		}
 	}
 	

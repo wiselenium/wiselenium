@@ -12,7 +12,7 @@
   <version>${wiselenium-core.version}</version>
   <packaging>jar</packaging>
   
-  <name>wiselenium</name>
+  <name>wiselenium core</name>
   <url>https://github.com/andreschaffer/wiselenium</url>
   
   <developers>

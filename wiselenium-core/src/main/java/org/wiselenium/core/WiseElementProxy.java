@@ -14,7 +14,7 @@ import org.openqa.selenium.internal.WrapsElement;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-class WiseElementProxy implements MethodInterceptor {
+final class WiseElementProxy implements MethodInterceptor {
 	
 	private static final String GET_WRAPPED_ELEMENT_METHOD_NAME = "getWrappedElement";
 	private final WebElement element;
@@ -33,8 +33,8 @@ class WiseElementProxy implements MethodInterceptor {
 	 */
 	@Override
 	public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
-		throws Throwable {
-		
+		throws Throwable { // NOSONAR because it's an overriden method
+	
 		if (GET_WRAPPED_ELEMENT_METHOD_NAME.equals(method.getName())) {
 			if (!(obj instanceof WrapsElement)) throw new WebElementNotWrappedException(obj);
 			return this.element;

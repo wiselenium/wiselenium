@@ -14,10 +14,10 @@ class ClassWithNoConstructorWithWebDriverException extends WiseException {
 	
 	/**
 	 * @param <T> The class type.
-	 * @param clazz The class that doesn't have a constructor that receives a WebDriver.
+	 * @param t The cause of the exception.
 	 */
-	public <T> ClassWithNoConstructorWithWebDriverException(Class<T> clazz) {
-		super("The class " + clazz + " doesn't have a constructor that receives a WebDriver");
+	public <T> ClassWithNoConstructorWithWebDriverException(Throwable t) {
+		super("The class doesn't have a constructor that receives a WebDriver", t);
 	}
 	
 }

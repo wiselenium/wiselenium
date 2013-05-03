@@ -13,10 +13,10 @@ class NoElementImplementationFoundException extends WiseException {
 	
 	
 	/**
-	 * @param clazz The class whose implementation couldn't be found.
+	 * @param t The cause of the exception.
 	 */
-	public NoElementImplementationFoundException(Class<?> clazz) {
-		super("Couldn't find an implementation of the class " + clazz.getName());
+	public NoElementImplementationFoundException(Throwable t) {
+		super("Couldn't find an implementation for the class", t);
 	}
 	
 }

@@ -20,6 +20,8 @@ import org.openqa.selenium.support.pagefactory.FieldDecorator;
  */
 public final class WisePageFactory {
 	
+	private WisePageFactory() {}
+	
 	/**
 	 * Instantiate an instance of the given class, and set a lazy proxy for each of its elements. <br/>
 	 * It assumes the element field name as the HTML element's "id" or "name". To change how the
@@ -98,7 +100,7 @@ public final class WisePageFactory {
 		try {
 			clazz.getConstructor(WebDriver.class);
 		} catch (Exception e) {
-			throw new ClassWithNoConstructorWithWebDriverException(clazz);
+			throw new ClassWithNoConstructorWithWebDriverException(e);
 		}
 	}
 	
