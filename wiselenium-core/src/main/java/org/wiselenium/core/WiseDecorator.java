@@ -7,7 +7,6 @@ import java.lang.reflect.Field;
 
 import net.sf.cglib.proxy.Enhancer;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
@@ -42,8 +41,8 @@ public class WiseDecorator extends DefaultFieldDecorator {
 	}
 	
 	private static Object createInstanceWithWebElementConstructor(Class<?> implentationClass,
-		Field field, WebElement webElement) {
-		validateClassHasConstructorWithWebElement(field.getType());
+		WebElement webElement) {
+		validateClassHasConstructorWithWebElement(implentationClass);
 		
 		Enhancer e = createEnhancerForField(implentationClass, webElement);
 		return e.create(new Class[] { WebElement.class }, new Object[] { webElement });
@@ -58,7 +57,7 @@ public class WiseDecorator extends DefaultFieldDecorator {
 	
 	private static void validateClassHasConstructorWithWebElement(Class<?> clazz) {
 		try {
-			clazz.getConstructor(WebDriver.class);
+			clazz.getConstructor(WebElement.class);
 		} catch (Exception e) {
 			throw new ClassWithNoConstructorWithWebElementException(clazz);
 		}
@@ -85,7 +84,7 @@ public class WiseDecorator extends DefaultFieldDecorator {
 		
 		Class<?> implentationClass = findImplementationClass(field.getType());
 		try {
-			return WiseDecorator.createInstanceWithWebElementConstructor(implentationClass, field,
+			return WiseDecorator.createInstanceWithWebElementConstructor(implentationClass,
 				webElement);
 		} catch (ClassWithNoConstructorWithWebElementException e) {
 			return WiseDecorator.createInstanceWithEmptyConstructor(implentationClass, webElement);
