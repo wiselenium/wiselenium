@@ -6,8 +6,6 @@ import net.sf.cglib.proxy.Enhancer;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.internal.WrapsDriver;
-import org.openqa.selenium.support.CacheLookup;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
@@ -32,8 +30,6 @@ public final class WisePageFactory {
 	 * @param clazz The class to be initialized.
 	 * @return An instance of the class with its element fields proxied.
 	 * @since 0.0.1
-	 * @see FindBy
-	 * @see CacheLookup
 	 */
 	public static <T> T initElements(WebDriver driver, Class<T> clazz) {
 		T instance;
