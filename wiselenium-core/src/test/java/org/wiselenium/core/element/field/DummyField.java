@@ -5,8 +5,8 @@ import org.wiselenium.core.Field;
 
 @SuppressWarnings("javadoc")
 @Field
-public interface DummyFieldWithWebElementInjectThroughConstructor {
+public interface DummyField {
 	
-	WebElement getWebElement();
+	WebElement getWrappedElement();
 	
 }

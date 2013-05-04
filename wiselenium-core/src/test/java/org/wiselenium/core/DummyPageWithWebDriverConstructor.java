@@ -3,23 +3,23 @@ package org.wiselenium.core;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.wiselenium.core.element.field.DummyFieldWithWebElementInjectThroughConstructor;
+import org.wiselenium.core.element.field.DummyFieldWithWebElementConstructor;
 
 @SuppressWarnings("javadoc")
-public class DummyPageWithWebDriverInjectedThoughConstructor extends Page {
+public class DummyPageWithWebDriverConstructor extends Page {
 	
 	public static final String URL = "button.html";
 	
 	@FindBy(id = "button")
-	private DummyFieldWithWebElementInjectThroughConstructor dummy;
+	private DummyFieldWithWebElementConstructor dummy;
 	
 	
-	public DummyPageWithWebDriverInjectedThoughConstructor(WebDriver driver) {
+	public DummyPageWithWebDriverConstructor(WebDriver driver) {
 		super(driver);
 	}
 	
 	public WebElement getDummyElementWebElement() {
-		return this.dummy.getWebElement();
+		return this.dummy.getWrappedElement();
 	}
 	
 }

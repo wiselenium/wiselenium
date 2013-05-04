@@ -2,6 +2,8 @@ package org.wiselenium.core;
 
 import static org.testng.Assert.assertNotNull;
 import static org.wiselenium.core.WisePageFactory.initElements;
+import static org.wiselenium.core.WiseUnwrapper.unwrapWebDriver;
+import static org.wiselenium.core.WiseUnwrapper.unwrapWebElement;
 
 import org.testng.annotations.Test;
 
@@ -11,21 +13,21 @@ public class WisePageFactoryTest extends TestBase {
 	@Test
 	public void shouldInitElementsInjectingThemThroughConstructor() {
 		this.driver
-			.get(getAbsoluteFilePath(DummyPageWithoutInheritanceAndWithWebDriverInjectedThoughConstructor.URL));
+			.get(getAbsoluteFilePath(DummyPageWithoutInheritanceAndWithWebDriverConstructor.URL));
 		
-		DummyPageWithoutInheritanceAndWithWebDriverInjectedThoughConstructor page = initElements(
-			this.driver, DummyPageWithoutInheritanceAndWithWebDriverInjectedThoughConstructor.class);
+		DummyPageWithoutInheritanceAndWithWebDriverConstructor page = initElements(this.driver,
+			DummyPageWithoutInheritanceAndWithWebDriverConstructor.class);
 		
-		assertNotNull(page.getWebDriver());
+		assertNotNull(page.getWrappedDriver());
 		assertNotNull(page.getDummyElementWebElement());
 	}
 	
 	@Test
 	public void shouldInitElementsInjectingThemThroughSuperConstructor() {
-		this.driver.get(getAbsoluteFilePath(DummyPageWithWebDriverInjectedThoughConstructor.URL));
+		this.driver.get(getAbsoluteFilePath(DummyPageWithWebDriverConstructor.URL));
 		
-		DummyPageWithWebDriverInjectedThoughConstructor page = initElements(this.driver,
-			DummyPageWithWebDriverInjectedThoughConstructor.class);
+		DummyPageWithWebDriverConstructor page = initElements(this.driver,
+			DummyPageWithWebDriverConstructor.class);
 		
 		assertNotNull(page.getWrappedDriver());
 		assertNotNull(page.getDummyElementWebElement());
@@ -39,9 +41,10 @@ public class WisePageFactoryTest extends TestBase {
 		DummyPageWithoutInheritanceAndWithEmptyConstructor page = initElements(this.driver,
 			DummyPageWithoutInheritanceAndWithEmptyConstructor.class);
 		
-		assertNotNull(page.getWebDriver());
+		assertNotNull(unwrapWebDriver(page));
 		assertNotNull(page.getWrappedDriver());
-		assertNotNull(page.getDummyElementWebElement());
+		assertNotNull(unwrapWebElement(page.getDummyField()));
+		assertNotNull(page.getDummyField().getWrappedElement());
 	}
 	
 }
