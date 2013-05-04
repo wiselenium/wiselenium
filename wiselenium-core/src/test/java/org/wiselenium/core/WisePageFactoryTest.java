@@ -27,12 +27,12 @@ public class WisePageFactoryTest extends TestBase {
 		DummyPageWithWebDriverInjectedThoughConstructor page = initElements(this.driver,
 			DummyPageWithWebDriverInjectedThoughConstructor.class);
 		
-		assertNotNull(page.getWebDriver());
+		assertNotNull(page.getWrappedDriver());
 		assertNotNull(page.getDummyElementWebElement());
 	}
 	
 	@Test
-	public void shouldInitElementsInjectingThemWithoutConstructor() {
+	public void shouldInitElementsInjectingThemWithEmptyConstructor() {
 		this.driver
 			.get(getAbsoluteFilePath(DummyPageWithoutInheritanceAndWithEmptyConstructor.URL));
 		
@@ -40,6 +40,7 @@ public class WisePageFactoryTest extends TestBase {
 			DummyPageWithoutInheritanceAndWithEmptyConstructor.class);
 		
 		assertNotNull(page.getWebDriver());
+		assertNotNull(page.getWrappedDriver());
 		assertNotNull(page.getDummyElementWebElement());
 	}
 	

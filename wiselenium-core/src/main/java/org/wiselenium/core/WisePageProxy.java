@@ -6,7 +6,6 @@ import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.internal.WrapsDriver;
 
 /**
  * The wiselenium proxy for pages.
@@ -28,6 +27,10 @@ final class WisePageProxy implements MethodInterceptor {
 		return new WisePageProxy(driver);
 	}
 	
+	private static boolean isGetWrappedDriver(Method method) {
+		return GET_WRAPPED_DRIVER.equals(method.getName());
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -35,11 +38,7 @@ final class WisePageProxy implements MethodInterceptor {
 	public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
 		throws Throwable { // NOSONAR because it's an overriden method
 	
-		if (GET_WRAPPED_DRIVER.equals(method.getName())) {
-			if (!(obj instanceof WrapsDriver)) throw new WebDriverNotWrappedException(obj);
-			return this.driver;
-		}
-		
+		if (isGetWrappedDriver(method)) return this.driver;
 		return proxy.invokeSuper(obj, args);
 	}
 	

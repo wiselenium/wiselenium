@@ -6,7 +6,6 @@ import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.WrapsElement;
 
 /**
  * The wiselenium proxy for elements.
@@ -28,6 +27,10 @@ final class WiseElementProxy implements MethodInterceptor {
 		return new WiseElementProxy(element);
 	}
 	
+	private static boolean isGetWrappedElement(Method method) {
+		return GET_WRAPPED_ELEMENT.equals(method.getName());
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -35,11 +38,7 @@ final class WiseElementProxy implements MethodInterceptor {
 	public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
 		throws Throwable { // NOSONAR because it's an overriden method
 	
-		if (GET_WRAPPED_ELEMENT.equals(method.getName())) {
-			if (!(obj instanceof WrapsElement)) throw new WebElementNotWrappedException(obj);
-			return this.element;
-		}
-		
+		if (isGetWrappedElement(method)) return this.element;
 		return proxy.invokeSuper(obj, args);
 	}
 	

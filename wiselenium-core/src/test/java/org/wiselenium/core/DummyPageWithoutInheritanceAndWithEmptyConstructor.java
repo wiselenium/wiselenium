@@ -24,4 +24,10 @@ public class DummyPageWithoutInheritanceAndWithEmptyConstructor {
 		return unwrapWebDriver(this);
 	}
 	
+	public WebDriver getWrappedDriver() {
+		// doesn't matter, because this page will be proxied and the proxy getWrappedDriver method
+		// will be called instead of this
+		return null;
+	}
+	
 }

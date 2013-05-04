@@ -2,12 +2,12 @@ package org.wiselenium.core;
 
 /**
  * Represents an exception which indicates that the class being instantiated by wiselenium doesn't
- * have a constructor that receives a WebElement.
+ * have a constructor that receives a WebDriver.
  * 
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-class ClassWithNoConstructorWithWebElementException extends WiseException {
+class ClassWithoutConstructorWithWebDriverException extends WiseException {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -16,8 +16,8 @@ class ClassWithNoConstructorWithWebElementException extends WiseException {
 	 * @param <T> The class type.
 	 * @param t The cause of the exception.
 	 */
-	public <T> ClassWithNoConstructorWithWebElementException(Throwable t) {
-		super("The class doesn't have a constructor that receives a WebElement", t);
+	public <T> ClassWithoutConstructorWithWebDriverException(Throwable t) {
+		super("The class doesn't have a constructor that receives a WebDriver", t);
 	}
 	
 }

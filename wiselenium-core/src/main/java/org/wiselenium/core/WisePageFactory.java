@@ -1,5 +1,6 @@
 package org.wiselenium.core;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 
 import net.sf.cglib.proxy.Enhancer;
@@ -35,7 +36,7 @@ public final class WisePageFactory {
 		T instance;
 		try {
 			instance = createInstanceWithWebDriverConstructor(driver, clazz);
-		} catch (ClassWithNoConstructorWithWebDriverException e) {
+		} catch (ClassWithoutConstructorWithWebDriverException e) {
 			instance = createInstanceWithEmptyConstructor(driver, clazz);
 		}
 		
@@ -59,12 +60,21 @@ public final class WisePageFactory {
 		return (T) e.create();
 	}
 	
-	@SuppressWarnings("unchecked")
 	private static <T> T createInstanceWithWebDriverConstructor(WebDriver driver, Class<T> clazz) {
-		validateClassHasConstructorWithWebDriver(clazz);
-		
-		Enhancer e = createEnhancerOfInstance(driver, clazz);
-		return (T) e.create(new Class[] { WebDriver.class }, new Object[] { driver });
+		Constructor<T> constructorWithWebDriver = getConstructorWithWebDriver(clazz);
+		try {
+			return constructorWithWebDriver.newInstance(driver);
+		} catch (Exception e) {
+			throw new ClassWithoutConstructorWithWebDriverException(e);
+		}
+	}
+	
+	private static <T> Constructor<T> getConstructorWithWebDriver(Class<T> clazz) {
+		try {
+			return clazz.getConstructor(WebDriver.class);
+		} catch (Exception e) {
+			throw new ClassWithoutConstructorWithWebDriverException(e);
+		}
 	}
 	
 	private static <T> T initElements(FieldDecorator decorator, T instance) {
@@ -89,14 +99,6 @@ public final class WisePageFactory {
 			} catch (IllegalAccessException e) {
 				throw new PageCreationException(instance.getClass(), e);
 			}
-		}
-	}
-	
-	private static <T> void validateClassHasConstructorWithWebDriver(Class<T> clazz) {
-		try {
-			clazz.getConstructor(WebDriver.class);
-		} catch (Exception e) {
-			throw new ClassWithNoConstructorWithWebDriverException(e);
 		}
 	}
 	

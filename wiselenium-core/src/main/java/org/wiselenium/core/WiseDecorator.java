@@ -3,6 +3,7 @@ package org.wiselenium.core;
 import static org.wiselenium.core.AnnotationUtils.isAnnotationPresent;
 import static org.wiselenium.core.ClasspathUtil.findImplementationClass;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 
 import net.sf.cglib.proxy.Enhancer;
@@ -42,10 +43,21 @@ class WiseDecorator extends DefaultFieldDecorator {
 	
 	private static Object createInstanceWithWebElementConstructor(Class<?> implentationClass,
 		WebElement webElement) {
-		validateClassHasConstructorWithWebElement(implentationClass);
 		
-		Enhancer e = createEnhancerForField(implentationClass, webElement);
-		return e.create(new Class[] { WebElement.class }, new Object[] { webElement });
+		Constructor<?> constructorWithWebElement = getConstructorWithWebElement(implentationClass);
+		try {
+			return constructorWithWebElement.newInstance(webElement);
+		} catch (Exception e) {
+			throw new ClassWithoutConstructorWithWebElementException(e);
+		}
+	}
+	
+	private static Constructor<?> getConstructorWithWebElement(Class<?> clazz) {
+		try {
+			return clazz.getConstructor(WebElement.class);
+		} catch (Exception e) {
+			throw new ClassWithoutConstructorWithWebElementException(e);
+		}
 	}
 	
 	private static boolean shouldDecorateWiseElement(Field field) {
@@ -53,14 +65,6 @@ class WiseDecorator extends DefaultFieldDecorator {
 			|| isAnnotationPresent(field.getType(), org.wiselenium.core.Container.class)
 			|| isAnnotationPresent(field.getType(), org.wiselenium.core.Frame.class)) return true;
 		return false;
-	}
-	
-	private static void validateClassHasConstructorWithWebElement(Class<?> clazz) {
-		try {
-			clazz.getConstructor(WebElement.class);
-		} catch (Exception e) {
-			throw new ClassWithNoConstructorWithWebElementException(e);
-		}
 	}
 	
 	/**
@@ -86,7 +90,7 @@ class WiseDecorator extends DefaultFieldDecorator {
 		try {
 			return WiseDecorator.createInstanceWithWebElementConstructor(implentationClass,
 				webElement);
-		} catch (ClassWithNoConstructorWithWebElementException e) {
+		} catch (ClassWithoutConstructorWithWebElementException e) {
 			return WiseDecorator.createInstanceWithEmptyConstructor(implentationClass, webElement);
 		}
 	}

@@ -76,6 +76,4 @@ public class TextTest extends TestBase {
 		assertEquals(this.page.getText().sendKeys(keysToSend).and().getValue(), keysToSend);
 	}
 	
-	// TODO tests for its other methods
-	
 }

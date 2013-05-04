@@ -1,13 +1,12 @@
 package org.wiselenium.core;
 
-import static org.wiselenium.core.WiseUnwrapper.unwrapWebDriver;
-
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.WrapsDriver;
 
 /**
  * Basic implementation of a common Page. <br/>
@@ -16,7 +15,7 @@ import org.openqa.selenium.WebElement;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-public class Page {
+public class Page implements WrapsDriver {
 	
 	private WebDriver driver;
 	
@@ -52,7 +51,7 @@ public class Page {
 	 * @since 0.0.1
 	 */
 	public Object executeScript(String script) {
-		return ((JavascriptExecutor) this.getWebDriver()).executeScript(script);
+		return ((JavascriptExecutor) this.getWrappedDriver()).executeScript(script);
 	}
 	
 	/**
@@ -63,7 +62,7 @@ public class Page {
 	 * @since 0.0.1
 	 */
 	public List<WebElement> findElements(By by) {
-		return this.getWebDriver().findElements(by);
+		return this.getWrappedDriver().findElements(by);
 	}
 	
 	/**
@@ -73,7 +72,7 @@ public class Page {
 	 * @since 0.0.1
 	 */
 	public void get(String url) {
-		this.getWebDriver().get(url);
+		this.getWrappedDriver().get(url);
 	}
 	
 	/**
@@ -83,7 +82,7 @@ public class Page {
 	 * @since 0.0.1
 	 */
 	public String getCurrentUrl() {
-		return this.getWebDriver().getCurrentUrl();
+		return this.getWrappedDriver().getCurrentUrl();
 	}
 	
 	/**
@@ -93,7 +92,7 @@ public class Page {
 	 * @since 0.0.1
 	 */
 	public String getPageSource() {
-		return this.getWebDriver().getPageSource();
+		return this.getWrappedDriver().getPageSource();
 	}
 	
 	/**
@@ -103,18 +102,15 @@ public class Page {
 	 * @since 0.0.1
 	 */
 	public String getTitle() {
-		return this.getWebDriver().getTitle();
+		return this.getWrappedDriver().getTitle();
 	}
 	
 	/**
-	 * Retrieves the WebDriver encapsulated within the page.
-	 * 
-	 * @return The driver of the page.
-	 * @since 0.0.1
+	 * {@inheritDoc}
 	 */
-	public WebDriver getWebDriver() {
-		if (this.driver != null) return this.driver;
-		return unwrapWebDriver(this);
+	@Override
+	public WebDriver getWrappedDriver() {
+		return this.driver;
 	}
 	
 }
