@@ -11,7 +11,7 @@
   <artifactId>wiselenium-parent</artifactId>
   <packaging>pom</packaging>
 
-  <name>wiselenium</name>
+  <name>wiselenium parent</name>
   <url>https://github.com/andreschaffer/wiselenium</url>
   
   <developers>

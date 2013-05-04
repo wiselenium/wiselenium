@@ -12,7 +12,7 @@
   <version>${wiselenium-testng.version}</version>
   <packaging>jar</packaging>
   
-  <name>wiselenium</name>
+  <name>wiselenium testng</name>
   <url>https://github.com/andreschaffer/wiselenium</url>
   
   <developers>
