@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.wiselenium.core.Page;
 
 @SuppressWarnings("javadoc")
-public class ButtonPage extends Page {
+public class ButtonPage extends Page<ButtonPage> {
 	
 	public static final String BUTTON_CLICKED_MESSAGE = "button clicked";
 	public static final String BUTTON_VALUE = "button";

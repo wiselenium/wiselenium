@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.wiselenium.core.element.field.DummyFieldWithWebElementConstructor;
 
 @SuppressWarnings("javadoc")
-public class DummyPageWithWebDriverConstructor extends Page {
+public class DummyPageWithWebDriverConstructor extends Page<DummyPageWithWebDriverConstructor> {
 	
 	public static final String URL = "button.html";
 	

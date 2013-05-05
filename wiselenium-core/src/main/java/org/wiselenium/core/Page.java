@@ -13,9 +13,10 @@ import org.openqa.selenium.internal.WrapsDriver;
  * Should be extended to reflect your own page services.
  * 
  * @author Andre Ricardo Schaffer
+ * @param <T> The page type.
  * @since 0.0.1
  */
-public class Page implements WrapsDriver {
+public class Page<T extends Page<T>> implements WrapsDriver {
 	
 	private WebDriver driver;
 	
@@ -39,8 +40,9 @@ public class Page implements WrapsDriver {
 	 * @return This page object.
 	 * @since 0.0.1
 	 */
-	public Page and() {
-		return this;
+	@SuppressWarnings("unchecked")
+	public T and() {
+		return (T) this;
 	}
 	
 	/**
@@ -62,6 +64,11 @@ public class Page implements WrapsDriver {
 	 * @since 0.0.1
 	 */
 	public List<WebElement> findElements(By by) {
+		// TODO change method to return wise elements, passing the class type in the method
+		// signature. if the user needs webelements, he can either pass weblement.class as
+		// parameter or call the wiseunwrapper to retrieve the webdriver and then use its
+		// findelements method
+		// TODO also add the findElement method to the class
 		return this.getWrappedDriver().findElements(by);
 	}
 	

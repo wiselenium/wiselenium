@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.wiselenium.core.Page;
 
 @SuppressWarnings("javadoc")
-public class TextPage extends Page {
+public class TextPage extends Page<TextPage> {
 	
 	public static final String TEXT_CLICKED_MESSAGE = "text clicked";
 	public static final String TEXT_VALUE = "text";

@@ -12,20 +12,22 @@ import org.wiselenium.core.element.field.Field;
  * @param <T> The field type.
  * @since 0.0.1
  */
-@SuppressWarnings("unchecked")
 public class BasicField<T extends Field<T>> implements Field<T> {
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public T and() {
 		return (T) this;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public T click() {
 		unwrapWebElement(this).click();
 		return (T) this;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public T doubleClick() {
 		// TODO will need a webdriver reference
