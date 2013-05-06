@@ -5,7 +5,6 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsDriver;
 
 /**
@@ -57,29 +56,44 @@ public class Page<T extends Page<T>> implements WrapsDriver {
 	}
 	
 	/**
-	 * Find all elements within the current page using the given mechanism. <br/>
+	 * Finds the first element within the current page using the given mechanism.
 	 * 
-	 * @param by The locating mechanism to use
-	 * @return A list of all WebElements found or an empty list if nothing matches.
+	 * @param <E> The type of the element.
+	 * @param clazz The class of the element.
+	 * @param by The locating mechanism to use.
+	 * @return The element found.
 	 * @since 0.0.1
 	 */
-	public List<WebElement> findElements(By by) {
-		// TODO change method to return wise elements, passing the class type in the method
-		// signature. if the user needs webelements, he can either pass weblement.class as
-		// parameter or call the wiseunwrapper to retrieve the webdriver and then use its
-		// findelements method
-		// TODO also add the findElement method to the class
-		return this.getWrappedDriver().findElements(by);
+	public <E> List<E> findElement(Class<E> clazz, By by) {
+		// TODO findElement
+		return null;
+	}
+	
+	/**
+	 * Finds all elements within the current page using the given mechanism.
+	 * 
+	 * @param <E> The type of the elements.
+	 * @param clazz The class of the elements.
+	 * @param by The locating mechanism to use.
+	 * @return A list of all elements found or an empty list if nothing matches.
+	 * @since 0.0.1
+	 */
+	public <E> List<E> findElements(Class<E> clazz, By by) {
+		// TODO findElements
+		return null;
 	}
 	
 	/**
 	 * Loads a new web page in the current browser window using a HTTP GET operation.
 	 * 
-	 * @param url The URL to load. It is best to use a fully qualified URL
+	 * @param url The URL to load. It is best to use a fully qualified URL.
+	 * @return This page object.
 	 * @since 0.0.1
 	 */
-	public void get(String url) {
+	@SuppressWarnings("unchecked")
+	public T get(String url) {
 		this.getWrappedDriver().get(url);
+		return (T) this;
 	}
 	
 	/**

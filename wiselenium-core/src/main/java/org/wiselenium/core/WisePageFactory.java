@@ -1,6 +1,5 @@
 package org.wiselenium.core;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 
 import net.sf.cglib.proxy.Enhancer;
@@ -61,17 +60,8 @@ public final class WisePageFactory {
 	}
 	
 	private static <T> T createInstanceWithWebDriverConstructor(WebDriver driver, Class<T> clazz) {
-		Constructor<T> constructorWithWebDriver = getConstructorWithWebDriver(clazz);
 		try {
-			return constructorWithWebDriver.newInstance(driver);
-		} catch (Exception e) {
-			throw new ClassWithoutConstructorWithWebDriverException(e);
-		}
-	}
-	
-	private static <T> Constructor<T> getConstructorWithWebDriver(Class<T> clazz) {
-		try {
-			return clazz.getConstructor(WebDriver.class);
+			return clazz.getConstructor(WebDriver.class).newInstance(driver);
 		} catch (Exception e) {
 			throw new ClassWithoutConstructorWithWebDriverException(e);
 		}

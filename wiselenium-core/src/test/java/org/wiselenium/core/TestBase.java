@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeClass;
 public class TestBase {
 	
 	protected WebDriver driver;
+	protected final String DUMMY_PAGE_URL = "dummy.html";
 	
 	
 	protected static String getAbsoluteFilePath(String relativePath) {

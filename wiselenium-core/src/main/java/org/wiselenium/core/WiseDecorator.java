@@ -3,7 +3,6 @@ package org.wiselenium.core;
 import static org.wiselenium.core.AnnotationUtils.isAnnotationPresent;
 import static org.wiselenium.core.ClasspathUtil.findImplementationClass;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 
 import net.sf.cglib.proxy.Enhancer;
@@ -26,7 +25,7 @@ class WiseDecorator extends DefaultFieldDecorator {
 		super(factory);
 	}
 	
-	private static Enhancer createEnhancerForField(Class<?> implentationClass, WebElement webElement) {
+	private static Enhancer createEnhancerForField(WebElement webElement, Class<?> implentationClass) {
 		Enhancer e = new Enhancer();
 		e.setSuperclass(implentationClass);
 		e.setInterfaces(new Class[] { WrapsElement.class });
@@ -35,26 +34,17 @@ class WiseDecorator extends DefaultFieldDecorator {
 		return e;
 	}
 	
-	private static Object createInstanceWithEmptyConstructor(Class<?> implentationClass,
-		WebElement webElement) {
-		Enhancer e = createEnhancerForField(implentationClass, webElement);
+	private static Object createInstanceWithEmptyConstructor(WebElement webElement,
+		Class<?> implentationClass) {
+		Enhancer e = createEnhancerForField(webElement, implentationClass);
 		return e.create();
 	}
 	
-	private static Object createInstanceWithWebElementConstructor(Class<?> implentationClass,
-		WebElement webElement) {
+	private static Object createInstanceWithWebElementConstructor(WebElement webElement,
+		Class<?> implentationClass) {
 		
-		Constructor<?> constructorWithWebElement = getConstructorWithWebElement(implentationClass);
 		try {
-			return constructorWithWebElement.newInstance(webElement);
-		} catch (Exception e) {
-			throw new ClassWithoutConstructorWithWebElementException(e);
-		}
-	}
-	
-	private static Constructor<?> getConstructorWithWebElement(Class<?> clazz) {
-		try {
-			return clazz.getConstructor(WebElement.class);
+			return implentationClass.getConstructor(WebElement.class).newInstance(webElement);
 		} catch (Exception e) {
 			throw new ClassWithoutConstructorWithWebElementException(e);
 		}
@@ -88,10 +78,10 @@ class WiseDecorator extends DefaultFieldDecorator {
 		
 		Class<?> implentationClass = findImplementationClass(field.getType());
 		try {
-			return WiseDecorator.createInstanceWithWebElementConstructor(implentationClass,
-				webElement);
+			return WiseDecorator.createInstanceWithWebElementConstructor(webElement,
+				implentationClass);
 		} catch (ClassWithoutConstructorWithWebElementException e) {
-			return WiseDecorator.createInstanceWithEmptyConstructor(implentationClass, webElement);
+			return WiseDecorator.createInstanceWithEmptyConstructor(webElement, implentationClass);
 		}
 	}
 	

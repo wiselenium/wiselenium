@@ -24,11 +24,10 @@ public class WisePageFactoryTest extends TestBase {
 	
 	@Test
 	public void shouldInitElementsInjectingThemThroughSuperConstructor() {
-		this.driver.get(getAbsoluteFilePath(DummyPageWithWebDriverConstructor.URL));
-		
 		DummyPageWithWebDriverConstructor page = initElements(this.driver,
 			DummyPageWithWebDriverConstructor.class);
 		
+		page.get(getAbsoluteFilePath(DummyPageWithWebDriverConstructor.URL));
 		assertNotNull(page.getWrappedDriver());
 		assertNotNull(page.getDummyElementWebElement());
 	}

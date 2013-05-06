@@ -22,8 +22,8 @@ public class TextTest extends TestBase {
 	
 	@BeforeMethod
 	public void initPage() {
-		this.driver.get(getAbsoluteFilePath(URL));
 		this.page = initElements(this.driver, TextPage.class);
+		this.page.get(getAbsoluteFilePath(URL));
 		assertEquals(this.page.getTitle(), TITLE);
 	}
 	
