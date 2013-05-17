@@ -20,6 +20,9 @@ public final class WisePageFactory {
 	
 	private WisePageFactory() {}
 	
+	// TODO overload the initElements method to also accept an object instead of a class, like the
+	// selenium pagefactory
+	
 	/**
 	 * Instantiate an instance of the given class, and set a lazy proxy for each of its elements. <br/>
 	 * It assumes the element field name as the HTML element's "id" or "name". To change how the
