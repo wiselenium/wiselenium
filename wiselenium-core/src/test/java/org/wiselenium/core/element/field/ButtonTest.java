@@ -4,12 +4,12 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
-import static org.wiselenium.core.WisePageFactory.initElements;
 import static org.wiselenium.core.element.field.ButtonPage.BUTTON_CLICKED_MESSAGE;
 import static org.wiselenium.core.element.field.ButtonPage.BUTTON_VALUE;
 import static org.wiselenium.core.element.field.ButtonPage.HIDDEN_BUTTON_VALUE;
 import static org.wiselenium.core.element.field.ButtonPage.TITLE;
 import static org.wiselenium.core.element.field.ButtonPage.URL;
+import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

@@ -1,6 +1,7 @@
-package org.wiselenium.core;
+package org.wiselenium.core.pagefactory;
 
 import java.lang.reflect.Modifier;
+
 
 /**
  * Utility class to help find resources on the classpath.
@@ -8,9 +9,9 @@ import java.lang.reflect.Modifier;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-final class ClasspathUtil {
+final class ClasspathUtils {
 	
-	private ClasspathUtil() {}
+	private ClasspathUtils() {}
 	
 	/**
 	 * Finds the implementation class of a type on the classpath. <br/>

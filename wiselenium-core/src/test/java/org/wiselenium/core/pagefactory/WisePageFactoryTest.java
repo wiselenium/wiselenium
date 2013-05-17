@@ -1,14 +1,22 @@
-package org.wiselenium.core;
+package org.wiselenium.core.pagefactory;
 
 import static org.testng.Assert.assertNotNull;
-import static org.wiselenium.core.WisePageFactory.initElements;
 import static org.wiselenium.core.WiseUnwrapper.unwrapWebDriver;
 import static org.wiselenium.core.WiseUnwrapper.unwrapWebElement;
+import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import org.testng.annotations.Test;
+import org.wiselenium.core.TestBase;
 
 @SuppressWarnings("javadoc")
 public class WisePageFactoryTest extends TestBase {
+	
+	@Test(expectedExceptions = PageCreationException.class)
+	public void shouldFailWhileCreatingPage() {
+		this.driver.get(getAbsoluteFilePath(DummyPageWithFinalField.URL));
+		initElements(this.driver, DummyPageWithFinalField.class);
+		System.out.println("ae");
+	}
 	
 	@Test
 	public void shouldInitElementsInjectingThemThroughConstructor() {

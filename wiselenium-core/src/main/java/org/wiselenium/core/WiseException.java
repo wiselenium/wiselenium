@@ -26,11 +26,4 @@ public class WiseException extends RuntimeException {
 		super(msg, t);
 	}
 	
-	/**
-	 * @param t The cause of the exception.
-	 */
-	public WiseException(Throwable t) {
-		super(t);
-	}
-	
 }

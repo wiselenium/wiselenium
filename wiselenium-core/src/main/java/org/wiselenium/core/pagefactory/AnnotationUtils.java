@@ -1,4 +1,4 @@
-package org.wiselenium.core;
+package org.wiselenium.core.pagefactory;
 
 import java.lang.annotation.Annotation;
 

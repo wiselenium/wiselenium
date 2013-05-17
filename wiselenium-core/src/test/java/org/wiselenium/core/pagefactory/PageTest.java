@@ -1,12 +1,14 @@
-package org.wiselenium.core;
+package org.wiselenium.core.pagefactory;
 
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
-import static org.wiselenium.core.WisePageFactory.initElements;
+import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.wiselenium.core.TestBase;
+import org.wiselenium.core.pagefactory.Page;
 
 @SuppressWarnings("javadoc")
 public class PageTest extends TestBase {

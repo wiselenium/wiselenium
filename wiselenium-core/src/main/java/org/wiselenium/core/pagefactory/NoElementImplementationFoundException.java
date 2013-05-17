@@ -1,4 +1,6 @@
-package org.wiselenium.core;
+package org.wiselenium.core.pagefactory;
+
+import org.wiselenium.core.WiseException;
 
 /**
  * Represents an exception thrown when an implementation of the element couldn't be found by

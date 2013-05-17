@@ -1,4 +1,4 @@
-package org.wiselenium.core;
+package org.wiselenium.core.pagefactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;

@@ -1,4 +1,6 @@
-package org.wiselenium.core;
+package org.wiselenium.core.pagefactory;
+
+import org.wiselenium.core.WiseException;
 
 /**
  * Represents an exception thrown due to an error while creating a page object.

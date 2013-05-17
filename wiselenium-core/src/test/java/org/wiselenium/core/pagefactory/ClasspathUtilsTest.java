@@ -1,13 +1,13 @@
-package org.wiselenium.core;
+package org.wiselenium.core.pagefactory;
 
-import static org.wiselenium.core.ClasspathUtil.findImplementationClass;
+import static org.wiselenium.core.pagefactory.ClasspathUtils.findImplementationClass;
 
 import java.util.List;
 
 import org.testng.annotations.Test;
 
 @SuppressWarnings("javadoc")
-public class ClasspathUtilTest {
+public class ClasspathUtilsTest {
 	
 	@Test(expectedExceptions = NoElementImplementationFoundException.class)
 	public void shouldThrowExceptionWhenNoImplementationIsFound() {

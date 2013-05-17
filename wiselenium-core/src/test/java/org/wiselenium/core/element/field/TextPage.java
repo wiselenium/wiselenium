@@ -1,7 +1,7 @@
 package org.wiselenium.core.element.field;
 
 import org.openqa.selenium.WebElement;
-import org.wiselenium.core.Page;
+import org.wiselenium.core.pagefactory.Page;
 
 @SuppressWarnings("javadoc")
 public class TextPage extends Page<TextPage> {

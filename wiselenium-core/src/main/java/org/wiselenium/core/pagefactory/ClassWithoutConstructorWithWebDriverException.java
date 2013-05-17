@@ -1,4 +1,6 @@
-package org.wiselenium.core;
+package org.wiselenium.core.pagefactory;
+
+import org.wiselenium.core.WiseException;
 
 /**
  * Represents an exception which indicates that the class being instantiated by wiselenium doesn't
