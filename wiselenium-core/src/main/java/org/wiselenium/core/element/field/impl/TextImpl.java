@@ -1,5 +1,6 @@
 package org.wiselenium.core.element.field.impl;
 
+import static java.lang.Integer.parseInt;
 import static org.wiselenium.core.WiseUnwrapper.unwrapWebElement;
 
 import org.wiselenium.core.element.field.Text;
@@ -19,8 +20,25 @@ public class TextImpl extends BasicField<Text> implements Text {
 	}
 	
 	@Override
+	public Integer getMaxLength() {
+		String maxlength = unwrapWebElement(this).getAttribute("maxlength");
+		try {
+			return parseInt(maxlength);
+		} catch (NumberFormatException e) {
+			return null;
+		}
+	}
+	
+	@Override
 	public String getValue() {
 		return unwrapWebElement(this).getAttribute("value");
+	}
+	
+	@Override
+	public boolean isReadOnly() {
+		String readonly = unwrapWebElement(this).getAttribute("readonly");
+		if (readonly == null) return false;
+		return true;
 	}
 	
 	@Override

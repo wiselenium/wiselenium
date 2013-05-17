@@ -3,9 +3,11 @@ package org.wiselenium.core.element.field;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.element.field.TextPage.HIDDEN_TEXT_VALUE;
 import static org.wiselenium.core.element.field.TextPage.TEXT_CLICKED_MESSAGE;
+import static org.wiselenium.core.element.field.TextPage.TEXT_MAXLENGTH;
 import static org.wiselenium.core.element.field.TextPage.TITLE;
 import static org.wiselenium.core.element.field.TextPage.URL;
 import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
@@ -62,6 +64,24 @@ public class TextTest extends TestBase {
 	public void shouldGetDisplayCondition() {
 		assertTrue(this.page.getText().isDisplayed());
 		assertFalse(this.page.getHiddenText().isDisplayed());
+	}
+	
+	@Test
+	public void shouldGetMaxlength() {
+		assertEquals(this.page.getText().getMaxLength(), TEXT_MAXLENGTH);
+		assertNull(this.page.getReadonlyText().getMaxLength());
+	}
+	
+	@Test
+	public void shouldGetReadOnly() {
+		assertFalse(this.page.getText().isReadOnly());
+		assertFalse(this.page.getHiddenText().isReadOnly());
+		
+		assertTrue(this.page.getReadonlyText().isReadOnly());
+		assertTrue(this.page.getReadonlyReadonlyText().isReadOnly());
+		assertTrue(this.page.getReadonlyTrueText().isReadOnly());
+		// readonly="false" is still rendered as readonly by the browsers
+		assertTrue(this.page.getReadonlyFalseText().isReadOnly());
 	}
 	
 	@Test

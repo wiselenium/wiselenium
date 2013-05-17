@@ -17,12 +17,28 @@ public interface Text extends Field<Text> {
 	Text clear();
 	
 	/**
+	 * Retrieves the the maximum number of characters allowed in this text field.
+	 * 
+	 * @return The maximum number of characters allowed.
+	 * @since 0.0.1
+	 */
+	Integer getMaxLength();
+	
+	/**
 	 * Retrieves the value of this text.
 	 * 
 	 * @return The innerText of this element.
 	 * @since 0.0.1
 	 */
 	String getValue();
+	
+	/**
+	 * Returns whether this test is read-only or not.
+	 * 
+	 * @return If this text is read-only.
+	 * @since 0.0.1
+	 */
+	boolean isReadOnly();
 	
 	/**
 	 * Types into this text.

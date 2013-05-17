@@ -6,11 +6,20 @@
 </head>
 <body>
 
-	<input type="text" id="text" value=""
+	<input type="text" id="text" value="" maxlength="30"
 	onclick="document.getElementById('message').innerHTML = 'text clicked';">
 	
 	<input type="text" id="hiddenText" value="hiddenText"
 	style="visibility: hidden;">
+	
+	<br/>
+	<input type="text" id="readonlyText" value="readonlyText" readonly>
+	<br/>
+	<input type="text" id="readonlyTrueText" value="readonlyTrueText" readonly="true">
+	<br/>
+	<input type="text" id="readonlyFalseText" value="readonlyFalseText" readonly="false">
+	<br/>
+	<input type="text" id="readonlyReadonlyText" value="readonlyReadonlyText" readonly="readonly">
 	
 	<div id="message"></div>
 
