@@ -21,7 +21,7 @@ public class TextImpl extends BasicField<Text> implements Text {
 	
 	@Override
 	public Integer getMaxLength() {
-		String maxlength = unwrapWebElement(this).getAttribute("maxlength");
+		String maxlength = this.getAttribute("maxlength");
 		try {
 			return parseInt(maxlength);
 		} catch (NumberFormatException e) {
@@ -31,12 +31,12 @@ public class TextImpl extends BasicField<Text> implements Text {
 	
 	@Override
 	public String getValue() {
-		return unwrapWebElement(this).getAttribute("value");
+		return this.getAttribute("value");
 	}
 	
 	@Override
 	public boolean isReadOnly() {
-		String readonly = unwrapWebElement(this).getAttribute("readonly");
+		String readonly = this.getAttribute("readonly");
 		if (readonly == null) return false;
 		return true;
 	}

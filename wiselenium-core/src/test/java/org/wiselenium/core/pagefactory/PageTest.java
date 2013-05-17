@@ -7,8 +7,8 @@ import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.wiselenium.core.FileUtils;
 import org.wiselenium.core.TestBase;
-import org.wiselenium.core.pagefactory.Page;
 
 @SuppressWarnings("javadoc")
 public class PageTest extends TestBase {
@@ -17,12 +17,13 @@ public class PageTest extends TestBase {
 	private Page page;
 	
 	private final String googleUrl = "http://www.google.com";
+	protected final String DUMMY_PAGE_URL = "dummy.html";
 	
 	
 	@BeforeMethod
 	public void initPage() {
 		this.page = initElements(this.driver, Page.class);
-		this.page.get(getAbsoluteFilePath(this.DUMMY_PAGE_URL));
+		this.page.get(FileUtils.getAbsoluteFilePath(this.DUMMY_PAGE_URL));
 	}
 	
 	@Test

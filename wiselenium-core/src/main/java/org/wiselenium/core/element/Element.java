@@ -37,6 +37,30 @@ public interface Element<T> {
 	String getCssValue(String propertyName);
 	
 	/**
+	 * Retrieves the id of this element.
+	 * 
+	 * @return The id of this element.
+	 * @since 0.0.1
+	 */
+	String getId();
+	
+	/**
+	 * Retrieves the style class of this element.
+	 * 
+	 * @return The style class of this element.
+	 * @since 0.0.1
+	 */
+	String getStyleClass();
+	
+	/**
+	 * Retrieves the title of this element.
+	 * 
+	 * @return The title of this element.
+	 * @since 0.0.1
+	 */
+	String getTitle();
+	
+	/**
 	 * Verifies if the element is displayed on the page.
 	 * 
 	 * @return Whether or not the element is displayed.

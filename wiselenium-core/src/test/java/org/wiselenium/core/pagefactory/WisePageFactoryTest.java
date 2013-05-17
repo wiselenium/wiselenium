@@ -1,6 +1,7 @@
 package org.wiselenium.core.pagefactory;
 
 import static org.testng.Assert.assertNotNull;
+import static org.wiselenium.core.FileUtils.getAbsoluteFilePath;
 import static org.wiselenium.core.WiseUnwrapper.unwrapWebDriver;
 import static org.wiselenium.core.WiseUnwrapper.unwrapWebElement;
 import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;

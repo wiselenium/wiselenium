@@ -45,6 +45,21 @@ public class BasicField<T extends Field<T>> implements Field<T> {
 	}
 	
 	@Override
+	public String getId() {
+		return this.getAttribute("id");
+	}
+	
+	@Override
+	public String getStyleClass() {
+		return this.getAttribute("class");
+	}
+	
+	@Override
+	public String getTitle() {
+		return this.getAttribute("title");
+	}
+	
+	@Override
 	public boolean isDisplayed() {
 		return unwrapWebElement(this).isDisplayed();
 	}

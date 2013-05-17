@@ -14,16 +14,17 @@ public class HyperlinkImpl extends BasicField<Hyperlink> implements Hyperlink {
 	
 	@Override
 	public String getHref() {
-		return unwrapWebElement(this).getAttribute("href");
+		return this.getAttribute("href");
 	}
 	
 	@Override
 	public String getTarget() {
-		return unwrapWebElement(this).getAttribute("target");
+		return this.getAttribute("target");
 	}
 	
 	@Override
 	public String getText() {
 		return unwrapWebElement(this).getText();
 	}
+	
 }
