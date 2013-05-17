@@ -20,11 +20,16 @@ public class ButtonPage extends Page<ButtonPage> {
 	private Button hiddenButton;
 	private Button resetButton;
 	private Button submitButton;
+	private Button disabledButton;
 	private WebElement message;
 	
 	
 	public Button getButton() {
 		return this.button;
+	}
+	
+	public Button getDisabledButton() {
+		return this.disabledButton;
 	}
 	
 	public Button getHiddenButton() {

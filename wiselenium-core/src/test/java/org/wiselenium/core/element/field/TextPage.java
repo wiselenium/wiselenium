@@ -23,8 +23,13 @@ public class TextPage extends Page<TextPage> {
 	private Text readonlyTrueText;
 	private Text readonlyFalseText;
 	private Text readonlyReadonlyText;
+	private Text disabledText;
 	private WebElement message;
 	
+	
+	public Text getDisabledText() {
+		return this.disabledText;
+	}
 	
 	public Text getHiddenText() {
 		return this.hiddenText;

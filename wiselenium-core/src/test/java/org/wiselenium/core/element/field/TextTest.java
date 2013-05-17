@@ -64,6 +64,12 @@ public class TextTest extends TestBase {
 	}
 	
 	@Test
+	public void shouldGetEnabled() {
+		assertTrue(this.page.getText().isEnabled());
+		assertFalse(this.page.getDisabledText().isEnabled());
+	}
+	
+	@Test
 	public void shouldGetMaxlength() {
 		assertEquals(this.page.getText().getMaxLength(), TEXT_MAXLENGTH);
 		assertNull(this.page.getReadonlyText().getMaxLength());
@@ -77,7 +83,6 @@ public class TextTest extends TestBase {
 		assertTrue(this.page.getReadonlyText().isReadOnly());
 		assertTrue(this.page.getReadonlyReadonlyText().isReadOnly());
 		assertTrue(this.page.getReadonlyTrueText().isReadOnly());
-		// readonly="false" is still rendered as readonly by the browsers
 		assertTrue(this.page.getReadonlyFalseText().isReadOnly());
 	}
 	

@@ -1,5 +1,7 @@
 package org.wiselenium.core.element.field.impl;
 
+import static org.wiselenium.core.WiseUnwrapper.unwrapWebElement;
+
 import org.wiselenium.core.element.field.Button;
 
 /**
@@ -18,6 +20,11 @@ public class ButtonImpl extends BasicField<Button> implements Button {
 	@Override
 	public String getValue() {
 		return this.getAttribute("value");
+	}
+	
+	@Override
+	public boolean isEnabled() {
+		return unwrapWebElement(this).isEnabled();
 	}
 	
 }

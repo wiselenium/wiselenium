@@ -35,6 +35,11 @@ public class TextImpl extends BasicField<Text> implements Text {
 	}
 	
 	@Override
+	public boolean isEnabled() {
+		return unwrapWebElement(this).isEnabled();
+	}
+	
+	@Override
 	public boolean isReadOnly() {
 		String readonly = this.getAttribute("readonly");
 		if (readonly == null) return false;

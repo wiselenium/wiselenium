@@ -56,6 +56,12 @@ public class ButtonTest extends TestBase {
 	}
 	
 	@Test
+	public void shouldGetEnabled() {
+		assertTrue(this.page.getButton().isEnabled());
+		assertFalse(this.page.getDisabledButton().isEnabled());
+	}
+	
+	@Test
 	public void shouldGetType() {
 		assertEquals(this.page.getButton().getType(), "button");
 		assertEquals(this.page.getResetButton().getType(), "reset");

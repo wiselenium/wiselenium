@@ -33,7 +33,15 @@ public interface Text extends Field<Text> {
 	String getValue();
 	
 	/**
-	 * Returns whether this test is read-only or not.
+	 * Retrieves whether this test is enabled or not.
+	 * 
+	 * @return If this text is enabled.
+	 * @since 0.0.1
+	 */
+	boolean isEnabled();
+	
+	/**
+	 * Retrieves whether this test is read-only or not.
 	 * 
 	 * @return If this text is read-only.
 	 * @since 0.0.1

@@ -25,4 +25,12 @@ public interface Button extends Field<Button> {
 	 */
 	String getValue();
 	
+	/**
+	 * Retrieves whether this button is enabled.
+	 * 
+	 * @return Whether this button is enabled.
+	 * @since 0.0.1
+	 */
+	boolean isEnabled();
+	
 }
