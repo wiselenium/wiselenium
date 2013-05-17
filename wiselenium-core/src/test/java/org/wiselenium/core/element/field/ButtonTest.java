@@ -59,6 +59,13 @@ public class ButtonTest extends TestBase {
 	}
 	
 	@Test
+	public void shouldGetType() {
+		assertEquals(this.page.getButton().getType(), "button");
+		assertEquals(this.page.getResetButton().getType(), "reset");
+		assertEquals(this.page.getSubmitButton().getType(), "submit");
+	}
+	
+	@Test
 	public void shouldGetValue() {
 		assertEquals(this.page.getButton().getValue(), BUTTON_VALUE);
 		assertEquals(this.page.getHiddenButton().getValue(), HIDDEN_BUTTON_VALUE);

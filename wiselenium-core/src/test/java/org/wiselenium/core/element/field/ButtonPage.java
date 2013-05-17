@@ -14,6 +14,8 @@ public class ButtonPage extends Page<ButtonPage> {
 	
 	private Button button;
 	private Button hiddenButton;
+	private Button resetButton;
+	private Button submitButton;
 	private WebElement message;
 	
 	
@@ -27,6 +29,14 @@ public class ButtonPage extends Page<ButtonPage> {
 	
 	public String getMessage() {
 		return this.message.getText();
+	}
+	
+	public Button getResetButton() {
+		return this.resetButton;
+	}
+	
+	public Button getSubmitButton() {
+		return this.submitButton;
 	}
 	
 }
