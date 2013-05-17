@@ -1,5 +1,8 @@
 package org.wiselenium.core.pagefactory;
 
+import static org.testng.Assert.assertTrue;
+import static org.wiselenium.core.FileUtils.getAbsoluteFilePath;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,6 +23,16 @@ public class DummyPageWithWebDriverConstructor extends Page<DummyPageWithWebDriv
 	
 	public WebElement getDummyElementWebElement() {
 		return this.dummy.getWrappedElement();
+	}
+	
+	@Override
+	protected void isLoaded() {
+		assertTrue(this.getWrappedDriver().getCurrentUrl().endsWith(URL));
+	}
+	
+	@Override
+	protected void load() {
+		this.get(getAbsoluteFilePath(URL));
 	}
 	
 }

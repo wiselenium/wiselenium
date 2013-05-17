@@ -24,8 +24,7 @@ public class HyperlinkTest extends TestBase {
 	@BeforeMethod
 	public void initPage() {
 		this.page = initElements(this.driver, HyperlinkPage.class);
-		this.page.get(getAbsoluteFilePath(URL));
-		assertEquals(this.page.getTitle(), HyperlinkPage.TITLE);
+		this.page.get();
 	}
 	
 	@Test

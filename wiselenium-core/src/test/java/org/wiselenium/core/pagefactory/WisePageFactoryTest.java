@@ -35,7 +35,7 @@ public class WisePageFactoryTest extends TestBase {
 		DummyPageWithWebDriverConstructor page = initElements(this.driver,
 			DummyPageWithWebDriverConstructor.class);
 		
-		page.get(getAbsoluteFilePath(DummyPageWithWebDriverConstructor.URL));
+		page.get();
 		assertNotNull(page.getWrappedDriver());
 		assertNotNull(page.getDummyElementWebElement());
 	}

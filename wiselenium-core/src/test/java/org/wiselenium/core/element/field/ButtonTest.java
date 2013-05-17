@@ -7,8 +7,6 @@ import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.element.field.ButtonPage.BUTTON_CLICKED_MESSAGE;
 import static org.wiselenium.core.element.field.ButtonPage.BUTTON_VALUE;
 import static org.wiselenium.core.element.field.ButtonPage.HIDDEN_BUTTON_VALUE;
-import static org.wiselenium.core.element.field.ButtonPage.TITLE;
-import static org.wiselenium.core.element.field.ButtonPage.URL;
 import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import org.testng.annotations.BeforeMethod;
@@ -24,8 +22,7 @@ public class ButtonTest extends TestBase {
 	@BeforeMethod
 	public void initPage() {
 		this.page = initElements(this.driver, ButtonPage.class);
-		this.page.get(getAbsoluteFilePath(URL));
-		assertEquals(this.page.getTitle(), TITLE);
+		this.page.get();
 	}
 	
 	@Test

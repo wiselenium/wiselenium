@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.internal.WrapsDriver;
+import org.openqa.selenium.support.ui.LoadableComponent;
 
 /**
  * Basic implementation of a common Page. <br/>
@@ -15,12 +16,10 @@ import org.openqa.selenium.internal.WrapsDriver;
  * @param <T> The page type.
  * @since 0.0.1
  */
-public class Page<T extends Page<T>> implements WrapsDriver {
+public class Page<T extends Page<T>> extends LoadableComponent<T> implements WrapsDriver {
 	
 	private WebDriver driver;
 	
-	
-	// TODO add a getDefaultBaseUrl method?
 	
 	/**
 	 */
@@ -133,5 +132,11 @@ public class Page<T extends Page<T>> implements WrapsDriver {
 	public WebDriver getWrappedDriver() {
 		return this.driver;
 	}
+	
+	@Override
+	protected void isLoaded() {}
+	
+	@Override
+	protected void load() {}
 	
 }

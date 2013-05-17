@@ -8,8 +8,6 @@ import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.element.field.TextPage.HIDDEN_TEXT_VALUE;
 import static org.wiselenium.core.element.field.TextPage.TEXT_CLICKED_MESSAGE;
 import static org.wiselenium.core.element.field.TextPage.TEXT_MAXLENGTH;
-import static org.wiselenium.core.element.field.TextPage.TITLE;
-import static org.wiselenium.core.element.field.TextPage.URL;
 import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import org.testng.annotations.BeforeMethod;
@@ -25,8 +23,7 @@ public class TextTest extends TestBase {
 	@BeforeMethod
 	public void initPage() {
 		this.page = initElements(this.driver, TextPage.class);
-		this.page.get(getAbsoluteFilePath(URL));
-		assertEquals(this.page.getTitle(), TITLE);
+		this.page.get();
 	}
 	
 	@Test
