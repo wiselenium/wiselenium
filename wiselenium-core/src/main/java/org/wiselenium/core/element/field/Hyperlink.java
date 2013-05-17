@@ -25,9 +25,9 @@ public interface Hyperlink extends Field<Hyperlink> {
 	String getTarget();
 	
 	/**
-	 * Retrieves the value of this hyperlink.
+	 * Retrieves the text of this hyperlink.
 	 * 
-	 * @return The innerText of this hyperlink.
+	 * @return The text of this hyperlink.
 	 * @since 0.0.1
 	 */
 	String getText();

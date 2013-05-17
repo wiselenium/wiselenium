@@ -7,7 +7,7 @@ import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.element.field.HyperlinkPage.HYPERLINK_CLICKED_MESSAGE;
 import static org.wiselenium.core.element.field.HyperlinkPage.HYPERLINK_HREF;
 import static org.wiselenium.core.element.field.HyperlinkPage.HYPERLINK_TARGET;
-import static org.wiselenium.core.element.field.HyperlinkPage.HYPERLINK_VALUE;
+import static org.wiselenium.core.element.field.HyperlinkPage.HYPERLINK_TEXT;
 import static org.wiselenium.core.element.field.HyperlinkPage.URL;
 import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
@@ -69,7 +69,7 @@ public class HyperlinkTest extends TestBase {
 	
 	@Test
 	public void shouldGetText() {
-		assertEquals(this.page.getHyperlink().getText(), HYPERLINK_VALUE);
+		assertEquals(this.page.getHyperlink().getText(), HYPERLINK_TEXT);
 	}
 	
 }

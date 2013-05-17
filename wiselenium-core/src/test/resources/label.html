@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>page for label tests</title>
+</head>
+<body>
+	
+	<label id="label" for="text" 
+	onclick="document.getElementById('message').innerHTML = 'label clicked';">
+	label text</label>
+	
+	<label id="hiddenLabel" for="text" 
+	style="visibility: hidden;">
+	hidden label</label>
+	
+	<input type="text" id="text" value="" maxlength="30">
+	
+	<div id="message"></div>
+
+</body>
+</html>

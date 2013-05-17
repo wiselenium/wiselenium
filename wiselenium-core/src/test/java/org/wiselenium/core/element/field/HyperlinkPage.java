@@ -11,8 +11,8 @@ import org.wiselenium.core.pagefactory.Page;
 public class HyperlinkPage extends Page<HyperlinkPage> {
 	
 	public static final String HYPERLINK_CLICKED_MESSAGE = "hyperlink clicked";
-	public static final String HYPERLINK_VALUE = "hyperlink test";
-	public static final String HIDDEN_HYPERLINK_VALUE = "hiddenHyperlink test";
+	public static final String HYPERLINK_TEXT = "hyperlink test";
+	public static final String HIDDEN_HYPERLINK_TEXT = "hiddenHyperlink test";
 	public static final String URL = "hyperlink.html";
 	public static final String TITLE = "page for hyperlink tests";
 	public static final String HYPERLINK_HREF = "#";
