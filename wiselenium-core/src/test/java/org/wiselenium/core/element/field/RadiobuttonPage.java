@@ -4,6 +4,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.FileUtils.getAbsoluteFilePath;
 
+import org.wiselenium.core.element.field.impl.RadiobuttonImpl;
 import org.wiselenium.core.pagefactory.Page;
 
 @SuppressWarnings("javadoc")
@@ -17,7 +18,7 @@ public class RadiobuttonPage extends Page<RadiobuttonPage> {
 	private Radiobutton checkedRadiobutton;
 	private Radiobutton checkedCheckedRadiobutton;
 	private Radiobutton checkedTrueRadiobutton;
-	private Radiobutton checkedFalseRadiobutton;
+	private RadiobuttonImpl checkedFalseRadiobutton;
 	
 	
 	public Radiobutton getCheckedCheckedRadiobutton() {

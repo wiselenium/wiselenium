@@ -13,4 +13,9 @@ public class DummyFieldWithEmptyConstructorImpl implements DummyFieldWithEmptyCo
 		return null;
 	}
 	
+	@Override
+	public void throwIllegalArgumetException() {
+		throw new IllegalArgumentException();
+	}
+	
 }

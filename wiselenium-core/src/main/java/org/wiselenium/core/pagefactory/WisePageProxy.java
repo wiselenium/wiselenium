@@ -36,7 +36,7 @@ final class WisePageProxy implements MethodInterceptor {
 	 */
 	@Override
 	public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
-		throws Throwable { // NOSONAR because it's an overriden method
+		throws Throwable { // NOSONAR because it's an overridden method
 	
 		if (isGetWrappedDriver(method)) return this.driver;
 		return proxy.invokeSuper(obj, args);

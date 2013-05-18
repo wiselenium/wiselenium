@@ -19,6 +19,9 @@ public class DummyPageWithFinalField {
 			public WebElement getWrappedElement() {
 				return null;
 			}
+			
+			@Override
+			public void throwIllegalArgumetException() {}
 		};
 	}
 	

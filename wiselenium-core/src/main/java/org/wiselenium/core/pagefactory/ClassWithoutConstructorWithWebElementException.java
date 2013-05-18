@@ -15,10 +15,9 @@ class ClassWithoutConstructorWithWebElementException extends WiseException {
 	
 	
 	/**
-	 * @param <T> The class type.
 	 * @param t The cause of the exception.
 	 */
-	public <T> ClassWithoutConstructorWithWebElementException(Throwable t) {
+	public ClassWithoutConstructorWithWebElementException(Throwable t) {
 		super("The class doesn't have a constructor that receives a WebElement", t);
 	}
 	
