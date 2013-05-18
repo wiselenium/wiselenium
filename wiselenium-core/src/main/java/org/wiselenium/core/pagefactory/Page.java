@@ -84,9 +84,10 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wra
 	 * @return A list of all elements decorated or an empty list.
 	 * @since 0.0.1
 	 */
+	@SuppressWarnings("unchecked")
 	public <E> List<E> findElements(Class<E> clazz, By by) {
-		// TODO findElements
-		return null;
+		List<WebElement> webElements = unwrapWebDriver(this).findElements(by);
+		return (List<E>) this.getWiseDecorator().decorate(clazz, webElements);
 	}
 	
 	/**
@@ -132,9 +133,6 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wra
 		return this.getWrappedDriver().getTitle();
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public WebDriver getWrappedDriver() {
 		return this.driver;

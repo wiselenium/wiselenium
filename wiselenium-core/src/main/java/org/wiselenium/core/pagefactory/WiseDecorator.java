@@ -1,6 +1,7 @@
 package org.wiselenium.core.pagefactory;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
@@ -21,7 +22,8 @@ public class WiseDecorator implements ExtendedSeleniumDecorator {
 	 */
 	public WiseDecorator(ElementLocatorFactory factory) {
 		WiseFieldDecoratorChain wiseFieldDecorator = new WiseFieldDecoratorChain(factory);
-		WiseContainerDecoratorChain wiseContainerDecorator = new WiseContainerDecoratorChain(factory);
+		WiseContainerDecoratorChain wiseContainerDecorator = new WiseContainerDecoratorChain(
+			factory);
 		ExtendedDefaultSeleniumDecoratorChain extendedDefaultFieldDecorator = new ExtendedDefaultSeleniumDecoratorChain(
 			factory);
 		wiseFieldDecorator.setNext(wiseContainerDecorator);
@@ -30,17 +32,16 @@ public class WiseDecorator implements ExtendedSeleniumDecorator {
 		this.decoratorChain = wiseFieldDecorator;
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
+	@Override
+	public Object decorate(Class<?> clazz, List<WebElement> webElements) {
+		return this.decoratorChain.decorate(clazz, webElements);
+	}
+	
 	@Override
 	public Object decorate(Class<?> clazz, WebElement webElement) {
 		return this.decoratorChain.decorate(clazz, webElement);
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object decorate(ClassLoader loader, Field field) {
 		return this.decoratorChain.decorate(loader, field);

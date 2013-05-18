@@ -14,12 +14,12 @@ public class DummyPage extends Page<DummyPage> {
 	public static final String URL = "dummy.html";
 	
 	@FindBy(name = "sex")
-	private List<WebElement> sexRadiobuttons;
+	private List<WebElement> radiobuttons;
 	private WebElement text;
 	
 	
-	public List<WebElement> getSexRadiobuttons() {
-		return this.sexRadiobuttons;
+	public List<WebElement> getRadiobuttons() {
+		return this.radiobuttons;
 	}
 	
 	public WebElement getText() {

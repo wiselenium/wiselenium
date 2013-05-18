@@ -4,6 +4,7 @@ import static org.wiselenium.core.pagefactory.AnnotationUtils.isAnnotationPresen
 import static org.wiselenium.core.pagefactory.ClasspathUtils.findImplementationClass;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 import net.sf.cglib.proxy.Enhancer;
 
@@ -11,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
+import org.testng.collections.Lists;
 
 /**
  * Class responsible for decorating WebElements into Fields.
@@ -65,9 +67,17 @@ class WiseFieldDecoratorChain extends ExtendedDefaultSeleniumDecoratorChain {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	protected <E> Object decorateWebElements(Class<E> clazz, List<WebElement> webElements) {
+		List<E> elements = Lists.newArrayList();
+		for (WebElement webElement : webElements)
+			elements.add((E) this.decorateWebElement(clazz, webElement));
+		return elements;
+	}
+	
 	@Override
 	protected boolean shouldDecorate(Class<?> clazz) {
-		// TODO decorate lists of fields as well
 		return isAnnotationPresent(clazz, org.wiselenium.core.Field.class);
 	}
 	

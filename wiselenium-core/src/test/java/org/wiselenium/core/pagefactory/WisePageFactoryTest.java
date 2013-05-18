@@ -63,7 +63,7 @@ public class WisePageFactoryTest extends TestBase {
 		DummyPage page = initElements(this.driver, DummyPage.class).and().get();
 		WebElement text = page.getText();
 		assertNotNull(text);
-		List<WebElement> sexRadiobuttons = page.getSexRadiobuttons();
+		List<WebElement> sexRadiobuttons = page.getRadiobuttons();
 		assertFalse(sexRadiobuttons.isEmpty());
 	}
 	

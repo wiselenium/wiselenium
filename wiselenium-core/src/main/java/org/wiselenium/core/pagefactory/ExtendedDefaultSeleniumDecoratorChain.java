@@ -3,6 +3,7 @@ package org.wiselenium.core.pagefactory;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
@@ -11,6 +12,7 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
+import org.testng.collections.Lists;
 
 /**
  * Extended default decorator for use with WisePageFactory. Will decorate 1) all of the WebElement
@@ -29,6 +31,12 @@ class ExtendedDefaultSeleniumDecoratorChain extends DefaultFieldDecorator implem
 	
 	ExtendedDefaultSeleniumDecoratorChain(ElementLocatorFactory factory) {
 		super(factory);
+	}
+	
+	@Override
+	public Object decorate(Class<?> clazz, List<WebElement> webElements) {
+		if (!this.shouldDecorate(clazz)) return this.callNextDecorator(clazz, webElements);
+		return this.decorateWebElements(clazz, webElements);
 	}
 	
 	@Override
@@ -59,6 +67,12 @@ class ExtendedDefaultSeleniumDecoratorChain extends DefaultFieldDecorator implem
 		return null;
 	}
 	
+	protected <E> Object callNextDecorator(Class<E> clazz, List<WebElement> webElements) {
+		if (this.nextDecoratorInChain != null)
+			return this.nextDecoratorInChain.decorate(clazz, webElements);
+		return new ArrayList<E>();
+	}
+	
 	protected Object callNextDecorator(ClassLoader loader, Field field) {
 		if (this.nextDecoratorInChain != null)
 			return this.nextDecoratorInChain.decorate(loader, field);
@@ -76,6 +90,13 @@ class ExtendedDefaultSeleniumDecoratorChain extends DefaultFieldDecorator implem
 	protected Object decorateWebElement(@SuppressWarnings("unused") Class<?> clazz,
 		WebElement webElement) {
 		return webElement;
+	}
+	
+	protected <E> Object decorateWebElements(Class<E> clazz, List<WebElement> webElements) {
+		List<WebElement> elements = Lists.newArrayList();
+		for (WebElement webElement : webElements)
+			elements.add((WebElement) this.decorateWebElement(clazz, webElement));
+		return elements;
 	}
 	
 	protected boolean isDecoratableList(Field field) {
