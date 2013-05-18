@@ -9,7 +9,7 @@ import org.openqa.selenium.support.pagefactory.FieldDecorator;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-interface ExtendedFieldDecorator extends FieldDecorator {
+interface ExtendedSeleniumDecorator extends FieldDecorator {
 	
 	/**
 	 * Decides how to decorate the webElement.

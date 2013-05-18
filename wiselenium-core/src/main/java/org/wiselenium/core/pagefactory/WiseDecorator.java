@@ -11,9 +11,9 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-public class WiseDecorator implements ExtendedFieldDecorator {
+public class WiseDecorator implements ExtendedSeleniumDecorator {
 	
-	private final WiseDecoratorChain decoratorChain;
+	private final DecoratorChain decoratorChain;
 	
 	
 	/**
@@ -22,7 +22,7 @@ public class WiseDecorator implements ExtendedFieldDecorator {
 	public WiseDecorator(ElementLocatorFactory factory) {
 		WiseFieldDecorator wiseFieldDecorator = new WiseFieldDecorator(factory);
 		WiseContainerDecorator wiseContainerDecorator = new WiseContainerDecorator(factory);
-		ExtendedDefaultFieldDecorator extendedDefaultFieldDecorator = new ExtendedDefaultFieldDecorator(
+		ExtendedDefaultSeleniumDecorator extendedDefaultFieldDecorator = new ExtendedDefaultSeleniumDecorator(
 			factory);
 		wiseFieldDecorator.setNext(wiseContainerDecorator);
 		wiseContainerDecorator.setNext(extendedDefaultFieldDecorator);

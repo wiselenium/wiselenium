@@ -6,7 +6,7 @@ package org.wiselenium.core.pagefactory;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-interface WiseDecoratorChain extends ExtendedFieldDecorator {
+interface DecoratorChain extends ExtendedSeleniumDecorator {
 	
 	/**
 	 * Sets the next decorator of the chain to be called.
@@ -15,6 +15,6 @@ interface WiseDecoratorChain extends ExtendedFieldDecorator {
 	 * @return This instance in order to allow chain method calls.
 	 * @since 0.0.1
 	 */
-	WiseDecoratorChain setNext(ExtendedFieldDecorator decorator);
+	DecoratorChain setNext(ExtendedSeleniumDecorator decorator);
 	
 }

@@ -21,15 +21,16 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-class ExtendedDefaultFieldDecorator extends DefaultFieldDecorator implements WiseDecoratorChain {
+class ExtendedDefaultSeleniumDecorator extends DefaultFieldDecorator implements
+	DecoratorChain {
 	
-	private ExtendedFieldDecorator nextDecoratorInChain;
+	private ExtendedSeleniumDecorator nextDecoratorInChain;
 	
 	
 	/**
 	 * @param factory The factory of the locator of the elements.
 	 */
-	public ExtendedDefaultFieldDecorator(ElementLocatorFactory factory) {
+	public ExtendedDefaultSeleniumDecorator(ElementLocatorFactory factory) {
 		super(factory);
 	}
 	
@@ -82,7 +83,7 @@ class ExtendedDefaultFieldDecorator extends DefaultFieldDecorator implements Wis
 	}
 	
 	@Override
-	public WiseDecoratorChain setNext(ExtendedFieldDecorator decorator) {
+	public DecoratorChain setNext(ExtendedSeleniumDecorator decorator) {
 		this.nextDecoratorInChain = decorator;
 		return this;
 	}

@@ -23,7 +23,7 @@ import org.openqa.selenium.support.ui.LoadableComponent;
 public class Page<T extends Page<T>> extends LoadableComponent<T> implements WrapsDriver {
 	
 	private WebDriver driver;
-	private ExtendedFieldDecorator wiseDecorator;
+	private ExtendedSeleniumDecorator wiseDecorator;
 	
 	
 	/**
@@ -146,7 +146,7 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wra
 	@Override
 	protected void load() {}
 	
-	private synchronized ExtendedFieldDecorator getWiseDecorator() {
+	private synchronized ExtendedSeleniumDecorator getWiseDecorator() {
 		if (this.wiseDecorator == null)
 			this.wiseDecorator = new WiseDecorator(new DefaultElementLocatorFactory(
 				this.getWrappedDriver()));

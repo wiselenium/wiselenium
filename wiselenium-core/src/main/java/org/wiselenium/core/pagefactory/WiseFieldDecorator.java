@@ -9,7 +9,6 @@ import net.sf.cglib.proxy.Enhancer;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
-import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
@@ -19,9 +18,9 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-class WiseFieldDecorator extends DefaultFieldDecorator implements WiseDecoratorChain {
+class WiseFieldDecorator extends ExtendedDefaultSeleniumDecorator {
 	
-	private ExtendedFieldDecorator nextDecoratorInChain;
+	private ExtendedSeleniumDecorator nextDecoratorInChain;
 	
 	
 	WiseFieldDecorator(ElementLocatorFactory factory) {
@@ -87,7 +86,7 @@ class WiseFieldDecorator extends DefaultFieldDecorator implements WiseDecoratorC
 	}
 	
 	@Override
-	public WiseDecoratorChain setNext(ExtendedFieldDecorator decorator) {
+	public DecoratorChain setNext(ExtendedSeleniumDecorator decorator) {
 		this.nextDecoratorInChain = decorator;
 		return this;
 	}
