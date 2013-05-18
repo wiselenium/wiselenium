@@ -18,12 +18,9 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-class WiseContainerDecorator extends ExtendedDefaultSeleniumDecorator {
+class WiseContainerDecoratorChain extends ExtendedDefaultSeleniumDecoratorChain {
 	
-	private ExtendedSeleniumDecorator nextDecoratorInChain;
-	
-	
-	WiseContainerDecorator(ElementLocatorFactory factory) {
+	WiseContainerDecoratorChain(ElementLocatorFactory factory) {
 		super(factory);
 	}
 	
@@ -52,19 +49,14 @@ class WiseContainerDecorator extends ExtendedDefaultSeleniumDecorator {
 		}
 	}
 	
-	private static boolean shouldDecorate(Class<?> clazz) {
-		return isAnnotationPresent(clazz, org.wiselenium.core.Container.class);
-	}
-	
-	private static boolean shouldDecorate(Field field) {
-		return shouldDecorate(field.getType());
+	@Override
+	protected Object decorateField(ClassLoader loader, Field field, ElementLocator locator) {
+		WebElement webElement = this.proxyForLocator(loader, locator);
+		return this.decorate(field.getType(), webElement);
 	}
 	
 	@Override
-	public Object decorate(Class<?> clazz, WebElement webElement) {
-		// TODO decorate lists of containers as well
-		if (!shouldDecorate(clazz)) return this.callNextDecorator(clazz, webElement);
-		
+	protected Object decorateWebElement(Class<?> clazz, WebElement webElement) {
 		Class<?> implentationClass = findImplementationClass(clazz);
 		Object instance;
 		try {
@@ -77,33 +69,14 @@ class WiseContainerDecorator extends ExtendedDefaultSeleniumDecorator {
 	}
 	
 	@Override
-	public Object decorate(ClassLoader loader, Field field) {
+	protected boolean shouldDecorate(Class<?> clazz) {
 		// TODO decorate lists of containers as well
-		if (!shouldDecorate(field)) return this.callNextDecorator(loader, field);
-		
-		ElementLocator locator = this.factory.createLocator(field);
-		if (locator == null) return null;
-		
-		WebElement webElement = this.proxyForLocator(loader, locator);
-		return this.decorate(field.getType(), webElement);
+		return isAnnotationPresent(clazz, org.wiselenium.core.Container.class);
 	}
 	
 	@Override
-	public DecoratorChain setNext(ExtendedSeleniumDecorator decorator) {
-		this.nextDecoratorInChain = decorator;
-		return this;
-	}
-	
-	private Object callNextDecorator(Class<?> clazz, WebElement webElement) {
-		if (this.nextDecoratorInChain != null)
-			return this.nextDecoratorInChain.decorate(clazz, webElement);
-		return null;
-	}
-	
-	private Object callNextDecorator(ClassLoader loader, Field field) {
-		if (this.nextDecoratorInChain != null)
-			return this.nextDecoratorInChain.decorate(loader, field);
-		return null;
+	protected boolean shouldDecorate(Field field) {
+		return this.shouldDecorate(field.getType());
 	}
 	
 }

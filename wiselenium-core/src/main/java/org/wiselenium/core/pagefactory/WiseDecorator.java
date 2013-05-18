@@ -13,16 +13,16 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
  */
 public class WiseDecorator implements ExtendedSeleniumDecorator {
 	
-	private final DecoratorChain decoratorChain;
+	private final ExtendedSeleniumDecoratorChain decoratorChain;
 	
 	
 	/**
 	 * @param factory The factory of the locator of the elements.
 	 */
 	public WiseDecorator(ElementLocatorFactory factory) {
-		WiseFieldDecorator wiseFieldDecorator = new WiseFieldDecorator(factory);
-		WiseContainerDecorator wiseContainerDecorator = new WiseContainerDecorator(factory);
-		ExtendedDefaultSeleniumDecorator extendedDefaultFieldDecorator = new ExtendedDefaultSeleniumDecorator(
+		WiseFieldDecoratorChain wiseFieldDecorator = new WiseFieldDecoratorChain(factory);
+		WiseContainerDecoratorChain wiseContainerDecorator = new WiseContainerDecoratorChain(factory);
+		ExtendedDefaultSeleniumDecoratorChain extendedDefaultFieldDecorator = new ExtendedDefaultSeleniumDecoratorChain(
 			factory);
 		wiseFieldDecorator.setNext(wiseContainerDecorator);
 		wiseContainerDecorator.setNext(extendedDefaultFieldDecorator);
