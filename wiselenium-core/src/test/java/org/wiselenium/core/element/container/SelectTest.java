@@ -61,6 +61,16 @@ public class SelectTest extends TestBase {
 	}
 	
 	@Test
+	public void shouldGetSelectedValue() {
+		assertEquals(this.page.getSelect().getSelectedValue(), FIRST_OPTION_VALUE);
+	}
+	
+	@Test
+	public void shouldGetSelectedVisibleText() {
+		assertEquals(this.page.getSelect().getSelectedVisibleText(), FIRST_OPTION_TEXT);
+	}
+	
+	@Test
 	public void shouldGetStyleClass() {
 		assertEquals(this.page.getSelect().getStyleClass(), SELECT_CLASS);
 	}
@@ -68,16 +78,6 @@ public class SelectTest extends TestBase {
 	@Test
 	public void shouldGetTitle() {
 		assertEquals(this.page.getSelect().getTitle(), SELECT_TITLE);
-	}
-	
-	@Test
-	public void shouldGetValue() {
-		assertEquals(this.page.getSelect().getSelectedValue(), FIRST_OPTION_VALUE);
-	}
-	
-	@Test
-	public void shouldGetVisibleText() {
-		assertEquals(this.page.getSelect().getSelectedVisibleText(), FIRST_OPTION_TEXT);
 	}
 	
 	@Test

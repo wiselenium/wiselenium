@@ -25,7 +25,7 @@ public interface Select extends Container<Select> {
 	String getSelectedVisibleText();
 	
 	/**
-	 * Select the option at the given index. This is done by examing the "index" attribute of an
+	 * Selects the option at the given index. This is done by examing the "index" attribute of an
 	 * element, and not merely by counting.
 	 * 
 	 * @param index The option at this index will be selected.
@@ -35,7 +35,7 @@ public interface Select extends Container<Select> {
 	Select selectByIndex(int index);
 	
 	/**
-	 * Select all options that have a value matching the argument. That is, when given "foo" this
+	 * Selects the option that has a value matching the argument. That is, when given "foo" this
 	 * would select an option like: &lt;option value="foo"&gt;Bar&lt;/option&gt;
 	 * 
 	 * @param value The value to match against.
@@ -45,7 +45,7 @@ public interface Select extends Container<Select> {
 	Select selectByValue(String value);
 	
 	/**
-	 * Select all options that display text matching the argument. That is, when given "Bar" this
+	 * Selects the option that displays text matching the argument. That is, when given "Bar" this
 	 * would select an option like: &lt;option value="foo"&gt;Bar&lt;/option&gt;
 	 * 
 	 * @param text The visible text to match against.
