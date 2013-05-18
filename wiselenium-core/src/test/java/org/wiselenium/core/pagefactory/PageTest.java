@@ -82,4 +82,5 @@ public class PageTest extends TestBase {
 	public void shouldReturnWebElementOnFindElement() {
 		assertNotNull(this.page.findElement(WebElement.class, By.id("text")));
 	}
+	
 }

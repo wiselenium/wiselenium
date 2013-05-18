@@ -96,7 +96,6 @@ class ExtendedDefaultSeleniumDecoratorChain extends DefaultFieldDecorator implem
 	}
 	
 	protected boolean shouldDecorate(Class<?> clazz) {
-		// TODO implement the decoratable list verification too
 		if (WebElement.class.isAssignableFrom(clazz)) return true;
 		return false;
 	}

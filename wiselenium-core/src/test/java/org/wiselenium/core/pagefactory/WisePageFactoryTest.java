@@ -1,11 +1,15 @@
 package org.wiselenium.core.pagefactory;
 
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.wiselenium.core.FileUtils.getAbsoluteFilePath;
 import static org.wiselenium.core.WiseUnwrapper.unwrapWebDriver;
 import static org.wiselenium.core.WiseUnwrapper.unwrapWebElement;
 import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
+import java.util.List;
+
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import org.wiselenium.core.TestBase;
 
@@ -16,7 +20,6 @@ public class WisePageFactoryTest extends TestBase {
 	public void shouldFailWhileCreatingPage() {
 		this.driver.get(getAbsoluteFilePath(DummyPageWithFinalField.URL));
 		initElements(this.driver, DummyPageWithFinalField.class);
-		System.out.println("ae");
 	}
 	
 	@Test
@@ -53,6 +56,15 @@ public class WisePageFactoryTest extends TestBase {
 		assertNotNull(page.getWrappedDriver());
 		assertNotNull(unwrapWebElement(page.getDummyField()));
 		assertNotNull(page.getDummyField().getWrappedElement());
+	}
+	
+	@Test
+	public void shouldInitWebElements() {
+		DummyPage page = initElements(this.driver, DummyPage.class).and().get();
+		WebElement text = page.getText();
+		assertNotNull(text);
+		List<WebElement> sexRadiobuttons = page.getSexRadiobuttons();
+		assertFalse(sexRadiobuttons.isEmpty());
 	}
 	
 }
