@@ -1,11 +1,15 @@
 package org.wiselenium.core.pagefactory;
 
+import static org.wiselenium.core.WiseUnwrapper.unwrapWebDriver;
+
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsDriver;
+import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.ui.LoadableComponent;
 
 /**
@@ -19,6 +23,7 @@ import org.openqa.selenium.support.ui.LoadableComponent;
 public class Page<T extends Page<T>> extends LoadableComponent<T> implements WrapsDriver {
 	
 	private WebDriver driver;
+	private ExtendedFieldDecorator wiseDecorator;
 	
 	
 	/**
@@ -58,14 +63,16 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wra
 	 * Finds the first element within the current page using the given mechanism.
 	 * 
 	 * @param <E> The type of the element.
-	 * @param clazz The class of the element.
+	 * @param clazz The class of the element. Must be either WebElement or a type annotated with
+	 * Field, Container or Frame.
 	 * @param by The locating mechanism to use.
-	 * @return The element found.
+	 * @return The element decorated or null.
 	 * @since 0.0.1
 	 */
-	public <E> List<E> findElement(Class<E> clazz, By by) {
-		// TODO findElement
-		return null;
+	@SuppressWarnings("unchecked")
+	public <E> E findElement(Class<E> clazz, By by) {
+		WebElement webElement = unwrapWebDriver(this).findElement(by);
+		return (E) this.getWiseDecorator().decorate(clazz, webElement);
 	}
 	
 	/**
@@ -74,7 +81,7 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wra
 	 * @param <E> The type of the elements.
 	 * @param clazz The class of the elements.
 	 * @param by The locating mechanism to use.
-	 * @return A list of all elements found or an empty list if nothing matches.
+	 * @return A list of all elements decorated or an empty list.
 	 * @since 0.0.1
 	 */
 	public <E> List<E> findElements(Class<E> clazz, By by) {
@@ -138,5 +145,12 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wra
 	
 	@Override
 	protected void load() {}
+	
+	private synchronized ExtendedFieldDecorator getWiseDecorator() {
+		if (this.wiseDecorator == null)
+			this.wiseDecorator = new WiseDecorator(new DefaultElementLocatorFactory(
+				this.getWrappedDriver()));
+		return this.wiseDecorator;
+	}
 	
 }

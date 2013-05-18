@@ -2,7 +2,6 @@ package org.wiselenium.core.pagefactory;
 
 import java.lang.reflect.Modifier;
 
-
 /**
  * Utility class to help find resources on the classpath.
  * 

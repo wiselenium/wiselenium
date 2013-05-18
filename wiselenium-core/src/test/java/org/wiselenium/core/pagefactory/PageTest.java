@@ -2,22 +2,25 @@ package org.wiselenium.core.pagefactory;
 
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.wiselenium.core.FileUtils;
 import org.wiselenium.core.TestBase;
+import org.wiselenium.core.element.field.Text;
 
-@SuppressWarnings("javadoc")
+@SuppressWarnings({ "javadoc", "rawtypes", "unchecked" })
 public class PageTest extends TestBase {
 	
-	@SuppressWarnings("rawtypes")
 	private Page page;
 	
 	private final String googleUrl = "http://www.google.com";
-	protected final String DUMMY_PAGE_URL = "dummy.html";
+	private final String DUMMY_PAGE_URL = "dummy.html";
 	
 	
 	@BeforeMethod
@@ -34,11 +37,6 @@ public class PageTest extends TestBase {
 	@Test
 	public void shouldExecuteScript() {
 		assertNotNull(this.page.executeScript("return this.name;"));
-	}
-	
-	@Test
-	public void shouldFindElement() {
-		// TODO findElement test
 	}
 	
 	@Test
@@ -68,4 +66,20 @@ public class PageTest extends TestBase {
 		assertNotNull(this.page.getWrappedDriver());
 	}
 	
+	@Test
+	public void shouldReturnCorrectElementOnFindElement() {
+		// if the class is generic typed, the cast is unnecessary
+		Text text = (Text) this.page.findElement(Text.class, By.id("text"));
+		assertNotNull(text);
+	}
+	
+	@Test
+	public void shouldReturnNullOnFindElement() {
+		assertNull(this.page.findElement(Object.class, By.id("text")));
+	}
+	
+	@Test
+	public void shouldReturnWebElementOnFindElement() {
+		assertNotNull(this.page.findElement(WebElement.class, By.id("text")));
+	}
 }

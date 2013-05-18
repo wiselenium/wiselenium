@@ -12,7 +12,6 @@ import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
-import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
 /**
  * Class responsible for decorating WebElements into Containers.
@@ -20,9 +19,9 @@ import org.openqa.selenium.support.pagefactory.FieldDecorator;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-public class WiseContainerDecorator extends DefaultFieldDecorator implements WiseDecoratorChain {
+class WiseContainerDecorator extends DefaultFieldDecorator implements WiseDecoratorChain {
 	
-	private FieldDecorator nextDecoratorInChain;
+	private ExtendedFieldDecorator nextDecoratorInChain;
 	
 	
 	WiseContainerDecorator(ElementLocatorFactory factory) {
@@ -54,21 +53,20 @@ public class WiseContainerDecorator extends DefaultFieldDecorator implements Wis
 		}
 	}
 	
+	private static boolean shouldDecorate(Class<?> clazz) {
+		return isAnnotationPresent(clazz, org.wiselenium.core.Container.class);
+	}
+	
 	private static boolean shouldDecorate(Field field) {
-		return isAnnotationPresent(field.getType(), org.wiselenium.core.Container.class);
+		return shouldDecorate(field.getType());
 	}
 	
 	@Override
-	public Object decorate(ClassLoader loader, Field field) {
+	public Object decorate(Class<?> clazz, WebElement webElement) {
 		// TODO decorate lists of containers as well
-		if (!shouldDecorate(field)) return this.nextDecoratorInChain.decorate(loader, field);
+		if (!shouldDecorate(clazz)) return this.callNextDecorator(clazz, webElement);
 		
-		ElementLocator locator = this.factory.createLocator(field);
-		if (locator == null) return null;
-		
-		WebElement webElement = this.proxyForLocator(loader, locator);
-		
-		Class<?> implentationClass = findImplementationClass(field.getType());
+		Class<?> implentationClass = findImplementationClass(clazz);
 		Object instance;
 		try {
 			instance = createInstanceWithWebElementConstructor(webElement, implentationClass);
@@ -80,9 +78,33 @@ public class WiseContainerDecorator extends DefaultFieldDecorator implements Wis
 	}
 	
 	@Override
-	public WiseDecoratorChain setNext(FieldDecorator decorator) {
+	public Object decorate(ClassLoader loader, Field field) {
+		// TODO decorate lists of containers as well
+		if (!shouldDecorate(field)) return this.callNextDecorator(loader, field);
+		
+		ElementLocator locator = this.factory.createLocator(field);
+		if (locator == null) return null;
+		
+		WebElement webElement = this.proxyForLocator(loader, locator);
+		return this.decorate(field.getType(), webElement);
+	}
+	
+	@Override
+	public WiseDecoratorChain setNext(ExtendedFieldDecorator decorator) {
 		this.nextDecoratorInChain = decorator;
 		return this;
+	}
+	
+	private Object callNextDecorator(Class<?> clazz, WebElement webElement) {
+		if (this.nextDecoratorInChain != null)
+			return this.nextDecoratorInChain.decorate(clazz, webElement);
+		return null;
+	}
+	
+	private Object callNextDecorator(ClassLoader loader, Field field) {
+		if (this.nextDecoratorInChain != null)
+			return this.nextDecoratorInChain.decorate(loader, field);
+		return null;
 	}
 	
 }
