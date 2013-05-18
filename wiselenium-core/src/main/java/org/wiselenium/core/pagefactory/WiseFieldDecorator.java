@@ -60,6 +60,7 @@ public class WiseFieldDecorator extends DefaultFieldDecorator implements WiseDec
 	
 	@Override
 	public Object decorate(ClassLoader loader, Field field) {
+		// TODO decorate lists of fields as well
 		if (!shouldDecorate(field)) return this.nextDecoratorInChain.decorate(loader, field);
 		
 		ElementLocator locator = this.factory.createLocator(field);
@@ -76,8 +77,9 @@ public class WiseFieldDecorator extends DefaultFieldDecorator implements WiseDec
 	}
 	
 	@Override
-	public void setNext(FieldDecorator decorator) {
+	public WiseDecoratorChain setNext(FieldDecorator decorator) {
 		this.nextDecoratorInChain = decorator;
+		return this;
 	}
 	
 }

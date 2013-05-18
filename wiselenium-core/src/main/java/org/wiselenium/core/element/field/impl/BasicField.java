@@ -2,6 +2,7 @@ package org.wiselenium.core.element.field.impl;
 
 import static org.wiselenium.core.WiseUnwrapper.unwrapWebElement;
 
+import org.wiselenium.core.element.BasicElement;
 import org.wiselenium.core.element.field.Field;
 
 /**
@@ -12,13 +13,7 @@ import org.wiselenium.core.element.field.Field;
  * @param <T> The field type.
  * @since 0.0.1
  */
-public class BasicField<T extends Field<T>> implements Field<T> {
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public T and() {
-		return (T) this;
-	}
+public class BasicField<T extends Field<T>> extends BasicElement<T> implements Field<T> {
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -32,36 +27,6 @@ public class BasicField<T extends Field<T>> implements Field<T> {
 	public T doubleClick() {
 		// TODO will need a webdriver reference
 		return (T) this;
-	}
-	
-	@Override
-	public String getAttribute(String name) {
-		return unwrapWebElement(this).getAttribute(name);
-	}
-	
-	@Override
-	public String getCssValue(String propertyName) {
-		return unwrapWebElement(this).getCssValue(propertyName);
-	}
-	
-	@Override
-	public String getId() {
-		return this.getAttribute("id");
-	}
-	
-	@Override
-	public String getStyleClass() {
-		return this.getAttribute("class");
-	}
-	
-	@Override
-	public String getTitle() {
-		return this.getAttribute("title");
-	}
-	
-	@Override
-	public boolean isDisplayed() {
-		return unwrapWebElement(this).isDisplayed();
 	}
 	
 }

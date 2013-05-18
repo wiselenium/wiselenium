@@ -18,8 +18,13 @@ class WiseDecorator implements FieldDecorator {
 	
 	
 	WiseDecorator(ElementLocatorFactory factory) {
-		this.decoratorChain = new WiseFieldDecorator(factory);
-		this.decoratorChain.setNext(new DefaultFieldDecorator(factory));
+		WiseFieldDecorator wiseFieldDecorator = new WiseFieldDecorator(factory);
+		WiseContainerDecorator wiseContainerDecorator = new WiseContainerDecorator(factory);
+		DefaultFieldDecorator defaultFieldDecorator = new DefaultFieldDecorator(factory);
+		wiseFieldDecorator.setNext(wiseContainerDecorator);
+		wiseContainerDecorator.setNext(defaultFieldDecorator);
+		
+		this.decoratorChain = wiseFieldDecorator;
 	}
 	
 	/**

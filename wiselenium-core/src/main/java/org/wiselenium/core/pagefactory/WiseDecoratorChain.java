@@ -14,8 +14,9 @@ public interface WiseDecoratorChain extends FieldDecorator {
 	 * Sets the next decorator of the chain to be called.
 	 * 
 	 * @param decorator The decorator.
+	 * @return This instance in order to allow chain method calls.
 	 * @since 0.0.1
 	 */
-	void setNext(FieldDecorator decorator);
+	WiseDecoratorChain setNext(FieldDecorator decorator);
 	
 }
