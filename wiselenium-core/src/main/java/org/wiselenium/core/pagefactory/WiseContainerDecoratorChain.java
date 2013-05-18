@@ -4,7 +4,6 @@ import static org.wiselenium.core.pagefactory.AnnotationUtils.isAnnotationPresen
 import static org.wiselenium.core.pagefactory.ClasspathUtils.findImplementationClass;
 
 import java.lang.reflect.Field;
-import java.util.List;
 
 import net.sf.cglib.proxy.Enhancer;
 
@@ -12,7 +11,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
-import org.testng.collections.Lists;
 
 /**
  * Class responsible for decorating WebElements into Containers.
@@ -35,14 +33,15 @@ class WiseContainerDecoratorChain extends ExtendedDefaultSeleniumDecoratorChain 
 		return e;
 	}
 	
-	private static Object createInstanceWithEmptyConstructor(WebElement webElement,
-		Class<?> implentationClass) {
+	@SuppressWarnings("unchecked")
+	private static <E> E createInstanceWithEmptyConstructor(WebElement webElement,
+		Class<E> implentationClass) {
 		Enhancer e = createEnhancer(webElement, implentationClass);
-		return e.create();
+		return (E) e.create();
 	}
 	
-	private static Object createInstanceWithWebElementConstructor(WebElement webElement,
-		Class<?> implentationClass) {
+	private static <E> E createInstanceWithWebElementConstructor(WebElement webElement,
+		Class<E> implentationClass) {
 		
 		try {
 			return implentationClass.getConstructor(WebElement.class).newInstance(webElement);
@@ -58,9 +57,9 @@ class WiseContainerDecoratorChain extends ExtendedDefaultSeleniumDecoratorChain 
 	}
 	
 	@Override
-	protected Object decorateWebElement(Class<?> clazz, WebElement webElement) {
-		Class<?> implentationClass = findImplementationClass(clazz);
-		Object instance;
+	protected <E> E decorateWebElement(Class<E> clazz, WebElement webElement) {
+		Class<? extends E> implentationClass = findImplementationClass(clazz);
+		E instance;
 		try {
 			instance = createInstanceWithWebElementConstructor(webElement, implentationClass);
 		} catch (ClassWithoutConstructorWithWebElementException e) {
@@ -68,15 +67,6 @@ class WiseContainerDecoratorChain extends ExtendedDefaultSeleniumDecoratorChain 
 		}
 		// TODO init container elements as well
 		return instance;
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	protected <E> Object decorateWebElements(Class<E> clazz, List<WebElement> webElements) {
-		List<E> elements = Lists.newArrayList();
-		for (WebElement webElement : webElements)
-			elements.add((E) this.decorateWebElement(clazz, webElement));
-		return elements;
 	}
 	
 	@Override

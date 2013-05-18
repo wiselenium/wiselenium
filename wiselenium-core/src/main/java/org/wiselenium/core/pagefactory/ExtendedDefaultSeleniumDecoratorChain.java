@@ -3,7 +3,6 @@ package org.wiselenium.core.pagefactory;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
@@ -34,13 +33,13 @@ class ExtendedDefaultSeleniumDecoratorChain extends DefaultFieldDecorator implem
 	}
 	
 	@Override
-	public Object decorate(Class<?> clazz, List<WebElement> webElements) {
+	public <E> List<E> decorate(Class<E> clazz, List<WebElement> webElements) {
 		if (!this.shouldDecorate(clazz)) return this.callNextDecorator(clazz, webElements);
 		return this.decorateWebElements(clazz, webElements);
 	}
 	
 	@Override
-	public Object decorate(Class<?> clazz, WebElement webElement) {
+	public <E> E decorate(Class<E> clazz, WebElement webElement) {
 		if (!this.shouldDecorate(clazz)) return this.callNextDecorator(clazz, webElement);
 		return this.decorateWebElement(clazz, webElement);
 	}
@@ -61,16 +60,16 @@ class ExtendedDefaultSeleniumDecoratorChain extends DefaultFieldDecorator implem
 		return this;
 	}
 	
-	protected Object callNextDecorator(Class<?> clazz, WebElement webElement) {
+	protected <E> List<E> callNextDecorator(Class<E> clazz, List<WebElement> webElements) {
+		if (this.nextDecoratorInChain != null)
+			return this.nextDecoratorInChain.decorate(clazz, webElements);
+		return Lists.newArrayList();
+	}
+	
+	protected <E> E callNextDecorator(Class<E> clazz, WebElement webElement) {
 		if (this.nextDecoratorInChain != null)
 			return this.nextDecoratorInChain.decorate(clazz, webElement);
 		return null;
-	}
-	
-	protected <E> Object callNextDecorator(Class<E> clazz, List<WebElement> webElements) {
-		if (this.nextDecoratorInChain != null)
-			return this.nextDecoratorInChain.decorate(clazz, webElements);
-		return new ArrayList<E>();
 	}
 	
 	protected Object callNextDecorator(ClassLoader loader, Field field) {
@@ -87,15 +86,16 @@ class ExtendedDefaultSeleniumDecoratorChain extends DefaultFieldDecorator implem
 		else return null;
 	}
 	
-	protected Object decorateWebElement(@SuppressWarnings("unused") Class<?> clazz,
+	@SuppressWarnings("unchecked")
+	protected <E> E decorateWebElement(@SuppressWarnings("unused") Class<E> clazz,
 		WebElement webElement) {
-		return webElement;
+		return (E) webElement;
 	}
 	
-	protected <E> Object decorateWebElements(Class<E> clazz, List<WebElement> webElements) {
-		List<WebElement> elements = Lists.newArrayList();
+	protected <E> List<E> decorateWebElements(Class<E> clazz, List<WebElement> webElements) {
+		List<E> elements = Lists.newArrayList();
 		for (WebElement webElement : webElements)
-			elements.add((WebElement) this.decorateWebElement(clazz, webElement));
+			elements.add(this.decorateWebElement(clazz, webElement));
 		return elements;
 	}
 	

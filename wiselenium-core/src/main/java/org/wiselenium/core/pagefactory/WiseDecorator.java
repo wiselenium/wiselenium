@@ -33,12 +33,12 @@ public class WiseDecorator implements ExtendedSeleniumDecorator {
 	}
 	
 	@Override
-	public Object decorate(Class<?> clazz, List<WebElement> webElements) {
+	public <E> List<E> decorate(Class<E> clazz, List<WebElement> webElements) {
 		return this.decoratorChain.decorate(clazz, webElements);
 	}
 	
 	@Override
-	public Object decorate(Class<?> clazz, WebElement webElement) {
+	public <E> E decorate(Class<E> clazz, WebElement webElement) {
 		return this.decoratorChain.decorate(clazz, webElement);
 	}
 	

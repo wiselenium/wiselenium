@@ -69,10 +69,9 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wra
 	 * @return The element decorated or null.
 	 * @since 0.0.1
 	 */
-	@SuppressWarnings("unchecked")
 	public <E> E findElement(Class<E> clazz, By by) {
 		WebElement webElement = unwrapWebDriver(this).findElement(by);
-		return (E) this.getWiseDecorator().decorate(clazz, webElement);
+		return this.getWiseDecorator().decorate(clazz, webElement);
 	}
 	
 	/**
@@ -84,10 +83,9 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wra
 	 * @return A list of all elements decorated or an empty list.
 	 * @since 0.0.1
 	 */
-	@SuppressWarnings("unchecked")
 	public <E> List<E> findElements(Class<E> clazz, By by) {
 		List<WebElement> webElements = unwrapWebDriver(this).findElements(by);
-		return (List<E>) this.getWiseDecorator().decorate(clazz, webElements);
+		return this.getWiseDecorator().decorate(clazz, webElements);
 	}
 	
 	/**
