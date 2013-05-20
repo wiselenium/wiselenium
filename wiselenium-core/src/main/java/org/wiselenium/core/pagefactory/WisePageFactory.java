@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 
 import net.sf.cglib.proxy.Enhancer;
 
+import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
@@ -20,8 +21,21 @@ public final class WisePageFactory {
 	
 	private WisePageFactory() {}
 	
-	// TODO overload the initElements method to also accept an object instead of a class, like the
-	// selenium pagefactory
+	/**
+	 * As {@link #initElements(WebDriver, Class)} but will only replace the fields of an already
+	 * instantiated Page Object.
+	 * 
+	 * @param <T> The type of the instance.
+	 * @param searchContext The context that will be used to look up the elements.
+	 * @param instance The instance whose fields should be proxied.
+	 * @return The instance with its element fields proxied.
+	 * @since 0.0.1
+	 */
+	public static <T> T initElements(SearchContext searchContext, T instance) {
+		ElementLocatorFactory locatorFactory = new DefaultElementLocatorFactory(searchContext);
+		WiseDecorator decorator = new WiseDecorator(locatorFactory);
+		return initElements(decorator, instance);
+	}
 	
 	/**
 	 * Instantiate an instance of the given class, and set a lazy proxy for each of its elements. <br/>
@@ -42,9 +56,7 @@ public final class WisePageFactory {
 			instance = createInstanceWithEmptyConstructor(driver, clazz);
 		}
 		
-		ElementLocatorFactory locatorFactory = new DefaultElementLocatorFactory(driver);
-		WiseDecorator decorator = new WiseDecorator(locatorFactory);
-		return initElements(decorator, instance);
+		return initElements(driver, instance);
 	}
 	
 	private static <T> Enhancer createEnhancerOfInstance(WebDriver driver, Class<T> clazz) {

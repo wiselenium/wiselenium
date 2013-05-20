@@ -5,9 +5,11 @@ import static org.wiselenium.core.WiseUnwrapper.unwrapWebElement;
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.collections.Lists;
 import org.wiselenium.core.element.container.Multiselect;
+import org.wiselenium.core.element.field.Option;
 
 /**
  * Implementation of a HTML Multiple Select.
@@ -18,6 +20,9 @@ import org.wiselenium.core.element.container.Multiselect;
 public class MultiselectImpl extends BasicContainer<Multiselect> implements Multiselect {
 	
 	private Select wrappedSelect;
+	
+	@FindBy(tagName = "option")
+	private List<Option> options;
 	
 	
 	@Override
@@ -48,6 +53,26 @@ public class MultiselectImpl extends BasicContainer<Multiselect> implements Mult
 	}
 	
 	@Override
+	public Multiselect deselectOptions(Option... options) {
+		for (Option option : options)
+			if (option.isSelected()) option.click();
+		return this;
+	}
+	
+	@Override
+	public List<Option> getOptions() {
+		return this.options;
+	}
+	
+	@Override
+	public List<Option> getSelectedOptions() {
+		List<Option> selectedOptions = Lists.newArrayList();
+		for (Option option : this.options)
+			if (option.isSelected()) selectedOptions.add(option);
+		return selectedOptions;
+	}
+	
+	@Override
 	public List<String> getSelectedValues() {
 		List<String> values = Lists.newArrayList();
 		List<WebElement> selectedOptions = this.getWrappedSelect().getAllSelectedOptions();
@@ -67,8 +92,8 @@ public class MultiselectImpl extends BasicContainer<Multiselect> implements Mult
 	
 	@Override
 	public Multiselect selectAll() {
-		List<WebElement> options = this.getWrappedSelect().getOptions();
-		for (WebElement option : options)
+		List<WebElement> selectOptions = this.getWrappedSelect().getOptions();
+		for (WebElement option : selectOptions)
 			if (!option.isSelected()) option.click();
 		return this;
 	}
@@ -91,6 +116,13 @@ public class MultiselectImpl extends BasicContainer<Multiselect> implements Mult
 	public Multiselect selectByVisibleText(String... texts) {
 		for (String t : texts)
 			this.getWrappedSelect().selectByVisibleText(t);
+		return this;
+	}
+	
+	@Override
+	public Multiselect selectOptions(Option... options) {
+		for (Option option : options)
+			if (!option.isSelected()) option.click();
 		return this;
 	}
 	

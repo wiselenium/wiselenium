@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.wiselenium.core.element.container.Select;
 
 @SuppressWarnings("javadoc")
 public class DummyPage extends Page<DummyPage> {
@@ -16,10 +17,15 @@ public class DummyPage extends Page<DummyPage> {
 	@FindBy(name = "sex")
 	private List<WebElement> radiobuttons;
 	private WebElement text;
+	private Select select1;
 	
 	
 	public List<WebElement> getRadiobuttons() {
 		return this.radiobuttons;
+	}
+	
+	public Select getSelect1() {
+		return this.select1;
 	}
 	
 	public WebElement getText() {

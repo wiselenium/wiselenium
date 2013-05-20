@@ -1,5 +1,9 @@
 package org.wiselenium.core.element.container;
 
+import java.util.List;
+
+import org.wiselenium.core.element.field.Option;
+
 /**
  * Represents a HTML Select.
  * 
@@ -7,6 +11,22 @@ package org.wiselenium.core.element.container;
  * @since 0.0.1
  */
 public interface Select extends Container<Select> {
+	
+	/**
+	 * Gets the options of this select.
+	 * 
+	 * @return The options of this select.
+	 * @since 0.0.1
+	 */
+	List<Option> getOptions();
+	
+	/**
+	 * Returns the selected option.
+	 * 
+	 * @return The selected option.
+	 * @since 0.0.1
+	 */
+	Option getSelectedOption();
 	
 	/**
 	 * Returns the selected value.
@@ -53,5 +73,14 @@ public interface Select extends Container<Select> {
 	 * @since 0.0.1
 	 */
 	Select selectByVisibleText(String text);
+	
+	/**
+	 * Selects an option of this select if not already selected.
+	 * 
+	 * @param option The option to be selected.
+	 * @return This select instance in order to allow chain calls.
+	 * @since 0.0.1
+	 */
+	Select selectOption(Option option);
 	
 }

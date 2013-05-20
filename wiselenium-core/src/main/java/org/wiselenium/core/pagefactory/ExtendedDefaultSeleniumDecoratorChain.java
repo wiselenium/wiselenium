@@ -34,6 +34,7 @@ class ExtendedDefaultSeleniumDecoratorChain extends DefaultFieldDecorator implem
 	
 	@Override
 	public <E> List<E> decorate(Class<E> clazz, List<WebElement> webElements) {
+		// TODO the class received was a list
 		if (!this.shouldDecorate(clazz)) return this.callNextDecorator(clazz, webElements);
 		return this.decorateWebElements(clazz, webElements);
 	}
@@ -79,11 +80,8 @@ class ExtendedDefaultSeleniumDecoratorChain extends DefaultFieldDecorator implem
 	}
 	
 	protected Object decorateField(ClassLoader loader, Field field, ElementLocator locator) {
-		if (WebElement.class.isAssignableFrom(field.getType()))
-			return this.proxyForLocator(loader, locator);
-		else if (List.class.isAssignableFrom(field.getType()))
-			return this.proxyForListLocator(loader, locator);
-		else return null;
+		if (this.isDecoratableList(field)) return this.proxyForListLocator(loader, locator);
+		return this.proxyForLocator(loader, locator);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -108,7 +106,7 @@ class ExtendedDefaultSeleniumDecoratorChain extends DefaultFieldDecorator implem
 		
 		Type listType = ((ParameterizedType) genericType).getActualTypeArguments()[0];
 		
-		if (!WebElement.class.equals(listType)) return false;
+		if (!this.shouldDecorate((Class<?>) listType)) return false;
 		
 		if (field.getAnnotation(FindBy.class) == null && field.getAnnotation(FindBys.class) == null)
 			return false;

@@ -4,6 +4,8 @@ import static org.wiselenium.core.pagefactory.AnnotationUtils.isAnnotationPresen
 import static org.wiselenium.core.pagefactory.ClasspathUtils.findImplementationClass;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
 import net.sf.cglib.proxy.Enhancer;
 
@@ -28,7 +30,7 @@ class WiseFieldDecoratorChain extends ExtendedDefaultSeleniumDecoratorChain {
 		Enhancer e = new Enhancer();
 		e.setSuperclass(implentationClass);
 		e.setInterfaces(new Class[] { WrapsElement.class });
-		e.setCallback(WiseElementProxy.getInstance(webElement));
+		e.setCallback(WiseFieldProxy.getInstance(webElement));
 		
 		return e;
 	}
@@ -52,6 +54,12 @@ class WiseFieldDecoratorChain extends ExtendedDefaultSeleniumDecoratorChain {
 	
 	@Override
 	protected Object decorateField(ClassLoader loader, Field field, ElementLocator locator) {
+		if (this.isDecoratableList(field)) {
+			List<WebElement> webElements = this.proxyForListLocator(loader, locator);
+			return this
+				.decorate((Class<?>) ((ParameterizedType) field.getGenericType())
+					.getActualTypeArguments()[0], webElements);
+		}
 		WebElement webElement = this.proxyForLocator(loader, locator);
 		return this.decorate(field.getType(), webElement);
 	}
@@ -69,11 +77,6 @@ class WiseFieldDecoratorChain extends ExtendedDefaultSeleniumDecoratorChain {
 	@Override
 	protected boolean shouldDecorate(Class<?> clazz) {
 		return isAnnotationPresent(clazz, org.wiselenium.core.Field.class);
-	}
-	
-	@Override
-	protected boolean shouldDecorate(Field field) {
-		return this.shouldDecorate(field.getType());
 	}
 	
 }

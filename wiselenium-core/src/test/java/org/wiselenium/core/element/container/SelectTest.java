@@ -6,15 +6,20 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.element.container.SelectPage.FIRST_OPTION_TEXT;
 import static org.wiselenium.core.element.container.SelectPage.FIRST_OPTION_VALUE;
+import static org.wiselenium.core.element.container.SelectPage.SECOND_OPTION_TEXT;
 import static org.wiselenium.core.element.container.SelectPage.SECOND_OPTION_VALUE;
 import static org.wiselenium.core.element.container.SelectPage.SELECT_CLASS;
 import static org.wiselenium.core.element.container.SelectPage.SELECT_TITLE;
 import static org.wiselenium.core.element.container.SelectPage.THIRD_OPTION_TEXT;
+import static org.wiselenium.core.element.container.SelectPage.THIRD_OPTION_VALUE;
 import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
+
+import java.util.List;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.wiselenium.core.TestBase;
+import org.wiselenium.core.element.field.Option;
 
 @SuppressWarnings("javadoc")
 public class SelectTest extends TestBase {
@@ -61,6 +66,13 @@ public class SelectTest extends TestBase {
 	}
 	
 	@Test
+	public void shouldGetOptions() {
+		List<Option> options = this.page.getSelect().getOptions();
+		assertNotNull(options);
+		assertTrue(!options.isEmpty());
+	}
+	
+	@Test
 	public void shouldGetSelectedValue() {
 		assertEquals(this.page.getSelect().getSelectedValue(), FIRST_OPTION_VALUE);
 	}
@@ -78,6 +90,26 @@ public class SelectTest extends TestBase {
 	@Test
 	public void shouldGetTitle() {
 		assertEquals(this.page.getSelect().getTitle(), SELECT_TITLE);
+	}
+	
+	@SuppressWarnings("null")
+	@Test
+	public void shouldSelectAndGetSelectedOption() {
+		Select select = this.page.getSelect();
+		List<Option> options = select.getOptions();
+		assertTrue(options != null && !options.isEmpty());
+		
+		String[] values = { FIRST_OPTION_VALUE, SECOND_OPTION_VALUE, THIRD_OPTION_VALUE };
+		String[] texts = { FIRST_OPTION_TEXT, SECOND_OPTION_TEXT, THIRD_OPTION_TEXT };
+		
+		for (int i = 0; i < options.size(); i++) {
+			Option option = options.get(i);
+			select.selectOption(option);
+			assertTrue(option.isSelected());
+			Option selectedOption = select.getSelectedOption();
+			assertEquals(selectedOption.getValue(), values[i]);
+			assertEquals(selectedOption.getVisibleText(), texts[i]);
+		}
 	}
 	
 	@Test

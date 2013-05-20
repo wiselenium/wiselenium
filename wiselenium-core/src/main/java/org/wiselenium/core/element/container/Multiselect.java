@@ -2,6 +2,8 @@ package org.wiselenium.core.element.container;
 
 import java.util.List;
 
+import org.wiselenium.core.element.field.Option;
+
 /**
  * Represents a HTML Multiple Select.
  * 
@@ -47,6 +49,31 @@ public interface Multiselect extends Container<Multiselect> {
 	 * @since 0.0.1
 	 */
 	Multiselect deselectByVisibleText(String... texts);
+	
+	/**
+	 * Deselects some options of this select if not already deselected.
+	 * 
+	 * @param options The options to be deselected.
+	 * @return This select instance in order to allow chain calls.
+	 * @since 0.0.1
+	 */
+	Multiselect deselectOptions(Option... options);
+	
+	/**
+	 * Gets the options of this select.
+	 * 
+	 * @return The options of this select.
+	 * @since 0.0.1
+	 */
+	List<Option> getOptions();
+	
+	/**
+	 * Returns the selected options.
+	 * 
+	 * @return The selected options.
+	 * @since 0.0.1
+	 */
+	List<Option> getSelectedOptions();
 	
 	/**
 	 * Returns the selected values.
@@ -101,5 +128,14 @@ public interface Multiselect extends Container<Multiselect> {
 	 * @since 0.0.1
 	 */
 	Multiselect selectByVisibleText(String... texts);
+	
+	/**
+	 * Selects some options of this select if not already selected.
+	 * 
+	 * @param options The options to be selected.
+	 * @return This select instance in order to allow chain calls.
+	 * @since 0.0.1
+	 */
+	Multiselect selectOptions(Option... options);
 	
 }

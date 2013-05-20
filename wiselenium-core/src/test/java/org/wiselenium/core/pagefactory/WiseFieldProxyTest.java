@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import org.wiselenium.core.TestBase;
 
 @SuppressWarnings("javadoc")
-public class WiseElementProxyTest extends TestBase {
+public class WiseFieldProxyTest extends TestBase {
 	
 	@Test(expectedExceptions = IllegalArgumentException.class)
 	public void shouldPropagateOriginalExceptionFromProxy() {
