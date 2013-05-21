@@ -5,6 +5,7 @@ import static org.wiselenium.core.FileUtils.getAbsoluteFilePath;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.wiselenium.core.element.container.Select;
@@ -12,6 +13,8 @@ import org.wiselenium.core.element.container.Select;
 @SuppressWarnings("javadoc")
 public class DummyPage extends Page<DummyPage> {
 	
+	public static final By BY_SELECT1 = By.id("select1");
+	public static final By BY_RADIOBUTTONS = By.name("sex");
 	public static final String URL = "dummy.html";
 	
 	@FindBy(name = "sex")
