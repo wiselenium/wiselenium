@@ -26,7 +26,7 @@ public class SelectPage extends Page<SelectPage> {
 	
 	private Select select;
 	private Select hiddenSelect;
-	private Multiselect multiselect;
+	private MultiSelect multiselect;
 	private WebElement message;
 	
 	
@@ -38,7 +38,7 @@ public class SelectPage extends Page<SelectPage> {
 		return this.message.getText();
 	}
 	
-	public Multiselect getMultiselect() {
+	public MultiSelect getMultiselect() {
 		return this.multiselect;
 	}
 	

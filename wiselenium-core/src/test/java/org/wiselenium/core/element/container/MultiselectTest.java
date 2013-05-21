@@ -34,13 +34,13 @@ public class MultiselectTest extends TestBase {
 	
 	@Test
 	public void shouldAllowChainCallsWithAnd() {
-		Multiselect select = this.page.getMultiselect();
+		MultiSelect select = this.page.getMultiselect();
 		assertEquals(select, select.and());
 	}
 	
 	@Test
 	public void shouldDeselectByIndex() {
-		Multiselect select = this.page.getMultiselect();
+		MultiSelect select = this.page.getMultiselect();
 		assertFalse(select.selectAll().and().getSelectedValues().isEmpty());
 		
 		String[] selectedValues = select.deselectByIndex(0, 1).and().getSelectedValues()
@@ -51,7 +51,7 @@ public class MultiselectTest extends TestBase {
 	
 	@Test
 	public void shouldDeselectByValue() {
-		Multiselect multiselect = this.page.getMultiselect();
+		MultiSelect multiselect = this.page.getMultiselect();
 		assertFalse(multiselect.selectAll().and().getSelectedValues().isEmpty());
 		
 		String[] selectedValues = multiselect
@@ -63,7 +63,7 @@ public class MultiselectTest extends TestBase {
 	
 	@Test
 	public void shouldDeselectByVisibleTexts() {
-		Multiselect multiselect = this.page.getMultiselect();
+		MultiSelect multiselect = this.page.getMultiselect();
 		assertFalse(multiselect.selectAll().and().getSelectedVisibleTexts().isEmpty());
 		
 		String[] selectedTexts = multiselect
@@ -92,7 +92,7 @@ public class MultiselectTest extends TestBase {
 	
 	@Test
 	public void shouldSelectAllAndGetSelectedValuesThenDeselectAll() {
-		Multiselect multiselect = this.page.getMultiselect();
+		MultiSelect multiselect = this.page.getMultiselect();
 		assertTrue(multiselect.getSelectedValues().isEmpty());
 		
 		String[] selectedValues = multiselect.selectAll().and().getSelectedValues()
@@ -106,7 +106,7 @@ public class MultiselectTest extends TestBase {
 	
 	@Test
 	public void shouldSelectByIndex() {
-		Multiselect select = this.page.getMultiselect();
+		MultiSelect select = this.page.getMultiselect();
 		assertTrue(select.getSelectedValues().isEmpty());
 		
 		String[] selectedValues = select.selectByIndex(0, 1).and().getSelectedValues()
@@ -117,7 +117,7 @@ public class MultiselectTest extends TestBase {
 	
 	@Test
 	public void shouldSelectByValue() {
-		Multiselect select = this.page.getMultiselect();
+		MultiSelect select = this.page.getMultiselect();
 		assertTrue(select.getSelectedValues().isEmpty());
 		
 		String[] selectedValues = select.selectByValue(FIRST_OPTION_VALUE, SECOND_OPTION_VALUE)
@@ -128,7 +128,7 @@ public class MultiselectTest extends TestBase {
 	
 	@Test
 	public void shouldSelectByVisibleText() {
-		Multiselect select = this.page.getMultiselect();
+		MultiSelect select = this.page.getMultiselect();
 		assertTrue(select.getSelectedValues().isEmpty());
 		
 		String[] selectedTexts = select.selectByVisibleText(FIRST_OPTION_TEXT).and()
@@ -140,7 +140,7 @@ public class MultiselectTest extends TestBase {
 	@SuppressWarnings("null")
 	@Test
 	public void shouldSelectDeselectAndGetSelectedOptions() {
-		Multiselect select = this.page.getMultiselect();
+		MultiSelect select = this.page.getMultiselect();
 		List<Option> options = select.getOptions();
 		assertTrue(options != null && !options.isEmpty());
 		

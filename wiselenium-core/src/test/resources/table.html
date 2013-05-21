@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>page for table tests</title>
+</head>
+<body>
+
+	<table id="tableWithCaptionAndHead" border="1">
+		<caption>Table Headers</caption>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Telephone</th>
+			</tr>
+		</thead>
+		<tr>
+			<td>Bill Gates</td>
+			<td>555 77 854</td>
+		</tr>
+	</table>
+
+	<br/>
+	<table id="tableWithoutHeadButWithHeaderCells" border="1">
+		<tr>
+			<th>First Name:</th>
+			<td>Bill Gates</td>
+		</tr>
+		<tr>
+			<th>Telephone:</th>
+			<td>555 77 854</td>
+		</tr>
+	</table>
+
+	<h4>Cells with spans:</h4>
+	<table id="tableWithColspan" border="1">
+		<tr>
+			<th>Name</th>
+			<th colspan="2">Telephone</th>
+		</tr>
+		<tr>
+			<td>Bill Gates</td>
+			<td>555 77 854</td>
+			<td>555 77 855</td>
+		</tr>
+	</table>
+
+	<br/>
+	<table id="tableWithRowspan" border="1">
+		<tr>
+			<th>First Name:</th>
+			<td>Bill Gates</td>
+		</tr>
+		<tr>
+			<th rowspan="2">Telephone:</th>
+			<td>555 77 854</td>
+		</tr>
+		<tr>
+			<td>555 77 855</td>
+		</tr>
+	</table>
+
+	<h4>Complex Table:</h4>
+	<table id="complexTableWithFoot" border="1">
+		<tr>
+			<td>
+				<p>This is a paragraph</p>
+				<p>This is another paragraph</p>
+			</td>
+			<td>This cell contains a table:
+				<table border="1">
+					<tr>
+						<th>A</th>
+						<td>B</td>
+					</tr>
+					<tr>
+						<th>C</th>
+						<td>D</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>This cell contains a list
+				<ul>
+					<li>apples</li>
+					<li>bananas</li>
+					<li>pineapples</li>
+				</ul>
+			</td>
+			<td>HELLO</td>
+		</tr>
+		<tfoot>
+			<tr>
+				<td>HELLO</td>
+				<td>WORLD</td>
+			</tr>
+		</tfoot>
+	</table>
+
+</body>
+</html>

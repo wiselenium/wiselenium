@@ -10,7 +10,7 @@ import org.wiselenium.core.element.field.Option;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-public interface Multiselect extends Container<Multiselect> {
+public interface MultiSelect extends Container<MultiSelect> {
 	
 	/**
 	 * Deselects all options.
@@ -18,7 +18,7 @@ public interface Multiselect extends Container<Multiselect> {
 	 * @return This select instance to allow chain calls.
 	 * @since 0.0.1
 	 */
-	Multiselect deselectAll();
+	MultiSelect deselectAll();
 	
 	/**
 	 * Deselects all options at the given indexes. This is done by examing the "index" attribute of
@@ -28,7 +28,7 @@ public interface Multiselect extends Container<Multiselect> {
 	 * @return This select element to allow chain calls.
 	 * @since 0.0.1
 	 */
-	Multiselect deselectByIndex(int... indexes);
+	MultiSelect deselectByIndex(int... indexes);
 	
 	/**
 	 * Deselects all options that have a value matching the argument. That is, when given "foo" this
@@ -38,7 +38,7 @@ public interface Multiselect extends Container<Multiselect> {
 	 * @return This select element to allow chain calls.
 	 * @since 0.0.1
 	 */
-	Multiselect deselectByValue(String... values);
+	MultiSelect deselectByValue(String... values);
 	
 	/**
 	 * Deselects all options that display text matching the argument. That is, when given "Bar" this
@@ -48,7 +48,7 @@ public interface Multiselect extends Container<Multiselect> {
 	 * @return This select element to allow chain calls.
 	 * @since 0.0.1
 	 */
-	Multiselect deselectByVisibleText(String... texts);
+	MultiSelect deselectByVisibleText(String... texts);
 	
 	/**
 	 * Deselects some options of this select if not already deselected.
@@ -57,7 +57,7 @@ public interface Multiselect extends Container<Multiselect> {
 	 * @return This select instance in order to allow chain calls.
 	 * @since 0.0.1
 	 */
-	Multiselect deselectOptions(Option... options);
+	MultiSelect deselectOptions(Option... options);
 	
 	/**
 	 * Gets the options of this select.
@@ -97,7 +97,7 @@ public interface Multiselect extends Container<Multiselect> {
 	 * @return This select instance to allow chain calls.
 	 * @since 0.0.1
 	 */
-	Multiselect selectAll();
+	MultiSelect selectAll();
 	
 	/**
 	 * Selects all options at the given indexes. This is done by examing the "index" attribute of an
@@ -107,7 +107,7 @@ public interface Multiselect extends Container<Multiselect> {
 	 * @return This select element to allow chain calls.
 	 * @since 0.0.1
 	 */
-	Multiselect selectByIndex(int... indexes);
+	MultiSelect selectByIndex(int... indexes);
 	
 	/**
 	 * Selects all options that have a value matching the argument. That is, when given "foo" this
@@ -117,7 +117,7 @@ public interface Multiselect extends Container<Multiselect> {
 	 * @return This select element to allow chain calls.
 	 * @since 0.0.1
 	 */
-	Multiselect selectByValue(String... values);
+	MultiSelect selectByValue(String... values);
 	
 	/**
 	 * Selects all options that display text matching the argument. That is, when given "Bar" this
@@ -127,7 +127,7 @@ public interface Multiselect extends Container<Multiselect> {
 	 * @return This select element to allow chain calls.
 	 * @since 0.0.1
 	 */
-	Multiselect selectByVisibleText(String... texts);
+	MultiSelect selectByVisibleText(String... texts);
 	
 	/**
 	 * Selects some options of this select if not already selected.
@@ -136,6 +136,6 @@ public interface Multiselect extends Container<Multiselect> {
 	 * @return This select instance in order to allow chain calls.
 	 * @since 0.0.1
 	 */
-	Multiselect selectOptions(Option... options);
+	MultiSelect selectOptions(Option... options);
 	
 }

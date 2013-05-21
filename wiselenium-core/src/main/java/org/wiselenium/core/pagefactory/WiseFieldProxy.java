@@ -31,9 +31,6 @@ final class WiseFieldProxy implements MethodInterceptor {
 		return GET_WRAPPED_ELEMENT.equals(method.getName());
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
 		throws Throwable { // NOSONAR because it's an overridden method

@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -34,9 +35,6 @@ final class WiseContainerProxy implements MethodInterceptor {
 		return GET_WRAPPED_ELEMENT.equals(method.getName());
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
 		throws Throwable { // NOSONAR because it's an overridden method
@@ -47,8 +45,11 @@ final class WiseContainerProxy implements MethodInterceptor {
 	}
 	
 	private synchronized void initializeInnerElements(Object obj) {
-		if (!this.initializedInnerElements) initElements(this.wrappedElement, obj);
-		this.initializedInnerElements = true;
+		if (!this.initializedInnerElements) try {
+			this.wrappedElement.toString();
+			initElements(this.wrappedElement, obj);
+			this.initializedInnerElements = true;
+		} catch (NoSuchElementException e) {}
 	}
 	
 }

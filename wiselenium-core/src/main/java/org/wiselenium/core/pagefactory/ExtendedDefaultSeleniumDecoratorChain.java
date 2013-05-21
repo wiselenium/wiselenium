@@ -34,7 +34,6 @@ class ExtendedDefaultSeleniumDecoratorChain extends DefaultFieldDecorator implem
 	
 	@Override
 	public <E> List<E> decorate(Class<E> clazz, List<WebElement> webElements) {
-		// TODO the class received was a list
 		if (!this.shouldDecorate(clazz)) return this.callNextDecorator(clazz, webElements);
 		return this.decorateWebElements(clazz, webElements);
 	}

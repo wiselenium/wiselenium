@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.collections.Lists;
-import org.wiselenium.core.element.container.Multiselect;
+import org.wiselenium.core.element.container.MultiSelect;
 import org.wiselenium.core.element.field.Option;
 
 /**
@@ -17,7 +17,7 @@ import org.wiselenium.core.element.field.Option;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-public class MultiselectImpl extends BasicContainer<Multiselect> implements Multiselect {
+public class MultiSelectImpl extends BasicContainer<MultiSelect> implements MultiSelect {
 	
 	private Select wrappedSelect;
 	
@@ -26,34 +26,34 @@ public class MultiselectImpl extends BasicContainer<Multiselect> implements Mult
 	
 	
 	@Override
-	public Multiselect deselectAll() {
+	public MultiSelect deselectAll() {
 		this.getWrappedSelect().deselectAll();
 		return this;
 	}
 	
 	@Override
-	public Multiselect deselectByIndex(int... indexes) {
+	public MultiSelect deselectByIndex(int... indexes) {
 		for (int i : indexes)
 			this.getWrappedSelect().deselectByIndex(i);
 		return this;
 	}
 	
 	@Override
-	public Multiselect deselectByValue(String... values) {
+	public MultiSelect deselectByValue(String... values) {
 		for (String v : values)
 			this.getWrappedSelect().deselectByValue(v);
 		return this;
 	}
 	
 	@Override
-	public Multiselect deselectByVisibleText(String... texts) {
+	public MultiSelect deselectByVisibleText(String... texts) {
 		for (String t : texts)
 			this.getWrappedSelect().deselectByVisibleText(t);
 		return this;
 	}
 	
 	@Override
-	public Multiselect deselectOptions(Option... options) {
+	public MultiSelect deselectOptions(Option... options) {
 		for (Option option : options)
 			if (option.isSelected()) option.click();
 		return this;
@@ -91,7 +91,7 @@ public class MultiselectImpl extends BasicContainer<Multiselect> implements Mult
 	}
 	
 	@Override
-	public Multiselect selectAll() {
+	public MultiSelect selectAll() {
 		List<WebElement> selectOptions = this.getWrappedSelect().getOptions();
 		for (WebElement option : selectOptions)
 			if (!option.isSelected()) option.click();
@@ -99,28 +99,28 @@ public class MultiselectImpl extends BasicContainer<Multiselect> implements Mult
 	}
 	
 	@Override
-	public Multiselect selectByIndex(int... indexes) {
+	public MultiSelect selectByIndex(int... indexes) {
 		for (int i : indexes)
 			this.getWrappedSelect().selectByIndex(i);
 		return this;
 	}
 	
 	@Override
-	public Multiselect selectByValue(String... values) {
+	public MultiSelect selectByValue(String... values) {
 		for (String v : values)
 			this.getWrappedSelect().selectByValue(v);
 		return this;
 	}
 	
 	@Override
-	public Multiselect selectByVisibleText(String... texts) {
+	public MultiSelect selectByVisibleText(String... texts) {
 		for (String t : texts)
 			this.getWrappedSelect().selectByVisibleText(t);
 		return this;
 	}
 	
 	@Override
-	public Multiselect selectOptions(Option... options) {
+	public MultiSelect selectOptions(Option... options) {
 		for (Option option : options)
 			if (!option.isSelected()) option.click();
 		return this;

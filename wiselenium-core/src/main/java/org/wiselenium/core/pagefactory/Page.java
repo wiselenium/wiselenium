@@ -61,7 +61,8 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wra
 	 * @param clazz The class of the element. Must be either WebElement or a type annotated with
 	 * Field, Container or Frame.
 	 * @param by The locating mechanism to use.
-	 * @return The element decorated or null.
+	 * @return The element decorated or null if it shouldn't be decorated because the type didn't
+	 * respect the parameter specification.
 	 * @since 0.0.1
 	 */
 	public <E> E findElement(Class<E> clazz, By by) {
@@ -74,7 +75,8 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wra
 	 * @param <E> The type of the elements.
 	 * @param clazz The class of the elements.
 	 * @param by The locating mechanism to use.
-	 * @return A list of all elements decorated or an empty list.
+	 * @return The elements decorated or an empty list if it shouldn't be decorated because the type
+	 * didn't respect the parameter specification.
 	 * @since 0.0.1
 	 */
 	public <E> List<E> findElements(Class<E> clazz, By by) {

@@ -2,6 +2,7 @@ package org.wiselenium.core.pagefactory;
 
 import static org.wiselenium.core.pagefactory.AnnotationUtils.isAnnotationPresent;
 import static org.wiselenium.core.pagefactory.ClasspathUtils.findImplementationClass;
+import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
@@ -67,11 +68,15 @@ class WiseContainerDecoratorChain extends ExtendedDefaultSeleniumDecoratorChain 
 	@Override
 	protected <E> E decorateWebElement(Class<E> clazz, WebElement webElement) {
 		Class<? extends E> implentationClass = findImplementationClass(clazz);
+		E instance;
 		try {
-			return createInstanceWithWebElementConstructor(webElement, implentationClass);
+			instance = createInstanceWithWebElementConstructor(webElement, implentationClass);
+			initElements(webElement, instance);
 		} catch (ClassWithoutConstructorWithWebElementException e) {
-			return createInstanceWithEmptyConstructor(webElement, implentationClass);
+			instance = createInstanceWithEmptyConstructor(webElement, implentationClass);
 		}
+		
+		return instance;
 	}
 	
 	@Override
