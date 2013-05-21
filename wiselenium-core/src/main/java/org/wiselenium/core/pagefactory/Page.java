@@ -1,15 +1,11 @@
 package org.wiselenium.core.pagefactory;
 
-import static org.wiselenium.core.WiseUnwrapper.unwrapWebDriver;
-
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsDriver;
-import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.ui.LoadableComponent;
 
 /**
@@ -23,7 +19,6 @@ import org.openqa.selenium.support.ui.LoadableComponent;
 public class Page<T extends Page<T>> extends LoadableComponent<T> implements WrapsDriver {
 	
 	private WebDriver driver;
-	private ExtendedSeleniumDecorator wiseDecorator;
 	
 	
 	/**
@@ -70,8 +65,7 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wra
 	 * @since 0.0.1
 	 */
 	public <E> E findElement(Class<E> clazz, By by) {
-		WebElement webElement = unwrapWebDriver(this).findElement(by);
-		return this.getWiseDecorator().decorate(clazz, webElement);
+		return WiseLocator.findElement(clazz, by, this.getWrappedDriver());
 	}
 	
 	/**
@@ -84,8 +78,7 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wra
 	 * @since 0.0.1
 	 */
 	public <E> List<E> findElements(Class<E> clazz, By by) {
-		List<WebElement> webElements = unwrapWebDriver(this).findElements(by);
-		return this.getWiseDecorator().decorate(clazz, webElements);
+		return WiseLocator.findElements(clazz, by, this.getWrappedDriver());
 	}
 	
 	/**
@@ -141,12 +134,5 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wra
 	
 	@Override
 	protected void load() {}
-	
-	private synchronized ExtendedSeleniumDecorator getWiseDecorator() {
-		if (this.wiseDecorator == null)
-			this.wiseDecorator = new WiseDecorator(new DefaultElementLocatorFactory(
-				this.getWrappedDriver()));
-		return this.wiseDecorator;
-	}
 	
 }
