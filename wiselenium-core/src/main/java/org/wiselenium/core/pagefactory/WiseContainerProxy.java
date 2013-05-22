@@ -1,14 +1,13 @@
 package org.wiselenium.core.pagefactory;
 
-import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
-
 import java.lang.reflect.Method;
 
+import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.WrapsElement;
 
 /**
  * The wiselenium proxy for containers.
@@ -19,15 +18,25 @@ import org.openqa.selenium.WebElement;
 final class WiseContainerProxy implements MethodInterceptor {
 	
 	private final WebElement wrappedElement;
-	private boolean initializedElements;
+	private boolean elementsInitialized;
 	
 	
-	private WiseContainerProxy(WebElement element) {
-		this.wrappedElement = element;
+	private WiseContainerProxy(WebElement webElement) {
+		this.wrappedElement = webElement;
 	}
 	
-	static WiseContainerProxy getInstance(WebElement element) {
-		return new WiseContainerProxy(element);
+	@SuppressWarnings("unchecked")
+	static <E> E getInstance(Class<E> implementationClass, WebElement webElement) {
+		Enhancer e = new Enhancer();
+		e.setSuperclass(implementationClass);
+		e.setInterfaces(new Class[] { WrapsElement.class });
+		e.setCallback(new WiseContainerProxy(webElement));
+		
+		try {
+			return (E) e.create();
+		} catch (IllegalArgumentException ex) {
+			throw new ClassWithoutNoArgConstructorException(implementationClass, ex);
+		}
 	}
 	
 	private static boolean isGetWrappedElement(Method method) {
@@ -39,17 +48,16 @@ final class WiseContainerProxy implements MethodInterceptor {
 	public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
 		throws Throwable { // NOSONAR because it's an overridden method
 	
-		this.initializeElements(obj);
+		this.initElements(obj);
 		if (isGetWrappedElement(method)) return this.wrappedElement;
 		return proxy.invokeSuper(obj, args);
 	}
 	
-	private synchronized void initializeElements(Object obj) {
-		if (!this.initializedElements) try {
-			this.wrappedElement.toString();
-			initElements(this.wrappedElement, obj);
-			this.initializedElements = true;
-		} catch (NoSuchElementException e) {}
+	private synchronized void initElements(Object obj) {
+		if (!this.elementsInitialized) {
+			WisePageFactory.initElements(this.wrappedElement, obj);
+			this.elementsInitialized = true;
+		}
 	}
 	
 }

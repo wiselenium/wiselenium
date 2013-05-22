@@ -2,10 +2,12 @@ package org.wiselenium.core.pagefactory;
 
 import java.lang.reflect.Method;
 
+import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.internal.WrapsDriver;
 
 /**
  * The wiselenium proxy for pages.
@@ -22,8 +24,17 @@ final class WisePageProxy implements MethodInterceptor {
 		this.wrappedDriver = driver;
 	}
 	
-	static WisePageProxy getInstance(WebDriver driver) {
-		return new WisePageProxy(driver);
+	@SuppressWarnings("unchecked")
+	static <T> T getInstance(WebDriver driver, Class<T> clazz) {
+		Enhancer e = new Enhancer();
+		e.setSuperclass(clazz);
+		e.setInterfaces(new Class[] { WrapsDriver.class });
+		e.setCallback(new WisePageProxy(driver));
+		try {
+			return (T) e.create();
+		} catch (IllegalArgumentException ex) {
+			throw new ClassWithoutNoArgConstructorException(clazz, ex);
+		}
 	}
 	
 	private static boolean isGetWrappedDriver(Method method) {

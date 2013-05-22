@@ -19,7 +19,7 @@ import org.wiselenium.core.element.field.Option;
 @SuppressWarnings("javadoc")
 public class WisePageFactoryTest extends TestBase {
 	
-	@Test(expectedExceptions = PageCreationException.class)
+	@Test(expectedExceptions = PageElementsInitializationException.class)
 	public void shouldFailWhileCreatingPage() {
 		this.driver.get(getAbsoluteFilePath(DummyPageWithFinalField.URL));
 		initElements(this.driver, DummyPageWithFinalField.class);

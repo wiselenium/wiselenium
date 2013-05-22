@@ -2,11 +2,8 @@ package org.wiselenium.core.pagefactory;
 
 import java.lang.reflect.Field;
 
-import net.sf.cglib.proxy.Enhancer;
-
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
@@ -41,9 +38,9 @@ public final class WisePageFactory {
 	 * Frame). <br/>
 	 * It assumes the element field name as the HTML element's "id" or "name". To change how the
 	 * element is located, use the FindBy annotation. <br/>
-	 * This method will attempt to instantiate the class given to it, using either a constructor
-	 * which takes a WebDriver instance as its only argument or falling back on a no-arg
-	 * constructor. An exception will be thrown if the class cannot be instantiated. <br/>
+	 * This method will attempt to instantiate the class given to it, using preferably a constructor
+	 * that takes a WebDriver instance as its only argument or falling back on a no-arg constructor.
+	 * An exception will be thrown if the class cannot be instantiated. <br/>
 	 * In case the no-arg constructor is used, the page itself is proxied to wrap the WebDriver,
 	 * which can be unwrapped using the WiseUnrwapper.
 	 * 
@@ -69,22 +66,19 @@ public final class WisePageFactory {
 	}
 	
 	private static <T> T instantiatePage(WebDriver driver, Class<T> clazz) {
-		T instance;
 		try {
-			instance = instantiatePageWithWebDriverConstructor(driver, clazz);
-		} catch (ClassWithoutConstructorThatTakesWebDriverException e) {
-			instance = instantiatePageWithEmptyConstructor(driver, clazz);
+			return instantiatePageWithWebDriverConstructor(driver, clazz);
+		} catch (ClassWithoutConstructorThatTakesWebDriverException e1) {
+			try {
+				return instantiatePageWithEmptyConstructor(driver, clazz);
+			} catch (ClassWithoutNoArgConstructorException e2) {
+				throw new PageInstantiationException(clazz); // NOSONAR it won't need the stacktrace
+			}
 		}
-		return instance;
 	}
 	
-	@SuppressWarnings("unchecked")
 	private static <T> T instantiatePageWithEmptyConstructor(WebDriver driver, Class<T> clazz) {
-		Enhancer e = new Enhancer();
-		e.setSuperclass(clazz);
-		e.setInterfaces(new Class[] { WrapsDriver.class });
-		e.setCallback(WisePageProxy.getInstance(driver));
-		return (T) e.create();
+		return WisePageProxy.getInstance(driver, clazz);
 	}
 	
 	private static <T> T instantiatePageWithWebDriverConstructor(WebDriver driver, Class<T> clazz) {
@@ -105,7 +99,7 @@ public final class WisePageFactory {
 				field.setAccessible(true);
 				field.set(instance, value);
 			} catch (IllegalAccessException e) {
-				throw new PageCreationException(instance.getClass(), e);
+				throw new PageElementsInitializationException(instance.getClass(), e);
 			}
 		}
 	}

@@ -16,10 +16,13 @@ public final class WiseUnwrapper {
 	private WiseUnwrapper() {}
 	
 	/**
-	 * Unwraps the WebDriver of a Page.
+	 * Unwraps the WebDriver of a page. <br/>
+	 * In order to do so, the page must implement WrapsDriver. (Notice: if the page was created
+	 * using the WisePageFactory with a no-arg constructor, it is in fact a proxy that implements it
+	 * already.)
 	 * 
 	 * @param page The page.
-	 * @return The WebDriver decorated by the Page.
+	 * @return The WebDriver decorated by the page.
 	 * @since 0.0.1
 	 */
 	public static WebDriver unwrapWebDriver(Object page) {
@@ -28,7 +31,9 @@ public final class WiseUnwrapper {
 	}
 	
 	/**
-	 * Unwraps the WebElement of an Element.
+	 * Unwraps the WebElement of an Element. <br/>
+	 * In order to do so, the element must implement WrapsElement. (Notice: wiselenium elements'
+	 * proxies already implement it.)
 	 * 
 	 * @param element The element.
 	 * @return The WebElement decorated by the Element.

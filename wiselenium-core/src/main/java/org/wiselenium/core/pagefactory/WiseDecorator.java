@@ -6,7 +6,6 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
-import org.testng.collections.Lists;
 
 /**
  * Class responsible for decorating WebElements.
@@ -57,11 +56,7 @@ public class WiseDecorator implements ExtendedSeleniumDecorator {
 	 * @since 0.0.1
 	 */
 	public static <E> List<E> decorateElements(Class<E> clazz, List<WebElement> webElements) {
-		// FIXME decorateElements
-		List<E> decoratedElements = Lists.newArrayList();
-		for (WebElement webElement : webElements)
-			decoratedElements.add(decorateElement(clazz, webElement));
-		return decoratedElements;
+		return WiseElementListProxy.getInstance(clazz, webElements);
 	}
 	
 	@Override
