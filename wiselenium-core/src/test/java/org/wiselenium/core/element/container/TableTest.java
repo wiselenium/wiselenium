@@ -104,7 +104,7 @@ public class TableTest extends TestBase {
 		
 		String[] cellsTexts = { TablePage.TABLE_FOOT_CELL1, TablePage.TABLE_FOOT_CELL2 };
 		
-		TableRow row = rows.get(0);
+		TableRow row = foot.getRow(0);
 		List<TableCell> cells = row.getCells();
 		assertFalse(cells.isEmpty());
 		for (int i = 0; i < cells.size(); i++) {
@@ -127,7 +127,7 @@ public class TableTest extends TestBase {
 		
 		String[] cellsTexts = { TABLE_HEAD_CELL1, TABLE_HEAD_CELL2 };
 		
-		TableRow row = rows.get(0);
+		TableRow row = head.getRow(0);
 		List<TableCell> cells = row.getCells();
 		assertFalse(cells.isEmpty());
 		for (int i = 0; i < cells.size(); i++) {

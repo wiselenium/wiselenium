@@ -59,14 +59,17 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wra
 	}
 	
 	/**
-	 * Finds the first element within the current page using the given mechanism.
+	 * Finds the first element within the current page using the given mechanism. <br/>
+	 * Throws a NoSuchElementException in case the element can't be found.
 	 * 
 	 * @param <E> The type of the element.
 	 * @param clazz The class of the element. Must be either WebElement or a type annotated with
-	 * Field, Container or Frame.
+	 * Field, Container or Frame. If the class is not concrete, will lookup for its implementation
+	 * matching the pattern classPackage.{impl}.className{Impl} yet. A more sofisticated search is
+	 * planned to be implemented on the future.
 	 * @param by The locating mechanism to use.
 	 * @return The element decorated or null if it shouldn't be decorated because the type didn't
-	 * respect the parameter specification.
+	 * respect the clazz parameter specification.
 	 * @since 0.0.1
 	 */
 	public <E> E findElement(Class<E> clazz, By by) {
@@ -77,10 +80,13 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wra
 	 * Finds all elements within the current page using the given mechanism.
 	 * 
 	 * @param <E> The type of the elements.
-	 * @param clazz The class of the elements.
+	 * @param clazz The class of the elements. Must be either WebElement or a type annotated with
+	 * Field, Container or Frame. If the class is not concrete, will lookup for its implementation
+	 * matching the pattern classPackage.{impl}.className{Impl} yet. A more sofisticated search is
+	 * planned to be implemented on the future.
 	 * @param by The locating mechanism to use.
 	 * @return The elements decorated or an empty list if it shouldn't be decorated because the type
-	 * didn't respect the parameter specification.
+	 * didn't respect the clazz parameter specification.
 	 * @since 0.0.1
 	 */
 	public <E> List<E> findElements(Class<E> clazz, By by) {

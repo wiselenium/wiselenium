@@ -1,9 +1,7 @@
 package org.wiselenium.core.element.field;
 
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotEquals;
-import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
@@ -25,12 +23,6 @@ public class CheckboxTest extends TestBase {
 	}
 	
 	@Test
-	public void shouldAllowChainCallsWithAnd() {
-		Checkbox checkbox = this.page.getCheckbox();
-		assertEquals(checkbox, checkbox.and());
-	}
-	
-	@Test
 	public void shouldCheck() {
 		Checkbox checkbox = this.page.getCheckbox();
 		checkbox.check();
@@ -45,12 +37,6 @@ public class CheckboxTest extends TestBase {
 		boolean checkedConditionbeforeClick = checkbox.isChecked();
 		checkbox.click();
 		assertNotEquals(checkbox.isChecked(), checkedConditionbeforeClick);
-	}
-	
-	@Test
-	public void shouldGetAttribute() {
-		assertNotNull(this.page.getCheckbox().getAttribute("id"));
-		assertFalse(this.page.getCheckbox().getAttribute("id").isEmpty());
 	}
 	
 	@Test

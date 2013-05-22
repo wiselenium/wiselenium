@@ -1,36 +1,44 @@
 package org.wiselenium.core.pagefactory;
 
-import static org.mockito.Mockito.mock;
 import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
-import org.openqa.selenium.NoSuchElementException;
+import java.util.List;
+
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import org.wiselenium.core.TestBase;
-import org.wiselenium.core.element.field.Text;
 import org.wiselenium.core.element.field.impl.TextImpl;
 import org.wiselenium.core.pagefactory.dummy.DummyFieldWithoutNoArgConstructor;
 import org.wiselenium.core.pagefactory.dummy.DummyPage;
 
 @SuppressWarnings("javadoc")
-public class WiseFieldProxyTest extends TestBase {
+public class WiseElementListProxyTest extends TestBase {
 	
-	@Test(expectedExceptions = NoSuchElementException.class)
+	@Test(expectedExceptions = IndexOutOfBoundsException.class)
 	public void shouldPropagateOriginalExceptionFromProxy() {
-		Text proxy;
+		List<TextImpl> proxy;
 		try {
 			DummyPage page = initElements(this.driver, DummyPage.class);
-			WebElement webElement = page.getText();
-			proxy = WiseFieldProxy.getInstance(TextImpl.class, webElement);
+			List<WebElement> webElements = page.getRadiobuttons();
+			proxy = WiseElementListProxy.getInstance(TextImpl.class, webElements);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-		proxy.getId();
+		proxy.get(0);
 	}
 	
 	@Test(expectedExceptions = ClassWithoutNoArgConstructorException.class)
 	public void shouldThrowExceptionWhenProxyingClassWithoutNoArgConstructor() {
-		WiseFieldProxy.getInstance(DummyFieldWithoutNoArgConstructor.class, mock(WebElement.class));
+		List<DummyFieldWithoutNoArgConstructor> proxy;
+		try {
+			DummyPage page = initElements(this.driver, DummyPage.class).and().get();
+			List<WebElement> webElements = page.getRadiobuttons();
+			proxy = WiseElementListProxy.getInstance(DummyFieldWithoutNoArgConstructor.class,
+				webElements);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		proxy.get(0);
 	}
 	
 }

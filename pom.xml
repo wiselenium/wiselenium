@@ -3,7 +3,7 @@
 
   <groupId>org.wiselenium</groupId>
   <artifactId>wiselenium-bom</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>wiselenium</name>
@@ -22,8 +22,8 @@
   </developers>
   
   <properties>
-	<wiselenium-core.version>0.0.1-SNAPSHOT</wiselenium-core.version>
-	<wiselenium-testng.version>0.0.1-SNAPSHOT</wiselenium-testng.version>
+	<wiselenium-core.version>0.1.0-SNAPSHOT</wiselenium-core.version>
+	<wiselenium-testng.version>0.1.0-SNAPSHOT</wiselenium-testng.version>
   </properties>
   
   <modules>
@@ -54,6 +54,12 @@
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>6.8</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>1.9.5</version>
 		</dependency>
 	</dependencies>
   </dependencyManagement>

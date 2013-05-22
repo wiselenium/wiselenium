@@ -1,6 +1,5 @@
 package org.wiselenium.core.element.field;
 
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
@@ -21,12 +20,6 @@ public class RadiobuttonTest extends TestBase {
 		this.page = initElements(this.driver, RadiobuttonPage.class);
 		this.page.load();
 		this.page.isLoaded();
-	}
-	
-	@Test
-	public void shouldAllowChainCallsWithAnd() {
-		Radiobutton radiobutton = this.page.getRadiobutton();
-		assertEquals(radiobutton, radiobutton.and());
 	}
 	
 	@Test

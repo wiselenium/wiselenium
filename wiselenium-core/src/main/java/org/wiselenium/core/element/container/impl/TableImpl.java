@@ -33,12 +33,7 @@ public class TableImpl extends BasicContainer<Table> implements Table {
 	
 	@Override
 	public TableBody getBody() {
-		try {
-			unwrapWebElement(this.body).toString();
-			return this.body;
-		} catch (NoSuchElementException e) {
-			return null;
-		}
+		return this.body;
 	}
 	
 	@Override
@@ -53,6 +48,7 @@ public class TableImpl extends BasicContainer<Table> implements Table {
 	@Override
 	public TableFoot getFoot() {
 		try {
+			// as it's a proxy, call some method just to return null if couldn't be located
 			unwrapWebElement(this.foot).toString();
 			return this.foot;
 		} catch (NoSuchElementException e) {
@@ -63,6 +59,7 @@ public class TableImpl extends BasicContainer<Table> implements Table {
 	@Override
 	public TableHead getHead() {
 		try {
+			// as it's a proxy, call some method just to return null if couldn't be located
 			unwrapWebElement(this.head).toString();
 			return this.head;
 		} catch (NoSuchElementException e) {

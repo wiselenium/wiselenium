@@ -33,12 +33,6 @@ public class MultiSelectTest extends TestBase {
 	}
 	
 	@Test
-	public void shouldAllowChainCallsWithAnd() {
-		MultiSelect select = this.page.getMultiselect();
-		assertEquals(select, select.and());
-	}
-	
-	@Test
 	public void shouldDeselectByIndex() {
 		MultiSelect select = this.page.getMultiselect();
 		assertFalse(select.selectAll().and().getSelectedValues().isEmpty());

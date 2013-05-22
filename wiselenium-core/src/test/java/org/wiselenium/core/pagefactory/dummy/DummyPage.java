@@ -1,4 +1,4 @@
-package org.wiselenium.core.pagefactory;
+package org.wiselenium.core.pagefactory.dummy;
 
 import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.FileUtils.getAbsoluteFilePath;
@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.wiselenium.core.element.container.Select;
+import org.wiselenium.core.pagefactory.Page;
 
 @SuppressWarnings("javadoc")
 public class DummyPage extends Page<DummyPage> {

@@ -1,19 +1,19 @@
-package org.wiselenium.core.pagefactory;
+package org.wiselenium.core.pagefactory.dummy;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.wiselenium.core.element.field.DummyFieldWithEmptyConstructor;
+import org.wiselenium.core.element.field.Button;
 
 @SuppressWarnings("javadoc")
-public class DummyPageWithoutInheritanceAndWithEmptyConstructor {
+public class DummyPageWithNoArgConstructor {
 	
 	public static final String URL = "button.html";
 	
 	@FindBy(id = "button")
-	private DummyFieldWithEmptyConstructor dummy;
+	private Button dummy;
 	
 	
-	public DummyFieldWithEmptyConstructor getDummyField() {
+	public Button getDummyField() {
 		return this.dummy;
 	}
 	

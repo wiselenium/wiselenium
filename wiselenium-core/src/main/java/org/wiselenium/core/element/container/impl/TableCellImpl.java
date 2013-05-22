@@ -16,14 +16,14 @@ public class TableCellImpl extends BasicContainer<TableCell> implements TableCel
 	@Override
 	public int getColSpan() {
 		String colspan = this.getAttribute("colspan");
-		if (colspan == null || colspan.isEmpty()) return 1;
+		if (colspan == null) return 1;
 		return valueOf(colspan);
 	}
 	
 	@Override
 	public int getRowSpan() {
 		String rowspan = this.getAttribute("rowspan");
-		if (rowspan == null || rowspan.isEmpty()) return 1;
+		if (rowspan == null) return 1;
 		return valueOf(rowspan);
 	}
 	

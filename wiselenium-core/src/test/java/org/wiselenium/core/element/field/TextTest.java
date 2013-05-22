@@ -2,7 +2,6 @@ package org.wiselenium.core.element.field;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.element.field.TextPage.HIDDEN_TEXT_VALUE;
@@ -27,12 +26,6 @@ public class TextTest extends TestBase {
 	}
 	
 	@Test
-	public void shouldAllowChainCallsWithAnd() {
-		Text text = this.page.getText();
-		assertEquals(text, text.and());
-	}
-	
-	@Test
 	public void shouldClear() {
 		String keysToSend = "test";
 		assertTrue(this.page.getText().sendKeys(keysToSend).and().clear().and().getValue()
@@ -43,24 +36,6 @@ public class TextTest extends TestBase {
 	public void shouldClick() {
 		this.page.getText().click();
 		assertEquals(this.page.getMessage(), TEXT_CLICKED_MESSAGE);
-	}
-	
-	@Test
-	public void shouldGetAttribute() {
-		assertNotNull(this.page.getText().getAttribute("id"));
-		assertNotNull(this.page.getHiddenText().getAttribute("id"));
-	}
-	
-	@Test
-	public void shouldGetCssValue() {
-		assertTrue(this.page.getText().getCssValue("inexistent").isEmpty());
-		assertNotNull(this.page.getHiddenText().getCssValue("visibility"));
-	}
-	
-	@Test
-	public void shouldGetDisplayCondition() {
-		assertTrue(this.page.getText().isDisplayed());
-		assertFalse(this.page.getHiddenText().isDisplayed());
 	}
 	
 	@Test

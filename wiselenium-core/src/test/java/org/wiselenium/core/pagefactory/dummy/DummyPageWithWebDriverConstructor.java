@@ -1,12 +1,12 @@
-package org.wiselenium.core.pagefactory;
+package org.wiselenium.core.pagefactory.dummy;
 
 import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.FileUtils.getAbsoluteFilePath;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.wiselenium.core.element.field.DummyFieldWithWebElementConstructor;
+import org.wiselenium.core.element.field.Button;
+import org.wiselenium.core.pagefactory.Page;
 
 @SuppressWarnings("javadoc")
 public class DummyPageWithWebDriverConstructor extends Page<DummyPageWithWebDriverConstructor> {
@@ -14,15 +14,15 @@ public class DummyPageWithWebDriverConstructor extends Page<DummyPageWithWebDriv
 	public static final String URL = "button.html";
 	
 	@FindBy(id = "button")
-	private DummyFieldWithWebElementConstructor dummy;
+	private Button dummy;
 	
 	
 	public DummyPageWithWebDriverConstructor(WebDriver driver) {
 		super(driver);
 	}
 	
-	public WebElement getDummyElementWebElement() {
-		return this.dummy.getWrappedElement();
+	public Button getDummyElement() {
+		return this.dummy;
 	}
 	
 	@Override

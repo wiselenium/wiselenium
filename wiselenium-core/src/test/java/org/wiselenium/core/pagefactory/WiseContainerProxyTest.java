@@ -7,21 +7,21 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import org.wiselenium.core.TestBase;
-import org.wiselenium.core.element.field.Text;
-import org.wiselenium.core.element.field.impl.TextImpl;
+import org.wiselenium.core.element.container.Select;
+import org.wiselenium.core.element.container.impl.SelectImpl;
 import org.wiselenium.core.pagefactory.dummy.DummyFieldWithoutNoArgConstructor;
 import org.wiselenium.core.pagefactory.dummy.DummyPage;
 
 @SuppressWarnings("javadoc")
-public class WiseFieldProxyTest extends TestBase {
+public class WiseContainerProxyTest extends TestBase {
 	
 	@Test(expectedExceptions = NoSuchElementException.class)
 	public void shouldPropagateOriginalExceptionFromProxy() {
-		Text proxy;
+		Select proxy;
 		try {
 			DummyPage page = initElements(this.driver, DummyPage.class);
 			WebElement webElement = page.getText();
-			proxy = WiseFieldProxy.getInstance(TextImpl.class, webElement);
+			proxy = WiseContainerProxy.getInstance(SelectImpl.class, webElement);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -30,7 +30,8 @@ public class WiseFieldProxyTest extends TestBase {
 	
 	@Test(expectedExceptions = ClassWithoutNoArgConstructorException.class)
 	public void shouldThrowExceptionWhenProxyingClassWithoutNoArgConstructor() {
-		WiseFieldProxy.getInstance(DummyFieldWithoutNoArgConstructor.class, mock(WebElement.class));
+		WiseContainerProxy.getInstance(DummyFieldWithoutNoArgConstructor.class,
+			mock(WebElement.class));
 	}
 	
 }

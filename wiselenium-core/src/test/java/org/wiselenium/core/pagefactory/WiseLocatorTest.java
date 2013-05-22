@@ -3,11 +3,11 @@ package org.wiselenium.core.pagefactory;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.WiseUnwrapper.unwrapWebElement;
-import static org.wiselenium.core.pagefactory.DummyPage.BY_RADIOBUTTONS;
-import static org.wiselenium.core.pagefactory.DummyPage.BY_SELECT1;
 import static org.wiselenium.core.pagefactory.WiseLocator.findElement;
 import static org.wiselenium.core.pagefactory.WiseLocator.findElements;
 import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
+import static org.wiselenium.core.pagefactory.dummy.DummyPage.BY_RADIOBUTTONS;
+import static org.wiselenium.core.pagefactory.dummy.DummyPage.BY_SELECT1;
 
 import java.util.List;
 
@@ -18,6 +18,7 @@ import org.testng.annotations.Test;
 import org.wiselenium.core.TestBase;
 import org.wiselenium.core.element.container.Select;
 import org.wiselenium.core.element.field.Radiobutton;
+import org.wiselenium.core.pagefactory.dummy.DummyPage;
 
 @SuppressWarnings("javadoc")
 public class WiseLocatorTest extends TestBase {

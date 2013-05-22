@@ -15,56 +15,41 @@ import org.testng.annotations.Test;
 import org.wiselenium.core.TestBase;
 import org.wiselenium.core.element.container.Select;
 import org.wiselenium.core.element.field.Option;
+import org.wiselenium.core.element.field.TextPage;
+import org.wiselenium.core.pagefactory.dummy.DummyPage;
+import org.wiselenium.core.pagefactory.dummy.DummyPageWithFinalField;
+import org.wiselenium.core.pagefactory.dummy.DummyPageWithNoArgConstructor;
+import org.wiselenium.core.pagefactory.dummy.DummyPageWithWebDriverConstructor;
+import org.wiselenium.core.pagefactory.dummy.DummyPageWithoutProperConstructor;
 
 @SuppressWarnings("javadoc")
 public class WisePageFactoryTest extends TestBase {
 	
-	@Test(expectedExceptions = PageElementsInitializationException.class)
-	public void shouldFailWhileCreatingPage() {
-		this.driver.get(getAbsoluteFilePath(DummyPageWithFinalField.URL));
-		initElements(this.driver, DummyPageWithFinalField.class);
-	}
-	
-	@Test(expectedExceptions = ClassWithoutNoArgConstructorException.class)
-	public void shouldInitElementsInjectingThemThroughConstructor() {
-		// TODO review
-		this.driver
-			.get(getAbsoluteFilePath(DummyPageWithoutInheritanceAndWithWebDriverConstructor.URL));
-		
-		DummyPageWithoutInheritanceAndWithWebDriverConstructor page = initElements(this.driver,
-			DummyPageWithoutInheritanceAndWithWebDriverConstructor.class);
-		
-		assertNotNull(page.getWrappedDriver());
-		assertNotNull(page.getDummyElementWebElement());
-	}
-	
-	@Test(expectedExceptions = ClassWithoutNoArgConstructorException.class)
-	public void shouldInitElementsInjectingThemThroughSuperConstructor() {
-		// TODO review
-		DummyPageWithWebDriverConstructor page = initElements(this.driver,
-			DummyPageWithWebDriverConstructor.class);
-		
-		page.get();
-		assertNotNull(page.getWrappedDriver());
-		assertNotNull(page.getDummyElementWebElement());
-	}
-	
 	@Test
-	public void shouldInitElementsInjectingThemWithEmptyConstructor() {
-		this.driver
-			.get(getAbsoluteFilePath(DummyPageWithoutInheritanceAndWithEmptyConstructor.URL));
+	public void shouldCreatePageWithNoArgConstructorAndInitElements() {
+		this.driver.get(getAbsoluteFilePath(DummyPageWithNoArgConstructor.URL));
 		
-		DummyPageWithoutInheritanceAndWithEmptyConstructor page = initElements(this.driver,
-			DummyPageWithoutInheritanceAndWithEmptyConstructor.class);
+		DummyPageWithNoArgConstructor page = initElements(this.driver,
+			DummyPageWithNoArgConstructor.class);
 		
 		assertNotNull(unwrapWebDriver(page));
 		assertNotNull(page.getWrappedDriver());
 		assertNotNull(unwrapWebElement(page.getDummyField()));
-		assertNotNull(page.getDummyField().getWrappedElement());
 	}
 	
 	@Test
-	public void shouldInitElementsOfContainerLazily() {
+	public void shouldCreatePageWithWebDriverConstructorAndInitElements() {
+		DummyPageWithWebDriverConstructor page = initElements(this.driver,
+			DummyPageWithWebDriverConstructor.class).and().get();
+		
+		assertNotNull(unwrapWebDriver(page));
+		assertNotNull(page.getWrappedDriver());
+		assertNotNull(unwrapWebElement(page.getDummyElement()));
+	}
+	
+	@Test
+	public void shouldInitElementsLazily() {
+		this.driver.get(getAbsoluteFilePath(TextPage.URL));
 		DummyPage page = initElements(this.driver, DummyPage.class).and().get();
 		
 		Select select1 = page.getSelect1();
@@ -76,12 +61,12 @@ public class WisePageFactoryTest extends TestBase {
 			assertNotNull(option);
 	}
 	
-	@Test(expectedExceptions = ClassWithoutNoArgConstructorException.class)
+	@Test
 	public void shouldInitElementsOfInstance() {
-		// TODO review
 		DummyPageWithWebDriverConstructor page = new DummyPageWithWebDriverConstructor(this.driver);
 		initElements(this.driver, page);
-		assertNotNull(page.getDummyElementWebElement());
+		assertNotNull(page.getDummyElement());
+		assertNotNull(unwrapWebElement(page.getDummyElement()));
 	}
 	
 	@Test
@@ -91,6 +76,17 @@ public class WisePageFactoryTest extends TestBase {
 		assertNotNull(text);
 		List<WebElement> sexRadiobuttons = page.getRadiobuttons();
 		assertFalse(sexRadiobuttons.isEmpty());
+	}
+	
+	@Test(expectedExceptions = PageElementsInitializationException.class)
+	public void shouldThrowExceptionWhileCreatingPageWithFinalField() {
+		this.driver.get(getAbsoluteFilePath(DummyPageWithFinalField.URL));
+		initElements(this.driver, DummyPageWithFinalField.class);
+	}
+	
+	@Test(expectedExceptions = PageInstantiationException.class)
+	public void shouldThrowExceptionWhileInstantiatingPageWithoutProperConstructor() {
+		initElements(this.driver, DummyPageWithoutProperConstructor.class);
 	}
 	
 }

@@ -1,15 +1,12 @@
 package org.wiselenium.core.element.container;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.element.container.SelectPage.FIRST_OPTION_TEXT;
 import static org.wiselenium.core.element.container.SelectPage.FIRST_OPTION_VALUE;
 import static org.wiselenium.core.element.container.SelectPage.SECOND_OPTION_TEXT;
 import static org.wiselenium.core.element.container.SelectPage.SECOND_OPTION_VALUE;
-import static org.wiselenium.core.element.container.SelectPage.SELECT_CLASS;
-import static org.wiselenium.core.element.container.SelectPage.SELECT_TITLE;
 import static org.wiselenium.core.element.container.SelectPage.THIRD_OPTION_TEXT;
 import static org.wiselenium.core.element.container.SelectPage.THIRD_OPTION_VALUE;
 import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
@@ -35,37 +32,6 @@ public class SelectTest extends TestBase {
 	}
 	
 	@Test
-	public void shouldAllowChainCallsWithAnd() {
-		Select select = this.page.getSelect();
-		assertEquals(select, select.and());
-	}
-	
-	@Test
-	public void shouldGetAttribute() {
-		assertNotNull(this.page.getSelect().getAttribute("id"));
-		assertNotNull(this.page.getHiddenSelect().getAttribute("id"));
-		assertFalse(this.page.getSelect().getAttribute("id").isEmpty());
-	}
-	
-	@Test
-	public void shouldGetCssValue() {
-		assertTrue(this.page.getSelect().getCssValue("inexistent").isEmpty());
-		assertNotNull(this.page.getHiddenSelect().getCssValue("visibility"));
-	}
-	
-	@Test
-	public void shouldGetDisplayCondition() {
-		assertTrue(this.page.getSelect().isDisplayed());
-		assertFalse(this.page.getHiddenSelect().isDisplayed());
-	}
-	
-	@Test
-	public void shouldGetId() {
-		assertNotNull(this.page.getSelect().getId());
-		assertNotNull(this.page.getHiddenSelect().getId());
-	}
-	
-	@Test
 	public void shouldGetOptions() {
 		List<Option> options = this.page.getSelect().getOptions();
 		assertNotNull(options);
@@ -80,16 +46,6 @@ public class SelectTest extends TestBase {
 	@Test
 	public void shouldGetSelectedVisibleText() {
 		assertEquals(this.page.getSelect().getSelectedVisibleText(), FIRST_OPTION_TEXT);
-	}
-	
-	@Test
-	public void shouldGetStyleClass() {
-		assertEquals(this.page.getSelect().getStyleClass(), SELECT_CLASS);
-	}
-	
-	@Test
-	public void shouldGetTitle() {
-		assertEquals(this.page.getSelect().getTitle(), SELECT_TITLE);
 	}
 	
 	@SuppressWarnings("null")

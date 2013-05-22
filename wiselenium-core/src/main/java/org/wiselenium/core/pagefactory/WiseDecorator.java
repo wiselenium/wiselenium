@@ -36,9 +36,13 @@ public class WiseDecorator implements ExtendedSeleniumDecorator {
 	 * Decorates a webElement.
 	 * 
 	 * @param <E> The type of the decorated element.
-	 * @param clazz The class of the decorated element.
+	 * @param clazz The class of the decorated element. Must be either WebElement or a type
+	 * annotated with Field, Container or Frame. If the class is not concrete, will lookup for its
+	 * implementation matching the pattern classPackage.{impl}.className{Impl} yet. A more
+	 * sofisticated search is planned to be implemented on the future.
 	 * @param webElement The webElement that will be decorated.
-	 * @return The webElement decorated.
+	 * @return The webElement decorated or null if it shouldn't be decorated because the type didn't
+	 * respect the clazz parameter specification.
 	 * @since 0.0.1
 	 */
 	public static <E> E decorateElement(Class<E> clazz, WebElement webElement) {
@@ -50,7 +54,10 @@ public class WiseDecorator implements ExtendedSeleniumDecorator {
 	 * Decorates a list of webElements.
 	 * 
 	 * @param <E> The type of the decorated elements.
-	 * @param clazz The class of the decorated elements.
+	 * @param clazz The class of the decorated elements. Must be either WebElement or a type
+	 * annotated with Field, Container or Frame. If the class is not concrete, will lookup for its
+	 * implementation matching the pattern classPackage.{impl}.className{Impl} yet. A more
+	 * sofisticated search is planned to be implemented on the future.
 	 * @param webElements The webElements that will be decorated.
 	 * @return The webElements decorated.
 	 * @since 0.0.1

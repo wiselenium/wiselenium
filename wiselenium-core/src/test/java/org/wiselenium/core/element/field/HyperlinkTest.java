@@ -1,8 +1,6 @@
 package org.wiselenium.core.element.field;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.element.field.HyperlinkPage.HYPERLINK_CLICKED_MESSAGE;
 import static org.wiselenium.core.element.field.HyperlinkPage.HYPERLINK_HREF;
@@ -28,33 +26,9 @@ public class HyperlinkTest extends TestBase {
 	}
 	
 	@Test
-	public void shouldAllowChainCallsWithAnd() {
-		Hyperlink hyperlink = this.page.getHyperlink();
-		assertEquals(hyperlink, hyperlink.and());
-	}
-	
-	@Test
 	public void shouldClick() {
 		this.page.getHyperlink().click();
 		assertEquals(this.page.getMessage(), HYPERLINK_CLICKED_MESSAGE);
-	}
-	
-	@Test
-	public void shouldGetAttribute() {
-		assertNotNull(this.page.getHyperlink().getAttribute("id"));
-		assertNotNull(this.page.getHiddenHyperlink().getAttribute("id"));
-	}
-	
-	@Test
-	public void shouldGetCssValue() {
-		assertTrue(this.page.getHyperlink().getCssValue("inexistent").isEmpty());
-		assertNotNull(this.page.getHiddenHyperlink().getCssValue("visibility"));
-	}
-	
-	@Test
-	public void shouldGetDisplayCondition() {
-		assertTrue(this.page.getHyperlink().isDisplayed());
-		assertFalse(this.page.getHiddenHyperlink().isDisplayed());
 	}
 	
 	@Test

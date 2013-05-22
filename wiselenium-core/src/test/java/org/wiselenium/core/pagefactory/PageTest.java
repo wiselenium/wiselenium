@@ -11,6 +11,7 @@ import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -68,42 +69,42 @@ public class PageTest extends TestBase {
 	}
 	
 	@Test
-	public void shouldReturnCorrectContainerListOnFindElements() {
+	public void shouldReturnContainerListOnFindElements() {
 		List<Select> selects = this.page.findElements(Select.class, By.name("select"));
 		assertNotNull(selects);
 		assertFalse(selects.isEmpty());
 	}
 	
 	@Test
-	public void shouldReturnCorrectFieldListOnFindElements() {
-		List<Radiobutton> radiobuttons = this.page.findElements(Radiobutton.class, By.name("sex"));
-		assertNotNull(radiobuttons);
-		assertFalse(radiobuttons.isEmpty());
-	}
-	
-	@Test
-	public void shouldReturnCorrectFieldOnFindElement() {
-		// if the class is generic typed, the cast is unnecessary
-		Text text = (Text) this.page.findElement(Text.class, By.id("text"));
-		assertNotNull(text);
-	}
-	
-	@Test
-	public void shouldReturnEmptyContainerListOnFindElements() {
+	public void shouldReturnEmptyContainerListOnElementsNotFound() {
 		List selects = this.page.findElements(Object.class, By.name("select"));
 		assertNotNull(selects);
 		assertTrue(selects.isEmpty());
 	}
 	
 	@Test
-	public void shouldReturnEmptyFieldListOnFindElements() {
+	public void shouldReturnEmptyFieldListOnElementsNotFound() {
 		List radiobuttons = this.page.findElements(Object.class, By.name("sex"));
 		assertNotNull(radiobuttons);
 		assertTrue(radiobuttons.isEmpty());
 	}
 	
 	@Test
-	public void shouldReturnNullFieldOnFindElement() {
+	public void shouldReturnFieldListOnFindElements() {
+		List<Radiobutton> radiobuttons = this.page.findElements(Radiobutton.class, By.name("sex"));
+		assertNotNull(radiobuttons);
+		assertFalse(radiobuttons.isEmpty());
+	}
+	
+	@Test
+	public void shouldReturnFieldOnFindElement() {
+		// if the class is generic typed, the cast is unnecessary
+		Text text = (Text) this.page.findElement(Text.class, By.id("text"));
+		assertNotNull(text);
+	}
+	
+	@Test
+	public void shouldReturnNullFieldOnFindElementWithAnInvalidType() {
 		assertNull(this.page.findElement(Object.class, By.id("text")));
 	}
 	
@@ -117,6 +118,11 @@ public class PageTest extends TestBase {
 	@Test
 	public void shouldReturnWebElementOnFindElement() {
 		assertNotNull(this.page.findElement(WebElement.class, By.id("text")));
+	}
+	
+	@Test(expectedExceptions = NoSuchElementException.class)
+	public void shouldThrowExceptionWhenElementIsNotFound() {
+		this.page.findElement(WebElement.class, By.id("inexistent"));
 	}
 	
 }

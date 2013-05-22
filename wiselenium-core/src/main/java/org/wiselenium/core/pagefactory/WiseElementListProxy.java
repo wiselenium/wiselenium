@@ -1,5 +1,6 @@
 package org.wiselenium.core.pagefactory;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 
@@ -40,8 +41,12 @@ final class WiseElementListProxy<E> implements MethodInterceptor {
 	public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
 		throws Throwable { // NOSONAR because it's an overridden method
 	
-		this.initElements();
-		return method.invoke(this.elements, args);
+		try {
+			this.initElements();
+			return method.invoke(this.elements, args);
+		} catch (InvocationTargetException e) {
+			throw e.getCause();
+		}
 	}
 	
 	private synchronized void initElements() {
