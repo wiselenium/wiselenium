@@ -15,7 +15,6 @@ import org.openqa.selenium.WebElement;
  */
 final class WiseFieldProxy implements MethodInterceptor {
 	
-	private static final String GET_WRAPPED_ELEMENT = "getWrappedElement";
 	private final WebElement wrappedElement;
 	
 	
@@ -28,7 +27,8 @@ final class WiseFieldProxy implements MethodInterceptor {
 	}
 	
 	private static boolean isGetWrappedElement(Method method) {
-		return GET_WRAPPED_ELEMENT.equals(method.getName());
+		return "getWrappedElement".equals(method.getName())
+			&& method.getReturnType() == WebElement.class && method.getParameterTypes().length == 0;
 	}
 	
 	@Override

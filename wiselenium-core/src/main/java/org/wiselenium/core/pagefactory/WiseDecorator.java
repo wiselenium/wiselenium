@@ -23,13 +23,12 @@ public class WiseDecorator implements ExtendedSeleniumDecorator {
 	 * @param factory The factory of the locator of the elements.
 	 */
 	public WiseDecorator(ElementLocatorFactory factory) {
-		WiseFieldDecoratorChain wiseFieldDecorator = new WiseFieldDecoratorChain(factory);
-		WiseContainerDecoratorChain wiseContainerDecorator = new WiseContainerDecoratorChain(
+		ExtendedSeleniumDecoratorChain extendedDefaultSeleniumDecorator = new DefaultExtendedSeleniumDecoratorChain(
 			factory);
-		ExtendedDefaultSeleniumDecoratorChain extendedDefaultFieldDecorator = new ExtendedDefaultSeleniumDecoratorChain(
-			factory);
-		wiseFieldDecorator.setNext(wiseContainerDecorator);
-		wiseContainerDecorator.setNext(extendedDefaultFieldDecorator);
+		ExtendedSeleniumDecoratorChain wiseContainerDecorator = new WiseContainerDecoratorChain(
+			factory).setNext(extendedDefaultSeleniumDecorator);
+		ExtendedSeleniumDecoratorChain wiseFieldDecorator = new WiseFieldDecoratorChain(factory)
+			.setNext(wiseContainerDecorator);
 		
 		this.decoratorChain = wiseFieldDecorator;
 	}
@@ -58,6 +57,7 @@ public class WiseDecorator implements ExtendedSeleniumDecorator {
 	 * @since 0.0.1
 	 */
 	public static <E> List<E> decorateElements(Class<E> clazz, List<WebElement> webElements) {
+		// FIXME decorateElements
 		List<E> decoratedElements = Lists.newArrayList();
 		for (WebElement webElement : webElements)
 			decoratedElements.add(decorateElement(clazz, webElement));

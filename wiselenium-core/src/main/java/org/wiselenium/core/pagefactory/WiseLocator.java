@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
+import org.testng.collections.Lists;
 
 /**
  * Utility class to find elements.
@@ -21,7 +22,7 @@ public final class WiseLocator {
 	 * Finds the first element within the search context using the given mechanism.
 	 * 
 	 * @param <E> The type of the element.
-	 * @param clazz The class of the element. Must be either a WebElement or a type annotated with
+	 * @param clazz The class of the element. Must be either WebElement or a type annotated with
 	 * Field, Container or Frame.
 	 * @param by The locating mechanism to use.
 	 * @param searchContext The search context of the element.
@@ -38,7 +39,7 @@ public final class WiseLocator {
 	 * Finds all elements within the search context using the given mechanism.
 	 * 
 	 * @param <E> The type of the element.
-	 * @param clazz The class of the element. Must be either a WebElement or a type annotated with
+	 * @param clazz The class of the element. Must be either WebElement or a type annotated with
 	 * Field, Container or Frame.
 	 * @param by The locating mechanism to use.
 	 * @param searchContext The search context of the element.
@@ -48,6 +49,7 @@ public final class WiseLocator {
 	 */
 	public static <E> List<E> findElements(Class<E> clazz, By by, SearchContext searchContext) {
 		List<WebElement> webElements = searchContext.findElements(by);
+		if (webElements.isEmpty()) return Lists.newArrayList();
 		return getWiseDecorator(searchContext).decorate(clazz, webElements);
 	}
 	

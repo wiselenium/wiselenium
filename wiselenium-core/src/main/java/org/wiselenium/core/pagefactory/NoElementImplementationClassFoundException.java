@@ -9,7 +9,7 @@ import org.wiselenium.core.WiseException;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-class NoElementImplementationFoundException extends WiseException {
+class NoElementImplementationClassFoundException extends WiseException {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -18,11 +18,11 @@ class NoElementImplementationFoundException extends WiseException {
 	 * @param clazz The class whose implementation couldn't be found.
 	 * @param t The cause of the exception.
 	 */
-	public NoElementImplementationFoundException(Class<?> clazz, Throwable t) {
+	public NoElementImplementationClassFoundException(Class<?> clazz, Throwable t) {
 		super(
 			"Couldn't find an implementation for the class: "
 				+ clazz.getName()
-				+ " . For now, it must match the pattern classPackage.{impl}.className{Impl} , but more a sofisticated implentation search is planned for the future.",
+				+ " . For now, it must match the pattern classPackage.{impl}.className{Impl} , but more a sofisticated implementation search is planned for the future.",
 			t);
 	}
 	

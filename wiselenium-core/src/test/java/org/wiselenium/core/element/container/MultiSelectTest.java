@@ -20,7 +20,7 @@ import org.wiselenium.core.TestBase;
 import org.wiselenium.core.element.field.Option;
 
 @SuppressWarnings("javadoc")
-public class MultiselectTest extends TestBase {
+public class MultiSelectTest extends TestBase {
 	
 	SelectPage page;
 	

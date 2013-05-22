@@ -13,22 +13,13 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.testng.collections.Lists;
 
-/**
- * Extended default decorator for use with WisePageFactory. Will decorate 1) all of the WebElement
- * fields and 2) List<WebElement> fields and 3) Types annotated with Field, Container or Frame that
- * have @FindBy or @FindBys annotation with a proxy that locates the elements using the passed in
- * ElementLocatorFactory.
- * 
- * @author Andre Ricardo Schaffer
- * @since 0.0.1
- */
-class ExtendedDefaultSeleniumDecoratorChain extends DefaultFieldDecorator implements
+abstract class ExtendedSeleniumDecoratorChainTemplate extends DefaultFieldDecorator implements
 	ExtendedSeleniumDecoratorChain {
 	
 	private ExtendedSeleniumDecorator nextDecoratorInChain;
 	
 	
-	ExtendedDefaultSeleniumDecoratorChain(ElementLocatorFactory factory) {
+	ExtendedSeleniumDecoratorChainTemplate(ElementLocatorFactory factory) {
 		super(factory);
 	}
 	
@@ -60,43 +51,42 @@ class ExtendedDefaultSeleniumDecoratorChain extends DefaultFieldDecorator implem
 		return this;
 	}
 	
-	protected <E> List<E> callNextDecorator(Class<E> clazz, List<WebElement> webElements) {
+	protected abstract <E> E decorateWebElement(Class<E> clazz, WebElement webElement);
+	
+	protected abstract <E> List<E> decorateWebElements(Class<E> clazz, List<WebElement> webElements);
+	
+	protected abstract <E> boolean shouldDecorate(Class<E> clazz);
+	
+	private <E> List<E> callNextDecorator(Class<E> clazz, List<WebElement> webElements) {
 		if (this.nextDecoratorInChain != null)
 			return this.nextDecoratorInChain.decorate(clazz, webElements);
 		return Lists.newArrayList();
 	}
 	
-	protected <E> E callNextDecorator(Class<E> clazz, WebElement webElement) {
+	private <E> E callNextDecorator(Class<E> clazz, WebElement webElement) {
 		if (this.nextDecoratorInChain != null)
 			return this.nextDecoratorInChain.decorate(clazz, webElement);
 		return null;
 	}
 	
-	protected Object callNextDecorator(ClassLoader loader, Field field) {
+	private Object callNextDecorator(ClassLoader loader, Field field) {
 		if (this.nextDecoratorInChain != null)
 			return this.nextDecoratorInChain.decorate(loader, field);
 		return null;
 	}
 	
-	protected Object decorateField(ClassLoader loader, Field field, ElementLocator locator) {
-		if (this.isDecoratableList(field)) return this.proxyForListLocator(loader, locator);
-		return this.proxyForLocator(loader, locator);
+	private Object decorateField(ClassLoader loader, Field field, ElementLocator locator) {
+		if (this.isDecoratableList(field)) {
+			List<WebElement> webElements = this.proxyForListLocator(loader, locator);
+			Class<?> listType = (Class<?>) ((ParameterizedType) field.getGenericType())
+				.getActualTypeArguments()[0];
+			return this.decorate(listType, webElements);
+		}
+		WebElement webElement = this.proxyForLocator(loader, locator);
+		return this.decorate(field.getType(), webElement);
 	}
 	
-	@SuppressWarnings("unchecked")
-	protected <E> E decorateWebElement(@SuppressWarnings("unused") Class<E> clazz,
-		WebElement webElement) {
-		return (E) webElement;
-	}
-	
-	protected <E> List<E> decorateWebElements(Class<E> clazz, List<WebElement> webElements) {
-		List<E> elements = Lists.newArrayList();
-		for (WebElement webElement : webElements)
-			elements.add(this.decorateWebElement(clazz, webElement));
-		return elements;
-	}
-	
-	protected boolean isDecoratableList(Field field) {
+	private boolean isDecoratableList(Field field) {
 		if (!List.class.isAssignableFrom(field.getType())) return false;
 		
 		// Type erasure in Java isn't complete. Attempt to discover the generic type of the list.
@@ -113,12 +103,7 @@ class ExtendedDefaultSeleniumDecoratorChain extends DefaultFieldDecorator implem
 		return true;
 	}
 	
-	protected boolean shouldDecorate(Class<?> clazz) {
-		if (WebElement.class.isAssignableFrom(clazz)) return true;
-		return false;
-	}
-	
-	protected boolean shouldDecorate(Field field) {
+	private boolean shouldDecorate(Field field) {
 		if (this.shouldDecorate(field.getType()) || this.isDecoratableList(field)) return true;
 		return false;
 	}

@@ -36,7 +36,7 @@ final class ClasspathUtils {
 		try {
 			return (Class<? extends T>) Class.forName(implementationClass.toString());
 		} catch (ClassNotFoundException e) {
-			throw new NoElementImplementationFoundException(clazz, e);
+			throw new NoElementImplementationClassFoundException(clazz, e);
 		}
 	}
 	

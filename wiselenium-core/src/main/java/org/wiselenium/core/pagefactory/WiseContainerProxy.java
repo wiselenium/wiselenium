@@ -18,9 +18,8 @@ import org.openqa.selenium.WebElement;
  */
 final class WiseContainerProxy implements MethodInterceptor {
 	
-	private static final String GET_WRAPPED_ELEMENT = "getWrappedElement";
 	private final WebElement wrappedElement;
-	private boolean initializedInnerElements;
+	private boolean initializedElements;
 	
 	
 	private WiseContainerProxy(WebElement element) {
@@ -32,23 +31,24 @@ final class WiseContainerProxy implements MethodInterceptor {
 	}
 	
 	private static boolean isGetWrappedElement(Method method) {
-		return GET_WRAPPED_ELEMENT.equals(method.getName());
+		return "getWrappedElement".equals(method.getName())
+			&& method.getReturnType() == WebElement.class && method.getParameterTypes().length == 0;
 	}
 	
 	@Override
 	public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
 		throws Throwable { // NOSONAR because it's an overridden method
 	
-		this.initializeInnerElements(obj);
+		this.initializeElements(obj);
 		if (isGetWrappedElement(method)) return this.wrappedElement;
 		return proxy.invokeSuper(obj, args);
 	}
 	
-	private synchronized void initializeInnerElements(Object obj) {
-		if (!this.initializedInnerElements) try {
+	private synchronized void initializeElements(Object obj) {
+		if (!this.initializedElements) try {
 			this.wrappedElement.toString();
 			initElements(this.wrappedElement, obj);
-			this.initializedInnerElements = true;
+			this.initializedElements = true;
 		} catch (NoSuchElementException e) {}
 	}
 	

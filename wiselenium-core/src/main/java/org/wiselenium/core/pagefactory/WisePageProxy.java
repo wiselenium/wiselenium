@@ -15,7 +15,6 @@ import org.openqa.selenium.WebDriver;
  */
 final class WisePageProxy implements MethodInterceptor {
 	
-	private static final String GET_WRAPPED_DRIVER = "getWrappedDriver";
 	private final WebDriver wrappedDriver;
 	
 	
@@ -28,7 +27,8 @@ final class WisePageProxy implements MethodInterceptor {
 	}
 	
 	private static boolean isGetWrappedDriver(Method method) {
-		return GET_WRAPPED_DRIVER.equals(method.getName());
+		return "getWrappedDriver".equals(method.getName())
+			&& method.getReturnType() == WebDriver.class && method.getParameterTypes().length == 0;
 	}
 	
 	@Override

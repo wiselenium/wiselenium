@@ -9,8 +9,12 @@ import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.support.ui.LoadableComponent;
 
 /**
- * Basic implementation of a common Page. <br/>
- * Should be extended to reflect your own page services.
+ * Basic implementation of a common Page. Should be extended to reflect your own page services. <br/>
+ * It extends {@link LoadableComponent}, so you can easily take advantage of its loading facilities
+ * just by overriding the empty load() and isLoaded() methods. <br/>
+ * It has a constructor that takes a WebDriver as only argument and another no-arg constructor,
+ * allowing you to extend and initialize it with the WisePageFactory with either constructor you
+ * prefer.
  * 
  * @author Andre Ricardo Schaffer
  * @param <T> The page type.

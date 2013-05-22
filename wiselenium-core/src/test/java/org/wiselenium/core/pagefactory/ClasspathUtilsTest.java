@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 @SuppressWarnings("javadoc")
 public class ClasspathUtilsTest {
 	
-	@Test(expectedExceptions = NoElementImplementationFoundException.class)
+	@Test(expectedExceptions = NoElementImplementationClassFoundException.class)
 	public void shouldThrowExceptionWhenNoImplementationIsFound() {
 		findImplementationClass(List.class);
 	}

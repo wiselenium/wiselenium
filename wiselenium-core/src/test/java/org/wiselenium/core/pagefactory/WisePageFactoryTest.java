@@ -25,8 +25,9 @@ public class WisePageFactoryTest extends TestBase {
 		initElements(this.driver, DummyPageWithFinalField.class);
 	}
 	
-	@Test
+	@Test(expectedExceptions = ClassWithoutNoArgConstructorException.class)
 	public void shouldInitElementsInjectingThemThroughConstructor() {
+		// TODO review
 		this.driver
 			.get(getAbsoluteFilePath(DummyPageWithoutInheritanceAndWithWebDriverConstructor.URL));
 		
@@ -37,8 +38,9 @@ public class WisePageFactoryTest extends TestBase {
 		assertNotNull(page.getDummyElementWebElement());
 	}
 	
-	@Test
+	@Test(expectedExceptions = ClassWithoutNoArgConstructorException.class)
 	public void shouldInitElementsInjectingThemThroughSuperConstructor() {
+		// TODO review
 		DummyPageWithWebDriverConstructor page = initElements(this.driver,
 			DummyPageWithWebDriverConstructor.class);
 		
@@ -74,8 +76,9 @@ public class WisePageFactoryTest extends TestBase {
 			assertNotNull(option);
 	}
 	
-	@Test
+	@Test(expectedExceptions = ClassWithoutNoArgConstructorException.class)
 	public void shouldInitElementsOfInstance() {
+		// TODO review
 		DummyPageWithWebDriverConstructor page = new DummyPageWithWebDriverConstructor(this.driver);
 		initElements(this.driver, page);
 		assertNotNull(page.getDummyElementWebElement());

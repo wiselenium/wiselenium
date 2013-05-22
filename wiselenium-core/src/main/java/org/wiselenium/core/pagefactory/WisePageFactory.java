@@ -8,7 +8,6 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
-import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
 /**
@@ -22,8 +21,8 @@ public final class WisePageFactory {
 	private WisePageFactory() {}
 	
 	/**
-	 * As {@link #initElements(WebDriver, Class)} but will only replace the fields of an already
-	 * instantiated Page Object.
+	 * As {@link #initElements(WebDriver, Class)} but will only replace the element fields of an
+	 * already instantiated Page Object.
 	 * 
 	 * @param <T> The type of the instance.
 	 * @param searchContext The context that will be used to look up the elements.
@@ -32,15 +31,21 @@ public final class WisePageFactory {
 	 * @since 0.0.1
 	 */
 	public static <T> T initElements(SearchContext searchContext, T instance) {
-		ElementLocatorFactory locatorFactory = new DefaultElementLocatorFactory(searchContext);
-		WiseDecorator decorator = new WiseDecorator(locatorFactory);
+		WiseDecorator decorator = new WiseDecorator(new DefaultElementLocatorFactory(searchContext));
 		return initElements(decorator, instance);
 	}
 	
 	/**
-	 * Instantiate an instance of the given class, and set a lazy proxy for each of its elements. <br/>
+	 * Instantiates an instance of the given class, and set a lazy proxy for each of its element
+	 * fields (WebElement, List&ltWebElement&gt or any type annotated with Field, Container or
+	 * Frame). <br/>
 	 * It assumes the element field name as the HTML element's "id" or "name". To change how the
-	 * element is located, use the FindBy annotation.
+	 * element is located, use the FindBy annotation. <br/>
+	 * This method will attempt to instantiate the class given to it, using either a constructor
+	 * which takes a WebDriver instance as its only argument or falling back on a no-arg
+	 * constructor. An exception will be thrown if the class cannot be instantiated. <br/>
+	 * In case the no-arg constructor is used, the page itself is proxied to wrap the WebDriver,
+	 * which can be unwrapped using the WiseUnrwapper.
 	 * 
 	 * @param <T> The class type that will be initialized.
 	 * @param driver The driver that will be used to look up the elements of the object.
@@ -49,37 +54,8 @@ public final class WisePageFactory {
 	 * @since 0.0.1
 	 */
 	public static <T> T initElements(WebDriver driver, Class<T> clazz) {
-		T instance;
-		try {
-			instance = createInstanceWithWebDriverConstructor(driver, clazz);
-		} catch (ClassWithoutConstructorWithWebDriverException e) {
-			instance = createInstanceWithEmptyConstructor(driver, clazz);
-		}
-		
+		T instance = instantiatePage(driver, clazz);
 		return initElements(driver, instance);
-	}
-	
-	private static <T> Enhancer createEnhancerOfInstance(WebDriver driver, Class<T> clazz) {
-		Enhancer e = new Enhancer();
-		e.setSuperclass(clazz);
-		e.setInterfaces(new Class[] { WrapsDriver.class });
-		e.setCallback(WisePageProxy.getInstance(driver));
-		
-		return e;
-	}
-	
-	@SuppressWarnings("unchecked")
-	private static <T> T createInstanceWithEmptyConstructor(WebDriver driver, Class<T> clazz) {
-		Enhancer e = createEnhancerOfInstance(driver, clazz);
-		return (T) e.create();
-	}
-	
-	private static <T> T createInstanceWithWebDriverConstructor(WebDriver driver, Class<T> clazz) {
-		try {
-			return clazz.getConstructor(WebDriver.class).newInstance(driver);
-		} catch (Exception e) {
-			throw new ClassWithoutConstructorWithWebDriverException(e);
-		}
 	}
 	
 	private static <T> T initElements(FieldDecorator decorator, T instance) {
@@ -90,6 +66,33 @@ public final class WisePageFactory {
 		}
 		
 		return instance;
+	}
+	
+	private static <T> T instantiatePage(WebDriver driver, Class<T> clazz) {
+		T instance;
+		try {
+			instance = instantiatePageWithWebDriverConstructor(driver, clazz);
+		} catch (ClassWithoutConstructorThatTakesWebDriverException e) {
+			instance = instantiatePageWithEmptyConstructor(driver, clazz);
+		}
+		return instance;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private static <T> T instantiatePageWithEmptyConstructor(WebDriver driver, Class<T> clazz) {
+		Enhancer e = new Enhancer();
+		e.setSuperclass(clazz);
+		e.setInterfaces(new Class[] { WrapsDriver.class });
+		e.setCallback(WisePageProxy.getInstance(driver));
+		return (T) e.create();
+	}
+	
+	private static <T> T instantiatePageWithWebDriverConstructor(WebDriver driver, Class<T> clazz) {
+		try {
+			return clazz.getConstructor(WebDriver.class).newInstance(driver);
+		} catch (Exception e) {
+			throw new ClassWithoutConstructorThatTakesWebDriverException(clazz, e);
+		}
 	}
 	
 	private static void proxyElements(FieldDecorator decorator, Object instance,
