@@ -7,17 +7,17 @@ import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.wiselenium.core.TestBase;
+import org.wiselenium.core.test.WiseTestNG;
 
 @SuppressWarnings("javadoc")
-public class RadiobuttonTest extends TestBase {
+public class RadiobuttonTest extends WiseTestNG<RadiobuttonTest> {
 	
 	RadiobuttonPage page;
 	
 	
 	@BeforeMethod
 	public void initPage() {
-		this.page = initElements(this.driver, RadiobuttonPage.class);
+		this.page = initElements(this.getDriver(), RadiobuttonPage.class);
 		this.page.load();
 		this.page.isLoaded();
 	}

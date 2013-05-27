@@ -11,17 +11,17 @@ import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.wiselenium.core.TestBase;
+import org.wiselenium.core.test.WiseTestNG;
 
 @SuppressWarnings("javadoc")
-public class HyperlinkTest extends TestBase {
+public class HyperlinkTest extends WiseTestNG<HyperlinkTest> {
 	
 	HyperlinkPage page;
 	
 	
 	@BeforeMethod
 	public void initPage() {
-		this.page = initElements(this.driver, HyperlinkPage.class);
+		this.page = initElements(this.getDriver(), HyperlinkPage.class);
 		this.page.get();
 	}
 	

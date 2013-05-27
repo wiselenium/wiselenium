@@ -1,7 +1,7 @@
 package org.wiselenium.core.pagefactory;
 
+import static org.wiselenium.core.ClasspathUtils.findImplementationClass;
 import static org.wiselenium.core.pagefactory.AnnotationUtils.isAnnotationPresent;
-import static org.wiselenium.core.pagefactory.ClasspathUtils.findImplementationClass;
 
 import java.util.List;
 

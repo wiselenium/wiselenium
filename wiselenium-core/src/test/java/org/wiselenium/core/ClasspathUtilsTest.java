@@ -1,7 +1,7 @@
-package org.wiselenium.core.pagefactory;
+package org.wiselenium.core;
 
 import static org.testng.Assert.assertEquals;
-import static org.wiselenium.core.pagefactory.ClasspathUtils.findImplementationClass;
+import static org.wiselenium.core.ClasspathUtils.findImplementationClass;
 
 import java.util.List;
 

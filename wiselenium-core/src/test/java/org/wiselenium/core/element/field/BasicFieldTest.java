@@ -5,21 +5,22 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.element.field.ButtonPage.BUTTON_CLICKED_MESSAGE;
+import static org.wiselenium.core.element.field.ButtonPage.BUTTON_DOUBLE_CLICKED_MESSAGE;
 import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.wiselenium.core.TestBase;
+import org.wiselenium.core.test.WiseTestNG;
 
 @SuppressWarnings("javadoc")
-public class BasicFieldTest extends TestBase {
+public class BasicFieldTest extends WiseTestNG<BasicFieldTest> {
 	
 	ButtonPage page;
 	
 	
 	@BeforeMethod
 	public void initPage() {
-		this.page = initElements(this.driver, ButtonPage.class);
+		this.page = initElements(this.getDriver(), ButtonPage.class);
 		this.page.get();
 	}
 	
@@ -33,6 +34,12 @@ public class BasicFieldTest extends TestBase {
 	public void shouldClick() {
 		this.page.getButton().click();
 		assertEquals(this.page.getMessage(), BUTTON_CLICKED_MESSAGE);
+	}
+	
+	@Test
+	public void shouldDoubleClick() {
+		this.page.getButton().doubleClick();
+		assertEquals(this.page.getMessage(), BUTTON_DOUBLE_CLICKED_MESSAGE);
 	}
 	
 	@Test

@@ -1,7 +1,6 @@
 package org.wiselenium.core.element.field;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.FileUtils.getAbsoluteFilePath;
 
 import org.openqa.selenium.WebElement;
@@ -13,7 +12,7 @@ public class LabelPage extends Page<LabelPage> {
 	public static final String LABEL_CLICKED_MESSAGE = "label clicked";
 	public static final String LABEL_FOR = "text";
 	public static final String LABEL_TEXT = "label text";
-	public static final String URL = "label.html";
+	public static final String URL = getAbsoluteFilePath("label.html");
 	public static final String TITLE = "page for label tests";
 	
 	private Label label;
@@ -36,12 +35,12 @@ public class LabelPage extends Page<LabelPage> {
 	@Override
 	protected void isLoaded() {
 		assertEquals(this.getTitle(), TITLE);
-		assertTrue(this.getWrappedDriver().getCurrentUrl().endsWith(URL));
+		assertEquals(this.getWrappedDriver().getCurrentUrl(), URL);
 	}
 	
 	@Override
 	protected void load() {
-		this.get(getAbsoluteFilePath(URL));
+		this.get(URL);
 	}
 	
 }

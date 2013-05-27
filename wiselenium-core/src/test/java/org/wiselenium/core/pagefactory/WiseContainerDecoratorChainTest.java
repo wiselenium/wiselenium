@@ -8,13 +8,13 @@ import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wiselenium.core.TestBase;
 import org.wiselenium.core.element.container.Select;
 import org.wiselenium.core.element.field.Text;
 import org.wiselenium.core.pagefactory.dummy.DummyPage;
+import org.wiselenium.core.test.WiseTestNG;
 
 @SuppressWarnings("javadoc")
-public class WiseContainerDecoratorChainTest extends TestBase {
+public class WiseContainerDecoratorChainTest extends WiseTestNG<WiseContainerDecoratorChainTest> {
 	
 	private DummyPage page;
 	private WiseContainerDecoratorChain decorator;
@@ -22,9 +22,9 @@ public class WiseContainerDecoratorChainTest extends TestBase {
 	
 	@BeforeClass
 	public void initDecorator() {
-		this.page = initElements(this.driver, DummyPage.class);
+		this.page = initElements(this.getDriver(), DummyPage.class);
 		this.decorator = new WiseContainerDecoratorChain(new DefaultElementLocatorFactory(
-			this.driver));
+			this.getDriver()));
 	}
 	
 	@Test

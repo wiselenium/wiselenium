@@ -5,17 +5,17 @@ import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.wiselenium.core.TestBase;
+import org.wiselenium.core.test.WiseTestNG;
 
 @SuppressWarnings("javadoc")
-public class LabelTest extends TestBase {
+public class LabelTest extends WiseTestNG<LabelTest> {
 	
 	LabelPage page;
 	
 	
 	@BeforeMethod
 	public void initPage() {
-		this.page = initElements(this.driver, LabelPage.class);
+		this.page = initElements(this.getDriver(), LabelPage.class);
 		this.page.get();
 	}
 	

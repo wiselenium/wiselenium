@@ -1,7 +1,6 @@
 package org.wiselenium.core.element.field;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.FileUtils.getAbsoluteFilePath;
 
 import org.wiselenium.core.pagefactory.Page;
@@ -9,7 +8,7 @@ import org.wiselenium.core.pagefactory.Page;
 @SuppressWarnings("javadoc")
 public class CheckboxPage extends Page<CheckboxPage> {
 	
-	public static final String URL = "checkbox.html";
+	public static final String URL = getAbsoluteFilePath("checkbox.html");
 	public static final String TITLE = "page for checkbox tests";
 	
 	private Checkbox checkbox;
@@ -47,12 +46,12 @@ public class CheckboxPage extends Page<CheckboxPage> {
 	@Override
 	protected void isLoaded() {
 		assertEquals(this.getTitle(), TITLE);
-		assertTrue(this.getWrappedDriver().getCurrentUrl().endsWith(URL));
+		assertEquals(this.getWrappedDriver().getCurrentUrl(), URL);
 	}
 	
 	@Override
 	protected void load() {
-		this.get(getAbsoluteFilePath(URL));
+		this.get(URL);
 	}
 	
 }

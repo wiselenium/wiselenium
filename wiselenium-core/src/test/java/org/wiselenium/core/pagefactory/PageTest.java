@@ -5,9 +5,9 @@ import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
-import static org.wiselenium.core.FileUtils.getAbsoluteFilePath;
 import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
+import java.io.File;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -15,25 +15,23 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.wiselenium.core.TestBase;
 import org.wiselenium.core.element.container.Select;
 import org.wiselenium.core.element.field.ButtonPage;
 import org.wiselenium.core.element.field.Radiobutton;
 import org.wiselenium.core.element.field.Text;
+import org.wiselenium.core.pagefactory.dummy.DummyPage;
+import org.wiselenium.core.test.WiseTestNG;
 
 @SuppressWarnings({ "javadoc", "rawtypes", "unchecked" })
-public class PageTest extends TestBase {
+public class PageTest extends WiseTestNG {
 	
 	private Page page;
-	
-	private static final String DUMMY_PAGE_URL = getAbsoluteFilePath("dummy.html");
-	private static final String BUTTON_PAGE_URL = getAbsoluteFilePath(ButtonPage.URL);
 	
 	
 	@BeforeMethod
 	public void initPage() {
-		this.page = initElements(this.driver, Page.class);
-		this.page.get(DUMMY_PAGE_URL);
+		this.page = initElements(this.getDriver(), Page.class);
+		this.page.get(DummyPage.URL);
 	}
 	
 	@Test
@@ -48,24 +46,32 @@ public class PageTest extends TestBase {
 	
 	@Test
 	public void shouldGetCurrentUrl() {
-		assertTrue(this.page.get(BUTTON_PAGE_URL).and().getCurrentUrl().contains("button"));
+		assertTrue(this.page.get(ButtonPage.URL).and().getCurrentUrl().contains("button"));
 	}
 	
 	@Test
 	public void shouldGetPageSource() {
-		assertNotNull(this.page.get(BUTTON_PAGE_URL).getPageSource());
+		assertNotNull(this.page.get(ButtonPage.URL).getPageSource());
 	}
 	
 	@Test
 	public void shouldGetTitle() {
 		String title = this.page.getTitle();
-		String newTitle = this.page.get(BUTTON_PAGE_URL).and().getTitle();
+		String newTitle = this.page.get(ButtonPage.URL).and().getTitle();
 		assertNotEquals(newTitle, title);
 	}
 	
 	@Test
 	public void shouldGetWrappedDriver() {
 		assertNotNull(this.page.getWrappedDriver());
+	}
+	
+	@Test
+	public void shouldInitNextPage() {
+		initElements(this.getDriver(), DummyPage.class).and().getLink().and().click();
+		// wouldn't need the cast if the page used generics
+		ButtonPage buttonPage = (ButtonPage) this.page.initNextPage(ButtonPage.class);
+		assertNotNull(buttonPage);
 	}
 	
 	@Test
@@ -118,6 +124,15 @@ public class PageTest extends TestBase {
 	@Test
 	public void shouldReturnWebElementOnFindElement() {
 		assertNotNull(this.page.findElement(WebElement.class, By.id("text")));
+	}
+	
+	@Test
+	public void shouldTakeScreenShot() {
+		String fileName = "pageScreenShot.png";
+		this.page.takeScreenShot(fileName);
+		File file = new File(fileName);
+		file.deleteOnExit();
+		assertTrue(file.exists());
 	}
 	
 	@Test(expectedExceptions = NoSuchElementException.class)

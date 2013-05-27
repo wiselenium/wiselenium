@@ -7,17 +7,17 @@ import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.wiselenium.core.TestBase;
+import org.wiselenium.core.test.WiseTestNG;
 
 @SuppressWarnings("javadoc")
-public class CheckboxTest extends TestBase {
+public class CheckboxTest extends WiseTestNG<CheckboxTest> {
 	
 	CheckboxPage page;
 	
 	
 	@BeforeMethod
 	public void initPage() {
-		this.page = initElements(this.driver, CheckboxPage.class);
+		this.page = initElements(this.getDriver(), CheckboxPage.class);
 		this.page.load();
 		this.page.isLoaded();
 	}

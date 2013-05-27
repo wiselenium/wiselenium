@@ -11,17 +11,17 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.wiselenium.core.TestBase;
+import org.wiselenium.core.test.WiseTestNG;
 
 @SuppressWarnings("javadoc")
-public class BasicContainerTest extends TestBase {
+public class BasicContainerTest extends WiseTestNG<BasicContainerTest> {
 	
 	TablePage page;
 	
 	
 	@BeforeMethod
 	public void initPage() {
-		this.page = initElements(this.driver, TablePage.class).and().get();
+		this.page = initElements(this.getDriver(), TablePage.class).and().get();
 	}
 	
 	@Test

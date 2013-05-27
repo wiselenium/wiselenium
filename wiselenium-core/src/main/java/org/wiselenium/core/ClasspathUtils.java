@@ -1,14 +1,14 @@
-package org.wiselenium.core.pagefactory;
+package org.wiselenium.core;
 
 import java.lang.reflect.Modifier;
 
 /**
- * Utility class to help find resources on the classpath.
+ * Utility class to find resources on the classpath.
  * 
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-final class ClasspathUtils {
+public final class ClasspathUtils {
 	
 	private ClasspathUtils() {}
 	

@@ -11,17 +11,17 @@ import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.wiselenium.core.TestBase;
+import org.wiselenium.core.test.WiseTestNG;
 
 @SuppressWarnings("javadoc")
-public class TextTest extends TestBase {
+public class TextTest extends WiseTestNG<TextTest> {
 	
 	TextPage page;
 	
 	
 	@BeforeMethod
 	public void initPage() {
-		this.page = initElements(this.driver, TextPage.class);
+		this.page = initElements(this.getDriver(), TextPage.class);
 		this.page.get();
 	}
 	

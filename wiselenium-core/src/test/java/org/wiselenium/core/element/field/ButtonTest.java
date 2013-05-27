@@ -10,17 +10,17 @@ import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.wiselenium.core.TestBase;
+import org.wiselenium.core.test.WiseTestNG;
 
 @SuppressWarnings("javadoc")
-public class ButtonTest extends TestBase {
+public class ButtonTest extends WiseTestNG<ButtonTest> {
 	
 	ButtonPage page;
 	
 	
 	@BeforeMethod
 	public void initPage() {
-		this.page = initElements(this.driver, ButtonPage.class);
+		this.page = initElements(this.getDriver(), ButtonPage.class);
 		this.page.get();
 	}
 	

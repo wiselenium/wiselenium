@@ -20,17 +20,15 @@ public final class WiseLocator {
 	
 	/**
 	 * Finds the first element within the search context using the given mechanism. <br/>
-	 * Throws NoSuchElementException in case the element can't be found.
+	 * Throws a NoSuchElementException if the element couldn't be found. <br/>
+	 * As a utility method for the WiseQuery, it follows its correspondent method
+	 * {@link org.wiselenium.core.WiseQuery#findElement(Class, By)} specification.
 	 * 
 	 * @param <E> The type of the element.
-	 * @param clazz The class of the element. Must be either WebElement or a type annotated with
-	 * Field, Container or Frame. If the class is not concrete, will lookup for its implementation
-	 * matching the pattern classPackage.{impl}.className{Impl} yet. A more sofisticated search is
-	 * planned to be implemented on the future.
+	 * @param clazz The class of the element.
 	 * @param by The locating mechanism to use.
-	 * @param searchContext The search context of the element.
-	 * @return The element decorated or null if it shouldn't be decorated because the type didn't
-	 * respect the clazz parameter specification.
+	 * @param searchContext The search context.
+	 * @return The element decorated.
 	 * @since 0.0.1
 	 */
 	public static <E> E findElement(Class<E> clazz, By by, SearchContext searchContext) {
@@ -39,17 +37,16 @@ public final class WiseLocator {
 	}
 	
 	/**
-	 * Finds all elements within the search context using the given mechanism.
+	 * Finds all elements within the search context using the given mechanism. <br/>
+	 * An empty list will be returned if the elements couldn't be found. <br/>
+	 * As a utility method for the WiseQuery, it follows its correspondent method
+	 * {@link org.wiselenium.core.WiseQuery#findElements(Class, By)} specification.
 	 * 
-	 * @param <E> The type of the element.
-	 * @param clazz The class of the element. Must be either WebElement or a type annotated with
-	 * Field, Container or Frame. If the class is not concrete, will lookup for its implementation
-	 * matching the pattern classPackage.{impl}.className{Impl} yet. A more sofisticated search is
-	 * planned to be implemented on the future.
+	 * @param <E> The type of the elements.
+	 * @param clazz The class of the elements.
 	 * @param by The locating mechanism to use.
-	 * @param searchContext The search context of the element.
-	 * @return The list with the elements decorated or an empty list if it shouldn't be decorated
-	 * because the type didn't respect the clazz parameter specification.
+	 * @param searchContext The search context.
+	 * @return The elements decorated.
 	 * @since 0.0.1
 	 */
 	public static <E> List<E> findElements(Class<E> clazz, By by, SearchContext searchContext) {

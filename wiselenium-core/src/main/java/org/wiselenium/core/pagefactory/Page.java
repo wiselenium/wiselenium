@@ -7,6 +7,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.support.ui.LoadableComponent;
+import org.wiselenium.core.ScreenShooter;
+import org.wiselenium.core.WebDriverUtils;
+import org.wiselenium.core.WiseQuery;
 
 /**
  * Basic implementation of a common Page. Should be extended to reflect your own page services. <br/>
@@ -20,7 +23,8 @@ import org.openqa.selenium.support.ui.LoadableComponent;
  * @param <T> The page type.
  * @since 0.0.1
  */
-public class Page<T extends Page<T>> extends LoadableComponent<T> implements WrapsDriver {
+public class Page<T extends Page<T>> extends LoadableComponent<T> implements WrapsDriver,
+	WiseQuery, ScreenShooter<T> {
 	
 	private WebDriver driver;
 	
@@ -37,9 +41,9 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wra
 	}
 	
 	/**
-	 * Returns this page object in order to allow chain calls in a more fluent way.
+	 * Returns this page instance in order to allow chain calls in a more fluent way.
 	 * 
-	 * @return This page object.
+	 * @return This page instance.
 	 * @since 0.0.1
 	 */
 	@SuppressWarnings("unchecked")
@@ -58,37 +62,12 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wra
 		return ((JavascriptExecutor) this.getWrappedDriver()).executeScript(script);
 	}
 	
-	/**
-	 * Finds the first element within the current page using the given mechanism. <br/>
-	 * Throws a NoSuchElementException in case the element can't be found.
-	 * 
-	 * @param <E> The type of the element.
-	 * @param clazz The class of the element. Must be either WebElement or a type annotated with
-	 * Field, Container or Frame. If the class is not concrete, will lookup for its implementation
-	 * matching the pattern classPackage.{impl}.className{Impl} yet. A more sofisticated search is
-	 * planned to be implemented on the future.
-	 * @param by The locating mechanism to use.
-	 * @return The element decorated or null if it shouldn't be decorated because the type didn't
-	 * respect the clazz parameter specification.
-	 * @since 0.0.1
-	 */
+	@Override
 	public <E> E findElement(Class<E> clazz, By by) {
 		return WiseLocator.findElement(clazz, by, this.getWrappedDriver());
 	}
 	
-	/**
-	 * Finds all elements within the current page using the given mechanism.
-	 * 
-	 * @param <E> The type of the elements.
-	 * @param clazz The class of the elements. Must be either WebElement or a type annotated with
-	 * Field, Container or Frame. If the class is not concrete, will lookup for its implementation
-	 * matching the pattern classPackage.{impl}.className{Impl} yet. A more sofisticated search is
-	 * planned to be implemented on the future.
-	 * @param by The locating mechanism to use.
-	 * @return The elements decorated or an empty list if it shouldn't be decorated because the type
-	 * didn't respect the clazz parameter specification.
-	 * @since 0.0.1
-	 */
+	@Override
 	public <E> List<E> findElements(Class<E> clazz, By by) {
 		return WiseLocator.findElements(clazz, by, this.getWrappedDriver());
 	}
@@ -139,6 +118,25 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wra
 	@Override
 	public WebDriver getWrappedDriver() {
 		return this.driver;
+	}
+	
+	/**
+	 * Instantiates the next page of the user navigation and initialize its elements.
+	 * 
+	 * @param <E> The type of the page.
+	 * @param clazz The class of the page.
+	 * @return An instance of the next page of the user navigation.
+	 * @since 0.0.1
+	 */
+	public <E> E initNextPage(Class<E> clazz) {
+		return WisePageFactory.initElements(this.getWrappedDriver(), clazz);
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public T takeScreenShot(String fileName) {
+		WebDriverUtils.takeScreenShot(this.getWrappedDriver(), fileName);
+		return (T) this;
 	}
 	
 	@Override

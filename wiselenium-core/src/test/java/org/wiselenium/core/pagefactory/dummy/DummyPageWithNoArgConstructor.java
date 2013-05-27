@@ -1,5 +1,7 @@
 package org.wiselenium.core.pagefactory.dummy;
 
+import static org.wiselenium.core.FileUtils.getAbsoluteFilePath;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.wiselenium.core.element.field.Button;
@@ -7,7 +9,7 @@ import org.wiselenium.core.element.field.Button;
 @SuppressWarnings("javadoc")
 public class DummyPageWithNoArgConstructor {
 	
-	public static final String URL = "button.html";
+	public static final String URL = getAbsoluteFilePath("button.html");
 	
 	@FindBy(id = "button")
 	private Button dummy;

@@ -1,7 +1,6 @@
 package org.wiselenium.core.element.field;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.FileUtils.getAbsoluteFilePath;
 
 import org.openqa.selenium.WebElement;
@@ -13,7 +12,7 @@ public class HyperlinkPage extends Page<HyperlinkPage> {
 	public static final String HYPERLINK_CLICKED_MESSAGE = "hyperlink clicked";
 	public static final String HYPERLINK_TEXT = "hyperlink test";
 	public static final String HIDDEN_HYPERLINK_TEXT = "hiddenHyperlink test";
-	public static final String URL = "hyperlink.html";
+	public static final String URL = getAbsoluteFilePath("hyperlink.html");
 	public static final String TITLE = "page for hyperlink tests";
 	public static final String HYPERLINK_HREF = "#";
 	public static final String HYPERLINK_TARGET = "_self";
@@ -38,12 +37,12 @@ public class HyperlinkPage extends Page<HyperlinkPage> {
 	@Override
 	protected void isLoaded() {
 		assertEquals(this.getTitle(), TITLE);
-		assertTrue(this.getWrappedDriver().getCurrentUrl().endsWith(URL));
+		assertEquals(this.getWrappedDriver().getCurrentUrl(), URL);
 	}
 	
 	@Override
 	protected void load() {
-		this.get(getAbsoluteFilePath(URL));
+		this.get(URL);
 	}
 	
 }

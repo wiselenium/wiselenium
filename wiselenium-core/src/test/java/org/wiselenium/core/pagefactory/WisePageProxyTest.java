@@ -1,23 +1,22 @@
 package org.wiselenium.core.pagefactory;
 
 import static org.mockito.Mockito.mock;
-import static org.wiselenium.core.FileUtils.getAbsoluteFilePath;
 import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
-import org.wiselenium.core.TestBase;
 import org.wiselenium.core.pagefactory.dummy.DummyPageWithNoArgConstructor;
 import org.wiselenium.core.pagefactory.dummy.DummyPageWithWebDriverConstructor;
+import org.wiselenium.core.test.WiseTestNG;
 
 @SuppressWarnings("javadoc")
-public class WisePageProxyTest extends TestBase {
+public class WisePageProxyTest extends WiseTestNG<WisePageProxyTest> {
 	
 	@Test(expectedExceptions = IllegalArgumentException.class)
 	public void shouldPropagateOriginalExceptionFromProxy() {
-		this.driver.get(getAbsoluteFilePath(DummyPageWithNoArgConstructor.URL));
+		this.getDriver().get(DummyPageWithNoArgConstructor.URL);
 		
-		DummyPageWithNoArgConstructor page = initElements(this.driver,
+		DummyPageWithNoArgConstructor page = initElements(this.getDriver(),
 			DummyPageWithNoArgConstructor.class);
 		
 		page.throwIllegalArgumentException();

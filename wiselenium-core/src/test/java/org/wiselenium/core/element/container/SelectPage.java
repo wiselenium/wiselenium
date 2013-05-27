@@ -1,7 +1,6 @@
 package org.wiselenium.core.element.container;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.FileUtils.getAbsoluteFilePath;
 
 import org.openqa.selenium.WebElement;
@@ -13,7 +12,7 @@ public class SelectPage extends Page<SelectPage> {
 	public static final String SELECT_CLICKED_MESSAGE = "select clicked";
 	public static final String SELECT_FOR = "text";
 	public static final String SELECT_TEXT = "select text";
-	public static final String URL = "select.html";
+	public static final String URL = getAbsoluteFilePath("select.html");
 	public static final String TITLE = "page for select tests";
 	public static final String FIRST_OPTION_VALUE = "value1";
 	public static final String SECOND_OPTION_VALUE = "value2";
@@ -49,12 +48,12 @@ public class SelectPage extends Page<SelectPage> {
 	@Override
 	protected void isLoaded() {
 		assertEquals(this.getTitle(), TITLE);
-		assertTrue(this.getWrappedDriver().getCurrentUrl().endsWith(URL));
+		assertEquals(this.getWrappedDriver().getCurrentUrl(), URL);
 	}
 	
 	@Override
 	protected void load() {
-		this.get(getAbsoluteFilePath(URL));
+		this.get(URL);
 	}
 	
 }

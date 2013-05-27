@@ -2,6 +2,9 @@ package org.wiselenium.core.element.field.impl;
 
 import static org.wiselenium.core.WiseUnwrapper.unwrapWebElement;
 
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
+import org.wiselenium.core.WiseThreadLocal;
 import org.wiselenium.core.element.BasicElement;
 import org.wiselenium.core.element.field.Field;
 
@@ -25,7 +28,9 @@ public class BasicField<T extends Field<T>> extends BasicElement<T> implements F
 	@SuppressWarnings("unchecked")
 	@Override
 	public T doubleClick() {
-		// TODO will need a webdriver reference
+		Action action = new Actions(WiseThreadLocal.getDriver())
+			.doubleClick(unwrapWebElement(this)).build();
+		action.perform();
 		return (T) this;
 	}
 	

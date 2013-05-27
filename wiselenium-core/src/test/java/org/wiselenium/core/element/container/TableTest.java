@@ -19,17 +19,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.wiselenium.core.TestBase;
+import org.wiselenium.core.test.WiseTestNG;
 
 @SuppressWarnings("javadoc")
-public class TableTest extends TestBase {
+public class TableTest extends WiseTestNG<TableTest> {
 	
 	TablePage page;
 	
 	
 	@BeforeMethod
 	public void initPage() {
-		this.page = initElements(this.driver, TablePage.class).and().get();
+		this.page = initElements(this.getDriver(), TablePage.class).and().get();
 	}
 	
 	@Test

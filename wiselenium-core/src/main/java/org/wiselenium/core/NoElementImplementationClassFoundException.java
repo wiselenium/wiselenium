@@ -1,6 +1,5 @@
-package org.wiselenium.core.pagefactory;
+package org.wiselenium.core;
 
-import org.wiselenium.core.WiseException;
 
 /**
  * Represents an exception thrown when an implementation of the element couldn't be found by
@@ -9,7 +8,7 @@ import org.wiselenium.core.WiseException;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-class NoElementImplementationClassFoundException extends WiseException {
+public class NoElementImplementationClassFoundException extends WiseException {
 	
 	private static final long serialVersionUID = 1L;
 	

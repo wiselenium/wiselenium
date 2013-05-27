@@ -16,18 +16,18 @@ import java.util.List;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.wiselenium.core.TestBase;
 import org.wiselenium.core.element.field.Option;
+import org.wiselenium.core.test.WiseTestNG;
 
 @SuppressWarnings("javadoc")
-public class MultiSelectTest extends TestBase {
+public class MultiSelectTest extends WiseTestNG<MultiSelectTest> {
 	
 	SelectPage page;
 	
 	
 	@BeforeMethod
 	public void initPage() {
-		this.page = initElements(this.driver, SelectPage.class);
+		this.page = initElements(this.getDriver(), SelectPage.class);
 		this.page.load();
 		this.page.isLoaded();
 	}

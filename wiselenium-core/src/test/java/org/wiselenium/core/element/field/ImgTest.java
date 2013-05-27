@@ -6,17 +6,17 @@ import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.wiselenium.core.TestBase;
+import org.wiselenium.core.test.WiseTestNG;
 
 @SuppressWarnings("javadoc")
-public class ImgTest extends TestBase {
+public class ImgTest extends WiseTestNG<ImgTest> {
 	
 	ImgPage page;
 	
 	
 	@BeforeMethod
 	public void initPage() {
-		this.page = initElements(this.driver, ImgPage.class);
+		this.page = initElements(this.getDriver(), ImgPage.class);
 		this.page.get();
 	}
 	

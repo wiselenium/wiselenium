@@ -1,7 +1,6 @@
 package org.wiselenium.core.element.container;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.FileUtils.getAbsoluteFilePath;
 
 import org.wiselenium.core.pagefactory.Page;
@@ -18,7 +17,7 @@ public class TablePage extends Page<TablePage> {
 	public static final String TABLE_FOOT_CELL2 = "WORLD";
 	public static final int ROW_SPAN = 2;
 	public static final int COL_SPAN = 2;
-	public static final String URL = "table.html";
+	public static final String URL = getAbsoluteFilePath("table.html");
 	public static final String TITLE = "page for table tests";
 	
 	private Table tableWithCaptionAndHead;
@@ -51,12 +50,12 @@ public class TablePage extends Page<TablePage> {
 	@Override
 	protected void isLoaded() {
 		assertEquals(this.getTitle(), TITLE);
-		assertTrue(this.getWrappedDriver().getCurrentUrl().endsWith(URL));
+		assertEquals(this.getWrappedDriver().getCurrentUrl(), URL);
 	}
 	
 	@Override
 	protected void load() {
-		this.get(getAbsoluteFilePath(URL));
+		this.get(URL);
 	}
 	
 }

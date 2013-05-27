@@ -6,7 +6,9 @@ import java.io.File;
 public final class FileUtils {
 	
 	public static String getAbsoluteFilePath(String relativePath) {
-		return "file:///" + new File("").getAbsolutePath() + "/src/test/resources/" + relativePath;
+		String absolutePath = "file:///" + new File("").getAbsolutePath() + "/src/test/resources/"
+			+ relativePath;
+		return absolutePath.replaceAll("\\\\", "/");
 	}
 	
 }

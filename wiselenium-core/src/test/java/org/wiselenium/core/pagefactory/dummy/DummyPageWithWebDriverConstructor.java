@@ -1,6 +1,6 @@
 package org.wiselenium.core.pagefactory.dummy;
 
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertEquals;
 import static org.wiselenium.core.FileUtils.getAbsoluteFilePath;
 
 import org.openqa.selenium.WebDriver;
@@ -11,7 +11,7 @@ import org.wiselenium.core.pagefactory.Page;
 @SuppressWarnings("javadoc")
 public class DummyPageWithWebDriverConstructor extends Page<DummyPageWithWebDriverConstructor> {
 	
-	public static final String URL = "button.html";
+	public static final String URL = getAbsoluteFilePath("button.html");
 	
 	@FindBy(id = "button")
 	private Button dummy;
@@ -27,12 +27,12 @@ public class DummyPageWithWebDriverConstructor extends Page<DummyPageWithWebDriv
 	
 	@Override
 	protected void isLoaded() {
-		assertTrue(this.getWrappedDriver().getCurrentUrl().endsWith(URL));
+		assertEquals(this.getWrappedDriver().getCurrentUrl(), URL);
 	}
 	
 	@Override
 	protected void load() {
-		this.get(getAbsoluteFilePath(URL));
+		this.get(URL);
 	}
 	
 }
