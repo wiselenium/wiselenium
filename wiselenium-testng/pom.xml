@@ -15,6 +15,46 @@
   <name>wiselenium testng</name>
   <url>https://github.com/andreschaffer/wiselenium</url>
   
+  <build>
+  	<plugins>
+  		<plugin>
+	          <groupId>org.apache.maven.plugins</groupId>
+	          <artifactId>maven-surefire-plugin</artifactId>
+	          <configuration>
+          	  	<suiteXmlFiles>
+            		<suiteXmlFile>${basedir}/src/test/resources/testng.xml</suiteXmlFile>
+          		</suiteXmlFiles>
+        	  </configuration>
+        	  <executions>
+	        	  	<execution>
+			            <id>default-test</id>
+			            <phase>test</phase>
+			            <goals>
+			              <goal>test</goal>
+			            </goals>
+			            <configuration>
+			              	<systemPropertyVariables>
+			                	<driver>firefox</driver>
+			              	</systemPropertyVariables>
+			            </configuration>
+			        </execution>
+			        <execution>
+			            <id>chrome-test</id>
+			            <phase>test</phase>
+			            <goals>
+			              <goal>test</goal>
+			            </goals>
+			            <configuration>
+			              	<systemPropertyVariables>
+			                	<driver>chrome</driver>
+			              	</systemPropertyVariables>
+			            </configuration>
+			        </execution>
+        	  </executions>
+          </plugin>
+  	</plugins>
+  </build>
+  
   <developers>
 	<developer>
 		<name>Andre Ricardo Schaffer</name>

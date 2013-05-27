@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+  
+<suite name="all-tests" verbose="1">
+
+  <test name="WiseTestNG">
+    <classes>
+       <class name="org.wiselenium.core.test.WiseTestNGTest" />
+    </classes>
+  </test>
+  
+</suite>

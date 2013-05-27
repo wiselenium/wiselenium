@@ -4,8 +4,10 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.wiselenium.core.ScreenShooter;
 import org.wiselenium.core.WebDriverUtils;
 import org.wiselenium.core.WiseQuery;
@@ -80,8 +82,19 @@ class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter<T> {
 	 * @since 0.0.1
 	 */
 	public T get(String url) {
-		this.driver.get(url);
+		if (url != null) this.driver.get(url);
 		return (T) this;
+	}
+	
+	/**
+	 * Returns the desired capabilities for the driver of the test. <br/>
+	 * May be overridden. By default, used on the initDriver() method.
+	 * 
+	 * @return The desired capabilities for the driver of the test.
+	 * @since 0.0.1
+	 */
+	public Capabilities getDesiredCapabilities() {
+		return new DesiredCapabilities();
 	}
 	
 	/**
@@ -97,7 +110,7 @@ class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter<T> {
 	/**
 	 * Returns the dir where the screenshots will be saved. Used on the takeScreenShot(String)
 	 * method as the base dir. <br/>
-	 * May be overridden.
+	 * May be overridden. By default, returns "target/tests-screenshots/" .
 	 * 
 	 * @return The dir where the screenshots will be saved.
 	 * @since 0.0.1
@@ -107,9 +120,9 @@ class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter<T> {
 	}
 	
 	/**
-	 * Returns the url of the test. Called on a beforeClass lifecycle to automatically navigate to
-	 * its url. <br/>
-	 * May be overridden.
+	 * Returns the url of the test. Called on a beforeClass lifecycle method to automatically
+	 * navigate to its url. <br/>
+	 * May be overridden. By default, returns null.
 	 * 
 	 * @return The url of the test.
 	 * @since 0.0.1
@@ -120,13 +133,13 @@ class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter<T> {
 	
 	/**
 	 * Should init the driver instance for the test. <br/>
-	 * May be overridden.
+	 * May be overridden. By default, inits a FirefoxDriver.
 	 * 
 	 * @return The instance of the driver for the test.
 	 * @since 0.0.1
 	 */
 	public WebDriver initDriver() {
-		return new FirefoxDriver();
+		return new FirefoxDriver(this.getDesiredCapabilities());
 	}
 	
 	/**
@@ -166,7 +179,7 @@ class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter<T> {
 	 * Must be called by the test on a beforeClass lifecycle method.<br/>
 	 * 1) calls the initDriver(), 2) makes the driver visible for the whole thread through the
 	 * WiseThreadLocal, 3) adds a shutdown hook to quit the driver, 4) injects all annotated pages
-	 * into the test instance.
+	 * into the test instance, 5) navigates to the url set for the test.
 	 * 
 	 * @since 0.0.1
 	 */
@@ -175,12 +188,7 @@ class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter<T> {
 		makeDriverVisibleForThread(this.driver);
 		addHookToQuitDriverOnShutdown(this.driver);
 		injectPagesIntoTest(this);
-		this.goToUrl();
-	}
-	
-	private void goToUrl() {
-		String url = this.getUrl();
-		if (url != null) this.driver.get(url);
+		this.get(this.getUrl());
 	}
 	
 }
