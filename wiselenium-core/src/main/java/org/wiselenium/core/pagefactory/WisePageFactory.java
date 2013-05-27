@@ -99,7 +99,7 @@ public final class WisePageFactory {
 				field.setAccessible(true);
 				field.set(instance, value);
 			} catch (IllegalAccessException e) {
-				throw new PageElementsInitializationException(instance.getClass(), e);
+				throw new PageInitializationException(instance.getClass(), e);
 			}
 		}
 	}

@@ -8,7 +8,7 @@ import org.wiselenium.core.WiseException;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-class PageElementsInitializationException extends WiseException {
+public class PageInitializationException extends WiseException {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -17,7 +17,7 @@ class PageElementsInitializationException extends WiseException {
 	 * @param clazz The class of the page.
 	 * @param t The cause of the exception.
 	 */
-	public PageElementsInitializationException(Class<?> clazz, Throwable t) {
+	public PageInitializationException(Class<?> clazz, Throwable t) {
 		super("Failure while trying to initialize the elements of the page " + clazz.getName(), t);
 	}
 	

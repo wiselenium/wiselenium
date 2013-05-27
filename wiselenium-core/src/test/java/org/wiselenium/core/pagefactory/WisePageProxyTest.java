@@ -1,7 +1,6 @@
 package org.wiselenium.core.pagefactory;
 
 import static org.mockito.Mockito.mock;
-import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
@@ -16,8 +15,7 @@ public class WisePageProxyTest extends WiseTestNG<WisePageProxyTest> {
 	public void shouldPropagateOriginalExceptionFromProxy() {
 		this.getDriver().get(DummyPageWithNoArgConstructor.URL);
 		
-		DummyPageWithNoArgConstructor page = initElements(this.getDriver(),
-			DummyPageWithNoArgConstructor.class);
+		DummyPageWithNoArgConstructor page = this.initElements(DummyPageWithNoArgConstructor.class);
 		
 		page.throwIllegalArgumentException();
 	}

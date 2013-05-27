@@ -5,7 +5,6 @@ import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.WiseUnwrapper.unwrapWebElement;
 import static org.wiselenium.core.pagefactory.WiseDecorator.decorateElement;
 import static org.wiselenium.core.pagefactory.WiseDecorator.decorateElements;
-import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 import static org.wiselenium.core.pagefactory.dummy.DummyPage.BY_RADIOBUTTONS;
 import static org.wiselenium.core.pagefactory.dummy.DummyPage.BY_SELECT1;
 
@@ -29,7 +28,7 @@ public class WiseDecoratorTest extends WiseTestNG<WiseDecoratorTest> {
 	
 	@BeforeMethod
 	public void initPage() {
-		this.page = initElements(this.getDriver(), DummyPage.class).and().get();
+		this.page = this.initElements(DummyPage.class).and().get();
 	}
 	
 	@Test

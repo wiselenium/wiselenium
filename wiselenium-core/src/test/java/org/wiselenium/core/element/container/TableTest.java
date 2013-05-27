@@ -11,7 +11,6 @@ import static org.wiselenium.core.element.container.TablePage.TABLE_BODY_CELL2;
 import static org.wiselenium.core.element.container.TablePage.TABLE_CAPTION;
 import static org.wiselenium.core.element.container.TablePage.TABLE_HEAD_CELL1;
 import static org.wiselenium.core.element.container.TablePage.TABLE_HEAD_CELL2;
-import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import java.util.List;
 
@@ -29,7 +28,7 @@ public class TableTest extends WiseTestNG<TableTest> {
 	
 	@BeforeMethod
 	public void initPage() {
-		this.page = initElements(this.getDriver(), TablePage.class).and().get();
+		this.page = this.initElements(TablePage.class).and().get();
 	}
 	
 	@Test

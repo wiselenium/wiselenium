@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-@Target(ElementType.TYPE)
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Page {
 	

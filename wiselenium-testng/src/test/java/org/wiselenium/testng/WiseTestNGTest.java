@@ -1,4 +1,4 @@
-package org.wiselenium.core.test;
+package org.wiselenium.testng;
 
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -12,10 +12,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wiselenium.core.element.field.Radiobutton;
 import org.wiselenium.core.element.field.Text;
-import org.wiselenium.core.pagefactory.dummy.DummyPage;
+import org.wiselenium.core.test.Page;
 
 @SuppressWarnings("javadoc")
-public class WiseTestTest extends WiseTestNG<WiseTestTest> {
+public class WiseTestNGTest extends WiseTestNG<WiseTestNGTest> {
 	
 	@Page
 	private DummyPage page;

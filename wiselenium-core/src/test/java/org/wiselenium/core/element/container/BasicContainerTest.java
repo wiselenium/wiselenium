@@ -4,7 +4,6 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
-import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class BasicContainerTest extends WiseTestNG<BasicContainerTest> {
 	
 	@BeforeMethod
 	public void initPage() {
-		this.page = initElements(this.getDriver(), TablePage.class).and().get();
+		this.page = this.initElements(TablePage.class).and().get();
 	}
 	
 	@Test

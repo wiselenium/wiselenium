@@ -7,7 +7,6 @@ import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.element.field.TextPage.HIDDEN_TEXT_VALUE;
 import static org.wiselenium.core.element.field.TextPage.TEXT_CLICKED_MESSAGE;
 import static org.wiselenium.core.element.field.TextPage.TEXT_MAXLENGTH;
-import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -21,7 +20,7 @@ public class TextTest extends WiseTestNG<TextTest> {
 	
 	@BeforeMethod
 	public void initPage() {
-		this.page = initElements(this.getDriver(), TextPage.class);
+		this.page = this.initElements(TextPage.class);
 		this.page.get();
 	}
 	

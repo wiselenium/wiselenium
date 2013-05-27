@@ -1,7 +1,6 @@
 package org.wiselenium.core.pagefactory;
 
 import static org.mockito.Mockito.mock;
-import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -19,7 +18,7 @@ public class WiseFieldProxyTest extends WiseTestNG<WiseFieldProxyTest> {
 	public void shouldPropagateOriginalExceptionFromProxy() {
 		Text proxy;
 		try {
-			DummyPage page = initElements(this.getDriver(), DummyPage.class);
+			DummyPage page = this.initElements(DummyPage.class);
 			WebElement webElement = page.getText();
 			proxy = WiseFieldProxy.getInstance(TextImpl.class, webElement);
 		} catch (Exception e) {

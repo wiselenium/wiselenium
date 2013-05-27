@@ -1,5 +1,6 @@
 package org.wiselenium.core.test;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -9,7 +10,9 @@ import org.wiselenium.core.ScreenShooter;
 import org.wiselenium.core.WebDriverUtils;
 import org.wiselenium.core.WiseQuery;
 import org.wiselenium.core.WiseThreadLocal;
+import org.wiselenium.core.pagefactory.PageInitializationException;
 import org.wiselenium.core.pagefactory.WiseLocator;
+import org.wiselenium.core.pagefactory.WisePageFactory;
 
 /**
  * All wiselenium tests should extend this class. <br/>
@@ -19,6 +22,7 @@ import org.wiselenium.core.pagefactory.WiseLocator;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
+@SuppressWarnings("unchecked")
 public class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter<T> {
 	
 	private WebDriver driver;
@@ -29,9 +33,19 @@ public class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter
 			new WiseShutdownHook("wiselenium " + Thread.currentThread().getName(), webDriver));
 	}
 	
-	private static void injectPages(@SuppressWarnings("rawtypes") WiseTest test) {
-		// TODO inject pages
-		test.toString();
+	private static void injectPagesIntoTest(@SuppressWarnings("rawtypes") WiseTest testInstance) {
+		for (Class<?> clazz = testInstance.getClass(); !clazz.equals(Object.class); clazz = clazz
+			.getSuperclass())
+			for (Field field : clazz.getDeclaredFields())
+				if (field.isAnnotationPresent(Page.class)) {
+					field.setAccessible(true);
+					Object page = testInstance.initElements(field.getType());
+					try {
+						field.set(testInstance, page);
+					} catch (Exception e) {
+						throw new PageInitializationException(field.getType(), e);
+					}
+				}
 	}
 	
 	private static void makeDriverVisibleForThread(WebDriver webDriver) {
@@ -44,19 +58,18 @@ public class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter
 	 * @return This test instance.
 	 * @since 0.0.1
 	 */
-	@SuppressWarnings("unchecked")
 	public T and() {
 		return (T) this;
 	}
 	
 	@Override
 	public <E> E findElement(Class<E> clazz, By by) {
-		return WiseLocator.findElement(clazz, by, this.getDriver());
+		return WiseLocator.findElement(clazz, by, this.driver);
 	}
 	
 	@Override
 	public <E> List<E> findElements(Class<E> clazz, By by) {
-		return WiseLocator.findElements(clazz, by, this.getDriver());
+		return WiseLocator.findElements(clazz, by, this.driver);
 	}
 	
 	/**
@@ -66,32 +79,24 @@ public class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter
 	 * @return This page object.
 	 * @since 0.0.1
 	 */
-	@SuppressWarnings("unchecked")
 	public T get(String url) {
-		this.getDriver().get(url);
+		this.driver.get(url);
 		return (T) this;
 	}
 	
 	/**
-	 * On first invocation, 1) calls the initDriver(), 2) makes the driver visible for the whole
-	 * thread through the WiseThreadLocal, 3) adds a shutdown hook to quit the driver, 4) injects
-	 * all annotated pages into the test instance.
+	 * Returns the driver of the test.
 	 * 
 	 * @return The driver of the test.
 	 * @since 0.0.1
 	 */
-	public synchronized WebDriver getDriver() {
-		if (this.driver == null) {
-			this.driver = this.initDriver();
-			makeDriverVisibleForThread(this.driver);
-			addHookToQuitDriverOnShutdown(this.driver);
-			injectPages(this);
-		}
+	public WebDriver getDriver() {
 		return this.driver;
 	}
 	
 	/**
-	 * Should init the driver instance for the test.
+	 * Should init the driver instance for the test. <br/>
+	 * May be overridden.
 	 * 
 	 * @return The instance of the driver for the test.
 	 * @since 0.0.1
@@ -100,10 +105,52 @@ public class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter
 		return new FirefoxDriver();
 	}
 	
-	@SuppressWarnings("unchecked")
+	/**
+	 * Instantiates an instance of the given class, and set a lazy proxy for each of its element
+	 * fields. <br/>
+	 * 
+	 * @param <E> The class type that will be initialized.
+	 * @param clazz The class to be initialized.
+	 * @return An instance of the class with its element fields proxied.
+	 * @since 0.0.1
+	 * @see WisePageFactory#initElements(WebDriver, Class)
+	 */
+	public <E> E initElements(Class<E> clazz) {
+		return WisePageFactory.initElements(this.driver, clazz);
+	}
+	
+	/**
+	 * As {@link #initElements(Class)} but will only replace the element fields of an already
+	 * instantiated Object.
+	 * 
+	 * @param <E> The type of the instance.
+	 * @param instance The instance whose fields should be proxied.
+	 * @return The instance with its element fields proxied.
+	 * @since 0.0.1
+	 */
+	public <E> E initElements(E instance) {
+		return WisePageFactory.initElements(this.driver, instance);
+	}
+	
 	@Override
 	public T takeScreenShot(String fileName) {
-		WebDriverUtils.takeScreenShot(this.getDriver(), fileName);
+		WebDriverUtils.takeScreenShot(this.driver, fileName);
 		return (T) this;
 	}
+	
+	/**
+	 * Must be called by the test on a beforeClass lifecycle method.<br/>
+	 * 1) calls the initDriver(), 2) makes the driver visible for the whole thread through the
+	 * WiseThreadLocal, 3) adds a shutdown hook to quit the driver, 4) injects all annotated pages
+	 * into the test instance.
+	 * 
+	 * @since 0.0.1
+	 */
+	protected void initWiseTest() {
+		this.driver = this.initDriver();
+		makeDriverVisibleForThread(this.driver);
+		addHookToQuitDriverOnShutdown(this.driver);
+		injectPagesIntoTest(this);
+	}
+	
 }

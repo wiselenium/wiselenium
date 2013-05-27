@@ -5,7 +5,6 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.WiseUnwrapper.unwrapWebDriver;
 import static org.wiselenium.core.WiseUnwrapper.unwrapWebElement;
-import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import java.util.List;
 
@@ -28,8 +27,7 @@ public class WisePageFactoryTest extends WiseTestNG<WisePageFactoryTest> {
 	public void shouldCreatePageWithNoArgConstructorAndInitElements() {
 		this.getDriver().get(DummyPageWithNoArgConstructor.URL);
 		
-		DummyPageWithNoArgConstructor page = initElements(this.getDriver(),
-			DummyPageWithNoArgConstructor.class);
+		DummyPageWithNoArgConstructor page = this.initElements(DummyPageWithNoArgConstructor.class);
 		
 		assertNotNull(unwrapWebDriver(page));
 		assertNotNull(page.getWrappedDriver());
@@ -38,8 +36,8 @@ public class WisePageFactoryTest extends WiseTestNG<WisePageFactoryTest> {
 	
 	@Test
 	public void shouldCreatePageWithWebDriverConstructorAndInitElements() {
-		DummyPageWithWebDriverConstructor page = initElements(this.getDriver(),
-			DummyPageWithWebDriverConstructor.class).and().get();
+		DummyPageWithWebDriverConstructor page = this
+			.initElements(DummyPageWithWebDriverConstructor.class).and().get();
 		
 		assertNotNull(unwrapWebDriver(page));
 		assertNotNull(page.getWrappedDriver());
@@ -49,7 +47,7 @@ public class WisePageFactoryTest extends WiseTestNG<WisePageFactoryTest> {
 	@Test
 	public void shouldInitElementsLazily() {
 		this.getDriver().get(TextPage.URL);
-		DummyPage page = initElements(this.getDriver(), DummyPage.class).and().get();
+		DummyPage page = this.initElements(DummyPage.class).and().get();
 		
 		Select select1 = page.getSelect1();
 		assertNotNull(select1);
@@ -64,29 +62,29 @@ public class WisePageFactoryTest extends WiseTestNG<WisePageFactoryTest> {
 	public void shouldInitElementsOfInstance() {
 		DummyPageWithWebDriverConstructor page = new DummyPageWithWebDriverConstructor(
 			this.getDriver());
-		initElements(this.getDriver(), page);
+		this.initElements(page);
 		assertNotNull(page.getDummyElement());
 		assertNotNull(unwrapWebElement(page.getDummyElement()));
 	}
 	
 	@Test
 	public void shouldInitWebElements() {
-		DummyPage page = initElements(this.getDriver(), DummyPage.class).and().get();
+		DummyPage page = this.initElements(DummyPage.class).and().get();
 		WebElement text = page.getText();
 		assertNotNull(text);
 		List<WebElement> sexRadiobuttons = page.getRadiobuttons();
 		assertFalse(sexRadiobuttons.isEmpty());
 	}
 	
-	@Test(expectedExceptions = PageElementsInitializationException.class)
+	@Test(expectedExceptions = PageInitializationException.class)
 	public void shouldThrowExceptionWhileCreatingPageWithFinalField() {
 		this.getDriver().get(DummyPageWithFinalField.URL);
-		initElements(this.getDriver(), DummyPageWithFinalField.class);
+		this.initElements(DummyPageWithFinalField.class);
 	}
 	
 	@Test(expectedExceptions = PageInstantiationException.class)
 	public void shouldThrowExceptionWhileInstantiatingPageWithoutProperConstructor() {
-		initElements(this.getDriver(), DummyPageWithoutProperConstructor.class);
+		this.initElements(DummyPageWithoutProperConstructor.class);
 	}
 	
 }

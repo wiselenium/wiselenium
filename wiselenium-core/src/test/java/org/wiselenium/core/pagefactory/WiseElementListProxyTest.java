@@ -1,7 +1,5 @@
 package org.wiselenium.core.pagefactory;
 
-import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
-
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
@@ -18,7 +16,7 @@ public class WiseElementListProxyTest extends WiseTestNG<WiseElementListProxyTes
 	public void shouldPropagateOriginalExceptionFromProxy() {
 		List<TextImpl> proxy;
 		try {
-			DummyPage page = initElements(this.getDriver(), DummyPage.class);
+			DummyPage page = this.initElements(DummyPage.class);
 			List<WebElement> webElements = page.getRadiobuttons();
 			proxy = WiseElementListProxy.getInstance(TextImpl.class, webElements);
 		} catch (Exception e) {
@@ -31,7 +29,7 @@ public class WiseElementListProxyTest extends WiseTestNG<WiseElementListProxyTes
 	public void shouldThrowExceptionWhenProxyingClassWithoutNoArgConstructor() {
 		List<DummyFieldWithoutNoArgConstructor> proxy;
 		try {
-			DummyPage page = initElements(this.getDriver(), DummyPage.class).and().get();
+			DummyPage page = this.initElements(DummyPage.class).and().get();
 			List<WebElement> webElements = page.getRadiobuttons();
 			proxy = WiseElementListProxy.getInstance(DummyFieldWithoutNoArgConstructor.class,
 				webElements);

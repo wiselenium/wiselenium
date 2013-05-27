@@ -1,7 +1,5 @@
 package org.wiselenium.core.pagefactory;
 
-import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
-
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
@@ -23,7 +21,7 @@ public class DefaultExtendedSeleniumDecoratorChainTest extends
 	
 	@BeforeClass
 	public void initDecorator() {
-		this.page = initElements(this.getDriver(), DummyPage.class);
+		this.page = this.initElements(DummyPage.class);
 		this.decorator = new DefaultExtendedSeleniumDecoratorChain(
 			new DefaultElementLocatorFactory(this.getDriver()));
 	}

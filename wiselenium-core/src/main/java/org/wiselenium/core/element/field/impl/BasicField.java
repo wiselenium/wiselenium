@@ -2,8 +2,10 @@ package org.wiselenium.core.element.field.impl;
 
 import static org.wiselenium.core.WiseUnwrapper.unwrapWebElement;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.wiselenium.core.WiseException;
 import org.wiselenium.core.WiseThreadLocal;
 import org.wiselenium.core.element.BasicElement;
 import org.wiselenium.core.element.field.Field;
@@ -28,8 +30,11 @@ public class BasicField<T extends Field<T>> extends BasicElement<T> implements F
 	@SuppressWarnings("unchecked")
 	@Override
 	public T doubleClick() {
-		Action action = new Actions(WiseThreadLocal.getDriver())
-			.doubleClick(unwrapWebElement(this)).build();
+		WebDriver driver = WiseThreadLocal.getDriver();
+		if (driver == null)
+			throw new WiseException(
+				"The driver must be set on the WiseThreadLocal as a pre-condition for the doubleClick() method");
+		Action action = new Actions(driver).doubleClick(unwrapWebElement(this)).build();
 		action.perform();
 		return (T) this;
 	}

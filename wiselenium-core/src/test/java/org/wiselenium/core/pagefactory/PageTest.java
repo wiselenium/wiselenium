@@ -5,7 +5,6 @@ import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
-import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import java.io.File;
 import java.util.List;
@@ -23,14 +22,14 @@ import org.wiselenium.core.pagefactory.dummy.DummyPage;
 import org.wiselenium.core.test.WiseTestNG;
 
 @SuppressWarnings({ "javadoc", "rawtypes", "unchecked" })
-public class PageTest extends WiseTestNG {
+public class PageTest extends WiseTestNG<PageTest> {
 	
 	private Page page;
 	
 	
 	@BeforeMethod
 	public void initPage() {
-		this.page = initElements(this.getDriver(), Page.class);
+		this.page = this.initElements(Page.class);
 		this.page.get(DummyPage.URL);
 	}
 	
@@ -68,8 +67,8 @@ public class PageTest extends WiseTestNG {
 	
 	@Test
 	public void shouldInitNextPage() {
-		initElements(this.getDriver(), DummyPage.class).and().getLink().and().click();
-		// wouldn't need the cast if the page used generics
+		this.initElements(DummyPage.class).and().getLink().and().click();
+		// wouldn't need any cast if the page used generics
 		ButtonPage buttonPage = (ButtonPage) this.page.initNextPage(ButtonPage.class);
 		assertNotNull(buttonPage);
 	}

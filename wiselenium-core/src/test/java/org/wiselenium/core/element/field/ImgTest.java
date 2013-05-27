@@ -2,7 +2,6 @@ package org.wiselenium.core.element.field;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -16,7 +15,7 @@ public class ImgTest extends WiseTestNG<ImgTest> {
 	
 	@BeforeMethod
 	public void initPage() {
-		this.page = initElements(this.getDriver(), ImgPage.class);
+		this.page = this.initElements(ImgPage.class);
 		this.page.get();
 	}
 	

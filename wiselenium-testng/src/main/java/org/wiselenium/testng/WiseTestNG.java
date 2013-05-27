@@ -1,4 +1,4 @@
-package org.wiselenium.core.test;
+package org.wiselenium.testng;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;

@@ -9,7 +9,6 @@ import static org.wiselenium.core.element.container.SelectPage.SECOND_OPTION_TEX
 import static org.wiselenium.core.element.container.SelectPage.SECOND_OPTION_VALUE;
 import static org.wiselenium.core.element.container.SelectPage.THIRD_OPTION_TEXT;
 import static org.wiselenium.core.element.container.SelectPage.THIRD_OPTION_VALUE;
-import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class SelectTest extends WiseTestNG<SelectTest> {
 	
 	@BeforeMethod
 	public void initPage() {
-		this.page = initElements(this.getDriver(), SelectPage.class);
+		this.page = this.initElements(SelectPage.class);
 		this.page.load();
 		this.page.isLoaded();
 	}

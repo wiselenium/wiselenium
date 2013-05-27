@@ -7,7 +7,6 @@ import static org.wiselenium.core.element.field.HyperlinkPage.HYPERLINK_HREF;
 import static org.wiselenium.core.element.field.HyperlinkPage.HYPERLINK_TARGET;
 import static org.wiselenium.core.element.field.HyperlinkPage.HYPERLINK_TEXT;
 import static org.wiselenium.core.element.field.HyperlinkPage.URL;
-import static org.wiselenium.core.pagefactory.WisePageFactory.initElements;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -21,7 +20,7 @@ public class HyperlinkTest extends WiseTestNG<HyperlinkTest> {
 	
 	@BeforeMethod
 	public void initPage() {
-		this.page = initElements(this.getDriver(), HyperlinkPage.class);
+		this.page = this.initElements(HyperlinkPage.class);
 		this.page.get();
 	}
 	
