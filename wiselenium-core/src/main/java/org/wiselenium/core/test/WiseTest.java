@@ -23,7 +23,7 @@ import org.wiselenium.core.pagefactory.WisePageFactory;
  * @since 0.0.1
  */
 @SuppressWarnings("unchecked")
-public class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter<T> {
+class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter<T> {
 	
 	private WebDriver driver;
 	
@@ -33,7 +33,7 @@ public class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter
 			new WiseShutdownHook("wiselenium " + Thread.currentThread().getName(), webDriver));
 	}
 	
-	private static void injectPagesIntoTest(@SuppressWarnings("rawtypes") WiseTest testInstance) {
+	private static void injectPagesIntoTest(WiseTest<?> testInstance) {
 		for (Class<?> clazz = testInstance.getClass(); !clazz.equals(Object.class); clazz = clazz
 			.getSuperclass())
 			for (Field field : clazz.getDeclaredFields())
@@ -95,6 +95,30 @@ public class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter
 	}
 	
 	/**
+	 * Returns the dir where the screenshots will be saved. Used on the takeScreenShot(String)
+	 * method as the base dir. <br/>
+	 * May be overridden.
+	 * 
+	 * @return The dir where the screenshots will be saved.
+	 * @since 0.0.1
+	 */
+	public String getScreenShotPath() {
+		return "target/tests-screenshots/";
+	}
+	
+	/**
+	 * Returns the url of the test. Called on a beforeClass lifecycle to automatically navigate to
+	 * its url. <br/>
+	 * May be overridden.
+	 * 
+	 * @return The url of the test.
+	 * @since 0.0.1
+	 */
+	public String getUrl() {
+		return null;
+	}
+	
+	/**
 	 * Should init the driver instance for the test. <br/>
 	 * May be overridden.
 	 * 
@@ -120,8 +144,8 @@ public class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter
 	}
 	
 	/**
-	 * As {@link #initElements(Class)} but will only replace the element fields of an already
-	 * instantiated Object.
+	 * As initElements(Class) but will only replace the element fields of an already instantiated
+	 * Object.
 	 * 
 	 * @param <E> The type of the instance.
 	 * @param instance The instance whose fields should be proxied.
@@ -134,7 +158,7 @@ public class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter
 	
 	@Override
 	public T takeScreenShot(String fileName) {
-		WebDriverUtils.takeScreenShot(this.driver, fileName);
+		WebDriverUtils.takeScreenShot(this.driver, this.getScreenShotPath() + fileName);
 		return (T) this;
 	}
 	
@@ -151,6 +175,12 @@ public class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter
 		makeDriverVisibleForThread(this.driver);
 		addHookToQuitDriverOnShutdown(this.driver);
 		injectPagesIntoTest(this);
+		this.goToUrl();
+	}
+	
+	private void goToUrl() {
+		String url = this.getUrl();
+		if (url != null) this.driver.get(url);
 	}
 	
 }

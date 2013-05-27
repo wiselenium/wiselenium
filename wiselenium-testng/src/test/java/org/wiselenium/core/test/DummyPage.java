@@ -1,7 +1,7 @@
-package org.wiselenium.testng;
+package org.wiselenium.core.test;
 
 import static org.testng.Assert.assertEquals;
-import static org.wiselenium.testng.FileUtils.getAbsoluteFilePath;
+import static org.wiselenium.core.test.FileUtils.getAbsoluteFilePath;
 
 import java.util.List;
 

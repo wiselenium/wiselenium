@@ -1,5 +1,6 @@
-package org.wiselenium.testng;
+package org.wiselenium.core.test;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -12,7 +13,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wiselenium.core.element.field.Radiobutton;
 import org.wiselenium.core.element.field.Text;
-import org.wiselenium.core.test.Page;
+import org.wiselenium.core.pagefactory.dummy.DummyPage;
 
 @SuppressWarnings("javadoc")
 public class WiseTestNGTest extends WiseTestNG<WiseTestNGTest> {
@@ -20,6 +21,11 @@ public class WiseTestNGTest extends WiseTestNG<WiseTestNGTest> {
 	@Page
 	private DummyPage page;
 	
+	
+	@Override
+	public String getUrl() {
+		return DummyPage.URL;
+	}
 	
 	@BeforeClass
 	public void pageShouldBeInjected() {
@@ -53,11 +59,16 @@ public class WiseTestNGTest extends WiseTestNG<WiseTestNGTest> {
 		assertNotNull(page.getText());
 	}
 	
+	@BeforeClass
+	public void shouldStartTestAtUrl() {
+		assertEquals(this.getDriver().getCurrentUrl(), this.getUrl());
+	}
+	
 	@Test
 	public void shouldTakeScreenShot() {
 		String fileName = "wiseTestScreenShot.png";
 		this.takeScreenShot(fileName);
-		File file = new File(fileName);
+		File file = new File(this.getScreenShotPath() + fileName);
 		file.deleteOnExit();
 		assertTrue(file.exists());
 	}

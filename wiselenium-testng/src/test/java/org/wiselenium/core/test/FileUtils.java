@@ -1,4 +1,4 @@
-package org.wiselenium.testng;
+package org.wiselenium.core.test;
 
 import java.io.File;
 

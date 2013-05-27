@@ -1,9 +1,9 @@
-package org.wiselenium.testng;
+package org.wiselenium.core.test;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.wiselenium.core.test.WiseTest;
+import org.testng.annotations.Listeners;
 
 /**
  * All wiselenium TestNG tests should extend this class.
@@ -12,16 +12,13 @@ import org.wiselenium.core.test.WiseTest;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
+@Listeners(WiseTestNGListener.class)
 public class WiseTestNG<T extends WiseTestNG<T>> extends WiseTest<T> {
 	
-	/**
-	 * Initializes the driver and all other pre-requisites for the test.
-	 * 
-	 * @since 0.0.1
-	 */
+	@Override
 	@BeforeClass
-	public void initWiseTestNG() {
-		this.initWiseTest();
+	public void initWiseTest() {
+		super.initWiseTest();
 	}
 	
 	/**
