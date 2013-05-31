@@ -8,12 +8,6 @@ It makes it possible to easily create and use your own UI component types in you
 Suppose you want to test for the values within the "wiselenium table of features" below:
 
 <table name="wiselenium-features">
-    <thead>
-        <tr>
-            <th>Framework Features</th>
-            <th>wiselenium</th>
-        </tr>
-    </thead>
     <tbody>
         <tr>
             <td>Provides strongly typed HTML elements with built-in methods</td>
@@ -31,7 +25,7 @@ Suppose you want to test for the values within the "wiselenium table of features
             <td>Adds convenience for test creation</td>
             <td>Yes</td>
         </tr>
-  	<tr>
+        </tr>
             <td>Transparently overcomes some driver-specific issues (e.g. IE)</td>
             <td>Yes (Soon!)</td>
         </tr>
@@ -47,10 +41,6 @@ public class GitHubExample extends WiseTestNG<GitHubExample> {
   public void shouldTestWiseleniumTableOfFeatures() {
 		this.get("https://github.com/andreschaffer/wiselenium");
 		Table table = this.findElement(Table.class, By.name("wiselenium-features"));
-		
-		TableRow headRow = table.getHead().and().getRow(0);
-		assertEquals(headRow.getCell(0).getText(), "Framework Features");
-		assertEquals(headRow.getCell(1).getText(), "wiselenium");
 		
 		for (TableRow bodyRow : table.getBody().and().getRows())
 			assertTrue(bodyRow.getCell(1).getText().contains("Yes"));
