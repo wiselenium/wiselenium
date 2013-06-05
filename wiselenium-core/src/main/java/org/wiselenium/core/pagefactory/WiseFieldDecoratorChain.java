@@ -1,7 +1,7 @@
 package org.wiselenium.core.pagefactory;
 
+import static org.wiselenium.core.AnnotationUtils.isAnnotationPresent;
 import static org.wiselenium.core.ClasspathUtils.findImplementationClass;
-import static org.wiselenium.core.pagefactory.AnnotationUtils.isAnnotationPresent;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ class WiseFieldDecoratorChain extends ExtendedSeleniumDecoratorChainTemplate {
 	
 	@Override
 	protected <E> List<E> decorateWebElements(Class<E> clazz, List<WebElement> webElements) {
-		return WiseElementListProxy.getInstance(clazz, webElements);
+		return WiseElementListProxy.getInstance(clazz, webElements, this.factory);
 	}
 	
 	@Override

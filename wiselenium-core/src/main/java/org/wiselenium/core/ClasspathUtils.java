@@ -2,6 +2,7 @@ package org.wiselenium.core;
 
 import java.lang.reflect.Modifier;
 
+
 /**
  * Utility class to find resources on the classpath.
  * 

@@ -1,14 +1,14 @@
-package org.wiselenium.core.pagefactory;
+package org.wiselenium.core;
 
 import java.lang.annotation.Annotation;
 
 /**
- * Utility class to verify is an annotation is present on interfaces or types.
+ * Utility class to verify if annotations are present on types.
  * 
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-final class AnnotationUtils {
+public final class AnnotationUtils {
 	
 	private AnnotationUtils() {}
 	

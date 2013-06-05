@@ -14,16 +14,16 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-class WiseContainerDecoratorChain extends ExtendedSeleniumDecoratorChainTemplate {
+class WiseFrameDecoratorChain extends ExtendedSeleniumDecoratorChainTemplate {
 	
-	WiseContainerDecoratorChain(ElementLocatorFactory factory) {
+	WiseFrameDecoratorChain(ElementLocatorFactory factory) {
 		super(factory);
 	}
 	
 	@Override
 	protected <E> E decorateWebElement(Class<E> clazz, WebElement webElement) {
 		Class<? extends E> implementationClass = findImplementationClass(clazz);
-		return WiseContainerProxy.getInstance(implementationClass, webElement);
+		return WiseFrameProxy.getInstance(implementationClass, webElement);
 	}
 	
 	@Override
@@ -33,7 +33,7 @@ class WiseContainerDecoratorChain extends ExtendedSeleniumDecoratorChainTemplate
 	
 	@Override
 	protected <E> boolean shouldDecorate(Class<E> clazz) {
-		return isAnnotationPresent(clazz, org.wiselenium.core.Container.class);
+		return isAnnotationPresent(clazz, org.wiselenium.core.Frame.class);
 	}
 	
 }

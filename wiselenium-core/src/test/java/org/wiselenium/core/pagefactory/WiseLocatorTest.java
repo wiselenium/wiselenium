@@ -14,6 +14,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.wiselenium.core.element.container.Select;
 import org.wiselenium.core.element.field.Radiobutton;
+import org.wiselenium.core.pagefactory.WiseLocator;
 import org.wiselenium.core.pagefactory.dummy.DummyPage;
 import org.wiselenium.core.test.WiseTestNG;
 

@@ -1,5 +1,7 @@
 package org.wiselenium.core.pagefactory;
 
+import static org.wiselenium.core.pagefactory.WiseElementProxyUtils.isGetWrappedElement;
+
 import java.lang.reflect.Method;
 
 import net.sf.cglib.proxy.Enhancer;
@@ -35,11 +37,6 @@ final class WiseFieldProxy implements MethodInterceptor {
 		} catch (IllegalArgumentException ex) {
 			throw new ClassWithoutNoArgConstructorException(implementationClass, ex);
 		}
-	}
-	
-	private static boolean isGetWrappedElement(Method method) {
-		return "getWrappedElement".equals(method.getName())
-			&& method.getReturnType() == WebElement.class && method.getParameterTypes().length == 0;
 	}
 	
 	@Override

@@ -1,5 +1,7 @@
 package org.wiselenium.core.test;
 
+import static org.openqa.selenium.ie.InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -12,9 +14,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
- * Enum for the "driver" TestNG parameter value.
+ * WebDrivers enum for convenience.
  * 
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
@@ -52,35 +55,75 @@ public enum Driver {
 	},
 	
 	/**
-	 * Corresponds to the InternetExplorerDriver.
+	 * Corresponds to the 32-bit InternetExplorerDriver.
 	 */
-	IE {
+	IE32 {
 		
 		@Override
 		public InternetExplorerDriver initDriver(Capabilities capabilities) {
-			String driverResource;
-			String fileName;
-			String osArch = System.getProperty("os.arch");
-			if (osArch.endsWith("64")) {
-				driverResource = "IEDriverServer-64.exe";
-				fileName = "IEDriverServer-64";
-			} else {
-				driverResource = "IEDriverServer-32.exe";
-				fileName = "IEDriverServer-32";
-			}
+			String driverResource = "IEDriverServer-32.exe";
 			File fileDriverExe;
 			try {
-				fileDriverExe = this.copyResourceToTempFile(driverResource, fileName, ".exe");
+				fileDriverExe = this.copyResourceToTempFile(driverResource, "IEDriverServer-32",
+					".exe");
 			} catch (IOException e) {
 				throw new DriverInitializationException(driverResource, e);
 			}
 			System.setProperty("webdriver.ie.driver", fileDriverExe.getAbsolutePath());
-			return new InternetExplorerDriver(capabilities);
+			return new InternetExplorerDriver(this.hackCapabilities(capabilities));
 		}
+		
+		private Capabilities hackCapabilities(Capabilities capabilities) {
+			if (capabilities instanceof DesiredCapabilities)
+				((DesiredCapabilities) capabilities).setCapability(
+					INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+			
+			return capabilities;
+		}
+		
+	},
+	
+	/**
+	 * Corresponds to the 64-bit InternetExplorerDriver.
+	 */
+	IE64 {
+		
+		@Override
+		public InternetExplorerDriver initDriver(Capabilities capabilities) {
+			String driverResource = "IEDriverServer-64.exe";
+			File fileDriverExe;
+			try {
+				fileDriverExe = this.copyResourceToTempFile(driverResource, "IEDriverServer-64",
+					".exe");
+			} catch (IOException e) {
+				throw new DriverInitializationException(driverResource, e);
+			}
+			System.setProperty("webdriver.ie.driver", fileDriverExe.getAbsolutePath());
+			return new InternetExplorerDriver(this.hackCapabilities(capabilities));
+		}
+		
+		private Capabilities hackCapabilities(Capabilities capabilities) {
+			if (capabilities instanceof DesiredCapabilities)
+				((DesiredCapabilities) capabilities).setCapability(
+					INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+			
+			return capabilities;
+		}
+		
 	};
 	
 	/**
 	 * Should init a webDriver.
+	 * 
+	 * @return An instance of the webDriver.
+	 * @since 0.0.1
+	 */
+	public WebDriver initDriver() {
+		return this.initDriver(new DesiredCapabilities());
+	}
+	
+	/**
+	 * Should init a webDriver with the desired capabilities.
 	 * 
 	 * @param capabilities The desired capabilities for the webDriver.
 	 * @return An instance of the webDriver.

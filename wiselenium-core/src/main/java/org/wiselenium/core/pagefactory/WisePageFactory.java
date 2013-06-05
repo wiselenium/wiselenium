@@ -4,8 +4,10 @@ import java.lang.reflect.Field;
 
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
+import org.wiselenium.core.AjaxElement;
 
 /**
  * Utility class to create Pages.
@@ -28,8 +30,13 @@ public final class WisePageFactory {
 	 * @since 0.0.1
 	 */
 	public static <T> T initElements(SearchContext searchContext, T instance) {
-		WiseDecorator decorator = new WiseDecorator(new DefaultElementLocatorFactory(searchContext));
-		return initElements(decorator, instance);
+		Class<?> currentInstanceHierarchyClass = instance.getClass();
+		while (currentInstanceHierarchyClass != Object.class) {
+			proxyElements(searchContext, instance, currentInstanceHierarchyClass);
+			currentInstanceHierarchyClass = currentInstanceHierarchyClass.getSuperclass();
+		}
+		
+		return instance;
 	}
 	
 	/**
@@ -55,14 +62,14 @@ public final class WisePageFactory {
 		return initElements(driver, instance);
 	}
 	
-	private static <T> T initElements(FieldDecorator decorator, T instance) {
-		Class<?> currentInstanceHierarchyClass = instance.getClass();
-		while (currentInstanceHierarchyClass != Object.class) {
-			proxyElements(decorator, instance, currentInstanceHierarchyClass);
-			currentInstanceHierarchyClass = currentInstanceHierarchyClass.getSuperclass();
-		}
-		
-		return instance;
+	private static FieldDecorator instantiateDecorator(SearchContext searchContext, Field field) {
+		FieldDecorator decorator;
+		AjaxElement ajaxElementAnnotation = field.getAnnotation(AjaxElement.class);
+		if (ajaxElementAnnotation != null) {
+			int timeout = ajaxElementAnnotation.timeOutInSeconds();
+			decorator = new WiseDecorator(new AjaxElementLocatorFactory(searchContext, timeout));
+		} else decorator = new WiseDecorator(new DefaultElementLocatorFactory(searchContext));
+		return decorator;
 	}
 	
 	private static <T> T instantiatePage(WebDriver driver, Class<T> clazz) {
@@ -89,11 +96,12 @@ public final class WisePageFactory {
 		}
 	}
 	
-	private static void proxyElements(FieldDecorator decorator, Object instance,
+	private static void proxyElements(SearchContext searchContext, Object instance,
 		Class<?> instanceHierarchyClass) {
 		
 		Field[] fields = instanceHierarchyClass.getDeclaredFields();
 		for (Field field : fields) {
+			FieldDecorator decorator = instantiateDecorator(searchContext, field);
 			Object value = decorator.decorate(instance.getClass().getClassLoader(), field);
 			if (value != null) try {
 				field.setAccessible(true);

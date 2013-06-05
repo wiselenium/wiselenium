@@ -50,6 +50,30 @@
 			              	</systemPropertyVariables>
 			            </configuration>
 			        </execution>
+			        <execution>
+			            <id>ie32-test</id>
+			            <phase>test</phase>
+			            <goals>
+			              <goal>test</goal>
+			            </goals>
+			            <configuration>
+			              	<systemPropertyVariables>
+			                	<driver>ie32</driver>
+			              	</systemPropertyVariables>
+			            </configuration>
+			        </execution>
+			        <execution>
+			            <id>ie64-test</id>
+			            <phase>test</phase>
+			            <goals>
+			              <goal>test</goal>
+			            </goals>
+			            <configuration>
+			              	<systemPropertyVariables>
+			                	<driver>ie64</driver>
+			              	</systemPropertyVariables>
+			            </configuration>
+			        </execution>
         	  </executions>
           </plugin>
   	</plugins>

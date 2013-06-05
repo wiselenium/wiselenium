@@ -1,12 +1,13 @@
 package org.wiselenium.core.test;
 
+import static org.wiselenium.core.test.Driver.FIREFOX;
+
 import java.lang.reflect.Field;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.wiselenium.core.ScreenShooter;
 import org.wiselenium.core.WebDriverUtils;
@@ -139,7 +140,7 @@ class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter<T> {
 	 * @since 0.0.1
 	 */
 	public WebDriver initDriver() {
-		return new FirefoxDriver(this.getDesiredCapabilities());
+		return FIREFOX.initDriver(this.getDesiredCapabilities());
 	}
 	
 	/**

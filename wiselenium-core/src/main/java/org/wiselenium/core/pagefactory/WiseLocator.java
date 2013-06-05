@@ -33,7 +33,8 @@ public final class WiseLocator {
 	 */
 	public static <E> E findElement(Class<E> clazz, By by, SearchContext searchContext) {
 		WebElement webElement = searchContext.findElement(by);
-		return getWiseDecorator(searchContext).decorate(clazz, webElement);
+		WiseDecorator decorator = new WiseDecorator(new DefaultElementLocatorFactory(searchContext));
+		return decorator.decorate(clazz, webElement);
 	}
 	
 	/**
@@ -52,11 +53,8 @@ public final class WiseLocator {
 	public static <E> List<E> findElements(Class<E> clazz, By by, SearchContext searchContext) {
 		List<WebElement> webElements = searchContext.findElements(by);
 		if (webElements.isEmpty()) return Lists.newArrayList();
-		return getWiseDecorator(searchContext).decorate(clazz, webElements);
-	}
-	
-	private static WiseDecorator getWiseDecorator(SearchContext searchContext) {
-		return new WiseDecorator(new DefaultElementLocatorFactory(searchContext));
+		WiseDecorator decorator = new WiseDecorator(new DefaultElementLocatorFactory(searchContext));
+		return decorator.decorate(clazz, webElements);
 	}
 	
 }
