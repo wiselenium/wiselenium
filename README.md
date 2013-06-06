@@ -108,7 +108,7 @@ public String getScreenShotPath() {
 }
 ```
 
-### WiseTestNG methods
+### The methods of the test
 The WiseTestNG class provides a lot of convenient self-explanatory methods:  
 `findElement(Class elementClass, By by)`, `initElements(Class pageClass)`, `get(String url)`, `getUrl()`, `takeScreenShot(String fileName)`, `waitFor(long timeOutInSeconds)`.  
 If these methods don't fulfill your needs, you can always get the original WebDriver from the `getDriver()` method and use as needed.
