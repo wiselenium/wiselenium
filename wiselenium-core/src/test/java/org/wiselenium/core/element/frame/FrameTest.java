@@ -17,6 +17,7 @@ import org.wiselenium.core.element.container.TableCell;
 import org.wiselenium.core.element.container.TableRow;
 import org.wiselenium.core.element.field.Radiobutton;
 import org.wiselenium.core.element.field.Text;
+import org.wiselenium.core.element.frame.impl.BasicFrame;
 import org.wiselenium.core.test.Page;
 import org.wiselenium.core.test.WiseTestNG;
 
@@ -48,6 +49,14 @@ public class FrameTest extends WiseTestNG<FrameTest> {
 		assertFalse(radios.isEmpty());
 		for (Radiobutton radio : radios)
 			assertNotNull(radio.getAttribute("name"));
+	}
+	
+	@Test
+	public void shouldFindElementWithBasicFrame() {
+		BasicFrame<?> frame = this.findElement(BasicFrame.class, By.id("frame_a"));
+		Text text = frame.findElement(Text.class, By.id("text"));
+		assertNotNull(text);
+		assertNotNull(text.getId());
 	}
 	
 	@Test

@@ -31,7 +31,7 @@ public class WiseTestNG<T extends WiseTestNG<T>> extends WiseTest<T> {
 	public WebDriver initDriver() {
 		if (this.driverParameter == null) return super.initDriver();
 		Driver driverEnum = Driver.valueOf(this.driverParameter.toUpperCase());
-		return driverEnum.initDriver(this.getDesiredCapabilities());
+		return driverEnum.initDriver();
 	}
 	
 	/**

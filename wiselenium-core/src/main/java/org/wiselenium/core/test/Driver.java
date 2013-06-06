@@ -30,6 +30,11 @@ public enum Driver {
 	CHROME {
 		
 		@Override
+		public ChromeDriver initDriver() {
+			return this.initDriver(DesiredCapabilities.chrome());
+		}
+		
+		@Override
 		public ChromeDriver initDriver(Capabilities capabilities) {
 			String driverResource = "chromedriver.exe";
 			File fileDriverExe;
@@ -49,6 +54,11 @@ public enum Driver {
 	FIREFOX {
 		
 		@Override
+		public FirefoxDriver initDriver() {
+			return this.initDriver(DesiredCapabilities.firefox());
+		}
+		
+		@Override
 		public FirefoxDriver initDriver(Capabilities capabilities) {
 			return new FirefoxDriver(capabilities);
 		}
@@ -58,6 +68,11 @@ public enum Driver {
 	 * Corresponds to the 32-bit InternetExplorerDriver.
 	 */
 	IE32 {
+		
+		@Override
+		public InternetExplorerDriver initDriver() {
+			return this.initDriver(DesiredCapabilities.internetExplorer());
+		}
 		
 		@Override
 		public InternetExplorerDriver initDriver(Capabilities capabilities) {
@@ -89,6 +104,11 @@ public enum Driver {
 	IE64 {
 		
 		@Override
+		public InternetExplorerDriver initDriver() {
+			return this.initDriver(DesiredCapabilities.internetExplorer());
+		}
+		
+		@Override
 		public InternetExplorerDriver initDriver(Capabilities capabilities) {
 			String driverResource = "IEDriverServer-64.exe";
 			File fileDriverExe;
@@ -118,9 +138,7 @@ public enum Driver {
 	 * @return An instance of the webDriver.
 	 * @since 0.0.1
 	 */
-	public WebDriver initDriver() {
-		return this.initDriver(new DesiredCapabilities());
-	}
+	public abstract WebDriver initDriver();
 	
 	/**
 	 * Should init a webDriver with the desired capabilities.

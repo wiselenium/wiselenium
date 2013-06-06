@@ -18,16 +18,16 @@ Suppose you want to test for the values within the "wiselenium table of features
             <td>Yes</td>
         </tr>
         <tr>
+            <td>Removes the burden of handling frames with WebDriver</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
             <td>Supports the Page Object pattern</td>
             <td>Yes</td>
         </tr>
         <tr>
             <td>Adds convenience for test creation</td>
             <td>Yes</td>
-        </tr>
-        </tr>
-            <td>Transparently overcomes some driver-specific issues (e.g. IE)</td>
-            <td>Yes (Soon!)</td>
         </tr>
     </tbody>
 </table>
@@ -49,49 +49,47 @@ public class GitHubExample extends WiseTestNG<GitHubExample> {
 }
 ```
 
-## Maven
+## Setup
 
-To setup your project and start using wiselenium, just add its dependency (not yet deployed to the Maven Central Repository!) to your `pom.xml`:
-```xml
-<dependency>
-	<groupId>org.wiselenium</groupId>
-	<artifactId>wiselenium-core</artifactId>
-	<version>0.1.0</version>
-	<scope>test</scope>
-</dependency>
-```
+wiselenium will soon be deployed to the Maven Central Repository.
 
-## WiseTestNG&lt;T&gt; and your test class
+## The test class
 
-The WiseTestNG class is intended to ease the configuration of your wiselenium tests with the TestNG framework:
+wiselenium provides the WiseTestNG class to ease the configuration of your tests with the TestNG framework.
 
-### Browser
-It is set to automatically open the browser on a beforeClass lifecyle and always close it afterClass. Firefox will be the default browser, which can be changed in two ways:  
+### The browser of the test
+WiseTestNG will automatically open a browser on a beforeClass lifecyle and always close if afterClass. Firefox is the default browser, which can be changed in two ways:  
   
 1) Override the `initDriver()` method to return the wanted browser.  
 ```java
 @Override
 public WebDriver initDriver() {
-	return new FirefoxDriver(this.getDesiredCapabilities());
+	return new FirefoxDriver();
 }
 ```  
-Notice the `getDesiredCapabilities()` method which can be overridden as well.
+
+Note that wiselenium offers a `Driver` enum to help driver instantiation:
+```java
+@Override
+public WebDriver initDriver() {
+	return Driver.CHROME.initDriver();
+}
+```  
   
-  
-2) Pass in the browser as a parameter through `testng.xml` ([TestNG documentation](http://testng.org/doc/index.html)).
+2) Pass in the browser as a parameter in the `testng.xml` ([TestNG documentation](http://testng.org/doc/index.html)).
 ```xml
 <parameter name="browser" value="firefox"/>
 ```
-The values must match any wiselenium `Driver` enum value.
+The values must match a `Driver` enum value.
 
-### URL
-Another parameter facility that you can take advantage of is the url, which, if present, will make WiseTestNG navigate to its value on a beforeClass lifecycle.
+### The URL of the test
+WiseTestNG can also navigate to a specific URL on a beforeClass lifecyle. For that, you can either override the `getUrl()` method or pass in the url parameter in the `testng.xml`.
 ```xml
 <parameter name="url" value="http://www.google.com"/>
 ```
 
-### Page Injection
-All page instance variables marked with the `@Page` annotation will be injected on your test.
+### The pages of the test
+WiseTestNG will inject all page instance variables annotated with `@Page` for you.
 ```java
 public class GitHubExample extends WiseTestNG<GitHubExample> {
 
@@ -102,22 +100,99 @@ public class GitHubExample extends WiseTestNG<GitHubExample> {
 
 ```
 
-A page must have either a no-arg constructor or a constructor that takes a WebDriver as only argument. You don't have to start your pages from the zero, because wiselenium provides the `Page` base class that already fulfills this requirement and many other convenience methods. Just extend it.
+### The failure of a test
+WiseTestNG will automatically take a screenshot of the browser screen when there's a test failure. You can change the directory to which the screenshots will be saved by overriding the method:
+```java
+public String getScreenShotPath() {
+		return "target/tests-screenshots/"; // default value
+	}
+	
+```
 
-### Find Element(s)
-As one could see from wiselenium "1 minute example", WiseTestNG makes it possible to find and use elements other than `WebElement`. In fact, the `Page` base class also offers this possibility.
-The only prerequisite is that the class of the element being searched is annotated with either `@Field` , `@Container` or `@Frame`.  
-A Field should be an element that doesn't contain any other elements, like an input, whereas a Container represents an element that do contain others, like a Table. By default, wiselenium automatically initializes every element inside a Page or a Container in a lazy mode.  
-The class of the element being search can (and should) be an interface. It's implementation class will be automatically lookedup. Check out wiselenium lookup strategy on the code javadoc.
+### WiseTestNG methods
+The WiseTestNG class provides a lot of convenient self-explanatory methods:  
+`findElement(Class elementClass, By by)`, `initElements(Class pageClass)`, `get(String url)`, `getUrl()`, `takeScreenShot(String fileName)`.  
+If these methods don't fulfill your needs, you can always get the original WebDriver from the `getDriver()` method and use as needed.
 
-### Create and use your Element
-As already said, an Element is identified by the annotations `@Field`, `@Container` and `@Frame`. Just annotate your element class with them, set a no-arg constructor and start using it!  
-Notice that wiselenium will always proxy your class and keep the original `WebElement`. To retrieve and use it, just call the `WiseUnwrapper.unwrapWebElement(...)` method passing in your element instance.  
-Again, you don't have to start your elements from the zero, as wiselenium provides base classes for them (Field/BasicField, Container/BasicContainer).
+## Elements
+An Element can be any type annotated with `@Field`, `@Container` or `@Frame` and must have a no-arg constructor.  
+Field: an element that doesn't contain any other elements, like an input text.  
+Container: represents an element that do contain others, like a table. wiselenium initializes every element inside a container in a lazy mode.  
+Frame: represents a HTML frame.  wiselenium will automatically switchTo the frame scope before any of its methods is called, and switchTo the previous scope afterwards. It also initializes every element inside a frame in a lazy mode.  
+When using wiselenium `findElements(...)` methods, you can pass an interface class. If so, it's implementation class will be automatically lookedup (check out wiselenium lookup strategy on the code javadoc).
+
+## The Page Object pattern
+wiselenium supports the Page Object pattern and has its own factory `initElements(...)` methods.  
+A page must have either a no-arg constructor or a constructor that takes a WebDriver as only argument. You don't have to start your pages from the zero, because wiselenium provides the `Page` base class that already fulfills this requirement and offers many other convenience methods. Just extend it!  
+Its instance variables will be located the same way Selenium/WebDriver does, with the difference that it'll inject not just WebElements, but also wiselenium Elements.
+
+### Page methods
+The Page class provides many conveninent self-explanatory methods:  
+`findElement(Class elementClass, By by)`, `initNextPage(Class<E> clazz)`, `executeScript(String script)`, `takeScreenShot(String fileName)`, `load()`, `isLoaded()`.  
+`load()` and `isLoaded()` methods refer to the `LoadableComponent` interface. For more information, check [Selenium wiki](https://code.google.com/p/selenium/wiki/LoadableComponent).  
+If these methods don't fulfill your needs, you can always get the original WebDriver from the `getWrappedDriver()` method and use as needed.
+
+## Create and use your Elements
+Just annotate your element class, set a no-arg constructor and start using it with wiselenium!  
+Note that wiselenium will always proxy your class and keep the original `WebElement`. To retrieve and use it, just call the `WiseUnwrapper.unwrapWebElement(...)` method passing in your element instance.  
+Again, you don't have to start your element classes from the zero, as wiselenium provides base classes for them (Field/BasicField, Container/BasicContainer, Frame/BasicFrame).
+
+## Frame usage
+As stated in the table of features, wiselenium removes the burden of handling frames with WebDriver.  
+Any Frame initialized with the wiselenium facilities will automatically and transparently handle its "switchTo" burden. So, lets say that you have a frame with an input text that you want to manage for example. You can either:  
+
+1) Create your own Frame element:
+```java
+public class DummyFrame extends BasicFrame<DummyFrame> {
+
+	private Text text;
+
+	public void type(String value) {
+		this.text.sendKeys(value);
+	}
+	
+	public String getValue() {
+		return this.text.getValue();
+	}
+
+}
+```
+
+```java
+public class DummyTest extends WiseTestNG<DummyTest> {
+
+	@Test
+	public void shouldUseFrameTransparently() {
+		DummyFrame frame = this.findElement(DummyFrame.class, By.name("frameName"));
+		String value = "test";
+		frame.type(value);
+		assertEquals(frame.getValue(), value);
+	}
+
+}
+```
+As can be seen, once the frame was found, we could use its inner elements as if they were at the default scope!  
+  
+2) Find the frame as a `BasicFrame` and export the input text that is inside it:
+```java
+public class DummyTest extends WiseTestNG<DummyTest> {
+
+	@Test
+	public void shouldUseExportedTextTransparently() {
+		BasicFrame frame = this.findElement(BasicFrame.class, By.name("frameName"));
+		Text text = frame.findElement(Text.class, By.name("text"));
+		String value = "test";
+		assertEquals(text.sendKeys(value).and().getValue(), value);
+	}
+
+}
+```
+Note that the `Frame.findElement(...)` method just exported the input text so that it could be used transparently even outside the frame!  
+As a matter of fact, the `BasicFrame` has a method called `exportInnerElement(E element)` that does just that. The trick is that its `findElement(...)` method makes use of the `exportInnerElement(E element)`.
 
 # Code Health
 wiselenium is developed with a real concern for code quality.  
-This is [Sonar's](http://www.sonarsource.org/) wiselenium dashboard running with the default 'Sonar Way with Findbugs' profile, except for some rules regarding braces ('If Stmts Must Use Braces', 'For Loops Must Use Braces', 'If Else Stmts Must Use Braces').  
+This is [Sonar's](http://www.sonarsource.org/) wiselenium dashboard running with the default 'Sonar Way with Findbugs' profile, except for some rules regarding braces ('If Stmts Must Use Braces', etc).  
 <img src='etc/sonar.png'/>
 
 # About the developers

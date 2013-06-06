@@ -6,9 +6,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.wiselenium.core.ScreenShooter;
 import org.wiselenium.core.WebDriverUtils;
 import org.wiselenium.core.WiseQuery;
@@ -88,17 +86,6 @@ class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter<T> {
 	}
 	
 	/**
-	 * Returns the desired capabilities for the driver of the test. <br/>
-	 * May be overridden. By default, used on the initDriver() method.
-	 * 
-	 * @return The desired capabilities for the driver of the test.
-	 * @since 0.0.1
-	 */
-	public Capabilities getDesiredCapabilities() {
-		return new DesiredCapabilities();
-	}
-	
-	/**
 	 * Returns the driver of the test.
 	 * 
 	 * @return The driver of the test.
@@ -140,7 +127,7 @@ class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter<T> {
 	 * @since 0.0.1
 	 */
 	public WebDriver initDriver() {
-		return FIREFOX.initDriver(this.getDesiredCapabilities());
+		return FIREFOX.initDriver();
 	}
 	
 	/**
