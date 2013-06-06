@@ -32,7 +32,7 @@ Suppose you want to test for the values within the "wiselenium table of features
     </tbody>
 </table>
   
-Then all you'd have to do is lookup for the table and use its built-in methods for the test:
+Then all you have to do is find the table and use its built-in methods for the test:
 
 ```java
 public class GitHubExample extends WiseTestNG<GitHubExample> {
@@ -98,7 +98,6 @@ public class GitHubExample extends WiseTestNG<GitHubExample> {
 	private DummyPage page;
 	
 }
-
 ```
 
 ### The failure of a test
@@ -106,8 +105,7 @@ WiseTestNG will automatically take a screenshot of the browser screen when there
 ```java
 public String getScreenShotPath() {
 		return "target/tests-screenshots/"; // default value
-	}
-	
+}
 ```
 
 ### WiseTestNG methods
@@ -120,7 +118,12 @@ An Element can be any type annotated with `@Field`, `@Container` or `@Frame` and
   - Field: an element that doesn't contain any other elements, like an input text.  
   - Container: represents an element that do contain others, like a table. wiselenium initializes every element inside a container in a lazy mode.  
   - Frame: represents a HTML frame.  wiselenium will automatically switchTo the frame scope before any of its methods is called, and switchTo the previous scope afterwards. It also initializes every element inside a frame in a lazy mode.  
+
 When using wiselenium `findElements(...)` methods, you can pass an interface class. If so, it's implementation class will be automatically lookedup (check out wiselenium lookup strategy on the code javadoc).
+
+### Element types
+wiselenium offers you almost all of the HTML elements:  
+`Text`,`Button`,`Hyperlink`,`Checkbox`,`Radiobutton`,`Img`,`Label`,`Select`,`MultiSelect`,`Table`,`Frame`, etc.
 
 ## The Page Object pattern
 wiselenium supports the Page Object pattern and has its own factory `initElements(...)` methods.  
