@@ -68,13 +68,14 @@ public WebDriver initDriver() {
 }
 ```  
 
-Note that wiselenium offers a `Driver` enum to help driver instantiation:
+Note that wiselenium offers a `Driver` enum to help you instantiate the driver:
 ```java
 @Override
 public WebDriver initDriver() {
 	return Driver.CHROME.initDriver();
 }
 ```  
+As known, Chrome and IE require the extra configuration of setting their exe drivers on your path (see [IE Driver wiki](https://code.google.com/p/selenium/wiki/InternetExplorerDriver)), but wiselenium `Driver` already does that for you.  
   
 2) Pass in the browser as a parameter in the `testng.xml` ([TestNG documentation](http://testng.org/doc/index.html)).
 ```xml
@@ -116,9 +117,9 @@ If these methods don't fulfill your needs, you can always get the original WebDr
 
 ## Elements
 An Element can be any type annotated with `@Field`, `@Container` or `@Frame` and must have a no-arg constructor.  
-Field: an element that doesn't contain any other elements, like an input text.  
-Container: represents an element that do contain others, like a table. wiselenium initializes every element inside a container in a lazy mode.  
-Frame: represents a HTML frame.  wiselenium will automatically switchTo the frame scope before any of its methods is called, and switchTo the previous scope afterwards. It also initializes every element inside a frame in a lazy mode.  
+  - Field: an element that doesn't contain any other elements, like an input text.  
+  - Container: represents an element that do contain others, like a table. wiselenium initializes every element inside a container in a lazy mode.  
+  - Frame: represents a HTML frame.  wiselenium will automatically switchTo the frame scope before any of its methods is called, and switchTo the previous scope afterwards. It also initializes every element inside a frame in a lazy mode.  
 When using wiselenium `findElements(...)` methods, you can pass an interface class. If so, it's implementation class will be automatically lookedup (check out wiselenium lookup strategy on the code javadoc).
 
 ## The Page Object pattern
@@ -131,6 +132,17 @@ The Page class provides many conveninent self-explanatory methods:
 `findElement(Class elementClass, By by)`, `initNextPage(Class<E> clazz)`, `executeScript(String script)`, `takeScreenShot(String fileName)`, `load()`, `isLoaded()`.  
 `load()` and `isLoaded()` methods refer to the `LoadableComponent` interface. For more information, check [Selenium wiki](https://code.google.com/p/selenium/wiki/LoadableComponent).  
 If these methods don't fulfill your needs, you can always get the original WebDriver from the `getWrappedDriver()` method and use as needed.
+
+### @AjaxElement
+Sometimes you have to wait for an element to be present, usually until an AJAX call completes. In these cases, wiselenium offers you the `@AjaxElement` annotation:
+```java
+public class DummyPage extends Page<DummyPage> {
+	
+	@AjaxElement(timeOutInSeconds=5) // default value
+	private Button button;
+	
+}
+```
 
 ## Create and use your Elements
 Just annotate your element class, set a no-arg constructor and start using it with wiselenium!  
