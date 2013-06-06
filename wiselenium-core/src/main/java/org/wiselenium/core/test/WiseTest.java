@@ -7,8 +7,8 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.wiselenium.core.ScreenShooting;
-import org.wiselenium.core.WiseQuery;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.wiselenium.core.WiseRoot;
 import org.wiselenium.core.WiseThreadLocal;
 import org.wiselenium.core.pagefactory.PageInitializationException;
 import org.wiselenium.core.pagefactory.WiseLocator;
@@ -25,7 +25,7 @@ import org.wiselenium.core.util.ScreenShooter;
  * @since 0.0.1
  */
 @SuppressWarnings("unchecked")
-class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooting<T> {
+class WiseTest<T extends WiseTest<T>> implements WiseRoot<T> {
 	
 	private WebDriver driver;
 	
@@ -166,6 +166,16 @@ class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooting<T> {
 	public T takeScreenShot(String fileName) {
 		ScreenShooter.takeScreenShot(this.driver, this.getScreenShotPath() + fileName);
 		return (T) this;
+	}
+	
+	@Override
+	public WebDriverWait waitFor(long timeOutInSeconds) {
+		return new WebDriverWait(this.driver, timeOutInSeconds);
+	}
+	
+	@Override
+	public WebDriverWait waitFor(long timeOutInSeconds, long sleepInMillis) {
+		return new WebDriverWait(this.driver, timeOutInSeconds, sleepInMillis);
 	}
 	
 	/**

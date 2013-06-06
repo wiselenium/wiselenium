@@ -110,7 +110,7 @@ public String getScreenShotPath() {
 
 ### WiseTestNG methods
 The WiseTestNG class provides a lot of convenient self-explanatory methods:  
-`findElement(Class elementClass, By by)`, `initElements(Class pageClass)`, `get(String url)`, `getUrl()`, `takeScreenShot(String fileName)`.  
+`findElement(Class elementClass, By by)`, `initElements(Class pageClass)`, `get(String url)`, `getUrl()`, `takeScreenShot(String fileName)`, `waitFor(long timeOutInSeconds)`.  
 If these methods don't fulfill your needs, you can always get the original WebDriver from the `getDriver()` method and use as needed.
 
 ## Elements
@@ -132,7 +132,7 @@ Its instance variables will be located the same way Selenium/WebDriver does, wit
 
 ### Page methods
 The Page class provides many conveninent self-explanatory methods:  
-`findElement(Class elementClass, By by)`, `initNextPage(Class<E> clazz)`, `executeScript(String script)`, `takeScreenShot(String fileName)`, `load()`, `isLoaded()`.  
+`findElement(Class elementClass, By by)`, `initNextPage(Class<E> clazz)`, `executeScript(String script)`, `takeScreenShot(String fileName)`, `waitFor(long timeOutInSeconds)`, `load()`, `isLoaded()`.  
 `load()` and `isLoaded()` methods refer to the `LoadableComponent` interface. For more information, check [Selenium wiki](https://code.google.com/p/selenium/wiki/LoadableComponent).  
 If these methods don't fulfill your needs, you can always get the original WebDriver from the `getWrappedDriver()` method and use as needed.
 

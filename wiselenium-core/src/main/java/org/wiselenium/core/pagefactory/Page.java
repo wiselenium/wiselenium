@@ -7,8 +7,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.support.ui.LoadableComponent;
-import org.wiselenium.core.ScreenShooting;
-import org.wiselenium.core.WiseQuery;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.wiselenium.core.WiseRoot;
 import org.wiselenium.core.util.ScreenShooter;
 
 /**
@@ -23,8 +23,8 @@ import org.wiselenium.core.util.ScreenShooter;
  * @param <T> The page type.
  * @since 0.0.1
  */
-public class Page<T extends Page<T>> extends LoadableComponent<T> implements WrapsDriver,
-	WiseQuery, ScreenShooting<T> {
+public class Page<T extends Page<T>> extends LoadableComponent<T> implements WiseRoot<T>,
+	WrapsDriver {
 	
 	private WebDriver driver;
 	
@@ -137,6 +137,16 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wra
 	public T takeScreenShot(String fileName) {
 		ScreenShooter.takeScreenShot(this.getWrappedDriver(), fileName);
 		return (T) this;
+	}
+	
+	@Override
+	public WebDriverWait waitFor(long timeOutInSeconds) {
+		return new WebDriverWait(this.getWrappedDriver(), timeOutInSeconds);
+	}
+	
+	@Override
+	public WebDriverWait waitFor(long timeOutInSeconds, long sleepInMillis) {
+		return new WebDriverWait(this.getWrappedDriver(), timeOutInSeconds, sleepInMillis);
 	}
 	
 	@Override

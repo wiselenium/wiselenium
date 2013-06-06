@@ -12,6 +12,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.wiselenium.core.element.container.Select;
@@ -137,6 +138,15 @@ public class PageTest extends WiseTestNG<PageTest> {
 	@Test(expectedExceptions = NoSuchElementException.class)
 	public void shouldThrowExceptionWhenElementIsNotFound() {
 		this.page.findElement(WebElement.class, By.id("inexistent"));
+	}
+	
+	@Test
+	public void shouldWaitFor() {
+		WebDriverWait webDriverWait1 = this.page.waitFor(5);
+		assertNotNull(webDriverWait1);
+		
+		WebDriverWait webDriverWait2 = this.page.waitFor(5, 1);
+		assertNotNull(webDriverWait2);
 	}
 	
 }

@@ -9,6 +9,7 @@ import java.io.File;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wiselenium.core.element.field.Radiobutton;
@@ -27,11 +28,6 @@ public class WiseTestNGTest extends WiseTestNG<WiseTestNGTest> {
 		return DummyPage.URL;
 	}
 	
-	@BeforeClass
-	public void shouldHavePageInjected() {
-		assertNotNull(this.page);
-	}
-	
 	@Test
 	public void shouldFindElement() {
 		Text text = this.get(DummyPage.URL).and().findElement(Text.class, By.id("text"));
@@ -44,6 +40,11 @@ public class WiseTestNGTest extends WiseTestNG<WiseTestNGTest> {
 			.findElements(Radiobutton.class, By.name("sex"));
 		assertNotNull(radiobuttons);
 		assertFalse(radiobuttons.isEmpty());
+	}
+	
+	@BeforeClass
+	public void shouldHavePageInjected() {
+		assertNotNull(this.page);
 	}
 	
 	@Test
@@ -71,6 +72,15 @@ public class WiseTestNGTest extends WiseTestNG<WiseTestNGTest> {
 		File file = new File(this.getScreenShotPath() + fileName);
 		file.deleteOnExit();
 		assertTrue(file.exists());
+	}
+	
+	@Test
+	public void shouldWaitFor() {
+		WebDriverWait webDriverWait1 = this.waitFor(5);
+		assertNotNull(webDriverWait1);
+		
+		WebDriverWait webDriverWait2 = this.waitFor(5, 1);
+		assertNotNull(webDriverWait2);
 	}
 	
 }
