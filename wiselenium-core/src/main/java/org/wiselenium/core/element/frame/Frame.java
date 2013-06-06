@@ -10,7 +10,7 @@ import org.wiselenium.core.element.Element;
  * @param <T> The frame type.
  * @since 0.0.1
  */
-@org.wiselenium.core.Frame
+@org.wiselenium.core.annotation.Frame
 public interface Frame<T extends Frame<T>> extends Element<T>, WiseQuery {
 	
 	/**

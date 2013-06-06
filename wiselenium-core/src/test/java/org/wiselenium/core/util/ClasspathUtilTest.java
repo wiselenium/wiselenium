@@ -1,7 +1,7 @@
-package org.wiselenium.core;
+package org.wiselenium.core.util;
 
 import static org.testng.Assert.assertEquals;
-import static org.wiselenium.core.ClasspathUtils.findImplementationClass;
+import static org.wiselenium.core.util.ClasspathUtil.findImplementationClass;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import org.wiselenium.core.element.field.Button;
 import org.wiselenium.core.element.field.impl.ButtonImpl;
 
 @SuppressWarnings("javadoc")
-public class ClasspathUtilsTest {
+public class ClasspathUtilTest {
 	
 	@Test
 	public void shouldFindImplementation() {

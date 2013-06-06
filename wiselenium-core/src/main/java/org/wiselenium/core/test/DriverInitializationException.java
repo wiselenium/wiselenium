@@ -8,7 +8,7 @@ import org.wiselenium.core.WiseException;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-public class DriverInitializationException extends WiseException {
+class DriverInitializationException extends WiseException {
 	
 	private static final long serialVersionUID = 1L;
 	

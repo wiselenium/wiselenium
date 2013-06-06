@@ -1,7 +1,7 @@
 package org.wiselenium.core.pagefactory;
 
-import static org.wiselenium.core.FrameUtils.getCurrentFramePath;
-import static org.wiselenium.core.pagefactory.WiseElementProxyUtils.isGetWrappedElement;
+import static org.wiselenium.core.pagefactory.WiseElementProxyUtil.isGetWrappedElement;
+import static org.wiselenium.core.util.FrameUtil.getCurrentFramePath;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -12,8 +12,8 @@ import net.sf.cglib.proxy.MethodProxy;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
-import org.wiselenium.core.FrameUtils;
 import org.wiselenium.core.WiseThreadLocal;
+import org.wiselenium.core.util.FrameUtil;
 
 /**
  * The wiselenium proxy for frames.
@@ -58,12 +58,12 @@ final class WiseFrameProxy implements MethodInterceptor {
 			this.initElements(obj);
 			return proxy.invokeSuper(obj, args);
 		} finally {
-			FrameUtils.switchToFrame(currentPath);
+			FrameUtil.switchToFrame(currentPath);
 		}
 	}
 	
 	private synchronized List<String> getParentFramePath() {
-		if (this.parentFramePath == null) this.parentFramePath = FrameUtils.getCurrentFramePath();
+		if (this.parentFramePath == null) this.parentFramePath = FrameUtil.getCurrentFramePath();
 		return this.parentFramePath;
 	}
 	
@@ -75,7 +75,7 @@ final class WiseFrameProxy implements MethodInterceptor {
 	}
 	
 	private synchronized void switchToFrame() {
-		FrameUtils.switchToFrame(this.getParentFramePath());
+		FrameUtil.switchToFrame(this.getParentFramePath());
 		WiseThreadLocal.getDriver().switchTo().frame(this.wrappedElement);
 	}
 	

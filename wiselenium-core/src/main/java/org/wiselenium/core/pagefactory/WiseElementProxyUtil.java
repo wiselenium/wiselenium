@@ -10,9 +10,9 @@ import org.openqa.selenium.WebElement;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-final class WiseElementProxyUtils {
+final class WiseElementProxyUtil {
 	
-	private WiseElementProxyUtils() {}
+	private WiseElementProxyUtil() {}
 	
 	/**
 	 * Verifies whether a method is the getWrappedElement() method.

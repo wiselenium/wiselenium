@@ -10,7 +10,7 @@ import org.wiselenium.core.element.Element;
  * @param <T> The container type.
  * @since 0.0.1
  */
-@org.wiselenium.core.Container
+@org.wiselenium.core.annotation.Container
 public interface Container<T extends Container<T>> extends Element<T>, WiseQuery {
 	
 }

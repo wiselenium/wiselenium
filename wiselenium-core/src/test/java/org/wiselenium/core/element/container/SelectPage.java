@@ -1,7 +1,7 @@
 package org.wiselenium.core.element.container;
 
 import static org.testng.Assert.assertEquals;
-import static org.wiselenium.core.FileUtils.getAbsoluteFilePath;
+import static org.wiselenium.core.util.TestResourceFinder.getAbsolutePath;
 
 import org.openqa.selenium.WebElement;
 import org.wiselenium.core.pagefactory.Page;
@@ -12,7 +12,7 @@ public class SelectPage extends Page<SelectPage> {
 	public static final String SELECT_CLICKED_MESSAGE = "select clicked";
 	public static final String SELECT_FOR = "text";
 	public static final String SELECT_TEXT = "select text";
-	public static final String URL = getAbsoluteFilePath("select.html");
+	public static final String URL = getAbsolutePath("select.html");
 	public static final String TITLE = "page for select tests";
 	public static final String FIRST_OPTION_VALUE = "value1";
 	public static final String SECOND_OPTION_VALUE = "value2";

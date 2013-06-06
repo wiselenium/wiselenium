@@ -13,6 +13,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wiselenium.core.element.field.Radiobutton;
 import org.wiselenium.core.element.field.Text;
+import org.wiselenium.core.test.annotation.Page;
 
 @SuppressWarnings("javadoc")
 public class WiseTestNGTest extends WiseTestNG<WiseTestNGTest> {
@@ -27,7 +28,7 @@ public class WiseTestNGTest extends WiseTestNG<WiseTestNGTest> {
 	}
 	
 	@BeforeClass
-	public void pageShouldBeInjected() {
+	public void shouldHavePageInjected() {
 		assertNotNull(this.page);
 	}
 	

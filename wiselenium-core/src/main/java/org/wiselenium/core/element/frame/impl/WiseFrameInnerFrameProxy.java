@@ -1,9 +1,9 @@
 package org.wiselenium.core.element.frame.impl;
 
-import static org.wiselenium.core.FrameUtils.getCurrentFramePath;
-import static org.wiselenium.core.element.frame.impl.WiseFrameInnerElementUtils.getWrappedElement;
-import static org.wiselenium.core.element.frame.impl.WiseFrameInnerElementUtils.isGetWrappedElement;
-import static org.wiselenium.core.element.frame.impl.WiseFrameInnerElementUtils.exportFields;
+import static org.wiselenium.core.element.frame.impl.WiseFrameInnerElementUtil.getWrappedElement;
+import static org.wiselenium.core.element.frame.impl.WiseFrameInnerElementUtil.isGetWrappedElement;
+import static org.wiselenium.core.element.frame.impl.WiseFrameInnerElementUtil.exportFields;
+import static org.wiselenium.core.util.FrameUtil.getCurrentFramePath;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -12,9 +12,9 @@ import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
 import org.openqa.selenium.WebElement;
-import org.wiselenium.core.FrameUtils;
 import org.wiselenium.core.WiseThreadLocal;
 import org.wiselenium.core.pagefactory.WisePageFactory;
+import org.wiselenium.core.util.FrameUtil;
 
 /**
  * The wiselenium proxy for frame inner frames.
@@ -31,11 +31,11 @@ final class WiseFrameInnerFrameProxy<E> implements MethodInterceptor {
 	
 	private WiseFrameInnerFrameProxy(E element) {
 		this.wrappedElement = element;
-		this.framePath = FrameUtils.getCurrentFramePath();
+		this.framePath = FrameUtil.getCurrentFramePath();
 	}
 	
 	static <E> E getInstance(E element) {
-		return WiseFrameInnerElementUtils.createProxy(element,
+		return WiseFrameInnerElementUtil.createProxy(element,
 			new WiseFrameInnerFrameProxy<E>(element));
 	}
 	
@@ -51,7 +51,7 @@ final class WiseFrameInnerFrameProxy<E> implements MethodInterceptor {
 			this.initElements(obj);
 			return proxy.invokeSuper(obj, args);
 		} finally {
-			FrameUtils.switchToFrame(currentPath);
+			FrameUtil.switchToFrame(currentPath);
 		}
 	}
 	
@@ -64,9 +64,9 @@ final class WiseFrameInnerFrameProxy<E> implements MethodInterceptor {
 	}
 	
 	private void switchToFrame() {
-		FrameUtils.switchToFrame(this.framePath);
+		FrameUtil.switchToFrame(this.framePath);
 		WiseThreadLocal.getDriver().switchTo()
-			.frame((WebElement) WiseFrameInnerElementUtils.getWrappedElement(this.wrappedElement));
+			.frame((WebElement) WiseFrameInnerElementUtil.getWrappedElement(this.wrappedElement));
 	}
 	
 }

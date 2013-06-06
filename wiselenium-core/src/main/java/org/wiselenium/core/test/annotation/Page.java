@@ -1,4 +1,4 @@
-package org.wiselenium.core.test;
+package org.wiselenium.core.test.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

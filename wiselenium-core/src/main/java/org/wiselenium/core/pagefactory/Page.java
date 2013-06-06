@@ -7,9 +7,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.support.ui.LoadableComponent;
-import org.wiselenium.core.ScreenShooter;
-import org.wiselenium.core.WebDriverUtils;
+import org.wiselenium.core.ScreenShooting;
 import org.wiselenium.core.WiseQuery;
+import org.wiselenium.core.util.ScreenShooter;
 
 /**
  * Basic implementation of a common Page. Should be extended to reflect your own page services. <br/>
@@ -24,7 +24,7 @@ import org.wiselenium.core.WiseQuery;
  * @since 0.0.1
  */
 public class Page<T extends Page<T>> extends LoadableComponent<T> implements WrapsDriver,
-	WiseQuery, ScreenShooter<T> {
+	WiseQuery, ScreenShooting<T> {
 	
 	private WebDriver driver;
 	
@@ -135,7 +135,7 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wra
 	@Override
 	@SuppressWarnings("unchecked")
 	public T takeScreenShot(String fileName) {
-		WebDriverUtils.takeScreenShot(this.getWrappedDriver(), fileName);
+		ScreenShooter.takeScreenShot(this.getWrappedDriver(), fileName);
 		return (T) this;
 	}
 	

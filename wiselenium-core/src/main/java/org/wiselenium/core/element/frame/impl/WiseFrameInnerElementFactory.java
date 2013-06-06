@@ -1,10 +1,10 @@
 package org.wiselenium.core.element.frame.impl;
 
-import static org.wiselenium.core.AnnotationUtils.isAnnotationPresent;
+import static org.wiselenium.core.util.AnnotationUtil.isAnnotationPresent;
 
 import org.openqa.selenium.WebElement;
-import org.wiselenium.core.Container;
-import org.wiselenium.core.Field;
+import org.wiselenium.core.annotation.Container;
+import org.wiselenium.core.annotation.Field;
 
 /**
  * Factory of frame inner elements.
@@ -33,7 +33,7 @@ final class WiseFrameInnerElementFactory {
 		if (isAnnotationPresent(element.getClass(), Container.class))
 			return WiseFrameInnerContainerProxy.getInstance(element);
 		
-		if (isAnnotationPresent(element.getClass(), org.wiselenium.core.Frame.class))
+		if (isAnnotationPresent(element.getClass(), org.wiselenium.core.annotation.Frame.class))
 			return WiseFrameInnerFrameProxy.getInstance(element);
 		
 		if (WebElement.class.isAssignableFrom(element.getClass())) {

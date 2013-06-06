@@ -1,4 +1,4 @@
-package org.wiselenium.core;
+package org.wiselenium.core.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,14 +9,14 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 /**
- * Utility class to centralize some webdriver common tasks.
+ * Utility class to handle screenshots.
  * 
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-public final class WebDriverUtils {
+public final class ScreenShooter {
 	
-	private WebDriverUtils() {}
+	private ScreenShooter() {}
 	
 	/**
 	 * Takes a screenshot of the webDriver page. <br/>

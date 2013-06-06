@@ -1,7 +1,7 @@
 package org.wiselenium.core.element.field;
 
 import static org.testng.Assert.assertEquals;
-import static org.wiselenium.core.FileUtils.getAbsoluteFilePath;
+import static org.wiselenium.core.util.TestResourceFinder.getAbsolutePath;
 
 import org.openqa.selenium.WebElement;
 import org.wiselenium.core.pagefactory.Page;
@@ -14,7 +14,7 @@ public class ImgPage extends Page<ImgPage> {
 	public static final String IMG_ALT = "img alt";
 	public static final String IMG_TITLE = "img title";
 	public static final String IMG_ID = "img";
-	public static final String URL = getAbsoluteFilePath("img.html");
+	public static final String URL = getAbsolutePath("img.html");
 	public static final String TITLE = "page for img tests";
 	public static final String IMG_CLASS = "any";
 	

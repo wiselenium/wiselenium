@@ -9,7 +9,7 @@ import org.wiselenium.core.element.Element;
  * @param <T> The field type.
  * @since 0.0.1
  */
-@org.wiselenium.core.Field
+@org.wiselenium.core.annotation.Field
 public interface Field<T extends Field<T>> extends Element<T> {
 	
 	/**

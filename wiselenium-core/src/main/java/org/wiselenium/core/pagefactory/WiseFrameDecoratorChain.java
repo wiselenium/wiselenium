@@ -1,7 +1,7 @@
 package org.wiselenium.core.pagefactory;
 
-import static org.wiselenium.core.AnnotationUtils.isAnnotationPresent;
-import static org.wiselenium.core.ClasspathUtils.findImplementationClass;
+import static org.wiselenium.core.util.AnnotationUtil.isAnnotationPresent;
+import static org.wiselenium.core.util.ClasspathUtil.findImplementationClass;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ class WiseFrameDecoratorChain extends ExtendedSeleniumDecoratorChainTemplate {
 	
 	@Override
 	protected <E> boolean shouldDecorate(Class<E> clazz) {
-		return isAnnotationPresent(clazz, org.wiselenium.core.Frame.class);
+		return isAnnotationPresent(clazz, org.wiselenium.core.annotation.Frame.class);
 	}
 	
 }

@@ -1,7 +1,7 @@
 package org.wiselenium.core.element.frame;
 
 import static org.testng.Assert.assertEquals;
-import static org.wiselenium.core.FileUtils.getAbsoluteFilePath;
+import static org.wiselenium.core.util.TestResourceFinder.getAbsolutePath;
 
 import org.wiselenium.core.pagefactory.Page;
 
@@ -9,7 +9,7 @@ import org.wiselenium.core.pagefactory.Page;
 public class FramePage extends Page<FramePage> {
 	
 	private static final String TITLE = "page for frame tests";
-	private static final String URL = getAbsoluteFilePath("frame.html");
+	private static final String URL = getAbsolutePath("frame.html");
 	
 	private FrameA frame_a;
 	private FrameB frame_b;

@@ -7,7 +7,7 @@ package org.wiselenium.core;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-public interface ScreenShooter<T> {
+public interface ScreenShooting<T> {
 	
 	/**
 	 * Takes a screenshot of the webDriver page and saves it into a file.

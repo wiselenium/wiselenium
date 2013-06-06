@@ -1,5 +1,6 @@
-package org.wiselenium.core;
+package org.wiselenium.core.util;
 
+import org.wiselenium.core.WiseException;
 
 /**
  * Represents an exception thrown while taking a snapshot of the webdriver page.

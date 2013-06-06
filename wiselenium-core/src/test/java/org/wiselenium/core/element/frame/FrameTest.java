@@ -18,8 +18,8 @@ import org.wiselenium.core.element.container.TableRow;
 import org.wiselenium.core.element.field.Radiobutton;
 import org.wiselenium.core.element.field.Text;
 import org.wiselenium.core.element.frame.impl.BasicFrame;
-import org.wiselenium.core.test.Page;
 import org.wiselenium.core.test.WiseTestNG;
+import org.wiselenium.core.test.annotation.Page;
 
 @SuppressWarnings("javadoc")
 public class FrameTest extends WiseTestNG<FrameTest> {

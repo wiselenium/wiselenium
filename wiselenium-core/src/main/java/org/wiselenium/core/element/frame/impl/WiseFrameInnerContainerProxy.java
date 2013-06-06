@@ -1,10 +1,10 @@
 package org.wiselenium.core.element.frame.impl;
 
-import static org.wiselenium.core.FrameUtils.getCurrentFramePath;
-import static org.wiselenium.core.FrameUtils.switchToFrame;
-import static org.wiselenium.core.element.frame.impl.WiseFrameInnerElementUtils.getWrappedElement;
-import static org.wiselenium.core.element.frame.impl.WiseFrameInnerElementUtils.isGetWrappedElement;
-import static org.wiselenium.core.element.frame.impl.WiseFrameInnerElementUtils.exportFields;
+import static org.wiselenium.core.element.frame.impl.WiseFrameInnerElementUtil.getWrappedElement;
+import static org.wiselenium.core.element.frame.impl.WiseFrameInnerElementUtil.isGetWrappedElement;
+import static org.wiselenium.core.element.frame.impl.WiseFrameInnerElementUtil.exportFields;
+import static org.wiselenium.core.util.FrameUtil.getCurrentFramePath;
+import static org.wiselenium.core.util.FrameUtil.switchToFrame;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -12,9 +12,9 @@ import java.util.List;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
-import org.wiselenium.core.FrameUtils;
 import org.wiselenium.core.WiseThreadLocal;
 import org.wiselenium.core.pagefactory.WisePageFactory;
+import org.wiselenium.core.util.FrameUtil;
 
 /**
  * The wiselenium proxy for frame inner containers.
@@ -31,11 +31,11 @@ final class WiseFrameInnerContainerProxy<E> implements MethodInterceptor {
 	
 	private WiseFrameInnerContainerProxy(E element) {
 		this.wrappedElement = element;
-		this.framePath = FrameUtils.getCurrentFramePath();
+		this.framePath = FrameUtil.getCurrentFramePath();
 	}
 	
 	static <E> E getInstance(E element) {
-		return WiseFrameInnerElementUtils.createProxy(element,
+		return WiseFrameInnerElementUtil.createProxy(element,
 			new WiseFrameInnerContainerProxy<E>(element));
 	}
 	

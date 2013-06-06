@@ -1,6 +1,6 @@
 package org.wiselenium.core.pagefactory;
 
-import static org.wiselenium.core.pagefactory.WiseElementProxyUtils.isGetWrappedElement;
+import static org.wiselenium.core.pagefactory.WiseElementProxyUtil.isGetWrappedElement;
 
 import java.lang.reflect.Method;
 

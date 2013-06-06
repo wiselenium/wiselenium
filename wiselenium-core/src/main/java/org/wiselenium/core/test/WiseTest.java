@@ -7,13 +7,14 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.wiselenium.core.ScreenShooter;
-import org.wiselenium.core.WebDriverUtils;
+import org.wiselenium.core.ScreenShooting;
 import org.wiselenium.core.WiseQuery;
 import org.wiselenium.core.WiseThreadLocal;
 import org.wiselenium.core.pagefactory.PageInitializationException;
 import org.wiselenium.core.pagefactory.WiseLocator;
 import org.wiselenium.core.pagefactory.WisePageFactory;
+import org.wiselenium.core.test.annotation.Page;
+import org.wiselenium.core.util.ScreenShooter;
 
 /**
  * All wiselenium tests should extend this class. <br/>
@@ -24,7 +25,7 @@ import org.wiselenium.core.pagefactory.WisePageFactory;
  * @since 0.0.1
  */
 @SuppressWarnings("unchecked")
-class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter<T> {
+class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooting<T> {
 	
 	private WebDriver driver;
 	
@@ -34,19 +35,23 @@ class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter<T> {
 			new WiseShutdownHook("wiselenium " + Thread.currentThread().getName(), webDriver));
 	}
 	
-	private static void injectPagesIntoTest(WiseTest<?> testInstance) {
+	private static void injectPageFieldIntoTest(Field field, WiseTest<?> testInstance) {
+		if (!field.isAnnotationPresent(Page.class)) return;
+		
+		field.setAccessible(true);
+		Object page = testInstance.initElements(field.getType());
+		try {
+			field.set(testInstance, page);
+		} catch (Exception e) {
+			throw new PageInitializationException(field.getType(), e);
+		}
+	}
+	
+	private static void injectPageFieldsIntoTest(WiseTest<?> testInstance) {
 		for (Class<?> clazz = testInstance.getClass(); !clazz.equals(Object.class); clazz = clazz
 			.getSuperclass())
 			for (Field field : clazz.getDeclaredFields())
-				if (field.isAnnotationPresent(Page.class)) {
-					field.setAccessible(true);
-					Object page = testInstance.initElements(field.getType());
-					try {
-						field.set(testInstance, page);
-					} catch (Exception e) {
-						throw new PageInitializationException(field.getType(), e);
-					}
-				}
+				injectPageFieldIntoTest(field, testInstance);
 	}
 	
 	private static void makeDriverVisibleForThread(WebDriver webDriver) {
@@ -159,7 +164,7 @@ class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter<T> {
 	
 	@Override
 	public T takeScreenShot(String fileName) {
-		WebDriverUtils.takeScreenShot(this.driver, this.getScreenShotPath() + fileName);
+		ScreenShooter.takeScreenShot(this.driver, this.getScreenShotPath() + fileName);
 		return (T) this;
 	}
 	
@@ -175,7 +180,7 @@ class WiseTest<T extends WiseTest<T>> implements WiseQuery, ScreenShooter<T> {
 		this.driver = this.initDriver();
 		makeDriverVisibleForThread(this.driver);
 		addHookToQuitDriverOnShutdown(this.driver);
-		injectPagesIntoTest(this);
+		injectPageFieldsIntoTest(this);
 		this.get(this.getUrl());
 	}
 	

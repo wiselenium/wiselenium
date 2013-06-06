@@ -1,7 +1,7 @@
 package org.wiselenium.core.element.field;
 
 import static org.testng.Assert.assertEquals;
-import static org.wiselenium.core.FileUtils.getAbsoluteFilePath;
+import static org.wiselenium.core.util.TestResourceFinder.getAbsolutePath;
 
 import org.wiselenium.core.element.field.impl.RadiobuttonImpl;
 import org.wiselenium.core.pagefactory.Page;
@@ -9,7 +9,7 @@ import org.wiselenium.core.pagefactory.Page;
 @SuppressWarnings("javadoc")
 public class RadiobuttonPage extends Page<RadiobuttonPage> {
 	
-	public static final String URL = getAbsoluteFilePath("radiobutton.html");
+	public static final String URL = getAbsolutePath("radiobutton.html");
 	public static final String TITLE = "page for radiobutton tests";
 	
 	private Radiobutton radiobutton;

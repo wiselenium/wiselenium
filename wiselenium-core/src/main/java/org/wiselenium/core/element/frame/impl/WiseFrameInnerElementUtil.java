@@ -16,9 +16,9 @@ import org.openqa.selenium.internal.WrapsElement;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-final class WiseFrameInnerElementUtils {
+final class WiseFrameInnerElementUtil {
 	
-	private WiseFrameInnerElementUtils() {}
+	private WiseFrameInnerElementUtil() {}
 	
 	/**
 	 * Proxies a frame inner element with the specified callback, so that it can be used

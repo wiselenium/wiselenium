@@ -1,13 +1,13 @@
-package org.wiselenium.core.test;
+package org.wiselenium.core.util;
 
 import java.io.File;
 
 @SuppressWarnings("javadoc")
-public final class FileUtils {
+public final class TestResourceFinder {
 	
-	public static String getAbsoluteFilePath(String relativePath) {
+	public static String getAbsolutePath(String fileName) {
 		String absolutePath = "file:///" + new File("").getAbsolutePath() + "/src/test/resources/"
-			+ relativePath;
+			+ fileName;
 		return absolutePath.replaceAll("\\\\", "/");
 	}
 	

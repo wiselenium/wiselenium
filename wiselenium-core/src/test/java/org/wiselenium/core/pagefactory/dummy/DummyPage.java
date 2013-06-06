@@ -1,7 +1,7 @@
 package org.wiselenium.core.pagefactory.dummy;
 
 import static org.testng.Assert.assertEquals;
-import static org.wiselenium.core.FileUtils.getAbsoluteFilePath;
+import static org.wiselenium.core.util.TestResourceFinder.getAbsolutePath;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class DummyPage extends Page<DummyPage> {
 	
 	public static final By BY_SELECT1 = By.id("select1");
 	public static final By BY_RADIOBUTTONS = By.name("sex");
-	public static final String URL = getAbsoluteFilePath("dummy.html");
+	public static final String URL = getAbsolutePath("dummy.html");
 	
 	@FindBy(name = "sex")
 	private List<WebElement> radiobuttons;

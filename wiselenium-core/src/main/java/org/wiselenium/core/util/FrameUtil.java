@@ -1,9 +1,10 @@
-package org.wiselenium.core;
+package org.wiselenium.core.util;
 
 import java.util.List;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.collections.Lists;
+import org.wiselenium.core.WiseThreadLocal;
 
 /**
  * Utility class to handle frames.
@@ -11,9 +12,9 @@ import org.testng.collections.Lists;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-public final class FrameUtils {
+public final class FrameUtil {
 	
-	private FrameUtils() {}
+	private FrameUtil() {}
 	
 	/**
 	 * Retrieves the current content path.

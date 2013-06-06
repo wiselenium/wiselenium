@@ -1,4 +1,4 @@
-package org.wiselenium.core;
+package org.wiselenium.core.util;
 
 import java.lang.annotation.Annotation;
 
@@ -8,9 +8,9 @@ import java.lang.annotation.Annotation;
  * @author Andre Ricardo Schaffer
  * @since 0.0.1
  */
-public final class AnnotationUtils {
+public final class AnnotationUtil {
 	
-	private AnnotationUtils() {}
+	private AnnotationUtil() {}
 	
 	/**
 	 * Finds an annotation in a class type hierarchy. <br/>

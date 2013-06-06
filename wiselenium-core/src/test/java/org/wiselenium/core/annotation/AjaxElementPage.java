@@ -1,9 +1,10 @@
-package org.wiselenium.core;
+package org.wiselenium.core.annotation;
 
 import static org.testng.Assert.assertEquals;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;
+import org.wiselenium.core.annotation.AjaxElement;
 import org.wiselenium.core.element.field.Hyperlink;
 import org.wiselenium.core.element.field.Text;
 import org.wiselenium.core.pagefactory.Page;

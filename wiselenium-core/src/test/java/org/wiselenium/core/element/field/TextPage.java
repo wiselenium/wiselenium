@@ -1,7 +1,7 @@
 package org.wiselenium.core.element.field;
 
 import static org.testng.Assert.assertEquals;
-import static org.wiselenium.core.FileUtils.getAbsoluteFilePath;
+import static org.wiselenium.core.util.TestResourceFinder.getAbsolutePath;
 
 import org.openqa.selenium.WebElement;
 import org.wiselenium.core.pagefactory.Page;
@@ -13,7 +13,7 @@ public class TextPage extends Page<TextPage> {
 	public static final String TEXT_CLICKED_MESSAGE = "text clicked";
 	public static final String TEXT_VALUE = "text";
 	public static final String HIDDEN_TEXT_VALUE = "hiddenText";
-	public static final String URL = getAbsoluteFilePath("text.html");
+	public static final String URL = getAbsolutePath("text.html");
 	public static final String TITLE = "page for text tests";
 	
 	private Text text;

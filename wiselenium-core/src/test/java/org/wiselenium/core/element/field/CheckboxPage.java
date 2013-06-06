@@ -1,14 +1,14 @@
 package org.wiselenium.core.element.field;
 
 import static org.testng.Assert.assertEquals;
-import static org.wiselenium.core.FileUtils.getAbsoluteFilePath;
+import static org.wiselenium.core.util.TestResourceFinder.getAbsolutePath;
 
 import org.wiselenium.core.pagefactory.Page;
 
 @SuppressWarnings("javadoc")
 public class CheckboxPage extends Page<CheckboxPage> {
 	
-	public static final String URL = getAbsoluteFilePath("checkbox.html");
+	public static final String URL = getAbsolutePath("checkbox.html");
 	public static final String TITLE = "page for checkbox tests";
 	
 	private Checkbox checkbox;

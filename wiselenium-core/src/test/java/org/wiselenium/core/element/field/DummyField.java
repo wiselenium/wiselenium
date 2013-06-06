@@ -1,7 +1,7 @@
 package org.wiselenium.core.element.field;
 
 import org.openqa.selenium.WebElement;
-import org.wiselenium.core.Field;
+import org.wiselenium.core.annotation.Field;
 
 @SuppressWarnings("javadoc")
 @Field

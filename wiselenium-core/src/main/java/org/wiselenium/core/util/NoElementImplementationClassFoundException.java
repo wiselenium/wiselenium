@@ -1,4 +1,6 @@
-package org.wiselenium.core;
+package org.wiselenium.core.util;
+
+import org.wiselenium.core.WiseException;
 
 
 /**

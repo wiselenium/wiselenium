@@ -1,7 +1,7 @@
 package org.wiselenium.core.element.frame.impl;
 
-import static org.wiselenium.core.FrameUtils.getCurrentFramePath;
-import static org.wiselenium.core.FrameUtils.switchToFrame;
+import static org.wiselenium.core.util.FrameUtil.getCurrentFramePath;
+import static org.wiselenium.core.util.FrameUtil.switchToFrame;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -11,7 +11,7 @@ import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
 import org.openqa.selenium.WebElement;
-import org.wiselenium.core.FrameUtils;
+import org.wiselenium.core.util.FrameUtil;
 
 /**
  * The wiselenium proxy for frame inner webElements.
@@ -27,7 +27,7 @@ final class WiseFrameInnerWebElementProxy implements MethodInterceptor {
 	
 	private WiseFrameInnerWebElementProxy(WebElement element) {
 		this.wrappedElement = element;
-		this.framePath = FrameUtils.getCurrentFramePath();
+		this.framePath = FrameUtil.getCurrentFramePath();
 	}
 	
 	static WebElement getInstance(WebElement element) {

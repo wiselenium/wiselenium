@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
-import org.wiselenium.core.AjaxElement;
+import org.wiselenium.core.annotation.AjaxElement;
 
 /**
  * Utility class to create Pages.

@@ -1,7 +1,7 @@
 package org.wiselenium.core.element.field;
 
 import static org.testng.Assert.assertEquals;
-import static org.wiselenium.core.FileUtils.getAbsoluteFilePath;
+import static org.wiselenium.core.util.TestResourceFinder.getAbsolutePath;
 
 import org.openqa.selenium.WebElement;
 import org.wiselenium.core.pagefactory.Page;
@@ -12,7 +12,7 @@ public class LabelPage extends Page<LabelPage> {
 	public static final String LABEL_CLICKED_MESSAGE = "label clicked";
 	public static final String LABEL_FOR = "text";
 	public static final String LABEL_TEXT = "label text";
-	public static final String URL = getAbsoluteFilePath("label.html");
+	public static final String URL = getAbsolutePath("label.html");
 	public static final String TITLE = "page for label tests";
 	
 	private Label label;
