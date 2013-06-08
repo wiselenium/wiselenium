@@ -12,7 +12,7 @@ import org.testng.annotations.Parameters;
  * 
  * @param <T> The type of the test.
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 @Listeners(WiseTestNGListener.class)
 public class WiseTestNG<T extends WiseTestNG<T>> extends WiseTest<T> {
@@ -39,7 +39,7 @@ public class WiseTestNG<T extends WiseTestNG<T>> extends WiseTest<T> {
 	 * 
 	 * @param driver The driver to be used on the test. Can be any of the {@link Driver} values.
 	 * @param url The url of the test.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	@Parameters({ "driver", "url" })
 	@BeforeClass
@@ -52,7 +52,7 @@ public class WiseTestNG<T extends WiseTestNG<T>> extends WiseTest<T> {
 	/**
 	 * Quits the driver of the test. Called automatically on the afterClass lifecycle.
 	 * 
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	@AfterClass(alwaysRun = true)
 	public void quitDriver() {

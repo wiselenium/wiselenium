@@ -8,7 +8,7 @@ import org.wiselenium.core.element.field.Checkbox;
  * Implementation of a HTML Checkbox.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public class CheckboxImpl extends BasicField<Checkbox> implements Checkbox {
 	

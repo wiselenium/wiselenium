@@ -10,7 +10,7 @@ import org.wiselenium.core.WiseThreadLocal;
  * Utility class to handle frames.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public final class FrameUtil {
 	
@@ -20,7 +20,7 @@ public final class FrameUtil {
 	 * Retrieves the current content path.
 	 * 
 	 * @return The name|id list of the frames of the current content path.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public static List<String> getCurrentFramePath() {
 		List<String> currentPath = Lists.newArrayList();
@@ -45,7 +45,7 @@ public final class FrameUtil {
 	 * Switches the driver to a frame, using its complete path.
 	 * 
 	 * @param framePath The frame path.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public static void switchToFrame(List<String> framePath) {
 		WiseThreadLocal.getDriver().switchTo().defaultContent();

@@ -1,8 +1,8 @@
 package org.wiselenium.core.element.frame.impl;
 
+import static org.wiselenium.core.element.frame.impl.WiseFrameInnerElementUtil.exportFields;
 import static org.wiselenium.core.element.frame.impl.WiseFrameInnerElementUtil.getWrappedElement;
 import static org.wiselenium.core.element.frame.impl.WiseFrameInnerElementUtil.isGetWrappedElement;
-import static org.wiselenium.core.element.frame.impl.WiseFrameInnerElementUtil.exportFields;
 import static org.wiselenium.core.util.FrameUtil.getCurrentFramePath;
 
 import java.lang.reflect.Method;
@@ -20,7 +20,7 @@ import org.wiselenium.core.util.FrameUtil;
  * The wiselenium proxy for frame inner frames.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 final class WiseFrameInnerFrameProxy<E> implements MethodInterceptor {
 	
@@ -35,8 +35,8 @@ final class WiseFrameInnerFrameProxy<E> implements MethodInterceptor {
 	}
 	
 	static <E> E getInstance(E element) {
-		return WiseFrameInnerElementUtil.createProxy(element,
-			new WiseFrameInnerFrameProxy<E>(element));
+		return WiseFrameInnerElementUtil.createProxy(element, new WiseFrameInnerFrameProxy<E>(
+			element));
 	}
 	
 	@Override

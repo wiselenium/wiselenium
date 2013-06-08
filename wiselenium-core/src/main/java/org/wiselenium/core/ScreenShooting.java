@@ -5,7 +5,7 @@ package org.wiselenium.core;
  * 
  * @param <T> The type of the screenshooter.
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public interface ScreenShooting<T> {
 	
@@ -14,7 +14,7 @@ public interface ScreenShooting<T> {
 	 * 
 	 * @param fileName The name of the screenshot file.
 	 * @return This instance in order to allow chain calls.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	T takeScreenShot(String fileName);
 	

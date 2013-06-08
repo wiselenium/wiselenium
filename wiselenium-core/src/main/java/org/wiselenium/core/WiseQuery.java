@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
  * Finds wise elements.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public interface WiseQuery {
 	
@@ -22,7 +22,7 @@ public interface WiseQuery {
 	 * @param by The locating mechanism to use.
 	 * @return The element decorated or null if it shouldn't be decorated because the type didn't
 	 * respect the clazz parameter specification.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	<E> E findElement(Class<E> clazz, By by);
 	
@@ -36,7 +36,7 @@ public interface WiseQuery {
 	 * @param by The locating mechanism to use.
 	 * @return The elements decorated or an empty list if it shouldn't be decorated because the type
 	 * didn't respect the clazz parameter specification.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	<E> List<E> findElements(Class<E> clazz, By by);
 	

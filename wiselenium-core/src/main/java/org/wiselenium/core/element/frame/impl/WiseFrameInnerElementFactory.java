@@ -10,7 +10,7 @@ import org.wiselenium.core.annotation.Field;
  * Factory of frame inner elements.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 final class WiseFrameInnerElementFactory {
 	
@@ -23,7 +23,7 @@ final class WiseFrameInnerElementFactory {
 	 * @param <E> The element type.
 	 * @param element The element.
 	 * @return The element proxied.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	@SuppressWarnings("unchecked")
 	public static <E> E getInstance(E element) {

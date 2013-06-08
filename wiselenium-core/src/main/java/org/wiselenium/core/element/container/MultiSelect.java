@@ -8,7 +8,7 @@ import org.wiselenium.core.element.field.Option;
  * Represents a HTML Multiple Select.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public interface MultiSelect extends Container<MultiSelect> {
 	
@@ -16,7 +16,7 @@ public interface MultiSelect extends Container<MultiSelect> {
 	 * Deselects all options.
 	 * 
 	 * @return This select instance to allow chain calls.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	MultiSelect deselectAll();
 	
@@ -26,7 +26,7 @@ public interface MultiSelect extends Container<MultiSelect> {
 	 * 
 	 * @param indexes The option at this index will be selected.
 	 * @return This select element to allow chain calls.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	MultiSelect deselectByIndex(int... indexes);
 	
@@ -36,7 +36,7 @@ public interface MultiSelect extends Container<MultiSelect> {
 	 * 
 	 * @param values The values to match against.
 	 * @return This select element to allow chain calls.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	MultiSelect deselectByValue(String... values);
 	
@@ -46,7 +46,7 @@ public interface MultiSelect extends Container<MultiSelect> {
 	 * 
 	 * @param texts The visible texts to match against.
 	 * @return This select element to allow chain calls.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	MultiSelect deselectByVisibleText(String... texts);
 	
@@ -55,7 +55,7 @@ public interface MultiSelect extends Container<MultiSelect> {
 	 * 
 	 * @param options The options to be deselected.
 	 * @return This select instance in order to allow chain calls.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	MultiSelect deselectOptions(Option... options);
 	
@@ -63,7 +63,7 @@ public interface MultiSelect extends Container<MultiSelect> {
 	 * Gets the options of this select.
 	 * 
 	 * @return The options of this select.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	List<Option> getOptions();
 	
@@ -71,7 +71,7 @@ public interface MultiSelect extends Container<MultiSelect> {
 	 * Returns the selected options.
 	 * 
 	 * @return The selected options.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	List<Option> getSelectedOptions();
 	
@@ -79,7 +79,7 @@ public interface MultiSelect extends Container<MultiSelect> {
 	 * Returns the selected values.
 	 * 
 	 * @return The selected values.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	List<String> getSelectedValues();
 	
@@ -87,7 +87,7 @@ public interface MultiSelect extends Container<MultiSelect> {
 	 * Returns the selected visible texts.
 	 * 
 	 * @return The selected visible texts.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	List<String> getSelectedVisibleTexts();
 	
@@ -95,7 +95,7 @@ public interface MultiSelect extends Container<MultiSelect> {
 	 * Selects all options.
 	 * 
 	 * @return This select instance to allow chain calls.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	MultiSelect selectAll();
 	
@@ -105,7 +105,7 @@ public interface MultiSelect extends Container<MultiSelect> {
 	 * 
 	 * @param indexes The option at this index will be selected.
 	 * @return This select element to allow chain calls.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	MultiSelect selectByIndex(int... indexes);
 	
@@ -115,7 +115,7 @@ public interface MultiSelect extends Container<MultiSelect> {
 	 * 
 	 * @param values The values to match against.
 	 * @return This select element to allow chain calls.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	MultiSelect selectByValue(String... values);
 	
@@ -125,7 +125,7 @@ public interface MultiSelect extends Container<MultiSelect> {
 	 * 
 	 * @param texts The visible texts to match against.
 	 * @return This select element to allow chain calls.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	MultiSelect selectByVisibleText(String... texts);
 	
@@ -134,7 +134,7 @@ public interface MultiSelect extends Container<MultiSelect> {
 	 * 
 	 * @param options The options to be selected.
 	 * @return This select instance in order to allow chain calls.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	MultiSelect selectOptions(Option... options);
 	

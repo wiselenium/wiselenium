@@ -16,7 +16,7 @@ import org.testng.collections.Lists;
  * The wiselenium proxy for a list of elements.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 final class WiseElementListProxy<E> implements MethodInterceptor {
 	

@@ -17,7 +17,7 @@ import org.wiselenium.core.util.FrameUtil;
  * The wiselenium proxy for frame inner webElements.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 final class WiseFrameInnerWebElementProxy implements MethodInterceptor {
 	

@@ -4,7 +4,7 @@ package org.wiselenium.core.element.field;
  * Represents a HTML Button.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public interface Button extends Field<Button> {
 	
@@ -13,7 +13,7 @@ public interface Button extends Field<Button> {
 	 * button, reset, submit.
 	 * 
 	 * @return The type of the button.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	String getType();
 	
@@ -21,7 +21,7 @@ public interface Button extends Field<Button> {
 	 * Retrieves the value of this button.
 	 * 
 	 * @return The innerText of this button.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	String getValue();
 	
@@ -29,7 +29,7 @@ public interface Button extends Field<Button> {
 	 * Retrieves whether this button is enabled.
 	 * 
 	 * @return Whether this button is enabled.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	boolean isEnabled();
 	

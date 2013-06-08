@@ -7,7 +7,7 @@ import org.wiselenium.core.WiseException;
  * have a no-arg constructor.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 class ClassWithoutNoArgConstructorException extends WiseException {
 	

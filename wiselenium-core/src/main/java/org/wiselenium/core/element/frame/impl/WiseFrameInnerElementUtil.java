@@ -14,7 +14,7 @@ import org.openqa.selenium.internal.WrapsElement;
  * Utility class for the frames' inner elements.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 final class WiseFrameInnerElementUtil {
 	
@@ -28,7 +28,7 @@ final class WiseFrameInnerElementUtil {
 	 * @param element The frame inner element.
 	 * @param callback The callback.
 	 * @return The frame inner element proxied.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public static <E> E createProxy(E element, Callback callback) {
 		Class<?> originalClass = getOriginalClass(element.getClass());
@@ -48,7 +48,7 @@ final class WiseFrameInnerElementUtil {
 	 * Proxies the fields of the object in order to use them transparently even outside the object.
 	 * 
 	 * @param obj The object.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public static void exportFields(Object obj) {
 		Class<?> originalClass = getOriginalClass(obj.getClass());
@@ -63,7 +63,7 @@ final class WiseFrameInnerElementUtil {
 	 * @param <E> The element type.
 	 * @param element The element.
 	 * @return The wrapped element of the element.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public static <E> Object getWrappedElement(E element) {
 		if (!Enhancer.isEnhanced(element.getClass())) return element;
@@ -75,7 +75,7 @@ final class WiseFrameInnerElementUtil {
 	 * 
 	 * @param method The method.
 	 * @return Whether the method is the getWrappedElement() method.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public static boolean isGetWrappedElement(Method method) {
 		return "getWrappedElement".equals(method.getName())

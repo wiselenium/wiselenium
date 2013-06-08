@@ -2,13 +2,12 @@ package org.wiselenium.core.util;
 
 import org.wiselenium.core.WiseException;
 
-
 /**
  * Represents an exception thrown when an implementation of the element couldn't be found by
  * wiselenium.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public class NoElementImplementationClassFoundException extends WiseException {
 	

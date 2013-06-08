@@ -8,7 +8,7 @@ import org.wiselenium.core.element.field.Option;
  * Represents a HTML Select.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public interface Select extends Container<Select> {
 	
@@ -16,7 +16,7 @@ public interface Select extends Container<Select> {
 	 * Gets the options of this select.
 	 * 
 	 * @return The options of this select.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	List<Option> getOptions();
 	
@@ -24,7 +24,7 @@ public interface Select extends Container<Select> {
 	 * Returns the selected option.
 	 * 
 	 * @return The selected option.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	Option getSelectedOption();
 	
@@ -32,7 +32,7 @@ public interface Select extends Container<Select> {
 	 * Returns the selected value.
 	 * 
 	 * @return The selected value.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	String getSelectedValue();
 	
@@ -40,7 +40,7 @@ public interface Select extends Container<Select> {
 	 * Returns the selected visible text.
 	 * 
 	 * @return The selected visible text.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	String getSelectedVisibleText();
 	
@@ -50,7 +50,7 @@ public interface Select extends Container<Select> {
 	 * 
 	 * @param index The option at this index will be selected.
 	 * @return This select element to allow chain calls.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	Select selectByIndex(int index);
 	
@@ -60,7 +60,7 @@ public interface Select extends Container<Select> {
 	 * 
 	 * @param value The value to match against.
 	 * @return This select element to allow chain calls.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	Select selectByValue(String value);
 	
@@ -70,7 +70,7 @@ public interface Select extends Container<Select> {
 	 * 
 	 * @param text The visible text to match against.
 	 * @return This select element to allow chain calls.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	Select selectByVisibleText(String text);
 	
@@ -79,7 +79,7 @@ public interface Select extends Container<Select> {
 	 * 
 	 * @param option The option to be selected.
 	 * @return This select instance in order to allow chain calls.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	Select selectOption(Option option);
 	

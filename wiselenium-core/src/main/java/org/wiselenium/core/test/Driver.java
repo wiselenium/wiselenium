@@ -20,7 +20,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
  * WebDrivers enum for convenience.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public enum Driver {
 	
@@ -136,7 +136,7 @@ public enum Driver {
 	 * Should init a webDriver.
 	 * 
 	 * @return An instance of the webDriver.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public abstract WebDriver initDriver();
 	
@@ -145,7 +145,7 @@ public enum Driver {
 	 * 
 	 * @param capabilities The desired capabilities for the webDriver.
 	 * @return An instance of the webDriver.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public abstract WebDriver initDriver(Capabilities capabilities);
 	
@@ -157,7 +157,7 @@ public enum Driver {
 	 * @param tempFileExtension The extension of the temp file.
 	 * @return The temp file.
 	 * @throws IOException When there's an error while copying the resource.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	protected File copyResourceToTempFile(String resourceName, String tempFileName,
 		String tempFileExtension) throws IOException {

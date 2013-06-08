@@ -12,7 +12,7 @@ import org.testng.collections.Lists;
  * Utility class to find elements.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public final class WiseLocator {
 	
@@ -29,7 +29,7 @@ public final class WiseLocator {
 	 * @param by The locating mechanism to use.
 	 * @param searchContext The search context.
 	 * @return The element decorated.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public static <E> E findElement(Class<E> clazz, By by, SearchContext searchContext) {
 		WebElement webElement = searchContext.findElement(by);
@@ -48,7 +48,7 @@ public final class WiseLocator {
 	 * @param by The locating mechanism to use.
 	 * @param searchContext The search context.
 	 * @return The elements decorated.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public static <E> List<E> findElements(Class<E> clazz, By by, SearchContext searchContext) {
 		List<WebElement> webElements = searchContext.findElements(by);

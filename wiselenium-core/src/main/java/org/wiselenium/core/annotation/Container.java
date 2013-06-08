@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  * A Container is an abstraction of a block-level HTML element used for grouping other elements.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

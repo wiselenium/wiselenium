@@ -6,7 +6,7 @@ import java.lang.reflect.Modifier;
  * Utility class to find resources on the classpath.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public final class ClasspathUtil {
 	
@@ -21,7 +21,7 @@ public final class ClasspathUtil {
 	 * @param <T> The class type.
 	 * @param clazz The class.
 	 * @return The implementation of the class.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> Class<? extends T> findImplementationClass(Class<T> clazz) {

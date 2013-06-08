@@ -13,7 +13,7 @@ import org.wiselenium.core.annotation.AjaxElement;
  * Utility class to create Pages.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public final class WisePageFactory {
 	
@@ -27,7 +27,7 @@ public final class WisePageFactory {
 	 * @param searchContext The context that will be used to look up the elements.
 	 * @param instance The instance whose fields should be proxied.
 	 * @return The instance with its element fields proxied.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public static <T> T initElements(SearchContext searchContext, T instance) {
 		Class<?> currentInstanceHierarchyClass = instance.getClass();
@@ -55,7 +55,7 @@ public final class WisePageFactory {
 	 * @param driver The driver that will be used to look up the elements of the object.
 	 * @param clazz The class to be initialized.
 	 * @return An instance of the class with its element fields proxied.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public static <T> T initElements(WebDriver driver, Class<T> clazz) {
 		T instance = instantiatePage(driver, clazz);

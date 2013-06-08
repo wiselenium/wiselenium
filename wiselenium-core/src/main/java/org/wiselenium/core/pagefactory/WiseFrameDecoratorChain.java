@@ -12,7 +12,7 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
  * Class responsible for decorating WebElements into Containers.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 class WiseFrameDecoratorChain extends ExtendedSeleniumDecoratorChainTemplate {
 	

@@ -9,7 +9,7 @@ import org.openqa.selenium.support.pagefactory.FieldDecorator;
  * Allows the WisePageFactory to decorate fields or webElements.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 interface ExtendedSeleniumDecorator extends FieldDecorator {
 	

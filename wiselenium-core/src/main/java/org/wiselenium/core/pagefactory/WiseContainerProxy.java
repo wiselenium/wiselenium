@@ -15,7 +15,7 @@ import org.openqa.selenium.internal.WrapsElement;
  * The wiselenium proxy for containers.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 final class WiseContainerProxy implements MethodInterceptor {
 	

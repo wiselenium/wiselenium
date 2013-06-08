@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * 
  * @author Andre Ricardo Schaffer
  * @param <T> The type of the class.
- * @since 0.0.1
+ * @since 0.1.0
  */
 public interface WiseRoot<T extends WiseRoot<T>> extends WiseQuery, ScreenShooting<T> {
 	
@@ -17,7 +17,7 @@ public interface WiseRoot<T extends WiseRoot<T>> extends WiseQuery, ScreenShooti
 	 * 
 	 * @param timeOutInSeconds The timeout in seconds.
 	 * @return A WebDriverWait.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	WebDriverWait waitFor(long timeOutInSeconds);
 	
@@ -28,7 +28,7 @@ public interface WiseRoot<T extends WiseRoot<T>> extends WiseQuery, ScreenShooti
 	 * @param timeOutInSeconds The timeout in seconds.
 	 * @param sleepInMillis
 	 * @return A WebDriverWait.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	WebDriverWait waitFor(long timeOutInSeconds, long sleepInMillis);
 	

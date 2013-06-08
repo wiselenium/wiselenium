@@ -8,7 +8,7 @@ import org.wiselenium.core.element.field.Label;
  * Implementation of a HTML Label.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public class LabelImpl extends BasicField<Label> implements Label {
 	

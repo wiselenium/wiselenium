@@ -21,7 +21,7 @@ import org.wiselenium.core.util.ScreenShooter;
  * 
  * @author Andre Ricardo Schaffer
  * @param <T> The page type.
- * @since 0.0.1
+ * @since 0.1.0
  */
 public class Page<T extends Page<T>> extends LoadableComponent<T> implements WiseRoot<T>,
 	WrapsDriver {
@@ -44,7 +44,7 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wis
 	 * Returns this page instance in order to allow chain calls in a more fluent way.
 	 * 
 	 * @return This page instance.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	@SuppressWarnings("unchecked")
 	public T and() {
@@ -56,7 +56,7 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wis
 	 * 
 	 * @param script The script to be executed.
 	 * @return The result of the script.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public Object executeScript(String script) {
 		return ((JavascriptExecutor) this.getWrappedDriver()).executeScript(script);
@@ -77,7 +77,7 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wis
 	 * 
 	 * @param url The URL to load. It is best to use a fully qualified URL.
 	 * @return This page object.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	@SuppressWarnings("unchecked")
 	public T get(String url) {
@@ -89,7 +89,7 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wis
 	 * Retrieves the current URL that the browser is looking at.
 	 * 
 	 * @return The current URL.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public String getCurrentUrl() {
 		return this.getWrappedDriver().getCurrentUrl();
@@ -99,7 +99,7 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wis
 	 * Retrieves the source of the page rendered in the browser.
 	 * 
 	 * @return The source of the page.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public String getPageSource() {
 		return this.getWrappedDriver().getPageSource();
@@ -109,7 +109,7 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wis
 	 * Retrieves the title of the current page.
 	 * 
 	 * @return The title of the current page, or null if one is not set.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public String getTitle() {
 		return this.getWrappedDriver().getTitle();
@@ -126,7 +126,7 @@ public class Page<T extends Page<T>> extends LoadableComponent<T> implements Wis
 	 * @param <E> The type of the page.
 	 * @param clazz The class of the page.
 	 * @return An instance of the next page of the user navigation.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public <E> E initNextPage(Class<E> clazz) {
 		return WisePageFactory.initElements(this.getWrappedDriver(), clazz);

@@ -4,7 +4,7 @@ package org.wiselenium.core.element.container;
  * Represents a HTML Table.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public interface Table extends Container<Table> {
 	
@@ -12,7 +12,7 @@ public interface Table extends Container<Table> {
 	 * Returns the body of the table (tbody).
 	 * 
 	 * @return The body of the table.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	TableBody getBody();
 	
@@ -20,7 +20,7 @@ public interface Table extends Container<Table> {
 	 * Returns the caption of the table.
 	 * 
 	 * @return The caption of the table.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	String getCaption();
 	
@@ -28,7 +28,7 @@ public interface Table extends Container<Table> {
 	 * Returns the foot of the table (tfoot).
 	 * 
 	 * @return The foot of the table.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	TableFoot getFoot();
 	
@@ -36,7 +36,7 @@ public interface Table extends Container<Table> {
 	 * Returns the head of the table (thead).
 	 * 
 	 * @return The head of the table (thead).
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	TableHead getHead();
 	

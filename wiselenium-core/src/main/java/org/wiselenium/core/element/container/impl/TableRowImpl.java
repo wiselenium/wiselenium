@@ -10,7 +10,7 @@ import org.wiselenium.core.element.container.TableRow;
  * Implementation of a HTML Table Row (tr).
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public class TableRowImpl extends BasicContainer<TableRow> implements TableRow {
 	

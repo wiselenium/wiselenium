@@ -6,7 +6,7 @@ import org.wiselenium.core.WiseException;
  * Exception thrown when the element type is not supported by an operation.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 class ElementTypeNotSupportedException extends WiseException {
 	

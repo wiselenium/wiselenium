@@ -10,7 +10,7 @@ import org.wiselenium.core.element.container.TableRow;
  * Implementation of a HTML Table Foot (tfoot).
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public class TableFootImpl extends BasicContainer<TableFoot> implements TableFoot {
 	

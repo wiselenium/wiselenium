@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
  * Identifies a Page to be injected on a WiseTest.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)

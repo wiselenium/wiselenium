@@ -22,7 +22,7 @@ import org.wiselenium.core.util.ScreenShooter;
  * 
  * @param <T> The type of the test.
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 @SuppressWarnings("unchecked")
 class WiseTest<T extends WiseTest<T>> implements WiseRoot<T> {
@@ -62,7 +62,7 @@ class WiseTest<T extends WiseTest<T>> implements WiseRoot<T> {
 	 * Returns this test instance in order to allow chain calls in a more fluent way.
 	 * 
 	 * @return This test instance.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public T and() {
 		return (T) this;
@@ -83,7 +83,7 @@ class WiseTest<T extends WiseTest<T>> implements WiseRoot<T> {
 	 * 
 	 * @param url The URL to load. It is best to use a fully qualified URL.
 	 * @return This page object.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public T get(String url) {
 		if (url != null) this.driver.get(url);
@@ -94,7 +94,7 @@ class WiseTest<T extends WiseTest<T>> implements WiseRoot<T> {
 	 * Returns the driver of the test.
 	 * 
 	 * @return The driver of the test.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public WebDriver getDriver() {
 		return this.driver;
@@ -106,7 +106,7 @@ class WiseTest<T extends WiseTest<T>> implements WiseRoot<T> {
 	 * May be overridden. By default, returns "target/tests-screenshots/" .
 	 * 
 	 * @return The dir where the screenshots will be saved.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public String getScreenShotPath() {
 		return "target/tests-screenshots/";
@@ -118,7 +118,7 @@ class WiseTest<T extends WiseTest<T>> implements WiseRoot<T> {
 	 * May be overridden. By default, returns null.
 	 * 
 	 * @return The url of the test.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public String getUrl() {
 		return null;
@@ -129,7 +129,7 @@ class WiseTest<T extends WiseTest<T>> implements WiseRoot<T> {
 	 * May be overridden. By default, inits a FirefoxDriver.
 	 * 
 	 * @return The instance of the driver for the test.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public WebDriver initDriver() {
 		return FIREFOX.initDriver();
@@ -142,7 +142,7 @@ class WiseTest<T extends WiseTest<T>> implements WiseRoot<T> {
 	 * @param <E> The class type that will be initialized.
 	 * @param clazz The class to be initialized.
 	 * @return An instance of the class with its element fields proxied.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 * @see WisePageFactory#initElements(WebDriver, Class)
 	 */
 	public <E> E initElements(Class<E> clazz) {
@@ -156,7 +156,7 @@ class WiseTest<T extends WiseTest<T>> implements WiseRoot<T> {
 	 * @param <E> The type of the instance.
 	 * @param instance The instance whose fields should be proxied.
 	 * @return The instance with its element fields proxied.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public <E> E initElements(E instance) {
 		return WisePageFactory.initElements(this.driver, instance);
@@ -184,7 +184,7 @@ class WiseTest<T extends WiseTest<T>> implements WiseRoot<T> {
 	 * WiseThreadLocal, 3) adds a shutdown hook to quit the driver, 4) injects all annotated pages
 	 * into the test instance, 5) navigates to the url set for the test.
 	 * 
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	protected void initWiseTest() {
 		this.driver = this.initDriver();

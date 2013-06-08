@@ -8,7 +8,7 @@ import static org.wiselenium.core.WiseUnwrapper.unwrapWebElement;
  * 
  * @author Andre Ricardo Schaffer
  * @param <T> The element type.
- * @since 0.0.1
+ * @since 0.1.0
  */
 public class BasicElement<T extends Element<T>> implements Element<T> {
 	

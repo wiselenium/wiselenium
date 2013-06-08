@@ -8,7 +8,7 @@ import org.wiselenium.core.element.field.Hyperlink;
  * Implementation of a HTML Hyperlink.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public class HyperlinkImpl extends BasicField<Hyperlink> implements Hyperlink {
 	

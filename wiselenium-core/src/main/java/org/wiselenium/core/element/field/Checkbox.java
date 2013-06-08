@@ -4,7 +4,7 @@ package org.wiselenium.core.element.field;
  * Represents a HTML Checkbox.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public interface Checkbox extends Field<Checkbox> {
 	
@@ -12,7 +12,7 @@ public interface Checkbox extends Field<Checkbox> {
 	 * Checks this checkbox if not checked already.
 	 * 
 	 * @return This checkbox element to allow chain calls.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	Checkbox check();
 	
@@ -20,7 +20,7 @@ public interface Checkbox extends Field<Checkbox> {
 	 * Returns whether this checkbox is checked.
 	 * 
 	 * @return Whether this checkbox is checked.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	boolean isChecked();
 	
@@ -28,7 +28,7 @@ public interface Checkbox extends Field<Checkbox> {
 	 * Returns whether this checkbox is enabled.
 	 * 
 	 * @return Whether this checkbox is enabled.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	boolean isEnabled();
 	
@@ -36,7 +36,7 @@ public interface Checkbox extends Field<Checkbox> {
 	 * Unchecks this checkbox if not unchecked already.
 	 * 
 	 * @return This checkbox element to allow chain calls.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	Checkbox uncheck();
 	

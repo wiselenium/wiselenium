@@ -10,7 +10,7 @@ import org.wiselenium.core.element.container.TableRow;
  * Implementation of a HTML Table Head (thead).
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public class TableHeadImpl extends BasicContainer<TableHead> implements TableHead {
 	

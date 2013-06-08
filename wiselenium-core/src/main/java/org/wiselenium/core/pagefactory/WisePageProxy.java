@@ -13,7 +13,7 @@ import org.openqa.selenium.internal.WrapsDriver;
  * The wiselenium proxy for pages.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 final class WisePageProxy implements MethodInterceptor {
 	

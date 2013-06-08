@@ -4,7 +4,7 @@ package org.wiselenium.core;
  * Represents a runtime exception thrown by wiselenium.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public class WiseException extends RuntimeException {
 	

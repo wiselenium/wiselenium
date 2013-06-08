@@ -5,7 +5,7 @@ package org.wiselenium.core;
  * doesn't wrap one.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 class WebElementNotWrappedException extends WiseException {
 	

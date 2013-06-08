@@ -6,7 +6,7 @@ import java.util.List;
  * Represents a HTML Table Foot (tfoot).
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public interface TableFoot extends Container<TableFoot> {
 	
@@ -15,7 +15,7 @@ public interface TableFoot extends Container<TableFoot> {
 	 * 
 	 * @param index The index of the row.
 	 * @return The row of the table foot.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	TableRow getRow(int index);
 	
@@ -23,7 +23,7 @@ public interface TableFoot extends Container<TableFoot> {
 	 * Returns the rows of the table foot.
 	 * 
 	 * @return The rows of the table foot.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	List<TableRow> getRows();
 	

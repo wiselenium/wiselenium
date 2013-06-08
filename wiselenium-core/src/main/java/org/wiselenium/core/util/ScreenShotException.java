@@ -6,7 +6,7 @@ import org.wiselenium.core.WiseException;
  * Represents an exception thrown while taking a snapshot of the webdriver page.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public class ScreenShotException extends WiseException {
 	

@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
  * Shutdown hook to quit a WebDriver.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 class WiseShutdownHook extends Thread {
 	

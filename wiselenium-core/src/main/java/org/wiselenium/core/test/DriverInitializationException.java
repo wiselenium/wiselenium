@@ -6,7 +6,7 @@ import org.wiselenium.core.WiseException;
  * Represents an exception thrown when initializing a WebDriver.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 class DriverInitializationException extends WiseException {
 	

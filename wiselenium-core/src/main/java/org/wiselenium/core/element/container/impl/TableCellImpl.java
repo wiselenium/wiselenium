@@ -9,7 +9,7 @@ import org.wiselenium.core.element.container.TableCell;
  * Implementation of a HTML Table Cell (th or td).
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public class TableCellImpl extends BasicContainer<TableCell> implements TableCell {
 	

@@ -9,7 +9,7 @@ import org.testng.TestListenerAdapter;
  * getScreenShotPath()testClass-methodName.png.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public class WiseTestNGListener extends TestListenerAdapter {
 	

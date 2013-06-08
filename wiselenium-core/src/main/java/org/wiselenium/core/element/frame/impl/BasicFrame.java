@@ -15,7 +15,7 @@ import org.wiselenium.core.pagefactory.WiseLocator;
  * 
  * @author Andre Ricardo Schaffer
  * @param <T> The frame type.
- * @since 0.0.1
+ * @since 0.1.0
  */
 public class BasicFrame<T extends Frame<T>> extends BasicElement<T> implements Frame<T> {
 	

@@ -6,7 +6,7 @@ import java.lang.annotation.Annotation;
  * Utility class to verify if annotations are present on types.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public final class AnnotationUtil {
 	
@@ -20,7 +20,7 @@ public final class AnnotationUtil {
 	 * @param clazz The class.
 	 * @param annotationType The annotation.
 	 * @return The annotation found or null.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public static <A extends Annotation> A findAnnotation(Class<?> clazz, Class<A> annotationType) {
 		if (clazz == null) throw new IllegalArgumentException("Clazz parameter can't be null");
@@ -51,7 +51,7 @@ public final class AnnotationUtil {
 	 * @param clazz The class.
 	 * @param annotationType The annotation.
 	 * @return Whether the annotation is present at the class hierarchy or not.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public static <A extends Annotation> boolean isAnnotationPresent(Class<?> clazz,
 		Class<A> annotationType) {

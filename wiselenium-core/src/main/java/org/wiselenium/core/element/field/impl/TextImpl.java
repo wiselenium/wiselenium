@@ -9,7 +9,7 @@ import org.wiselenium.core.element.field.Text;
  * Implementation of a HTML input text.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public class TextImpl extends BasicField<Text> implements Text {
 	

@@ -8,7 +8,7 @@ import org.wiselenium.core.element.Element;
  * 
  * @author Andre Ricardo Schaffer
  * @param <T> The frame type.
- * @since 0.0.1
+ * @since 0.1.0
  */
 @org.wiselenium.core.annotation.Frame
 public interface Frame<T extends Frame<T>> extends Element<T>, WiseQuery {
@@ -20,7 +20,7 @@ public interface Frame<T extends Frame<T>> extends Element<T>, WiseQuery {
 	 * @param <E> The type of the element.
 	 * @param element The element.
 	 * @return The element proxied.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	<E> E exportInnerElement(E element);
 	

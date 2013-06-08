@@ -10,7 +10,7 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
  * Class responsible for decorating WebElements.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public class WiseDecorator implements ExtendedSeleniumDecorator {
 	

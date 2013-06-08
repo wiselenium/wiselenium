@@ -8,7 +8,7 @@ import org.wiselenium.core.element.field.Button;
  * Implementation of a HTML Button.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public class ButtonImpl extends BasicField<Button> implements Button {
 	

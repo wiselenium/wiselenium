@@ -6,7 +6,7 @@ import java.util.List;
  * Represents a HTML Table Head (thead).
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public interface TableHead extends Container<TableHead> {
 	
@@ -15,7 +15,7 @@ public interface TableHead extends Container<TableHead> {
 	 * 
 	 * @param index The index of the row.
 	 * @return The row of the table head.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	TableRow getRow(int index);
 	
@@ -23,7 +23,7 @@ public interface TableHead extends Container<TableHead> {
 	 * Returns the rows of the table head.
 	 * 
 	 * @return The rows of the table head.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	List<TableRow> getRows();
 	

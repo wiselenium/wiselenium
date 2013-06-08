@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  * A Field is an abstraction of an inline HTML element.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

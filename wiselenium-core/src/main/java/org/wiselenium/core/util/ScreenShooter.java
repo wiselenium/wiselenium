@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
  * Utility class to handle screenshots.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public final class ScreenShooter {
 	
@@ -24,7 +24,7 @@ public final class ScreenShooter {
 	 * 
 	 * @param driver The webDriver.
 	 * @param fileName The name of the screenshot file.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public static void takeScreenShot(WebDriver driver, String fileName) {
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);

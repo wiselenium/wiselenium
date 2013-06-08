@@ -5,7 +5,7 @@ package org.wiselenium.core.element;
  * 
  * @author Andre Ricardo Schaffer
  * @param <T> The element type.
- * @since 0.0.1
+ * @since 0.1.0
  */
 public interface Element<T> {
 	
@@ -13,7 +13,7 @@ public interface Element<T> {
 	 * Returns this element object in order to allow chain calls in a more fluent way.
 	 * 
 	 * @return This element object.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	T and();
 	
@@ -22,7 +22,7 @@ public interface Element<T> {
 	 * 
 	 * @param name The name of the attribute.
 	 * @return The attribute's current value or null if the value is not set.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	String getAttribute(String name);
 	
@@ -32,7 +32,7 @@ public interface Element<T> {
 	 * @param propertyName The name of the property.
 	 * @return The current, computed value of the property. If it doesn't have the property, an
 	 * empty string is returned.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	String getCssValue(String propertyName);
 	
@@ -40,7 +40,7 @@ public interface Element<T> {
 	 * Retrieves the id of this element.
 	 * 
 	 * @return The id of this element.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	String getId();
 	
@@ -48,7 +48,7 @@ public interface Element<T> {
 	 * Retrieves the style class of this element.
 	 * 
 	 * @return The style class of this element.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	String getStyleClass();
 	
@@ -56,7 +56,7 @@ public interface Element<T> {
 	 * Retrieves the title of this element.
 	 * 
 	 * @return The title of this element.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	String getTitle();
 	
@@ -64,7 +64,7 @@ public interface Element<T> {
 	 * Verifies if the element is displayed on the page.
 	 * 
 	 * @return Whether or not the element is displayed.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	boolean isDisplayed();
 	

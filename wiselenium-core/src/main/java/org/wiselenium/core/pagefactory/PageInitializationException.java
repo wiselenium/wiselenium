@@ -6,7 +6,7 @@ import org.wiselenium.core.WiseException;
  * Represents an exception thrown due to an error while initializing the elements of a page.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public class PageInitializationException extends WiseException {
 	

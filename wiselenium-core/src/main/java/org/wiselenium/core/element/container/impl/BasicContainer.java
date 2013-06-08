@@ -15,7 +15,7 @@ import org.wiselenium.core.pagefactory.WiseLocator;
  * 
  * @author Andre Ricardo Schaffer
  * @param <T> The container type.
- * @since 0.0.1
+ * @since 0.1.0
  */
 public class BasicContainer<T extends Container<T>> extends BasicElement<T> implements Container<T> {
 	

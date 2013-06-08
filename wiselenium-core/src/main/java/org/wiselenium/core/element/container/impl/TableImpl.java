@@ -14,7 +14,7 @@ import org.wiselenium.core.element.container.TableHead;
  * Implementation of a HTML Table.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public class TableImpl extends BasicContainer<Table> implements Table {
 	

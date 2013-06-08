@@ -17,7 +17,7 @@ import org.wiselenium.core.util.FrameUtil;
  * The wiselenium proxy for frame inner fields.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 final class WiseFrameInnerFieldProxy<E> implements MethodInterceptor {
 	
@@ -31,8 +31,8 @@ final class WiseFrameInnerFieldProxy<E> implements MethodInterceptor {
 	}
 	
 	static <E> E getInstance(E element) {
-		return WiseFrameInnerElementUtil.createProxy(element,
-			new WiseFrameInnerFieldProxy<E>(element));
+		return WiseFrameInnerElementUtil.createProxy(element, new WiseFrameInnerFieldProxy<E>(
+			element));
 	}
 	
 	@Override

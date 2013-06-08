@@ -8,7 +8,7 @@ import org.wiselenium.core.element.field.Option;
  * Implementation of a HTML Select Option.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public class OptionImpl extends BasicField<Option> implements Option {
 	

@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
  * Utility class to centralize some wise element proxy tasks.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 final class WiseElementProxyUtil {
 	
@@ -19,7 +19,7 @@ final class WiseElementProxyUtil {
 	 * 
 	 * @param method The method.
 	 * @return Whether the method is the getWrappedElement() method.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	public static boolean isGetWrappedElement(Method method) {
 		return "getWrappedElement".equals(method.getName())

@@ -8,7 +8,7 @@ import org.wiselenium.core.element.field.Radiobutton;
  * Implementation of a HTML Radio button.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public class RadiobuttonImpl extends BasicField<Radiobutton> implements Radiobutton {
 	

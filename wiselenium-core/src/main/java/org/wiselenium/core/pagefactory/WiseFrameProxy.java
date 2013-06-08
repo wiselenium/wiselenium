@@ -19,7 +19,7 @@ import org.wiselenium.core.util.FrameUtil;
  * The wiselenium proxy for frames.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 final class WiseFrameProxy implements MethodInterceptor {
 	

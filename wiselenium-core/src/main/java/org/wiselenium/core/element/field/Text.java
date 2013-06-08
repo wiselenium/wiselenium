@@ -4,7 +4,7 @@ package org.wiselenium.core.element.field;
  * Represents a HTML input text;
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 public interface Text extends Field<Text> {
 	
@@ -12,7 +12,7 @@ public interface Text extends Field<Text> {
 	 * Clears this text content.
 	 * 
 	 * @return This text object.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	Text clear();
 	
@@ -20,7 +20,7 @@ public interface Text extends Field<Text> {
 	 * Retrieves the the maximum number of characters allowed in this text field.
 	 * 
 	 * @return The maximum number of characters allowed.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	Integer getMaxLength();
 	
@@ -28,7 +28,7 @@ public interface Text extends Field<Text> {
 	 * Retrieves the value of this text.
 	 * 
 	 * @return The innerText of this element.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	String getValue();
 	
@@ -36,7 +36,7 @@ public interface Text extends Field<Text> {
 	 * Retrieves whether this test is enabled or not.
 	 * 
 	 * @return If this text is enabled.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	boolean isEnabled();
 	
@@ -44,7 +44,7 @@ public interface Text extends Field<Text> {
 	 * Retrieves whether this test is read-only or not.
 	 * 
 	 * @return If this text is read-only.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	boolean isReadOnly();
 	
@@ -53,7 +53,7 @@ public interface Text extends Field<Text> {
 	 * 
 	 * @param keysToSend The content to be typed.
 	 * @return This text object.
-	 * @since 0.0.1
+	 * @since 0.1.0
 	 */
 	Text sendKeys(CharSequence... keysToSend);
 	

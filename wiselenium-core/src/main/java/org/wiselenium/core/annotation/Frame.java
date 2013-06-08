@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  * A Frame is an abstraction of a HTML frame.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

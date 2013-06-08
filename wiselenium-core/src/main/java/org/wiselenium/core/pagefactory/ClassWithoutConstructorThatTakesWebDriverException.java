@@ -7,7 +7,7 @@ import org.wiselenium.core.WiseException;
  * have a constructor that takes a WebDriver as only argument.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.0.1
+ * @since 0.1.0
  */
 class ClassWithoutConstructorThatTakesWebDriverException extends WiseException {
 	
