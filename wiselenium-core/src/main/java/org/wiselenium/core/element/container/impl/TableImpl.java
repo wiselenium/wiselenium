@@ -1,3 +1,28 @@
+/**
+ * Copyright (c) 2013 Andre Ricardo Schaffer
+ * import static org.wiselenium.core.WiseUnwrapper.unwrapWebElement;
+
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.wiselenium.core.element.container.Table;
+import org.wiselenium.core.element.container.TableBody;
+import org.wiselenium.core.element.container.TableFoot;
+import org.wiselenium.core.element.container.TableHead;
+o the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ * */
+
 package org.wiselenium.core.element.container.impl;
 
 import static org.wiselenium.core.WiseUnwrapper.unwrapWebElement;
