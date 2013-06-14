@@ -30,8 +30,8 @@
   
   <scm>
 	<url>https://github.com/andreschaffer/wiselenium/</url>
-	<connection>scm:git:git@github.com:wiselenium/wiselenium.git</connection>
-	<developerConnection>scm:git:git@github.com:wiselenium/wiselenium.git</developerConnection>
+	<connection>scm:git:git@github.com:andreschaffer/wiselenium.git</connection>
+	<developerConnection>scm:git:git@github.com:andreschaffer/wiselenium.git</developerConnection>
   </scm>
   
   <developers>
