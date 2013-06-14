@@ -4,7 +4,7 @@
   <parent>
   	<groupId>org.wiselenium</groupId>
   	<artifactId>wiselenium-parent</artifactId>
-  	<version>0.1.0-SNAPSHOT</version>
+  	<version>0.1.0</version>
   	<relativePath>../wiselenium-parent</relativePath>
   </parent>
   
@@ -12,8 +12,24 @@
   <version>${wiselenium-testng.version}</version>
   <packaging>jar</packaging>
   
+  <properties>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
+  </properties>
+    
   <name>wiselenium testng</name>
+  <description>
+  TestNG adapter for wiselenium.
+  </description>
   <url>https://github.com/andreschaffer/wiselenium</url>
+  
+  <licenses>
+	<license>
+		<name>MIT License</name>
+		<url>http://www.opensource.org/licenses/mit-license.php</url>
+		<distribution>repo</distribution>
+	</license>
+  </licenses>
   
   <build>
   	<plugins>

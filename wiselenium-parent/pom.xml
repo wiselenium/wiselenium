@@ -4,15 +4,31 @@
   <parent>
   	<groupId>org.wiselenium</groupId>
   	<artifactId>wiselenium-bom</artifactId>
-  	<version>0.1.0-SNAPSHOT</version>
+  	<version>0.1.0</version>
   	<relativePath>../</relativePath>
   </parent>
   
   <artifactId>wiselenium-parent</artifactId>
   <packaging>pom</packaging>
-
+  
+  <properties>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
+  </properties>
+  
   <name>wiselenium parent</name>
+  <description>
+  wiselenium parent pom.
+  </description>
   <url>https://github.com/andreschaffer/wiselenium</url>
+  
+  <licenses>
+	<license>
+		<name>MIT License</name>
+		<url>http://www.opensource.org/licenses/mit-license.php</url>
+		<distribution>repo</distribution>
+	</license>
+  </licenses>
   
   <developers>
 	<developer>
