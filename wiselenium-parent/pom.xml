@@ -99,6 +99,36 @@
       			</execution>
       		</executions>
       	</plugin>
+		
+		<plugin>
+			<groupId>com.mycila.maven-license-plugin</groupId>
+			<artifactId>maven-license-plugin</artifactId>
+			<version>1.9.0</version>
+			<configuration>
+				<header>${project.basedir}/../MIT-LICENSE.txt</header>
+				<failIfMissing>true</failIfMissing>
+				<strictCheck>true</strictCheck>
+				<aggregate>true</aggregate>
+			</configuration>
+			<executions>
+				<execution>
+					<id>enforce-license-headers</id>
+					<phase>verify</phase>
+					<goals>
+						<goal>check</goal>
+					</goals>
+					<configuration>
+						<includes>
+							<include>**/src/main/java/**</include>
+							<include>**/src/test/java/**</include>
+						</includes>
+						<mapping>
+							<java>JAVADOC_STYLE</java>
+						</mapping>
+					</configuration>
+				</execution>
+			</executions>
+		</plugin>
   	</plugins>
   	
   	<pluginManagement>
