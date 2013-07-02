@@ -7,7 +7,7 @@
     <version>7</version>
   </parent>
   
-  <groupId>org.wiselenium</groupId>
+  <groupId>com.github.wiselenium</groupId>
   <artifactId>wiselenium-parent</artifactId>
   <version>0.1.0</version>
   <packaging>pom</packaging>
@@ -54,13 +54,13 @@
   <dependencyManagement>
 	<dependencies>
 		<dependency>
-			<groupId>org.wiselenium</groupId>
+			<groupId>com.github.wiselenium</groupId>
 			<artifactId>wiselenium-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		
 		<dependency>
-			<groupId>org.wiselenium</groupId>
+			<groupId>com.github.wiselenium</groupId>
 			<artifactId>wiselenium-testng</artifactId>
 			<version>${project.version}</version>
 		</dependency>

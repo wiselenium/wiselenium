@@ -28,13 +28,13 @@
   <test name="core">
   	<parameter name="browser" value="firefox"/>
     <classes>
-       <class name="org.wiselenium.core.test.WiseTestNGTest" />
+       <class name="com.github.wiselenium.core.test.WiseTestNGTest" />
     </classes>
   </test>
   
   <test name="github">
     <classes>
-       <class name="org.wiselenium.core.test.example.GitHubExample" />
+       <class name="com.github.wiselenium.core.test.example.GitHubExample" />
     </classes>
   </test>
   

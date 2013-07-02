@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   
   <parent>
-  	<groupId>org.wiselenium</groupId>
+  	<groupId>com.github.wiselenium</groupId>
   	<artifactId>wiselenium-parent</artifactId>
   	<version>0.1.0</version>
   	<relativePath>../</relativePath>
@@ -104,7 +104,7 @@
   
   <dependencies>
   	<dependency>
-  		<groupId>org.wiselenium</groupId>
+  		<groupId>com.github.wiselenium</groupId>
 		<artifactId>wiselenium-core</artifactId>
   	</dependency>
   	
