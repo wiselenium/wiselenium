@@ -22,7 +22,7 @@
   wiselenium is a framework built upon Selenium WebDriver to ease the creation of tests in a strongly typed manner.
   It makes it possible to easily create and use your own UI component types in your tests.
   </description>
-  <url>https://github.com/andreschaffer/wiselenium</url>
+  <url>https://github.com/wiselenium/wiselenium</url>
   
   <licenses>
 	<license>
@@ -33,9 +33,9 @@
   </licenses>
   
   <scm>
-	<url>https://github.com/andreschaffer/wiselenium/</url>
-	<connection>scm:git:git@github.com:andreschaffer/wiselenium.git</connection>
-	<developerConnection>scm:git:git@github.com:andreschaffer/wiselenium.git</developerConnection>
+	<url>https://github.com/wiselenium/wiselenium/</url>
+	<connection>scm:git:git@github.com:wiselenium/wiselenium.git</connection>
+	<developerConnection>scm:git:git@github.com:wiselenium/wiselenium.git</developerConnection>
   </scm>
   
   <developers>
