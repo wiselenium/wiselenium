@@ -21,7 +21,7 @@
  */
 package org.wiselenium.core.test;
 
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 import static org.wiselenium.core.test.util.TestResourceFinder.getAbsolutePath;
 
 import java.util.List;
@@ -38,7 +38,8 @@ public class DummyPage extends Page<DummyPage> {
 	
 	public static final By BY_SELECT1 = By.id("select1");
 	public static final By BY_RADIOBUTTONS = By.name("sex");
-	public static final String URL = getAbsolutePath("dummy.html");
+	public static final String PARTIAL_URL = "dummy.html";
+	public static final String URL = getAbsolutePath(PARTIAL_URL);
 	
 	@FindBy(name = "sex")
 	private List<WebElement> radiobuttons;
@@ -65,7 +66,7 @@ public class DummyPage extends Page<DummyPage> {
 	
 	@Override
 	protected void isLoaded() {
-		assertEquals(this.getWrappedDriver().getCurrentUrl(), URL);
+		assertTrue(this.getWrappedDriver().getCurrentUrl().endsWith(PARTIAL_URL));
 	}
 	
 	@Override

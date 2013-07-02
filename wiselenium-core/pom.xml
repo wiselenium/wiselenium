@@ -5,11 +5,10 @@
   	<groupId>org.wiselenium</groupId>
   	<artifactId>wiselenium-parent</artifactId>
   	<version>0.1.0</version>
-  	<relativePath>../wiselenium-parent</relativePath>
+  	<relativePath>../</relativePath>
   </parent>
   
   <artifactId>wiselenium-core</artifactId>
-  <version>${wiselenium-core.version}</version>
   <packaging>jar</packaging>
   
   <properties>

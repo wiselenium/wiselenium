@@ -21,7 +21,6 @@
  */
 package org.wiselenium.core.test;
 
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -30,6 +29,7 @@ import java.io.File;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -49,9 +49,14 @@ public class WiseTestNGTest extends WiseTestNG<WiseTestNGTest> {
 		return DummyPage.URL;
 	}
 	
+	@Override
+	public WebDriver initDriver() {
+		return Driver.IE32.initDriver();
+	}
+	
 	@Test
 	public void shouldFindElement() {
-		Text text = this.get(DummyPage.URL).and().findElement(Text.class, By.id("text"));
+		Text text = this.page.get().and().findElement(Text.class, By.id("text"));
 		assertNotNull(text);
 	}
 	
@@ -83,7 +88,7 @@ public class WiseTestNGTest extends WiseTestNG<WiseTestNGTest> {
 	
 	@BeforeClass
 	public void shouldStartTestAtUrl() {
-		assertEquals(this.getDriver().getCurrentUrl(), this.getUrl());
+		assertTrue(this.getDriver().getCurrentUrl().endsWith(DummyPage.PARTIAL_URL));
 	}
 	
 	@Test

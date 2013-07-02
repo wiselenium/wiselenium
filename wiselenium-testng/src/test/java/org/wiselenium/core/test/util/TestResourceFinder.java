@@ -29,7 +29,11 @@ public final class TestResourceFinder {
 	public static String getAbsolutePath(String fileName) {
 		String absolutePath = "file:///" + new File("").getAbsolutePath() + "/src/test/resources/"
 			+ fileName;
-		return absolutePath.replaceAll("\\\\", "/");
+		return replaceSlashes(absolutePath);
+	}
+	
+	private static String replaceSlashes(String value) {
+		return value.replaceAll("\\\\", "/");
 	}
 	
 }

@@ -1,16 +1,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
+  
   <groupId>org.wiselenium</groupId>
-  <artifactId>wiselenium-bom</artifactId>
+  <artifactId>wiselenium-parent</artifactId>
   <version>0.1.0</version>
   <packaging>pom</packaging>
   
   <properties>
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
-	<wiselenium-core.version>0.1.0</wiselenium-core.version>
-	<wiselenium-testng.version>0.1.0</wiselenium-testng.version>
   </properties>
   
   <name>wiselenium</name>
@@ -43,21 +47,22 @@
   </developers>
   
   <modules>
-	<module>wiselenium-parent</module>
+	<module>wiselenium-core</module>
+	<module>wiselenium-testng</module>
   </modules>
-  
+
   <dependencyManagement>
 	<dependencies>
 		<dependency>
 			<groupId>org.wiselenium</groupId>
 			<artifactId>wiselenium-core</artifactId>
-			<version>${wiselenium-core.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.wiselenium</groupId>
 			<artifactId>wiselenium-testng</artifactId>
-			<version>${wiselenium-testng.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		
 		<dependency>
@@ -79,5 +84,148 @@
 		</dependency>
 	</dependencies>
   </dependencyManagement>
+  
+  <build>
+  	<plugins>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+          	<artifactId>maven-compiler-plugin</artifactId>
+          	<version>3.1</version>
+          	<configuration>
+          		<source>1.6</source>
+          		<target>1.6</target>
+          	</configuration>
+  		</plugin>
+  		
+  		<plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-jar-plugin</artifactId>
+	        <version>2.4</version>
+	        <configuration>
+	        	<forceCreation>true</forceCreation>
+	        </configuration>
+      	</plugin>
+      	
+      	<plugin>
+      		<groupId>org.apache.maven.plugins</groupId>
+      		<artifactId>maven-javadoc-plugin</artifactId>
+        	<version>2.9</version>
+        	<executions>
+        		<execution>
+        			<id>attach-javadoc</id>
+        			<phase>verify</phase>
+        			<goals>
+        				<goal>jar</goal>
+        			</goals>
+        			<configuration>
+        				<force>true</force>
+        			</configuration>
+        		</execution>
+        	</executions>
+      	</plugin>
+      	
+      	<plugin>
+      		<groupId>org.apache.maven.plugins</groupId>
+      		<artifactId>maven-source-plugin</artifactId>
+      		<version>2.2.1</version>
+      		<executions>
+      			<execution>
+      				<id>attach-source</id>
+      				<phase>verify</phase>
+      				<goals>
+      					<goal>jar-no-fork</goal>
+      				</goals>
+      				<configuration>
+      					<forceCreation>true</forceCreation>
+      				</configuration>
+      			</execution>
+      		</executions>
+      	</plugin>
+		
+		<plugin>
+			<groupId>com.mycila.maven-license-plugin</groupId>
+			<artifactId>maven-license-plugin</artifactId>
+			<version>1.9.0</version>
+			<configuration>
+				<header>MIT-LICENSE.txt</header>
+				<failIfMissing>true</failIfMissing>
+				<strictCheck>true</strictCheck>
+				<aggregate>true</aggregate>
+			</configuration>
+			<executions>
+				<execution>
+					<id>enforce-license-headers</id>
+					<phase>verify</phase>
+					<goals>
+						<goal>check</goal>
+					</goals>
+					<configuration>
+						<includes>
+							<include>**/src/main/java/**</include>
+							<include>**/src/test/java/**</include>
+						</includes>
+						<mapping>
+							<java>JAVADOC_STYLE</java>
+						</mapping>
+					</configuration>
+				</execution>
+			</executions>
+		</plugin>
+		
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-release-plugin</artifactId>
+			<version>2.4.1</version>
+			<configuration>
+				<autoVersionSubmodules>true</autoVersionSubmodules>
+				<mavenExecutorId>forked-path</mavenExecutorId>
+			</configuration>
+		</plugin>
+  	</plugins>
+  	
+  	<pluginManagement>
+  		<plugins>
+	        <plugin>
+	          <groupId>org.apache.maven.plugins</groupId>
+	          <artifactId>maven-surefire-plugin</artifactId>
+	          <version>2.14.1</version>
+	        </plugin>
+  		</plugins>
+  	</pluginManagement>
+  </build>
+  
+  <profiles>
+	  <profile>
+		<id>release-sign-artifacts</id>
+		<properties>
+			<gpg.useagent>true</gpg.useagent>
+			<gpg.executable>gpg2</gpg.executable>
+		</properties>
+		<activation>
+		  <property>
+			<name>performRelease</name>
+			<value>true</value>
+		  </property>
+		</activation>
+		<build>
+		  <plugins>
+			<plugin>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-gpg-plugin</artifactId>
+			  <version>1.4</version>
+			  <executions>
+				<execution>
+				  <id>sign-artifacts</id>
+				  <phase>verify</phase>
+				  <goals>
+					<goal>sign</goal>
+				  </goals>
+				</execution>
+			  </executions>
+			</plugin>
+		  </plugins>
+		</build>
+	  </profile>
+  </profiles>
   
 </project>

@@ -5,11 +5,10 @@
   	<groupId>org.wiselenium</groupId>
   	<artifactId>wiselenium-parent</artifactId>
   	<version>0.1.0</version>
-  	<relativePath>../wiselenium-parent</relativePath>
+  	<relativePath>../</relativePath>
   </parent>
   
   <artifactId>wiselenium-testng</artifactId>
-  <version>${wiselenium-testng.version}</version>
   <packaging>jar</packaging>
   
   <properties>
@@ -30,6 +29,14 @@
 		<distribution>repo</distribution>
 	</license>
   </licenses>
+  
+  <developers>
+	<developer>
+		<name>Andre Ricardo Schaffer</name>
+		<email>andre.schaffer@gmail.com</email>
+		<url>http://www.linkedin.com/in/andrericardoschaffer</url>
+	</developer>
+  </developers>
   
   <build>
   	<plugins>
@@ -94,14 +101,6 @@
           </plugin>
   	</plugins>
   </build>
-  
-  <developers>
-	<developer>
-		<name>Andre Ricardo Schaffer</name>
-		<email>andre.schaffer@gmail.com</email>
-		<url>http://www.linkedin.com/in/andrericardoschaffer</url>
-	</developer>
-  </developers>
   
   <dependencies>
   	<dependency>
