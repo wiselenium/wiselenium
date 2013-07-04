@@ -9,7 +9,7 @@
   
   <groupId>com.github.wiselenium</groupId>
   <artifactId>wiselenium-parent</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   
   <properties>
@@ -198,10 +198,6 @@
   <profiles>
 	  <profile>
 		<id>release-sign-artifacts</id>
-		<properties>
-			<gpg.useagent>true</gpg.useagent>
-			<gpg.executable>gpg2</gpg.executable>
-		</properties>
 		<activation>
 		  <property>
 			<name>performRelease</name>
@@ -221,6 +217,10 @@
 				  <goals>
 					<goal>sign</goal>
 				  </goals>
+				  <configuration>
+					<useAgent>true</useAgent>
+					<executable>gpg2</executable>
+				  </configuration>
 				</execution>
 			  </executions>
 			</plugin>
