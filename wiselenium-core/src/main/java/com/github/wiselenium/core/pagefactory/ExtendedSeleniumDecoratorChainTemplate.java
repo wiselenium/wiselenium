@@ -32,7 +32,8 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
-import org.testng.collections.Lists;
+
+import com.google.common.collect.Lists;
 
 abstract class ExtendedSeleniumDecoratorChainTemplate extends DefaultFieldDecorator implements
 	ExtendedSeleniumDecoratorChain {

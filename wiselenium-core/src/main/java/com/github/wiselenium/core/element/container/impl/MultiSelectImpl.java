@@ -28,10 +28,10 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.collections.Lists;
 
 import com.github.wiselenium.core.element.container.MultiSelect;
 import com.github.wiselenium.core.element.field.Option;
+import com.google.common.collect.Lists;
 
 /**
  * Implementation of a HTML Multiple Select.

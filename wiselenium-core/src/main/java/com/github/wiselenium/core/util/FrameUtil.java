@@ -24,9 +24,9 @@ package com.github.wiselenium.core.util;
 import java.util.List;
 
 import org.openqa.selenium.JavascriptExecutor;
-import org.testng.collections.Lists;
 
 import com.github.wiselenium.core.WiseThreadLocal;
+import com.google.common.collect.Lists;
 
 /**
  * Utility class to handle frames.

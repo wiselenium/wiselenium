@@ -27,7 +27,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
-import org.testng.collections.Lists;
+
+import com.google.common.collect.Lists;
 
 /**
  * Utility class to find elements.

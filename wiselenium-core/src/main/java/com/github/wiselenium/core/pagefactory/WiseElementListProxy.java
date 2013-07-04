@@ -31,7 +31,8 @@ import net.sf.cglib.proxy.MethodProxy;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
-import org.testng.collections.Lists;
+
+import com.google.common.collect.Lists;
 
 /**
  * The wiselenium proxy for a list of elements.

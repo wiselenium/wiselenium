@@ -24,12 +24,12 @@ package com.github.wiselenium.core.element.frame.impl;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.testng.collections.Lists;
 
 import com.github.wiselenium.core.WiseThreadLocal;
 import com.github.wiselenium.core.element.BasicElement;
 import com.github.wiselenium.core.element.frame.Frame;
 import com.github.wiselenium.core.pagefactory.WiseLocator;
+import com.google.common.collect.Lists;
 
 /**
  * Basic implementation of a common Frame. <br/>
