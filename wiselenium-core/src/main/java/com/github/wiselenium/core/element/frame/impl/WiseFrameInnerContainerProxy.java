@@ -33,8 +33,7 @@ import java.util.List;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
-
-import com.github.wiselenium.core.WiseThreadLocal;
+import com.github.wiselenium.core.WiseUnwrapper;
 import com.github.wiselenium.core.pagefactory.WisePageFactory;
 import com.github.wiselenium.core.util.FrameUtil;
 
@@ -79,7 +78,7 @@ final class WiseFrameInnerContainerProxy<E> implements MethodInterceptor {
 	
 	private synchronized void initElements(Object obj) {
 		if (!this.elementsInitialized) {
-			WisePageFactory.initElements(WiseThreadLocal.getDriver(), obj);
+			WisePageFactory.initElements(WiseUnwrapper.unwrapWebElement(this.wrappedElement), obj);
 			exportFields(obj);
 			this.elementsInitialized = true;
 		}

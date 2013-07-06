@@ -21,6 +21,7 @@
  */
 package com.github.wiselenium.core.element.frame;
 
+import java.util.List;
 
 import com.github.wiselenium.core.WiseQuery;
 import com.github.wiselenium.core.element.Element;
@@ -45,5 +46,16 @@ public interface Frame<T extends Frame<T>> extends Element<T>, WiseQuery {
 	 * @since 0.1.0
 	 */
 	<E> E exportInnerElement(E element);
+	
+	/**
+	 * Proxies a list of elements that live inside this Frame, so that they can be used
+	 * transparently even outside the frame class.
+	 * 
+	 * @param <E> The type of the element.
+	 * @param elements The list of elements.
+	 * @return The elements proxied.
+	 * @since 0.2.0
+	 */
+	<E> List<E> exportInnerElements(List<E> elements);
 	
 }

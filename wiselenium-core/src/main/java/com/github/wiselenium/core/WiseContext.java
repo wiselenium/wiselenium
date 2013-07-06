@@ -24,12 +24,13 @@ package com.github.wiselenium.core;
 import org.openqa.selenium.WebDriver;
 
 /**
- * Helper class to make a WebDriver instance visible for the whole thread.
+ * Helper class to make some objects available for the whole thread. <br/>
+ * For instance, the WebDriver instance.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.1.0
+ * @since 0.2.0
  */
-public final class WiseThreadLocal {
+public final class WiseContext {
 	
 	static final InheritableThreadLocal<WebDriver> WEB_DRIVER_THREAD_LOCAL;
 	
@@ -38,7 +39,7 @@ public final class WiseThreadLocal {
 	}
 	
 	
-	private WiseThreadLocal() {}
+	private WiseContext() {}
 	
 	/**
 	 * Retrieves the WebDriver of the current thread.

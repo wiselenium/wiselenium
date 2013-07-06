@@ -27,8 +27,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 
+import com.github.wiselenium.core.WiseContext;
 import com.github.wiselenium.core.WiseException;
-import com.github.wiselenium.core.WiseThreadLocal;
 import com.github.wiselenium.core.element.BasicElement;
 import com.github.wiselenium.core.element.field.Field;
 
@@ -52,10 +52,10 @@ public class BasicField<T extends Field<T>> extends BasicElement<T> implements F
 	@SuppressWarnings("unchecked")
 	@Override
 	public T doubleClick() {
-		WebDriver driver = WiseThreadLocal.getDriver();
+		WebDriver driver = WiseContext.getDriver();
 		if (driver == null)
 			throw new WiseException(
-				"The driver must be set on the WiseThreadLocal as a pre-condition for the doubleClick() method");
+				"The driver must be set on the WiseContext as a pre-condition for the doubleClick() method");
 		Action action = new Actions(driver).doubleClick(unwrapWebElement(this)).build();
 		action.perform();
 		return (T) this;

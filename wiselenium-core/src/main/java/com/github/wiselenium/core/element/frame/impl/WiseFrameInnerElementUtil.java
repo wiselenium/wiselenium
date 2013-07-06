@@ -31,6 +31,8 @@ import net.sf.cglib.proxy.Enhancer;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 
+import com.google.common.collect.Lists;
+
 /**
  * Utility class for the frames' inner elements.
  * 
@@ -140,9 +142,10 @@ final class WiseFrameInnerElementUtil {
 	private static void exportList(Field field, Object obj, Object fieldValue)
 		throws IllegalAccessException {
 		List list = (List) fieldValue;
+		List exportedList = Lists.newArrayList();
 		for (int i = 0; i < list.size(); i++)
-			list.add(WiseFrameInnerElementFactory.getInstance(list.get(i)));
-		field.set(obj, list);
+			exportedList.add(WiseFrameInnerElementFactory.getInstance(list.get(i)));
+		field.set(obj, exportedList);
 	}
 	
 	private static Class<?> getOriginalClass(Class<?> clazz) {

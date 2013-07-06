@@ -25,7 +25,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 
-import com.github.wiselenium.core.WiseThreadLocal;
+import com.github.wiselenium.core.WiseContext;
 import com.github.wiselenium.core.element.BasicElement;
 import com.github.wiselenium.core.element.frame.Frame;
 import com.github.wiselenium.core.pagefactory.WiseLocator;
@@ -47,17 +47,23 @@ public class BasicFrame<T extends Frame<T>> extends BasicElement<T> implements F
 	}
 	
 	@Override
+	public <E> List<E> exportInnerElements(List<E> elements) {
+		List<E> exportedElements = Lists.newArrayList();
+		for (E e : elements)
+			exportedElements.add(this.exportInnerElement(e));
+		return exportedElements;
+	}
+	
+	@Override
 	public <E> E findElement(Class<E> clazz, By by) {
-		E element = WiseLocator.findElement(clazz, by, WiseThreadLocal.getDriver());
+		E element = WiseLocator.findElement(clazz, by, WiseContext.getDriver());
 		return this.exportInnerElement(element);
 	}
 	
 	@Override
 	public <E> List<E> findElements(Class<E> clazz, By by) {
-		List<E> proxiedElements = Lists.newArrayList();
-		for (E element : WiseLocator.findElements(clazz, by, WiseThreadLocal.getDriver()))
-			proxiedElements.add(this.exportInnerElement(element));
-		return proxiedElements;
+		return this
+			.exportInnerElements(WiseLocator.findElements(clazz, by, WiseContext.getDriver()));
 	}
 	
 }

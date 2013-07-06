@@ -25,7 +25,7 @@ import java.util.List;
 
 import org.openqa.selenium.JavascriptExecutor;
 
-import com.github.wiselenium.core.WiseThreadLocal;
+import com.github.wiselenium.core.WiseContext;
 import com.google.common.collect.Lists;
 
 /**
@@ -70,9 +70,9 @@ public final class FrameUtil {
 	 * @since 0.1.0
 	 */
 	public static void switchToFrame(List<String> framePath) {
-		WiseThreadLocal.getDriver().switchTo().defaultContent();
+		WiseContext.getDriver().switchTo().defaultContent();
 		for (String content : framePath)
-			WiseThreadLocal.getDriver().switchTo().frame(content);
+			WiseContext.getDriver().switchTo().frame(content);
 	}
 	
 	private static String getAscendantFrameAttribute(String attribute, int depth) {
@@ -84,11 +84,11 @@ public final class FrameUtil {
 		try {
 			String frameElementScript = script.toString().concat(".frameElement.")
 				.concat(attribute);
-			result = (String) ((JavascriptExecutor) WiseThreadLocal.getDriver())
+			result = (String) ((JavascriptExecutor) WiseContext.getDriver())
 				.executeScript(frameElementScript);
 		} catch (Exception e) {
 			String elementScript = script.toString().concat(".").concat(attribute);
-			result = (String) ((JavascriptExecutor) WiseThreadLocal.getDriver())
+			result = (String) ((JavascriptExecutor) WiseContext.getDriver())
 				.executeScript(elementScript);
 		}
 		

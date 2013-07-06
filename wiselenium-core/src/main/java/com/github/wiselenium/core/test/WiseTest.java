@@ -30,8 +30,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.github.wiselenium.core.WiseContext;
 import com.github.wiselenium.core.WiseRoot;
-import com.github.wiselenium.core.WiseThreadLocal;
 import com.github.wiselenium.core.pagefactory.PageInitializationException;
 import com.github.wiselenium.core.pagefactory.WiseLocator;
 import com.github.wiselenium.core.pagefactory.WisePageFactory;
@@ -77,7 +77,7 @@ class WiseTest<T extends WiseTest<T>> implements WiseRoot<T> {
 	}
 	
 	private static void makeDriverVisibleForThread(WebDriver webDriver) {
-		WiseThreadLocal.setDriver(webDriver);
+		WiseContext.setDriver(webDriver);
 	}
 	
 	/**
@@ -203,8 +203,8 @@ class WiseTest<T extends WiseTest<T>> implements WiseRoot<T> {
 	/**
 	 * Must be called by the test on a beforeClass lifecycle method.<br/>
 	 * 1) calls the initDriver(), 2) makes the driver visible for the whole thread through the
-	 * WiseThreadLocal, 3) adds a shutdown hook to quit the driver, 4) injects all annotated pages
-	 * into the test instance, 5) navigates to the url set for the test.
+	 * WiseContext, 3) adds a shutdown hook to quit the driver, 4) injects all annotated pages into
+	 * the test instance, 5) navigates to the url set for the test.
 	 * 
 	 * @since 0.1.0
 	 */

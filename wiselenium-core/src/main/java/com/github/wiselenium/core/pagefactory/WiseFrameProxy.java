@@ -34,7 +34,7 @@ import net.sf.cglib.proxy.MethodProxy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 
-import com.github.wiselenium.core.WiseThreadLocal;
+import com.github.wiselenium.core.WiseContext;
 import com.github.wiselenium.core.util.FrameUtil;
 
 /**
@@ -91,14 +91,14 @@ final class WiseFrameProxy implements MethodInterceptor {
 	
 	private synchronized void initElements(Object obj) {
 		if (!this.elementsInitialized) {
-			WisePageFactory.initElements(WiseThreadLocal.getDriver(), obj);
+			WisePageFactory.initElements(WiseContext.getDriver(), obj);
 			this.elementsInitialized = true;
 		}
 	}
 	
 	private synchronized void switchToFrame() {
 		FrameUtil.switchToFrame(this.getParentFramePath());
-		WiseThreadLocal.getDriver().switchTo().frame(this.wrappedElement);
+		WiseContext.getDriver().switchTo().frame(this.wrappedElement);
 	}
 	
 }

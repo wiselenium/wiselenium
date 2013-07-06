@@ -1,0 +1,5 @@
+0.2.0
+- New static decorator method on the WiseDecorator to decorate WebElement into any other Element.
+- Renamed WiseThreadLocal to WiseContext.
+- Fixed WiseFrameInnerContainerProxy to initialize it's elements with its wrapped WebElement instead of the WebDriver.
+- Fixed WiseFrameInnerElementUtil.exportList not to reuse the list, avoiding infinite loop.
