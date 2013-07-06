@@ -68,11 +68,11 @@ public class WiseleniumPage extends Page<WiseleniumPage> {
 <dependency>
   	<groupId>com.github.wiselenium</groupId>
   	<artifactId>wiselenium-testng</artifactId>
-  	<version>0.1.0</version>
+  	<version>0.2.0</version>
 </dependency>
 ```
 
-And you're ready to go!
+And you're good to go!
 
 ## Elements available
 wiselenium already offers you a lot of HTML elements:  
@@ -81,10 +81,10 @@ wiselenium already offers you a lot of HTML elements:
 ## The Page Object pattern
 wiselenium supports the Page Object Pattern and has its own Factory `initElements(...)` methods.  
 Its instance variables will be located the same way Selenium/WebDriver does, with the only difference that it can inject other elements than WebElements.  
-A page must have either a no-arg constructor or a constructor that takes a WebDriver as only argument. You don't have to start your pages from the zero, because wiselenium provides the `Page` base class that already fulfills these requirements and offers many other convenience methods. Consider extending it!  
+A page must have either a no-arg constructor or a constructor that takes a WebDriver as only argument. You don't have to start your pages from zero, because wiselenium provides the `Page` base class that already fulfills these requirements and offers many other convenience methods. Consider extending it!  
 
 ### Page methods
-The `Page` class provides many conveninent self-explanatory methods:  
+The `Page` class provides many convenient self-explanatory methods:  
 `findElement(Class elementClass, By by)`, `initNextPage(Class<E> clazz)`, `executeScript(String script)`, `takeScreenShot(String fileName)`, `waitFor(long timeOutInSeconds)`, `load()`, `isLoaded()`.  
 `load()` and `isLoaded()` methods refer to the `LoadableComponent` interface. For more information, check [Selenium wiki](https://code.google.com/p/selenium/wiki/LoadableComponent).  
 If these methods don't fulfill your needs, you can always get the original WebDriver from the `getWrappedDriver()` method and use as needed.
@@ -106,11 +106,12 @@ An Element can be any type annotated with `@Field`, `@Container` or `@Frame` and
   - Container: represents an element that do contain others, like a table. wiselenium automatically initializes every element inside a container on a lazy mode for you.  
   - Frame: represents a HTML frame.  wiselenium will automatically switchTo the frame scope before any of its methods is called, and switchTo the previous scope afterwards. It also initializes every element inside a frame on a lazy mode for you.  
 
-You can combine and use them in any way you want!  
-As of a Page, you don't have to start your elements from the zero, because wiselenium provides the `BasicField`, `BasicContainer` and `BasicFrame` as base classes for you.  
-Note that wiselenium will always proxy your class and keep the original `WebElement`. To retrieve and use it, just call the `WiseUnwrapper.unwrapWebElement(...)` method passing in your element instance.  
-  
-When using any wiselenium `findElement(...)` method, you may pass an interface type. If so, wiselenium will lookup for it's implementation class (check out wiselenium lookup strategy on the code javadoc).
+It's perfectly fine to compose your Elements with other Elements to create some really nice structures!  
+As of a Page, you don't have to start your elements from zero, because wiselenium provides the `BasicField`, `BasicContainer` and `BasicFrame` as base classes for you.  
+Note that wiselenium will always proxy your Element class and keep the original correspondent `WebElement`. To retrieve and use it, just call the `WiseUnwrapper.unwrapWebElement(...)` method passing in your Element instance.  
+
+To dynamically turn a simple WebElement into a specific Element, use the `WiseDecorator.decorateElement(Class<E> clazz, WebElement webElement)` method.  
+When using any wiselenium `findElement(...)` or `decorateElement(...)` method, you may pass an interface type. If so, wiselenium will automatically lookup for it's implementation class (check out wiselenium lookup strategy on the code javadoc).
 
 ## Frame usage
 As stated in the table of features, wiselenium removes the burden of handling frames with WebDriver.  
@@ -233,3 +234,6 @@ This is [Sonar's](http://www.sonarsource.org/) wiselenium dashboard running with
 # About the developers
 
 http://www.linkedin.com/in/andrericardoschaffer
+
+# Contact Info
+Please feel free to make contact at wiselenium@gmail.com
