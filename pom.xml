@@ -36,7 +36,7 @@
 	<url>https://github.com/wiselenium/wiselenium/</url>
 	<connection>scm:git:git@github.com:wiselenium/wiselenium.git</connection>
 	<developerConnection>scm:git:git@github.com:wiselenium/wiselenium.git</developerConnection>
-    <tag>wiselenium 0.1.0</tag>
+    <tag>wiselenium ${project.version}</tag>
   </scm>
   
   <developers>

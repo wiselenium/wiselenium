@@ -1,3 +1,7 @@
+0.3.0
+- Update of selenium-java version to 2.35.0.
+- Update of testng version to 6.8.7.
+
 0.2.0
 - New static decorator method on the WiseDecorator to decorate WebElement into any other Element.
 - Renamed WiseThreadLocal to WiseContext.
