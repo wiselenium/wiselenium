@@ -79,17 +79,6 @@ A page must have either a no-arg constructor or a constructor that takes a WebDr
 All component, frame and WebElement fields will be injected by the wiselenium page factory.  
 If the no-arg constructor is used, you can annotate a WebDriver field with @Root and have it automatically injected also.  
 
-#### @AjaxElement
-Sometimes you have to wait for an element to be present, usually until an AJAX call completes. In these cases, you can use the `@AjaxElement` annotation and have it's location strategy configured to wait for the element:
-```java
-public class DummyPage {
-	
-	@AjaxElement(timeOutInSeconds=5) // default value
-	private Button button;
-	
-}
-```
-
 #### Create your Components
 A component is any type annotated with `@Component` and must have a no-arg constructor.  
 Every other component, frame or WebElement inside a component will be automatically initialized on a lazy mode. That way, you can easily create really nice structures!  
@@ -132,6 +121,17 @@ public class DummyTest extends WiseTest {
 }
 ```
 As can be seen, once the frame was found, we could use its inner members without the burden of switching contexts!  
+
+#### @AjaxElement
+Sometimes you have to wait for an element to be present, usually until an AJAX call completes. In these cases, you can use the `@AjaxElement` annotation and have it's location strategy configured to wait for the element:
+```java
+public class DummyPage {
+	
+	@AjaxElement(timeOutInSeconds=5) // default value
+	private Button button;
+	
+}
+```
 
 #### Locating components
 wiselenium facade offers a `findElement(Class<E> elementClass, By by)` method that is able to locate your components.  
