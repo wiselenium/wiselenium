@@ -19,8 +19,8 @@
   
   <name>wiselenium</name>
   <description>
-  wiselenium is a framework built upon Selenium WebDriver to ease the creation of tests in a strongly typed manner.
-  It makes it possible to easily create and use your own UI component types in your tests.
+  wiselenium is a framework built upon Selenium WebDriver to ease the creation of tests using strongly typed components.
+  Easily create your own UI component types and use them in your tests.
   </description>
   <url>https://github.com/wiselenium/wiselenium</url>
   
@@ -48,7 +48,8 @@
   </developers>
   
   <modules>
-	<module>wiselenium-core</module>
+	<module>wiselenium-factory</module>
+	<module>wiselenium-elements</module>
 	<module>wiselenium-testng</module>
   </modules>
 
@@ -56,10 +57,14 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.github.wiselenium</groupId>
-			<artifactId>wiselenium-core</artifactId>
+			<artifactId>wiselenium-factory</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>com.github.wiselenium</groupId>
+			<artifactId>wiselenium-elements</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.github.wiselenium</groupId>
 			<artifactId>wiselenium-testng</artifactId>
@@ -69,19 +74,13 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>2.35.0</version>
+			<version>2.37.1</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>6.8.7</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<version>1.9.5</version>
 		</dependency>
 	</dependencies>
   </dependencyManagement>
