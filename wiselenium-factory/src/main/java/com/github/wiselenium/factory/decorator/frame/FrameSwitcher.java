@@ -37,6 +37,8 @@ import com.google.common.collect.Lists;
  */
 public final class FrameSwitcher {
 	
+	private FrameSwitcher() {}
+	
 	/**
 	 * Retrieves the current content path.
 	 * 

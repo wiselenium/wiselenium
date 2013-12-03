@@ -66,8 +66,7 @@ public class WiseTest implements WiseQuery, WiseWait, WiseScreenShoot {
 	
 	@AfterClass(alwaysRun = true)
 	public void tearDownWiseTest() {
-		WebDriver driver = this.getDriver();
-		if (driver != null) driver.quit();
+		if (this.driver != null) this.driver.quit();
 	}
 	
 	/**

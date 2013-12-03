@@ -39,6 +39,8 @@ import com.google.common.collect.Lists;
  */
 public final class Wiselenium {
 	
+	private Wiselenium() {}
+	
 	/**
 	 * Finds the first element within the search context using the given mechanism. <br/>
 	 * Throws a NoSuchElementException if the element couldn't be found. <br/>

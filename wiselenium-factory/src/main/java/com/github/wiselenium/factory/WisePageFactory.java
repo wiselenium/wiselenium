@@ -42,7 +42,7 @@ import com.github.wiselenium.factory.exception.PageInstantiationException;
  */
 public final class WisePageFactory {
 	
-	public WisePageFactory() {}
+	private WisePageFactory() {}
 	
 	/**
 	 * Instantiates an object of the given class and initializes its elements. <br/>
