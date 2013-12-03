@@ -27,10 +27,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Identifies the wrapped element.
+ * Identifies the root element/driver of the object.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.1.0
+ * @since 0.3.0
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)

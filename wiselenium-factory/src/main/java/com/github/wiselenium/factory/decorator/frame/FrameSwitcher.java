@@ -33,7 +33,7 @@ import com.google.common.collect.Lists;
  * Responsible for handling frames' switches.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.1.0
+ * @since 0.3.0
  */
 public final class FrameSwitcher {
 	
@@ -41,7 +41,7 @@ public final class FrameSwitcher {
 	 * Retrieves the current content path.
 	 * 
 	 * @return The name|id list of the frames of the current content path.
-	 * @since 0.1.0
+	 * @since 0.3.0
 	 */
 	public static List<String> getCurrentFramePath() {
 		List<String> currentPath = Lists.newArrayList();
@@ -66,7 +66,7 @@ public final class FrameSwitcher {
 	 * Switches the driver to a frame, using its complete path.
 	 * 
 	 * @param framePath The frame path.
-	 * @since 0.1.0
+	 * @since 0.3.0
 	 */
 	public static void switchToFramePath(List<String> framePath) {
 		WebDriver driver = WiseContext.getDriver();

@@ -35,10 +35,10 @@ public class AjaxElementPage {
 	
 	@AjaxElement
 	@FindBy(xpath = "//a[contains(text(), 'Selenium - Web Browser Automation')]")
-	private WebElement ajaxField;
+	private WebElement ajaxComponent;
 	
-	public WebElement getAjaxField() {
-		return this.ajaxField;
+	public WebElement getAjaxComponent() {
+		return this.ajaxComponent;
 	}
 	
 	public AjaxElementPage search(CharSequence... keysToSend) {

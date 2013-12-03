@@ -25,7 +25,7 @@ package com.github.wiselenium.testng.exception;
  * Represents an exception thrown while taking a snapshot of the webdriver page.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.1.0
+ * @since 0.3.0
  */
 public class ScreenShotException extends RuntimeException {
 	

@@ -26,8 +26,7 @@ import static org.testng.Assert.assertTrue;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import com.github.wiselenium.element.DummyContainer;
-import com.github.wiselenium.element.DummyField;
+import com.github.wiselenium.element.DummyComponent;
 import com.github.wiselenium.element.DummyFrame;
 
 @SuppressWarnings("javadoc")
@@ -39,8 +38,7 @@ public class NullDecorationTest {
 		assertTrue(decorator.shouldDecorate(Object.class));
 		assertTrue(decorator.shouldDecorate(WebElement.class));
 		assertTrue(decorator.shouldDecorate(DummyFrame.class));
-		assertTrue(decorator.shouldDecorate(DummyField.class));
-		assertTrue(decorator.shouldDecorate(DummyContainer.class));
+		assertTrue(decorator.shouldDecorate(DummyComponent.class));
 	}
 	
 }

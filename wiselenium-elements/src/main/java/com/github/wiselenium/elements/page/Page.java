@@ -49,7 +49,7 @@ import com.github.wiselenium.factory.annotation.Root;
  * 
  * @author Andre Ricardo Schaffer
  * @param <T> The page type.
- * @since 0.1.0
+ * @since 0.3.0
  */
 public class Page extends LoadableComponent<Page>
 implements WrapsDriver, WiseQuery, WiseWait, WiseScreenShoot {
@@ -76,7 +76,7 @@ implements WrapsDriver, WiseQuery, WiseWait, WiseScreenShoot {
 	 * @param <E> The type of the page.
 	 * @param clazz The class of the page.
 	 * @return An instance of the next page of the user navigation.
-	 * @since 0.1.0
+	 * @since 0.3.0
 	 */
 	public <E> E initNextPage(Class<E> clazz) {
 		return WisePageFactory.initElements(this.driver, clazz);
@@ -87,7 +87,7 @@ implements WrapsDriver, WiseQuery, WiseWait, WiseScreenShoot {
 	 * 
 	 * @param script The script to be executed.
 	 * @return The result of the script.
-	 * @since 0.1.0
+	 * @since 0.3.0
 	 */
 	public Object executeScript(String script) {
 		return ((JavascriptExecutor) this.driver).executeScript(script);
@@ -98,7 +98,7 @@ implements WrapsDriver, WiseQuery, WiseWait, WiseScreenShoot {
 	 * 
 	 * @param url The URL to load. It is best to use a fully qualified URL.
 	 * @return This page object.
-	 * @since 0.1.0
+	 * @since 0.3.0
 	 */
 	public void get(String url) {
 		this.driver.get(url);
@@ -108,7 +108,7 @@ implements WrapsDriver, WiseQuery, WiseWait, WiseScreenShoot {
 	 * Retrieves the current URL that the browser is looking at.
 	 * 
 	 * @return The current URL.
-	 * @since 0.1.0
+	 * @since 0.3.0
 	 */
 	public String getCurrentUrl() {
 		return this.driver.getCurrentUrl();
@@ -118,7 +118,7 @@ implements WrapsDriver, WiseQuery, WiseWait, WiseScreenShoot {
 	 * Retrieves the source of the page rendered in the browser.
 	 * 
 	 * @return The source of the page.
-	 * @since 0.1.0
+	 * @since 0.3.0
 	 */
 	public String getPageSource() {
 		return this.driver.getPageSource();
@@ -128,7 +128,7 @@ implements WrapsDriver, WiseQuery, WiseWait, WiseScreenShoot {
 	 * Retrieves the title of the current page.
 	 * 
 	 * @return The title of the current page, or null if one is not set.
-	 * @since 0.1.0
+	 * @since 0.3.0
 	 */
 	public String getTitle() {
 		return this.driver.getTitle();

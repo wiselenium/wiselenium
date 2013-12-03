@@ -26,8 +26,8 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 
-import com.github.wiselenium.elements.field.Radiobutton;
-import com.github.wiselenium.elements.field.Text;
+import com.github.wiselenium.elements.component.Radiobutton;
+import com.github.wiselenium.elements.component.Text;
 import com.github.wiselenium.elements.frame.impl.FrameImpl;
 
 @SuppressWarnings("javadoc")

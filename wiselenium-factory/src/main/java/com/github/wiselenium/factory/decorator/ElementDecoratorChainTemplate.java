@@ -35,6 +35,12 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
 import com.github.wiselenium.factory.annotation.Root;
 
+/**
+ * Element decorator template.
+ * 
+ * @author Andre Ricardo Schaffer
+ * @since 0.3.0
+ */
 public abstract class ElementDecoratorChainTemplate extends DefaultFieldDecorator
 implements ElementDecoratorChain {
 	

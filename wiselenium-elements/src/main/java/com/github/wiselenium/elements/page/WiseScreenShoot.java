@@ -26,7 +26,7 @@ package com.github.wiselenium.elements.page;
  * 
  * @param <T> The type of the screenshooter.
  * @author Andre Ricardo Schaffer
- * @since 0.1.0
+ * @since 0.3.0
  */
 public interface WiseScreenShoot {
 	
@@ -35,7 +35,7 @@ public interface WiseScreenShoot {
 	 * 
 	 * @param fileName The name of the screenshot file.
 	 * @return This instance in order to allow chain calls.
-	 * @since 0.1.0
+	 * @since 0.3.0
 	 */
 	void takeScreenShot(String fileName);
 	

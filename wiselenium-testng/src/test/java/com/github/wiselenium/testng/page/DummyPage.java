@@ -28,8 +28,8 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.github.wiselenium.elements.container.Select;
-import com.github.wiselenium.elements.field.Hyperlink;
+import com.github.wiselenium.elements.component.Hyperlink;
+import com.github.wiselenium.elements.component.Select;
 import com.github.wiselenium.elements.page.Page;
 import com.github.wiselenium.testng.TestResourceFinder;
 

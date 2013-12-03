@@ -48,20 +48,20 @@ public class WisePageFactoryTest extends TestBase {
 		DummyPageWithWebDriverConstructor page = WisePageFactory.initElements(
 				this.driver,
 				DummyPageWithWebDriverConstructor.class);
-		assertNotNull(page.getDummyField());
+		assertNotNull(page.getDummyComponent());
 	}
 	
 	@Test
 	public void shouldCreatePageWithNoArgConstructorAndInitElements() {
 		DummyPageWithNoArgConstructor page = WisePageFactory.initElements(this.driver, DummyPageWithNoArgConstructor.class);
-		assertNotNull(page.getDummyField());
+		assertNotNull(page.getDummyComponent());
 	}
 	
 	@Test
 	public void shouldInitElementsOfInstance() {
 		DummyPageWithWebDriverConstructor page = new DummyPageWithWebDriverConstructor(this.driver);
 		WisePageFactory.initElements(this.driver, page);
-		assertNotNull(page.getDummyField());
+		assertNotNull(page.getDummyComponent());
 	}
 	
 	@Test(expectedExceptions = PageInstantiationException.class)

@@ -38,7 +38,7 @@ import com.google.common.collect.Lists;
  * The wiselenium proxy for a list of elements.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.1.0
+ * @since 0.3.0
  */
 public final class WiseElementListProxy<E> implements MethodInterceptor {
 	

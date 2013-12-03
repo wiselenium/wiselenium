@@ -33,8 +33,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.github.wiselenium.elements.field.Radiobutton;
-import com.github.wiselenium.elements.field.Text;
+import com.github.wiselenium.elements.component.Radiobutton;
+import com.github.wiselenium.elements.component.Text;
 import com.github.wiselenium.testng.WiseTest;
 import com.github.wiselenium.testng.annotation.Page;
 import com.github.wiselenium.testng.page.DummyPage;

@@ -38,7 +38,7 @@ import com.github.wiselenium.factory.exception.PageInstantiationException;
  * Utility class to create Pages.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.1.0
+ * @since 0.3.0
  */
 public final class WisePageFactory {
 	
@@ -53,7 +53,7 @@ public final class WisePageFactory {
 	 * @param driver The driver that will be used to look up the object elements.
 	 * @param clazz The class to be instantiated.
 	 * @return An instance of the class with its elements proxied.
-	 * @since 0.1.0
+	 * @since 0.3.0
 	 */
 	public static <T> T initElements(WebDriver driver, Class<T> clazz) {
 		T instance = instantiatePage(driver, clazz);
@@ -66,7 +66,7 @@ public final class WisePageFactory {
 	 * @param searchContext The context that will be used to look up the elements.
 	 * @param instance The instance whose fields will be initialized.
 	 * @return The instance with its elements initialized.
-	 * @since 0.1.0
+	 * @since 0.3.0
 	 */
 	public static <T> T initElements(SearchContext searchContext, T instance) {
 		Class<?> currentInstanceHierarchyClass = instance.getClass();

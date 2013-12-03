@@ -36,8 +36,7 @@ import org.testng.annotations.Test;
 import com.github.wiselenium.TestBase;
 import com.github.wiselenium.TestResourceFinder;
 import com.github.wiselenium.Wiselenium;
-import com.github.wiselenium.element.DummyContainer;
-import com.github.wiselenium.element.DummyField;
+import com.github.wiselenium.element.DummyComponent;
 import com.github.wiselenium.element.DummyFrame;
 
 @SuppressWarnings("javadoc")
@@ -56,8 +55,7 @@ public class WiseFrameDecorationTest extends TestBase {
 	public void shouldRecognizeTypeToDecorate() {
 		WiseFrameDecorator decorator = new WiseFrameDecorator(null);
 		assertTrue(decorator.shouldDecorate(DummyFrame.class));
-		assertFalse(decorator.shouldDecorate(DummyField.class));
-		assertFalse(decorator.shouldDecorate(DummyContainer.class));
+		assertFalse(decorator.shouldDecorate(DummyComponent.class));
 		assertFalse(decorator.shouldDecorate(WebElement.class));
 		assertFalse(decorator.shouldDecorate(Object.class));
 	}

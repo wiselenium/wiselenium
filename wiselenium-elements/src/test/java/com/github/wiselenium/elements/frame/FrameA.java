@@ -22,7 +22,7 @@
 package com.github.wiselenium.elements.frame;
 
 
-import com.github.wiselenium.elements.field.Text;
+import com.github.wiselenium.elements.component.Text;
 import com.github.wiselenium.elements.frame.impl.FrameImpl;
 
 @SuppressWarnings("javadoc")

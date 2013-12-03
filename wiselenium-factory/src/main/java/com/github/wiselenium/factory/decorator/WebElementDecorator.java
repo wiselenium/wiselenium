@@ -27,12 +27,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
 /**
- * Extension of default decorator.<br/>
- * Will decorate 1) WebElement fields, 2) List<WebElement> fields
- * and 3) Types annotated with Field, Container or Frame that have @FindBy or @FindBys annotation.
+ * Decorator for WebElements.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.1.0
+ * @since 0.3.0
  */
 public class WebElementDecorator extends ElementDecoratorChainTemplate {
 	

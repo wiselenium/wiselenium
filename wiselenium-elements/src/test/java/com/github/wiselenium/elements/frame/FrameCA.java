@@ -24,7 +24,7 @@ package com.github.wiselenium.elements.frame;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.github.wiselenium.elements.field.Text;
+import com.github.wiselenium.elements.component.Text;
 import com.github.wiselenium.elements.frame.impl.FrameImpl;
 
 @SuppressWarnings("javadoc")

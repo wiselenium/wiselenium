@@ -36,7 +36,7 @@ import com.github.wiselenium.elements.frame.Frame;
  * 
  * @author Andre Ricardo Schaffer
  * @param <T> The frame type.
- * @since 0.1.0
+ * @since 0.3.0
  */
 public class FrameImpl<T extends Frame<T>> extends BasicElement<T> implements Frame<T> {
 	

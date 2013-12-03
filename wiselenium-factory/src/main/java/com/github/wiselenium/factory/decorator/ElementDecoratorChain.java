@@ -25,7 +25,7 @@ package com.github.wiselenium.factory.decorator;
  * Decorators chain of responsibility.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.1.0
+ * @since 0.3.0
  */
 public interface ElementDecoratorChain extends ElementDecorator {
 	
@@ -33,7 +33,7 @@ public interface ElementDecoratorChain extends ElementDecorator {
 	 * Sets the next decorator of the chain to be called.
 	 * 
 	 * @param decorator The decorator.
-	 * @since 0.1.0
+	 * @since 0.3.0
 	 */
 	void setNext(ElementDecorator decorator);
 	

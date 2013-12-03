@@ -26,7 +26,7 @@ package com.github.wiselenium.factory.exception;
  * Represents an exception thrown due to an error while trying to instantiate a page.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.1.0
+ * @since 0.3.0
  */
 public class PageInstantiationException extends RuntimeException {
 	

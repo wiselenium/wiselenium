@@ -37,7 +37,7 @@ import com.github.wiselenium.factory.WisePageFactory;
  * The wiselenium proxy for frames.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.1.0
+ * @since 0.3.0
  */
 public final class WiseFrameProxy implements MethodInterceptor {
 	

@@ -27,10 +27,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
 /**
- * Decorates WebElements.
+ * Decorates elements.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.1.0
+ * @since 0.3.0
  */
 public interface ElementDecorator extends FieldDecorator {
 	

@@ -29,7 +29,7 @@ import com.github.wiselenium.elements.WiseQuery;
  * 
  * @author Andre Ricardo Schaffer
  * @param <T> The frame type.
- * @since 0.1.0
+ * @since 0.3.0
  */
 @com.github.wiselenium.factory.annotation.Frame
 public interface Frame<T extends Frame<T>> extends Element<T>, WiseQuery {

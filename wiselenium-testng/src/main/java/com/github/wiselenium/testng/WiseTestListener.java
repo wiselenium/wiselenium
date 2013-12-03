@@ -32,10 +32,10 @@ import org.testng.TestListenerAdapter;
 /**
  * A Method Listener that performs some operations depending on the test result. <br/>
  * 1) On a test failure, saves a screenshot in a file with name equals to
- * {getScreenShotPath()}/{testClass}_{methodName}_{currentTimestamp}.png.
+ * {getTestFailureScreenShotPath()}/{testClass}_{methodName}_{currentTimestamp}.png.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.1.0
+ * @since 0.3.0
  */
 public class WiseTestListener extends TestListenerAdapter {
 	

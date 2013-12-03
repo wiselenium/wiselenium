@@ -27,16 +27,18 @@ import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.github.wiselenium.element.DummyField;
-import com.github.wiselenium.element.impl.DummyFieldImpl;
+import com.github.wiselenium.element.DummyComponent;
+import com.github.wiselenium.element.impl.DummyComponentImpl;
 
 @SuppressWarnings("javadoc")
 public class ClasspathUtilsTest {
 	
 	@Test
 	public void shouldFindImplementation() {
-		Class<? extends DummyField> clazz = ClasspathUtils.findImplementationClass(DummyField.class);
-		assertEquals(clazz, DummyFieldImpl.class);
+		Class<? extends DummyComponent> clazz = ClasspathUtils
+				.findImplementationClass(DummyComponent.class);
+		
+		assertEquals(clazz, DummyComponentImpl.class);
 	}
 	
 	@Test(expectedExceptions = RuntimeException.class)

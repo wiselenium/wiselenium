@@ -27,15 +27,14 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
-import com.github.wiselenium.factory.decorator.container.WiseContainerDecorator;
-import com.github.wiselenium.factory.decorator.field.WiseFieldDecorator;
+import com.github.wiselenium.factory.decorator.component.WiseComponentDecorator;
 import com.github.wiselenium.factory.decorator.frame.WiseFrameDecorator;
 
 /**
- * Class responsible for decorating WebElements.
+ * Class responsible for decorating elements.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.1.0
+ * @since 0.3.0
  */
 public class WiseDecorator implements ElementDecorator {
 	
@@ -47,18 +46,16 @@ public class WiseDecorator implements ElementDecorator {
 	 * @param factory The factory of the elements locator.
 	 */
 	public WiseDecorator(ElementLocatorFactory factory) {
-		ElementDecoratorChain wiseFieldDecorator = new WiseFieldDecorator(factory);
-		ElementDecoratorChain wiseContainerDecorator = new WiseContainerDecorator(factory);
+		ElementDecoratorChain wiseComponentDecorator = new WiseComponentDecorator(factory);
 		ElementDecoratorChain wiseFrameDecorator = new WiseFrameDecorator(factory);
 		ElementDecoratorChain webElementDecorator = new WebElementDecorator(factory);
 		ElementDecoratorChain nullDecorator = new NullDecorator(factory);
 		
-		wiseFieldDecorator.setNext(wiseContainerDecorator);
-		wiseContainerDecorator.setNext(wiseFrameDecorator);
+		wiseComponentDecorator.setNext(wiseFrameDecorator);
 		wiseFrameDecorator.setNext(webElementDecorator);
 		webElementDecorator.setNext(nullDecorator);
 		
-		this.elementDecorator = wiseFieldDecorator;
+		this.elementDecorator = wiseComponentDecorator;
 	}
 	
 	/**

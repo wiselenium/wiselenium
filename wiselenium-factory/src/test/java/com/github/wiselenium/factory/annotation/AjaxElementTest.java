@@ -39,10 +39,10 @@ public class AjaxElementTest extends TestBase {
 	}
 	
 	@Test
-	public void shouldFindSeleniumHomePageThroughGoogleUsingPageField() {
+	public void shouldFindSeleniumHomePageThroughGoogleUsingPageComponent() {
 		AjaxElementPage page = WisePageFactory.initElements(this.driver, AjaxElementPage.class);
 		page.search("seleniumhq");
-		assertTrue(page.getAjaxField().isDisplayed());
+		assertTrue(page.getAjaxComponent().isDisplayed());
 	}
 	
 }

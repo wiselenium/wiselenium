@@ -36,7 +36,7 @@ import com.github.wiselenium.factory.util.ClasspathUtils;
  * Class responsible for decorating Frames.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.1.0
+ * @since 0.3.0
  */
 public class WiseFrameDecorator extends ElementDecoratorChainTemplate {
 	

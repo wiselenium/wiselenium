@@ -31,7 +31,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.github.wiselenium.element.DummyField;
+import com.github.wiselenium.element.DummyComponent;
 
 @SuppressWarnings("javadoc")
 public class WiseleniumTest extends TestBase {
@@ -47,32 +47,32 @@ public class WiseleniumTest extends TestBase {
 	
 	@Test
 	public void shouldFindElement() {
-		DummyField select = Wiselenium.findElement(DummyField.class, BY_SELECT1, this.driver);
+		DummyComponent select = Wiselenium.findElement(DummyComponent.class, BY_SELECT1, this.driver);
 		assertNotNull(select);
 	}
 	
 	@SuppressWarnings("null")
 	@Test
 	public void shouldFindElements() {
-		List<DummyField> elements = Wiselenium.findElements(
-				DummyField.class, BY_RADIOBUTTON, this.driver);
+		List<DummyComponent> elements = Wiselenium.findElements(
+				DummyComponent.class, BY_RADIOBUTTON, this.driver);
 		
 		assertTrue(elements != null && !elements.isEmpty());
-		for (DummyField element : elements) {
+		for (DummyComponent element : elements) {
 			assertNotNull(element);
 		}
 	}
 	
 	@Test
 	public void shouldReturnEmptyListWhenElementsAreNotFound() {
-		List<DummyField> selects = Wiselenium.findElements(
-				DummyField.class, By.id("inexistent"), this.driver);
+		List<DummyComponent> selects = Wiselenium.findElements(
+				DummyComponent.class, By.id("inexistent"), this.driver);
 		assertTrue(selects != null && selects.isEmpty());
 	}
 	
 	@Test(expectedExceptions = NoSuchElementException.class)
 	public void shouldThrowExceptionWhenElementIsntFound() {
-		Wiselenium.findElement(DummyField.class, By.id("inexistent"), this.driver);
+		Wiselenium.findElement(DummyComponent.class, By.id("inexistent"), this.driver);
 	}
 	
 }

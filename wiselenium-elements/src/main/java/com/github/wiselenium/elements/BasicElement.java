@@ -32,7 +32,7 @@ import com.github.wiselenium.factory.annotation.Root;
  * 
  * @author Andre Ricardo Schaffer
  * @param <T> The element type.
- * @since 0.1.0
+ * @since 0.3.0
  */
 public class BasicElement<T extends Element<T>> implements Element<T>, WrapsElement {
 	

@@ -29,7 +29,7 @@ import org.openqa.selenium.By;
  * Finds wise elements.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.1.0
+ * @since 0.3.0
  */
 public interface WiseQuery {
 	
@@ -37,9 +37,9 @@ public interface WiseQuery {
 	 * Finds the first element within the current context using the given mechanism.
 	 * 
 	 * @param clazz The class of the element. Must be either WebElement or a type annotated with
-	 * Field, Container or Frame.
+	 * Component or Frame.
 	 * @return The element.
-	 * @since 0.1.0
+	 * @since 0.3.0
 	 */
 	<E> E findElement(Class<E> clazz, By by);
 	
@@ -47,9 +47,9 @@ public interface WiseQuery {
 	 * Finds all elements within the current context using the given mechanism.
 	 * 
 	 * @param clazz The class of the elements. Must be either WebElement or a type annotated with
-	 * Field, Container or Frame.
+	 * Component or Frame.
 	 * @return The elements.
-	 * @since 0.1.0
+	 * @since 0.3.0
 	 */
 	<E> List<E> findElements(Class<E> clazz, By by);
 	

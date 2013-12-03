@@ -1,3 +1,24 @@
+/**
+ * Copyright (c) 2013 Andre Ricardo Schaffer
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package com.github.wiselenium;
 
 import java.util.List;
@@ -26,7 +47,7 @@ public final class Wiselenium {
 	 * @param by The locating mechanism to use.
 	 * @param searchContext The search context.
 	 * @return The element.
-	 * @since 0.1.0
+	 * @since 0.3.0
 	 */
 	public static <E> E findElement(Class<E> clazz, By by, SearchContext searchContext) {
 		WebElement webElement = searchContext.findElement(by);
@@ -41,7 +62,7 @@ public final class Wiselenium {
 	 * @param by The locating mechanism to use.
 	 * @param searchContext The search context.
 	 * @return The list of elements.
-	 * @since 0.1.0
+	 * @since 0.3.0
 	 */
 	public static <E> List<E> findElements(Class<E> clazz, By by, SearchContext searchContext) {
 		List<WebElement> webElements = searchContext.findElements(by);
@@ -55,10 +76,10 @@ public final class Wiselenium {
 	 * Decorates a webElement.
 	 * 
 	 * @param clazz The class of the decorated element. Must be either WebElement or a type
-	 * annotated with Field, Container or Frame.
+	 * annotated with Component or Frame.
 	 * @param webElement The webElement that will be decorated.
 	 * @return The decorated element or null if the type isn't supported.
-	 * @since 0.2.0
+	 * @since 0.3.0
 	 */
 	public static <E> E decorateElement(Class<E> clazz, WebElement webElement) {
 		WiseDecorator decorator = new WiseDecorator(new DefaultElementLocatorFactory(webElement));
@@ -69,10 +90,10 @@ public final class Wiselenium {
 	 * Decorates a list of webElements.
 	 * 
 	 * @param clazz The class of the decorated elements. Must be either WebElement or a type
-	 * annotated with Field, Container or Frame.
+	 * annotated with Component or Frame.
 	 * @param webElements The webElements that will be decorated.
 	 * @return The list of decorated elements or an empty list if the type is not supported.
-	 * @since 0.2.0
+	 * @since 0.3.0
 	 */
 	public static <E> List<E> decorateElements(Class<E> clazz, List<WebElement> webElements) {
 		List<E> elements = Lists.newArrayList();

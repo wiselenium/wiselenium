@@ -26,8 +26,8 @@ import static org.testng.Assert.assertEquals;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import com.github.wiselenium.elements.container.Table;
-import com.github.wiselenium.elements.container.TableRow;
+import com.github.wiselenium.elements.component.Table;
+import com.github.wiselenium.elements.component.TableRow;
 import com.github.wiselenium.testng.WiseTest;
 
 @SuppressWarnings("javadoc")

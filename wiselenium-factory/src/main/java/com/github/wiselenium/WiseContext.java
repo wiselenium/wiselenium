@@ -28,7 +28,7 @@ import org.openqa.selenium.WebDriver;
  * For instance, the WebDriver.
  * 
  * @author Andre Ricardo Schaffer
- * @since 0.2.0
+ * @since 0.3.0
  */
 public final class WiseContext {
 	
@@ -44,7 +44,7 @@ public final class WiseContext {
 	 * Retrieves the WebDriver of the current thread.
 	 * 
 	 * @return The WebDriver of the current thread.
-	 * @since 0.1.0
+	 * @since 0.3.0
 	 */
 	public static WebDriver getDriver() {
 		WebDriver driver = WEB_DRIVER_THREAD_LOCAL.get();
@@ -59,7 +59,7 @@ public final class WiseContext {
 	 * Sets the WebDriver of the current thread.
 	 * 
 	 * @param driver The WebDriver of the current thread.
-	 * @since 0.1.0
+	 * @since 0.3.0
 	 */
 	public static void setDriver(WebDriver driver) {
 		WEB_DRIVER_THREAD_LOCAL.set(driver);
