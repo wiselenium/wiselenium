@@ -74,7 +74,7 @@ This is wiselenium core. Main resources:
   - WiseContext.class = driver storage for the thread.  
   - @Root = field annotation to mark the root element for injection on your objects. That is, WebDrivers for pages and WebElements for components.  
   
-Note: If you're using the wiselenium-testng module, then you won't have to bother with the WisePageFactory, Wiselenium and WiseContext classes, because it offers convenience methods that wrap these classes methods themselves.
+Note: If you're using the wiselenium-testng module, then you won't have to bother with the WisePageFactory, Wiselenium and WiseContext classes, because it already offers convenience methods that wrap these classes methods themselves.
 
 #### Page Object Pattern
 A page must have either a no-arg constructor or a constructor that takes a WebDriver as only argument.  
