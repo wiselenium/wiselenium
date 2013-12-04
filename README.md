@@ -72,7 +72,9 @@ This is wiselenium core. Main resources:
   - WisePageFactory.class = page factory that understands components annotated with @Component or @Frame.  
   - Wiselenium.class = facade with locator methods that also works with annotated components.  
   - WiseContext.class = driver storage for the thread.  
-  - @Root = field annotation to mark the root element for injection on your objects. That is, WebDrivers for pages and WebElements for components.
+  - @Root = field annotation to mark the root element for injection on your objects. That is, WebDrivers for pages and WebElements for components.  
+  
+Note: You won't have to bother with the WisePageFactory, Wiselenium and WiseContext classes if you're using the wiselenium-testng module (explained ahead).
 
 #### Page Object Pattern
 A page must have either a no-arg constructor or a constructor that takes a WebDriver as only argument.  
@@ -82,7 +84,54 @@ If the no-arg constructor is used, you can annotate a WebDriver field with @Root
 #### Create your Components
 A component is any type annotated with `@Component` and must have a no-arg constructor.  
 Every other component, frame or WebElement inside a component will be automatically initialized on a lazy mode. That way, you can easily create really nice structures!  
-You can have the component corresponding WebElement injected by annotating a WebElement field of your component with @Root.
+You can have the component corresponding WebElement injected by annotating a WebElement field of your component with @Root.  
+
+1) Creating your component:
+```java
+@Component
+public class QueryComponent {
+
+	@Root
+	private WebElement root;
+	
+	@FindBy(id = "t")
+	private Text text;
+	
+	@FindBy(id = "b")
+	private Button button;
+
+	// ...
+
+}
+```
+
+2) Creating your page:
+```java
+public class SearchPage {
+
+	@Root
+	private WebDriver driver;
+
+	@FindBy(id = "q")
+	private QueryComponent queryComponent;
+	
+	// ...
+
+}
+```
+
+3) Using your page on the test:
+```java
+public class SearchTest extends WiseTest {
+
+	@Test
+	public void shouldSearch() {
+		SearchPage page = this.initElements(SearchPage.class);
+		// ...
+	}
+
+}
+```
 
 #### Create your Frames
 A component is any type annotated with `@Frame` and must have a no-arg constructor.  
