@@ -1,14 +1,17 @@
 # What is wiselenium?
 
-wiselenium is a framework built upon [Selenium WebDriver](http://seleniumhq.org/) to ease the creation of tests using strongly typed components.  
-Easily create your own UI component types and use them in your tests!
+wiselenium is an improved Page Factory Framework built upon [Selenium WebDriver](http://seleniumhq.org/) to ease the creation / maintenance of your tests.
 
 # 1 minute example
 
-Suppose you want to test for the values within the "wiselenium table of features" below:
+Suppose you want to test the values within the wiselenium table of features below:
 
 <table name="wiselenium-features">
     <tbody>
+    	<tr>
+            <td>Takes the Page Object Pattern to the next level</td>
+            <td>Yes</td>
+        </tr>
         <tr>
             <td>Provides strongly typed HTML components with built-in methods</td>
             <td>Yes</td>
@@ -22,17 +25,13 @@ Suppose you want to test for the values within the "wiselenium table of features
             <td>Yes</td>
         </tr>
         <tr>
-            <td>Takes the Page Object Pattern to the next level</td>
-            <td>Yes</td>
-        </tr>
-        <tr>
             <td>Adds convenience for test creation</td>
             <td>Yes</td>
         </tr>
     </tbody>
 </table>
   
-Then you can just find the table and use its built-in methods:
+Then you can just find the table and make use of its built-in methods:
 
 ```java
 public class GitHubExample extends WiseTest {
@@ -66,6 +65,14 @@ public class WiseleniumPage {
 wiselenium has 3 different modules to help you out on your tests: wiselenium-factory, wiselenium-elements, wiselenium-testng.
 
 ## wiselenium-factory
+
+```xml
+<dependency>
+	<groupId>com.github.wiselenium</groupId>
+	<artifactId>wiselenium-factory</artifactId>
+	<version>0.3.0</version>
+</dependency>
+```
 This is wiselenium core. Main resources:  
   - @Component = type annotation to identify your components.  
   - @Frame = type annotation to identify your frames.  
@@ -78,7 +85,7 @@ Note: If you're using the wiselenium-testng module, then you won't have to bothe
 
 #### Page Object Pattern
 A page must have either a no-arg constructor or a constructor that takes a WebDriver as only argument.  
-All component, frame and WebElement fields will be injected by the wiselenium page factory.  
+Every component, frame and WebElement fields will be injected by the wiselenium page factory.  
 If the no-arg constructor is used, you can annotate a WebDriver field with @Root and have it automatically injected also.  
 
 #### Create your Components
@@ -188,16 +195,30 @@ If you need to dynamically turn a simple WebElement into a specific Component, u
 When using any wiselenium `findElement(...)` or `decorateElement(...)` method, you may pass an interface type. If so, wiselenium will automatically lookup for it's implementation class following the pattern `{classPackage}.impl.{className}Impl`.
 
 #### Storing the driver for the thread
-If your're not using the wiselenium-testng module, it is important to store the WebDriver of your test at the WiseContext with the `setDriver` method, as it is used in some different places along wiselenium.
+If your're _not_ using the wiselenium-testng module, it is important to store the WebDriver of your test at the WiseContext with the `setDriver` method before anything else, as it is used in some different places along wiselenium.
 
 
 ## wiselenium-elements
+```xml
+<dependency>
+	<groupId>com.github.wiselenium</groupId>
+	<artifactId>wiselenium-elements</artifactId>
+	<version>0.3.0</version>
+</dependency>
+```
 This module depends on the wiselenium-factory module and offers a lot of HTML components implementations:  
 `Text`,`Button`,`Hyperlink`,`Checkbox`,`Radiobutton`,`Img`,`Label`,`Select`,`MultiSelect`,`Table`,`Frame`, etc.  
-It also offers a `Page` base class with many built-in methods.
+It also offers a `Page` base class with many built-in methods that you can extend.
 
 
 ## wiselenium-testng
+```xml
+<dependency>
+	<groupId>com.github.wiselenium</groupId>
+	<artifactId>wiselenium-testng</artifactId>
+	<version>0.3.0</version>
+</dependency>
+```
 This module depends on the wiselenium-factory module and eases the configuration of your tests using the [TestNG](http://testng.org/doc/index.html) framework. Main resources:  
   - WiseTest.class = test base class that can be extended.
 
@@ -225,11 +246,7 @@ A lot of convenient self-explanatory methods are provided:
 `findElement(Class elementClass, By by)`, `initElements(Class pageClass)`, `get(String url)`, `takeScreenShot(String fileName)`, `waitFor(long timeOutInSeconds)`, `getDriver()`.  
 
 #### Storing the driver for the thread
-The WiseTest base class automatically stores the driver at the WiseContext for you.
-
-
-# Project Setup
-Soon to be deployed at the Maven Central Repository.
+Not needed. The WiseTest base class automatically stores the driver at the WiseContext for you.
 
 # About the developers
 http://www.linkedin.com/in/andrericardoschaffer
