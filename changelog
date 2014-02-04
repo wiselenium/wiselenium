@@ -1,13 +1,13 @@
 0.3.0
-- Update of selenium-java version to 2.37.1.
+- Update of selenium-java version to 2.39.0.
 - Update of testng version to 6.8.7.
 - Major refactoring:
 	- Better modularization of projetcs: factory, elements, testng.
 	- Introduction of the Wiselenium facade.
 	- Introduction of the @Root annotation.
-	- Union of the @Field and @Container logic into the single now called @Component logic.
+	- Union of the @Field and @Container logic into the single and now called @Component logic.
 	- Addition of a reentrancy check at the WiseFrameProxy intercept method.
-	- Removal of the frame's export element logic.
+	- Removed frame's export element logic.
 
 0.2.0
 - New static decorator method on the WiseDecorator to decorate WebElement into any other Element.
