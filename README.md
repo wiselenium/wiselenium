@@ -79,19 +79,19 @@ This is wiselenium core. Main resources:
   - WisePageFactory.class = page factory that understands components annotated with @Component or @Frame.  
   - Wiselenium.class = facade with locator methods that also works with annotated components.  
   - WiseContext.class = driver storage for the thread.  
-  - @Root = field annotation to mark the root element for injection on your objects. That is, WebDrivers for pages and WebElements for components.  
+  - @Root = field annotation to mark a root element for injection on your pages / components. That is, WebDrivers for pages and WebElements for components.  
   
 Note: If you're using the wiselenium-testng module, then you won't have to bother with the WisePageFactory, Wiselenium and WiseContext classes, because it already offers convenience methods that wrap these classes methods themselves.
 
 #### Page Object Pattern
 A page must have either a no-arg constructor or a constructor that takes a WebDriver as only argument.  
-Every component, frame and WebElement fields will be injected by the wiselenium page factory.  
+Every component, frame and WebElement field of the page will be automatically injected by the wiselenium page factory.  
 If the no-arg constructor is used, you can annotate a WebDriver field with @Root and have it automatically injected also.  
 
 #### Create your Components
 A component is any type annotated with `@Component` and must have a no-arg constructor.  
-Every other component, frame or WebElement inside a component will be automatically initialized on a lazy mode. That way, you can easily create really nice structures!  
-You can have the component corresponding WebElement injected by annotating a WebElement field of your component with @Root.  
+Every other component, frame or WebElement inside the component will be initialized on a lazy mode. That way, you can easily create really nice structures!  
+You can have the corresponding WebElement injected by annotating a WebElement field of your component with @Root.  
 
 1) Creating your component:
 ```java
@@ -141,8 +141,8 @@ public class SearchTest extends WiseTest {
 ```
 
 #### Create your Frames
-A component is any type annotated with `@Frame` and must have a no-arg constructor.  
-wiselenium will automatically switchTo the frame context before any of its methods are called, and switchTo the previous context afterwards. This way, even nested frame structures are transparently handled. Every component, frame or WebElement inside it is also initialized on a lazy mode.  
+A frame is any type annotated with `@Frame` and must have a no-arg constructor.  
+wiselenium will automatically switchTo the frame context before any of its methods are called, and switchTo the previous context afterwards. This way, even nested frame structures are transparently handled. Every component, frame or WebElement inside it will be initialized on a lazy mode.  
 
 1) Creating your frame:
 ```java
