@@ -34,7 +34,7 @@ Suppose you want to test the values within the wiselenium table of features belo
 Then you can just find the table and make use of its built-in methods:
 
 ```java
-public class GitHubExample extends WiseTest {
+public class GitHubTestExample extends WiseTest {
 	
 	@Test
 	public void shouldTestWiseleniumTableOfFeatures() {
@@ -61,6 +61,20 @@ public class WiseleniumPage {
 }
 ```
 
+```java
+public class GitHubTestExample extends WiseTest {
+	
+	@Test
+	public void shouldTestWiseleniumTableOfFeatures() {
+		this.get("https://github.com/wiselenium/wiselenium");
+		WiseleniumPage wiseleniumPage = this.initElements(WiseleniumPage.class);
+		
+		// ...
+	}
+	
+}
+```
+
 # wiselenium modules
 wiselenium has 3 different modules to help you out on your tests: wiselenium-factory, wiselenium-elements, wiselenium-testng.
 
@@ -73,25 +87,16 @@ wiselenium has 3 different modules to help you out on your tests: wiselenium-fac
 	<version>0.3.0</version>
 </dependency>
 ```
-This is wiselenium core. Main resources:  
-  - @Component = type annotation to identify your components.  
-  - @Frame = type annotation to identify your frames.  
-  - WisePageFactory.class = page factory that understands components annotated with @Component or @Frame.  
-  - Wiselenium.class = facade with locator methods that also works with annotated components.  
-  - WiseContext.class = driver storage for the thread.  
-  - @Root = field annotation to mark a root element for injection on your pages / components. That is, WebDrivers for pages and WebElements for components.  
-  
-Note: If you're using the wiselenium-testng module, then you won't have to bother with the WisePageFactory, Wiselenium and WiseContext classes, because it already offers convenience methods that wrap these classes methods themselves.
 
 #### Page Object Pattern
 A page must have either a no-arg constructor or a constructor that takes a WebDriver as only argument.  
-Every component, frame and WebElement field of the page will be automatically injected by the wiselenium page factory.  
+Every component (`@Component`), frame (`@Frame`) and WebElement field of the page will be automatically injected by the wiselenium page factory.  
 If the no-arg constructor is used, you can annotate a WebDriver field with @Root and have it automatically injected also.  
 
 #### Create your Components
 A component is any type annotated with `@Component` and must have a no-arg constructor.  
 Every other component, frame or WebElement inside the component will be initialized on a lazy mode. That way, you can easily create really nice structures!  
-You can have the corresponding WebElement injected by annotating a WebElement field of your component with @Root.  
+You can have the corresponding WebElement injected by annotating a field of your component with @Root.  
 
 1) Creating your component:
 ```java
@@ -194,8 +199,15 @@ wiselenium facade offers a `findElement(Class<E> elementClass, By by)` method th
 If you need to dynamically turn a simple WebElement into a specific Component, use the `decorateElement(Class<E> elementClass, WebElement webElement)` method.  
 When using any wiselenium `findElement(...)` or `decorateElement(...)` method, you may pass an interface type. If so, wiselenium will automatically lookup for it's implementation class following the pattern `{classPackage}.impl.{className}Impl`.
 
-#### Storing the driver for the thread
-If your're _not_ using the wiselenium-testng module, it is important to store the WebDriver of your test at the WiseContext with the `setDriver` method before anything else, as it is used in some different places along wiselenium.
+#### Please note
+All examples shown have made use of the wiselenium-testng module so far (by extending the `WiseTest` base class).  
+If you _don't_ want to use the wiselenium-testng module, it is important to store the WebDriver of your test at the WiseContext before anything else, as it is used in some different places along wiselenium.
+```java
+	WebDriver webDriver = new FirefoxDriver();
+	WiseContext.setDriver(webDriver);
+```
+
+Every convenient method provided by the `WiseTest` (`findElement`, `initElements`, etc) will be found at `Wiselenium` and `WisePageFactory` classes.
 
 
 ## wiselenium-elements
@@ -223,7 +235,7 @@ This module depends on the wiselenium-factory module and eases the configuration
   - WiseTest.class = test base class that can be extended.
 
 #### Browser configuration
-The browser will be automatically open on a beforeClass lifecyle and closed afterClass.  
+The browser will be automatically opened on a beforeClass lifecyle and closed afterClass.  
 Firefox is the default browser, and can be changed overriding the `initDriver()` method.
 
 #### Page initialization
@@ -244,9 +256,6 @@ Set the directory to which the screenshots will be saved by overriding the metho
 #### Convenience methods
 A lot of convenient self-explanatory methods are provided:  
 `findElement(Class elementClass, By by)`, `initElements(Class pageClass)`, `get(String url)`, `takeScreenShot(String fileName)`, `waitFor(long timeOutInSeconds)`, `getDriver()`.  
-
-#### Storing the driver for the thread
-Not needed. The WiseTest base class automatically stores the driver at the WiseContext for you.
 
 # About the developers
 http://www.linkedin.com/in/andrericardoschaffer
