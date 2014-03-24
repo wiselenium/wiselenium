@@ -87,7 +87,8 @@ public class GitHubTestExample extends WiseTest {
 }
 ```
 
-Pretty simple, isn't it?
+Pretty simple, isn't it?  
+Now it's time to create and make use of more powerful abstractions for your UI components like this! :)
 
 # How to add wiselenium to your project
 
