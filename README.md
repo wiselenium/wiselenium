@@ -53,8 +53,8 @@ public class GitHubTestExample extends WiseTest {
 		this.get("https://github.com/wiselenium/wiselenium");
 		Table table = this.findElement(Table.class, By.name("wiselenium-features"));
 		
-		for (TableRow bodyRow : table.getBody().getRows())
-			assertEquals(bodyRow.getCell(1).getText(), "Yes");
+		for (TableRow row : table.getBody().getRows())
+			assertEquals(row.getCell(1).getText(), "Yes");
 	}
 	
 }
@@ -87,8 +87,14 @@ public class GitHubTestExample extends WiseTest {
 }
 ```
 
-# wiselenium modules
-wiselenium has 3 different modules to help you out on your tests: wiselenium-factory, wiselenium-elements, wiselenium-testng.
+Pretty simple, isn't it?
+
+# How to add wiselenium to your project
+
+wiselenium comes in 3 different modules to help you out on your tests:  
+- wiselenium-factory: This is the wiselenium core. It is built upon Selenium WebDriver Framework, providing an improved Page Factory and is completely independent of the other modules.
+- wiselenium-elements: This module depends on the wiselenium-factory and offers a lot of HTML components abstractions.
+- wiselenium-testng: This module depends on the wiselenium-factory and offers ease of configuration for your tests using the [TestNG](http://testng.org/doc/index.html) framework.
 
 ## wiselenium-factory
 
@@ -100,15 +106,19 @@ wiselenium has 3 different modules to help you out on your tests: wiselenium-fac
 </dependency>
 ```
 
-#### Page Object Pattern
-A page must have either a no-arg constructor or a constructor that takes a WebDriver as only argument.  
-Every component (`@Component`), frame (`@Frame`) and WebElement field of the page will be automatically injected by the wiselenium page factory.  
-If the no-arg constructor is used, you can annotate a WebDriver field with @Root and have it automatically injected also.  
+#### How to create and use your Components
+A component can be any type annotated with `@Component` and a no-arg constructor.  
+Each of its encapsulated components, frames and WebElements will be automatically initialized on a lazy mode. That way, you can easily create some really nice structures.  
+If you want access to its corresponding WebElement, you can use the `@Root` annotation on a WebElement member to have it injected.
 
-#### Create your Components
-A component is any type annotated with `@Component` and must have a no-arg constructor.  
-Every other component, frame or WebElement inside the component will be initialized on a lazy mode. That way, you can easily create some really nice structures.  
-You can have the corresponding WebElement injected by annotating a field of your component with @Root.  
+
+#### How to create and use your Pages
+A page can be any type with either a no-arg constructor or a constructor that takes a WebDriver as only argument.  
+As of wiselenium Components, your page inner components, frames and WebElements will be automatically injected.  
+The `@Root` annotation will also work here if you want to inject the WebDriver for the page.
+
+
+#### Putting it all together in an example
 
 1) Creating your component:
 ```java
@@ -144,7 +154,7 @@ public class SearchPage {
 }
 ```
 
-3) Using your page on the test:
+3) Creating your test with your page:
 ```java
 public class SearchTest extends WiseTest {
 
@@ -157,9 +167,23 @@ public class SearchTest extends WiseTest {
 }
 ```
 
-#### Create your Frames
-A frame is any type annotated with `@Frame` and must have a no-arg constructor.  
-wiselenium will automatically switchTo the frame context before any of its methods are called, and switchTo the previous context afterwards. This way, even nested frame structures are transparently handled. Every component, frame or WebElement inside it will be initialized on a lazy mode.  
+#### Please note
+The examples shown have made use of the wiselenium-testng module so far (by extending the `WiseTest` base class). 
+However, it's use is totally facultative.  
+So if you _don't_ want to use the wiselenium-testng module, it is important to store the WebDriver of your test at the WiseContext before anything else, as it is used internally by wiselenium.
+```java
+	WebDriver webDriver = new FirefoxDriver();
+	WiseContext.setDriver(webDriver);
+```
+
+All `WiseTest` convenience methods used on the tests (`findElement`, `initElements`, etc) can be found at `Wiselenium` and `WisePageFactory` classes, so that you are able to use wiselenium along with any other test framework.
+
+#### Frames with no pain
+We all know how painful it can be to use Selenium WebDriver when the page has lots of frames. All the switchTo(frame) burden...  
+What if we could create abstractions of these frames and simply use them, ignoring the need of all these switchTo(frame) explicit instructions?  
+If dealing with frames is part of your reality and this would make a real difference on your tests, good news: wiselenium transparently handles this for you!  
+Creating a frame abstraction is no harder than creating a component. Like a component, it can be any type annotated with `@Frame` and must have a no-arg constructor.  
+When you use a frame on your page, wiselenium will automatically switchTo that frame context before any of its methods are called and switchTo the previous context afterwards. This way, even nested frame structures are transparently handled. Every component, frame and WebElement inside it will be also initialized on a lazy mode.  
 
 1) Creating your frame:
 ```java
@@ -179,7 +203,7 @@ public class DummyFrame {
 }
 ```
 
-2) Creating the test using your frame:
+2) Creating your test using your frame:
 ```java
 public class DummyTest extends WiseTest {
 
@@ -195,31 +219,20 @@ public class DummyTest extends WiseTest {
 ```
 As can be seen, once the frame was found, we could use its inner members without the burden of switching contexts!  
 
-#### @AjaxElement
-Sometimes you have to wait for an element to be present, usually until an AJAX call completes. In these cases, you can use the `@AjaxElement` annotation and have it's location strategy configured to wait for the element:
+#### Waiting for ajax elements
+Sometimes you have to wait for an element to be present, usually until an AJAX call completes. In these cases, wiselenium offers you the `@AjaxElement` annotation so that its location strategy is configured to wait for the element for a certain amount of time:
 ```java
 public class DummyPage {
 	
-	@AjaxElement(timeOutInSeconds=5) // default value
+	@AjaxElement(timeOutInSeconds=5) // 5 is the default value
 	private Button button;
 	
 }
 ```
 
-#### Locating components
-wiselenium facade offers a `findElement(Class<E> elementClass, By by)` method that is able to locate your components.  
+#### Dynamically decorating WebElements
 If you need to dynamically turn a simple WebElement into a specific Component, use the `decorateElement(Class<E> elementClass, WebElement webElement)` method.  
-When using any wiselenium `findElement(...)` or `decorateElement(...)` method, you may pass an interface type. If so, wiselenium will automatically lookup for it's implementation class following the pattern `{classPackage}.impl.{className}Impl`.
-
-#### Please note
-All examples shown have made use of the wiselenium-testng module so far (by extending the `WiseTest` base class).  
-If you _don't_ want to use the wiselenium-testng module, it is important to store the WebDriver of your test at the WiseContext before anything else, as it is used in some different places along wiselenium.
-```java
-	WebDriver webDriver = new FirefoxDriver();
-	WiseContext.setDriver(webDriver);
-```
-
-Every convenient method provided by the `WiseTest` (`findElement`, `initElements`, etc) will be found at `Wiselenium` and `WisePageFactory` classes.
+When using any wiselenium `findElement(...)` or `decorateElement(...)` method, you may pass an interface type. If so, wiselenium will lookup for it's implementation class following the pattern `{classPackage}.impl.{className}Impl`.
 
 
 ## wiselenium-elements
@@ -230,9 +243,9 @@ Every convenient method provided by the `WiseTest` (`findElement`, `initElements
 	<version>0.3.0</version>
 </dependency>
 ```
-This module depends on the wiselenium-factory module and offers a lot of HTML components implementations:  
+Some of the HTML components abstractions that this module offers:  
 `Text`,`Button`,`Hyperlink`,`Checkbox`,`Radiobutton`,`Img`,`Label`,`Select`,`MultiSelect`,`Table`,`Frame`, etc.  
-It also offers a `Page` base class with many built-in methods that you can extend.
+It also provides a `Page` base class with many built-in methods that you can extend.
 
 
 ## wiselenium-testng
@@ -243,15 +256,10 @@ It also offers a `Page` base class with many built-in methods that you can exten
 	<version>0.3.0</version>
 </dependency>
 ```
-This module depends on the wiselenium-factory module and eases the configuration of your tests using the [TestNG](http://testng.org/doc/index.html) framework. Main resources:  
-  - WiseTest.class = test base class that can be extended.
-
-#### Browser configuration
-The browser will be automatically opened on a beforeClass lifecyle and closed afterClass.  
-Firefox is the default browser, and can be changed overriding the `initDriver()` method.
+This module mainly offers the `WiseTest` base class with some convenience features.  
 
 #### Page initialization
-All page instances annotated with `@Page` are automatically injected for you.
+Every page field annotated with `@Page` is automatically injected on the test.
 ```java
 public class GitHubExample extends WiseTest {
 
@@ -261,16 +269,22 @@ public class GitHubExample extends WiseTest {
 }
 ```
 
+#### Browser configuration
+The browser is automatically opened on a beforeClass lifecyle and closed afterClass.  
+Firefox is the default browser, and that can be changed overriding the `initDriver()` method to return the driver you want.
+
 #### Screenshots on test failures
 One of the golden rules of good testing is that you should be able to diagnose why a test failed without having to rerun it. For that, wiselenium automatically takes a screenshot when a test fails.  
 Set the directory to which the screenshots will be saved by overriding the method `getTestFailureScreenShotPath()`. Defaults to `target/test-failure-screenshots/`.
 
 #### Convenience methods
-A lot of convenient self-explanatory methods are provided:  
+Many convenience self-explanatory methods are provided:  
 `findElement(Class elementClass, By by)`, `initElements(Class pageClass)`, `get(String url)`, `takeScreenShot(String fileName)`, `waitFor(long timeOutInSeconds)`, `getDriver()`.  
+
+# Happy testing!
+
+# Contact Info
+If you want to make contact, please feel free to message me at wiselenium@gmail.com .
 
 # About the developers
 http://www.linkedin.com/in/andrericardoschaffer
-
-# Contact Info
-Please feel free to make contact at wiselenium@gmail.com
