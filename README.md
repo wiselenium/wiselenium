@@ -1,6 +1,14 @@
 # What is wiselenium?
 
-wiselenium is an improved Page Factory Framework built upon [Selenium WebDriver](http://seleniumhq.org/) to ease the creation / maintenance of your tests.
+wiselenium extends the [Selenium WebDriver Page Factory] (https://code.google.com/p/selenium/wiki/PageFactory) to support better UI component abstractions.
+
+# When to use it?
+
+If you are writing tests on pages with UI components that deserve a better abstraction other than the WebElement, there's a good chance that wiselenium will come in handy.
+
+For instance, widgets, JSF, vaadin, home-brewed components, etc.
+
+Also, you should consider using wiselenium if you rather rely on the behavior of your components instead of their structure, so that your tests can easily keep up to them when they evolve (and they will).
 
 # 1 minute example
 
@@ -31,7 +39,11 @@ Suppose you want to test the values within the wiselenium table of features belo
     </tbody>
 </table>
   
-Then you can just find the table and make use of its built-in methods:
+How many lines of code you'd have to write for that test depending solely on the WebElements?  
+
+Wouldn't it be a lot simpler if you could take advantage of a table abstraction?  
+
+Check out how it could be done using wiselenium:
 
 ```java
 public class GitHubTestExample extends WiseTest {
@@ -48,7 +60,7 @@ public class GitHubTestExample extends WiseTest {
 }
 ```
 
-Want to use the Page Object Pattern? OK, it would look like this:
+How about using that table abstraction with the Page Object Pattern? 
 
 ```java
 public class WiseleniumPage {
@@ -95,7 +107,7 @@ If the no-arg constructor is used, you can annotate a WebDriver field with @Root
 
 #### Create your Components
 A component is any type annotated with `@Component` and must have a no-arg constructor.  
-Every other component, frame or WebElement inside the component will be initialized on a lazy mode. That way, you can easily create really nice structures!  
+Every other component, frame or WebElement inside the component will be initialized on a lazy mode. That way, you can easily create some really nice structures.  
 You can have the corresponding WebElement injected by annotating a field of your component with @Root.  
 
 1) Creating your component:
@@ -250,7 +262,7 @@ public class GitHubExample extends WiseTest {
 ```
 
 #### Screenshots on test failures
-A screenshot is automatically taken when a test fails.  
+One of the golden rules of good testing is that you should be able to diagnose why a test failed without having to rerun it. For that, wiselenium automatically takes a screenshot when a test fails.  
 Set the directory to which the screenshots will be saved by overriding the method `getTestFailureScreenShotPath()`. Defaults to `target/test-failure-screenshots/`.
 
 #### Convenience methods
